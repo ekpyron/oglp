@@ -49,4 +49,26 @@ void VertexArray::Bind (void) const
 	GLP_CHECK_ERROR;
 }
 
+void VertexArray::VertexAttribOffset (const Buffer &buffer, GLuint index,
+																			GLint size, GLenum type,
+																			GLboolean normalized,
+																			GLsizei stride, GLintptr offset)
+{
+	VertexArrayVertexAttribOffsetEXT (obj, buffer.obj, index, size,
+																		type, normalized, stride, offset);
+	GLP_CHECK_ERROR;
+}
+
+void VertexArray::EnableVertexAttrib (GLuint index)
+{
+	EnableVertexArrayAttribEXT (obj, index);
+	GLP_CHECK_ERROR;
+}
+
+void VertexArray::DisableVertexAttrib (GLuint index)
+{
+	DisableVertexArrayAttribEXT (obj, index);
+	GLP_CHECK_ERROR;
+}
+
 } /* namespace gl */

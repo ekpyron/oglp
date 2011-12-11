@@ -122,6 +122,7 @@ private:
 		* internal OpenGL buffer object name
 		*/
 	 GLuint obj;
+	 friend class VertexArray;
 };
 
 } /* namespace gl */

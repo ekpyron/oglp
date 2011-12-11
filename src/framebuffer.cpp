@@ -72,4 +72,10 @@ void Framebuffer::Renderbuffer (GLenum attachment,
 	GLP_CHECK_ERROR;
 }
 
+void Framebuffer::DrawBuffers (const std::vector<GLenum> &bufs) const
+{
+	FramebufferDrawBuffersEXT (obj, bufs.size (), &bufs[0]);
+	GLP_CHECK_ERROR;
+}
+
 } /* namespace gl */

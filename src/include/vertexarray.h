@@ -18,6 +18,7 @@
 #define GLP_VERTEXARRAY_H
 
 #include "common.h"
+#include "buffer.h"
 
 namespace gl {
 
@@ -64,6 +65,44 @@ public:
 		* Binds the internal OpenGL vertex array object.
 		*/
 	 void Bind (void) const;
+	 /**
+		* Specify an vertex attrib.
+		* Defines an array of generic vertex attribute data in the vertex array.
+		* \param buffer Buffer object in which the data is stored.
+		* \param index Specifies the index of the generic vertex
+		*              attribute to be modified.
+		* \param type Specifies the data type of each component.
+		*             Symbolic constants GL_BYTE, GL_UNSIGNED_BYTE,
+		*             GL_SHORT, GL_UNSIGNED_SHORT, GL_INT, GL_UNSIGNED_INT,
+		*             GL_FLOAT, or GL_DOUBLE are accepted.
+		* \param normalized Specifies whether fixed-point data values
+		*                   should be normalized (GL_TRUE) or converted
+		*                   directly as fixed-point values (GL_FALSE) when
+		*                   they are accessed.
+		* \param stride Specifies the byte offset between consecutive
+		*               generic vertex attributes. If stride is 0, the
+		*               generic vertex attributes are understood to be
+		*               tightly packed.
+		* \param offset Specifies the offset of the first component of
+		*               the first generic vertex attribute in the buffer.
+		*/
+	 void VertexAttribOffset (const Buffer &buffer, GLuint index, GLint size,
+														GLenum type, GLboolean normalized, GLsizei stride,
+														GLintptr offset);
+	 /**
+		* Enable a vertex attrib.
+		* Enables a generic vertex attribute.
+		* \param index Specifies the index of the generic vertex
+		*              attribute to be enabled.
+		*/
+	 void EnableVertexAttrib (GLuint index);
+	 /**
+		* Disable a vertex attrib.
+		* Disables a generic vertex attribute.
+		* \param index Specifies the index of the generic vertex
+		*              attribute to be disabled.
+		*/
+	 void DisableVertexAttrib (GLuint index);
 private:
 	 /**
 		* internal OpenGL vertex array object

@@ -1537,6 +1537,12 @@ PFNGLPROGRAMUNIFORMMATRIX4X2DVEXTPROC ProgramUniformMatrix4x2dvEXT =
     (PFNGLPROGRAMUNIFORMMATRIX4X2DVEXTPROC) Unsupported;
 PFNGLPROGRAMUNIFORMMATRIX4X3DVEXTPROC ProgramUniformMatrix4x3dvEXT =
     (PFNGLPROGRAMUNIFORMMATRIX4X3DVEXTPROC) Unsupported;
+PFNGLVERTEXARRAYVERTEXATTRIBOFFSETEXTPROC VertexArrayVertexAttribOffsetEXT =
+    (PFNGLVERTEXARRAYVERTEXATTRIBOFFSETEXTPROC) Unsupported;
+PFNGLENABLEVERTEXARRAYATTRIBEXTPROC EnableVertexArrayAttribEXT =
+    (PFNGLENABLEVERTEXARRAYATTRIBEXTPROC) Unsupported;
+PFNGLDISABLEVERTEXARRAYATTRIBEXTPROC DisableVertexArrayAttribEXT =
+    (PFNGLDISABLEVERTEXARRAYATTRIBEXTPROC) Unsupported;
 
 
 GLAPI int APIENTRY Unsupported (...)
@@ -3080,6 +3086,12 @@ void InitPrototypes (GetProcAddressCallback getprocaddress)
     if (ptr) ProgramUniformMatrix4x2dvEXT = (PFNGLPROGRAMUNIFORMMATRIX4X2DVEXTPROC) ptr;
     ptr = getprocaddress ("glProgramUniformMatrix4x3dvEXT");
     if (ptr) ProgramUniformMatrix4x3dvEXT = (PFNGLPROGRAMUNIFORMMATRIX4X3DVEXTPROC) ptr;
+    ptr = getprocaddress ("glVertexArrayVertexAttribOffsetEXT");
+    if (ptr) VertexArrayVertexAttribOffsetEXT = (PFNGLVERTEXARRAYVERTEXATTRIBOFFSETEXTPROC) ptr;
+    ptr = getprocaddress ("glEnableVertexArrayAttribEXT");
+    if (ptr) EnableVertexArrayAttribEXT = (PFNGLENABLEVERTEXARRAYATTRIBEXTPROC) ptr;
+    ptr = getprocaddress ("glDisableVertexArrayAttribEXT");
+    if (ptr) DisableVertexArrayAttribEXT = (PFNGLDISABLEVERTEXARRAYATTRIBEXTPROC) ptr;
 
 }
 

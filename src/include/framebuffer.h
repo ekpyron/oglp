@@ -20,6 +20,7 @@
 #include "common.h"
 #include "texture.h"
 #include "renderbuffer.h"
+#include <vector>
 
 namespace gl {
 
@@ -101,6 +102,14 @@ public:
 		*/
 	 void Renderbuffer (GLenum attachment,
 											const Renderbuffer &renderbuffer) const;
+	 /**
+		* Specify buffers to draw to.
+		* Specifies a list of color buffers to be drawn into.
+		* \param bufs Points to an vector of symbolic constants
+		*             specifying the buffers into which fragment
+		*             colors or data values will be written.
+		*/
+	 void DrawBuffers (const std::vector<GLenum> &bufs) const;
 private:
 	 /**
 		* internal OpenGL framebuffer object
