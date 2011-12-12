@@ -64,4 +64,28 @@ void Texture::GenerateMipmap (GLenum target)
 	CheckError ();
 }
 
+void Texture::Parameter (GLenum target, GLenum pname, GLfloat param)
+{
+	TextureParameterfEXT (obj, target, pname, param);
+	CheckError ();
+}
+
+void Texture::Parameter (GLenum target, GLenum pname, GLint param)
+{
+	TextureParameteriEXT (obj, target, pname, param);
+	CheckError ();
+}
+
+void Texture::Parameter (GLenum target, GLenum pname, const GLfloat *params)
+{
+	TextureParameterfvEXT (obj, target, pname, params);
+	CheckError ();
+}
+
+void Texture::Parameter (GLenum target, GLenum pname, const GLint *params)
+{
+	TextureParameterivEXT (obj, target, pname, params);
+	CheckError ();
+}
+
 } /* namespace gl */

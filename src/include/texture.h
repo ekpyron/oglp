@@ -21,13 +21,15 @@
 
 namespace gl {
 
-/** OpenGL texture object.
+/**
+ * OpenGL texture object.
  * A wrapper class around an OpenGL Texture object.
  */
 class Texture
 {
 public:
-	 /** Default constructor.
+	 /**
+		* Default constructor.
 		* Creates a new Texture object.
 		*/
 	 Texture (void);
@@ -74,7 +76,8 @@ public:
     *               GL_TEXTURE_2D_MULTISAMPLE_ARRAY.
 		*/
 	 void Bind (GLenum texunit, GLenum target) const;
-	 /** Specified a two-dimensional texture Image.
+	 /**
+		* Specified a two-dimensional texture Image.
 		* Loads a two-dimensional texture image from memory to the
 		* internal OpenGL texture object.
 		* \param target Specifies the target texture.
@@ -147,7 +150,8 @@ public:
 	 void Image2D (GLenum target, GLint level, GLint internalFormat,
 								 GLsizei width, GLsizei height, GLint border,
 								 GLenum format, GLenum type, const GLvoid *data);
-	 /** Generate mipmaps.
+	 /**
+		* Generate mipmaps.
 		* Generates mipmaps for the internal texture object
 		* and the specified texture target.
 		* \param target Specifies the target to which the texture whose
@@ -157,6 +161,88 @@ public:
 		*               GL_TEXTURE_CUBE_MAP.
 		*/
 	 void GenerateMipmap (GLenum target);
+	 /**
+		* Set texture parameters.
+		* Set texture parameters.
+		* \param target Specifies the target texture, which must be either
+		*               GL_TEXTURE_1D, GL_TEXTURE_2D, GL_TEXTURE_3D,
+		*               GL_TEXTURE_1D_ARRAY, GL_TEXTURE_2D_ARRAY,
+		*               GL_TEXTURE_RECTANGLE, or GL_TEXTURE_CUBE_MAP.
+		* \param pname Specifies the symbolic name of a single-valued texture
+		*              parameter. pname can be one of the following:
+		*              GL_TEXTURE_BASE_LEVEL, GL_TEXTURE_COMPARE_FUNC,
+		*              GL_TEXTURE_COMPARE_MODE, GL_TEXTURE_LOD_BIAS,
+		*              GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MAG_FILTER,
+		*              GL_TEXTURE_MIN_LOD, GL_TEXTURE_MAX_LOD,
+		*              GL_TEXTURE_MAX_LEVEL, GL_TEXTURE_SWIZZLE_R,
+		*              GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_B,
+		*              GL_TEXTURE_SWIZZLE_A, GL_TEXTURE_WRAP_S,
+		*              GL_TEXTURE_WRAP_T, or GL_TEXTURE_WRAP_R.
+		* \param param Specifies the value of pname.
+		*/
+	 void Parameter (GLenum target, GLenum pname, GLint param);
+	 /**
+		* Set texture parameters.
+		* Set texture parameters.
+		* \param target Specifies the target texture, which must be either
+		*               GL_TEXTURE_1D, GL_TEXTURE_2D, GL_TEXTURE_3D,
+		*               GL_TEXTURE_1D_ARRAY, GL_TEXTURE_2D_ARRAY,
+		*               GL_TEXTURE_RECTANGLE, or GL_TEXTURE_CUBE_MAP.
+		* \param pname Specifies the symbolic name of a single-valued texture
+		*              parameter. pname can be one of the following:
+		*              GL_TEXTURE_BASE_LEVEL, GL_TEXTURE_BORDER_COLOR,
+		*              GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE,
+		*              GL_TEXTURE_LOD_BIAS, GL_TEXTURE_MIN_FILTER,
+		*              GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MIN_LOD,
+		*              GL_TEXTURE_MAX_LOD, GL_TEXTURE_MAX_LEVEL,
+		*              GL_TEXTURE_SWIZZLE_R, GL_TEXTURE_SWIZZLE_G,
+		*              GL_TEXTURE_SWIZZLE_B, GL_TEXTURE_SWIZZLE_A,
+		*              GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T,
+		*              or GL_TEXTURE_WRAP_R.
+		* \param params Specifies the values of pname.
+		*/
+	 void Parameter (GLenum target, GLenum pname, const GLint *params);
+	 /**
+		* Set texture parameters.
+		* Set texture parameters.
+		* \param target Specifies the target texture, which must be either
+		*               GL_TEXTURE_1D, GL_TEXTURE_2D, GL_TEXTURE_3D,
+		*               GL_TEXTURE_1D_ARRAY, GL_TEXTURE_2D_ARRAY,
+		*               GL_TEXTURE_RECTANGLE, or GL_TEXTURE_CUBE_MAP.
+		* \param pname Specifies the symbolic name of a single-valued texture
+		*              parameter. pname can be one of the following:
+		*              GL_TEXTURE_BASE_LEVEL, GL_TEXTURE_COMPARE_FUNC,
+		*              GL_TEXTURE_COMPARE_MODE, GL_TEXTURE_LOD_BIAS,
+		*              GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MAG_FILTER,
+		*              GL_TEXTURE_MIN_LOD, GL_TEXTURE_MAX_LOD,
+		*              GL_TEXTURE_MAX_LEVEL, GL_TEXTURE_SWIZZLE_R,
+		*              GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_B,
+		*              GL_TEXTURE_SWIZZLE_A, GL_TEXTURE_WRAP_S,
+		*              GL_TEXTURE_WRAP_T, or GL_TEXTURE_WRAP_R.
+		* \param param Specifies the value of pname.
+		*/
+	 void Parameter (GLenum target, GLenum pname, GLfloat param);
+	 /**
+		* Set texture parameters.
+		* Set texture parameters.
+		* \param target Specifies the target texture, which must be either
+		*               GL_TEXTURE_1D, GL_TEXTURE_2D, GL_TEXTURE_3D,
+		*               GL_TEXTURE_1D_ARRAY, GL_TEXTURE_2D_ARRAY,
+		*               GL_TEXTURE_RECTANGLE, or GL_TEXTURE_CUBE_MAP.
+		* \param pname Specifies the symbolic name of a single-valued texture
+		*              parameter. pname can be one of the following:
+		*              GL_TEXTURE_BASE_LEVEL, GL_TEXTURE_BORDER_COLOR,
+		*              GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE,
+		*              GL_TEXTURE_LOD_BIAS, GL_TEXTURE_MIN_FILTER,
+		*              GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MIN_LOD,
+		*              GL_TEXTURE_MAX_LOD, GL_TEXTURE_MAX_LEVEL,
+		*              GL_TEXTURE_SWIZZLE_R, GL_TEXTURE_SWIZZLE_G,
+		*              GL_TEXTURE_SWIZZLE_B, GL_TEXTURE_SWIZZLE_A,
+		*              GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T,
+		*              or GL_TEXTURE_WRAP_R.
+		* \param params Specifies the values of pname.
+		*/
+	 void Parameter (GLenum target, GLenum pname, const GLfloat *params);
 private:
 	 /** internal OpenGL texture object
 		*/
