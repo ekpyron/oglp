@@ -25,7 +25,7 @@
 
 namespace gl {
 
-/** An OpenGL shader program object.
+/** OpenGL shader program object.
  * A wrapper class around an OpenGL shader program.
  */
 class Program

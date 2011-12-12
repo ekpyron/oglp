@@ -24,7 +24,7 @@
 
 namespace gl {
 
-/** An OpenGL framebuffer object.
+/** OpenGL framebuffer object.
  * A wrapper class around an OpenGL Framebuffer object.
  */
 class Framebuffer

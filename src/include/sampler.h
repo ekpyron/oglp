@@ -21,7 +21,7 @@
 
 namespace gl {
 
-/** An OpenGL sampler object.
+/** OpenGL sampler object.
  * A wrapper class around an OpenGL Sampler object.
  */
 class Sampler

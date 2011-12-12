@@ -48,7 +48,7 @@ GLfloat Uniform::operator= (GLfloat v)
 	if (location != -1)
 	{
 		ProgramUniform1f (program, location, v);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return v;
 }
@@ -58,7 +58,7 @@ const glm::vec2 &Uniform::operator= (const glm::vec2 &v)
 	if (location != -1)
 	{
 		ProgramUniform2fv (program, location, 1, &v[0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return v;
 }
@@ -68,7 +68,7 @@ const glm::vec3 &Uniform::operator= (const glm::vec3 &v)
 	if (location != -1)
 	{
 		ProgramUniform3fv (program, location, 1, &v[0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return v;
 }
@@ -78,7 +78,7 @@ const glm::vec4 &Uniform::operator= (const glm::vec4 &v)
 	if (location != -1)
 	{
 		ProgramUniform4fv (program, location, 1, &v[0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return v;
 }
@@ -88,7 +88,7 @@ GLint Uniform::operator= (GLint v)
 	if (location != -1)
 	{
 		ProgramUniform1i (program, location, v);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return v;
 }
@@ -98,7 +98,7 @@ const glm::ivec2 &Uniform::operator= (const glm::ivec2 &v)
 	if (location != -1)
 	{
 		ProgramUniform2iv (program, location, 1, &v[0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return v;
 }
@@ -108,7 +108,7 @@ const glm::ivec3 &Uniform::operator= (const glm::ivec3 &v)
 	if (location != -1)
 	{
 		ProgramUniform3iv (program, location, 1, &v[0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return v;
 }
@@ -118,7 +118,7 @@ const glm::ivec4 &Uniform::operator= (const glm::ivec4 &v)
 	if (location != -1)
 	{
 		ProgramUniform4iv (program, location, 1, &v[0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return v;
 }
@@ -128,7 +128,7 @@ GLuint Uniform::operator= (GLuint v)
 	if (location != -1)
 	{
 		ProgramUniform1ui (program, location, v);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return v;
 }
@@ -138,7 +138,7 @@ const glm::uvec2 &Uniform::operator= (const glm::uvec2 &v)
 	if (location != -1)
 	{
 		ProgramUniform2uiv (program, location, 1, &v[0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return v;
 }
@@ -148,7 +148,7 @@ const glm::uvec3 &Uniform::operator= (const glm::uvec3 &v)
 	if (location != -1)
 	{
 		ProgramUniform3uiv (program, location, 1, &v[0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return v;
 }
@@ -158,7 +158,7 @@ const glm::uvec4 &Uniform::operator= (const glm::uvec4 &v)
 	if (location != -1)
 	{
 		ProgramUniform4uiv (program, location, 1, &v[0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return v;
 }
@@ -168,7 +168,7 @@ const glm::mat2 &Uniform::operator= (const glm::mat2 &m)
 	if (location != -1)
 	{
 		ProgramUniformMatrix2fv (program, location, 1, GL_FALSE, &m[0][0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return m;
 }
@@ -178,7 +178,7 @@ const glm::mat3 &Uniform::operator= (const glm::mat3 &m)
 	if (location != -1)
 	{
 		ProgramUniformMatrix3fv (program, location, 1, GL_FALSE, &m[0][0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return m;
 }
@@ -188,7 +188,7 @@ const glm::mat4 &Uniform::operator= (const glm::mat4 &m)
 	if (location != -1)
 	{
 		ProgramUniformMatrix4fv (program, location, 1, GL_FALSE, &m[0][0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return m;
 }
@@ -198,7 +198,7 @@ const glm::mat2x3 &Uniform::operator= (const glm::mat2x3 &m)
 	if (location != -1)
 	{
 		ProgramUniformMatrix2x3fv (program, location, 1, GL_FALSE, &m[0][0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return m;
 }
@@ -208,7 +208,7 @@ const glm::mat3x2 &Uniform::operator= (const glm::mat3x2 &m)
 	if (location != -1)
 	{
 		ProgramUniformMatrix3x2fv (program, location, 1, GL_FALSE, &m[0][0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return m;
 }
@@ -218,7 +218,7 @@ const glm::mat2x4 &Uniform::operator= (const glm::mat2x4 &m)
 	if (location != -1)
 	{
 		ProgramUniformMatrix2x4fv (program, location, 1, GL_FALSE, &m[0][0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return m;
 }
@@ -228,7 +228,7 @@ const glm::mat4x2 &Uniform::operator= (const glm::mat4x2 &m)
 	if (location != -1)
 	{
 		ProgramUniformMatrix4x2fv (program, location, 1, GL_FALSE, &m[0][0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return m;
 }
@@ -238,7 +238,7 @@ const glm::mat3x4 &Uniform::operator= (const glm::mat3x4 &m)
 	if (location != -1)
 	{
 		ProgramUniformMatrix3x4fv (program, location, 1, GL_FALSE, &m[0][0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return m;
 }
@@ -248,7 +248,7 @@ const glm::mat4x3 &Uniform::operator= (const glm::mat4x3 &m)
 	if (location != -1)
 	{
 		ProgramUniformMatrix4x3fv (program, location, 1, GL_FALSE, &m[0][0]);
-		GLP_CHECK_ERROR;
+		CheckError ();
 	}
 	return m;
 }

@@ -21,20 +21,10 @@
 #include "gl3w.h"
 #include "exception.h"
 
-#ifdef GLP_DEBUG
-
-#define GLP_CHECK_ERROR    gl::CheckError ()
-
 namespace gl {
 
 void CheckError (void);
 
 } /* namespace gl */
-
-#else /* GLP_DEBUG */
-
-#define GLP_CHECK_ERROR
-
-#endif /* GLP_DEBUG */
 
 #endif /* !defined GLP_COMMON_H */

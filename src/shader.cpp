@@ -26,7 +26,7 @@ Shader::Shader (void) : obj (0)
 Shader::Shader (GLenum type)
 {
 	obj = CreateShader (type);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Shader::Shader (Shader &&s) : obj (s.obj)
@@ -39,7 +39,7 @@ Shader::~Shader (void)
 	if (obj)
 	{
 		DeleteShader (obj);
-		GLP_CHECK_ERROR;
+		CheckError ();
 		obj = 0;
 	}
 }
@@ -57,7 +57,7 @@ void Shader::Create (GLenum type)
 		 DeleteShader (obj);
 	}
 	obj = CreateShader (type);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Shader::Source (const std::string &source) const
@@ -65,7 +65,7 @@ void Shader::Source (const std::string &source) const
 	const GLchar *src = source.c_str ();
 	ShaderSource (obj, 1, &src, NULL);
 
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 bool Shader::Compile (void) const
@@ -74,7 +74,7 @@ bool Shader::Compile (void) const
 	CompileShader (obj);
 	
 	GetShaderiv (obj, GL_COMPILE_STATUS, &status);
-	GLP_CHECK_ERROR;
+	CheckError ();
 	return status;
 }
 

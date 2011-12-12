@@ -22,7 +22,7 @@
 
 namespace gl {
 
-/** An OpenGL vertex array object.
+/** OpenGL vertex array object.
  * A wrapper class around an OpenGL vertex array object.
  */
 class VertexArray
@@ -75,6 +75,8 @@ public:
 		*             Symbolic constants GL_BYTE, GL_UNSIGNED_BYTE,
 		*             GL_SHORT, GL_UNSIGNED_SHORT, GL_INT, GL_UNSIGNED_INT,
 		*             GL_FLOAT, or GL_DOUBLE are accepted.
+		* \param size Specifies the number of components per generic
+		*             vertex attribute. Must be 1, 2, 3, or 4.
 		* \param normalized Specifies whether fixed-point data values
 		*                   should be normalized (GL_TRUE) or converted
 		*                   directly as fixed-point values (GL_FALSE) when

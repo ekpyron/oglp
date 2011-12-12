@@ -21,34 +21,34 @@ namespace gl {
 Renderbuffer::Renderbuffer (void)
 {
 	GenRenderbuffers (1, &obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Renderbuffer::Renderbuffer (Renderbuffer &&renderbuffer)
 	: obj (renderbuffer.obj)
 {
 	GenRenderbuffers (1, &renderbuffer.obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Renderbuffer::~Renderbuffer (void)
 {
 	DeleteRenderbuffers (1, &obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Renderbuffer &Renderbuffer::operator= (Renderbuffer &&renderbuffer)
 {
 	obj = renderbuffer.obj;
 	GenRenderbuffers (1, &renderbuffer.obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Renderbuffer::Storage (GLenum internalformat, GLsizei width,
 														GLsizei height) const
 {
 	NamedRenderbufferStorageEXT (obj, internalformat, width, height);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 } /* namespace gl */

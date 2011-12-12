@@ -21,40 +21,40 @@ namespace gl {
 ProgramPipeline::ProgramPipeline (void)
 {
 	GenProgramPipelines (1, &pipeline);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 ProgramPipeline::ProgramPipeline (ProgramPipeline &&p)
 	: pipeline (p.pipeline)
 {
 	GenProgramPipelines (1, &p.pipeline);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 ProgramPipeline::~ProgramPipeline (void)
 {
 	DeleteProgramPipelines (1, &pipeline);	
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 ProgramPipeline &ProgramPipeline::operator= (ProgramPipeline &&p)
 {
 	pipeline = p.pipeline;
 	GenProgramPipelines (1, &p.pipeline);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void ProgramPipeline::Bind (void) const
 {
 	BindProgramPipeline (pipeline);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void ProgramPipeline::UseProgramStages (GLbitfield stages,
 																			 const Program &program)
 {
 	gl::UseProgramStages (pipeline, stages, program.program);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 bool ProgramPipeline::Validate (void) const
@@ -62,7 +62,7 @@ bool ProgramPipeline::Validate (void) const
 	GLint status;
 	ValidateProgramPipeline (pipeline);
 	GetProgramPipelineiv (pipeline, GL_VALIDATE_STATUS, &status);
-	GLP_CHECK_ERROR;
+	CheckError ();
 	return status;
 }
 
@@ -73,7 +73,7 @@ std::string ProgramPipeline::GetInfoLog (void) const
 	GetProgramPipelineiv (pipeline, GL_INFO_LOG_LENGTH, &length);
 	log.resize (length);
 	GetProgramPipelineInfoLog (pipeline, length, &length, &log[0]);
-	GLP_CHECK_ERROR;
+	CheckError ();
 	return std::string (&log[0], length);
 }
 

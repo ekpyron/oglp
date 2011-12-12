@@ -21,32 +21,32 @@ namespace gl {
 Texture::Texture (void)
 {
 	GenTextures (1, &obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Texture::Texture (Texture &&texture) : obj (texture.obj)
 {
 	GenTextures (1, &texture.obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Texture::~Texture (void)
 {
 	DeleteTextures (1, &obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Texture &Texture::operator= (Texture &&texture)
 {
 	obj = texture.obj;
 	GenTextures (1, &texture.obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Texture::Bind (GLenum texunit, GLenum target) const
 {
 	BindMultiTextureEXT (texunit, target, obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Texture::Image2D (GLenum target, GLint level, GLint internalFormat,
@@ -55,13 +55,13 @@ void Texture::Image2D (GLenum target, GLint level, GLint internalFormat,
 {
 	TextureImage2DEXT (obj, target, level, internalFormat, width, height,
 										 border, format, type, data);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Texture::GenerateMipmap (GLenum target)
 {
 	GenerateTextureMipmapEXT (obj, target);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 } /* namespace gl */

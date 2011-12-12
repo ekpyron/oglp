@@ -22,7 +22,7 @@
 
 namespace gl {
 
-/** An OpenGL shader object.
+/** OpenGL shader object.
  * A wrapper class around an OpenGL shader object.
  */
 class Shader

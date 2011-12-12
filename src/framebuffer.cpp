@@ -21,39 +21,39 @@ namespace gl {
 Framebuffer::Framebuffer (void)
 {
 	GenFramebuffers (1, &obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Framebuffer::Framebuffer (Framebuffer &&framebuffer)
 	: obj (framebuffer.obj)
 {
 	GenFramebuffers (1, &framebuffer.obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Framebuffer::~Framebuffer (void)
 {
 	DeleteFramebuffers (1, &obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Framebuffer &Framebuffer::operator= (Framebuffer &&framebuffer)
 {
 	obj = framebuffer.obj;
 	GenFramebuffers (1, &framebuffer.obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Framebuffer::Bind (GLenum target) const
 {
 	BindFramebuffer (target, obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Framebuffer::Unbind (GLenum target)
 {
 	BindFramebuffer (target, 0);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Framebuffer::Texture2D (GLenum attachment, GLenum textarget,
@@ -61,7 +61,7 @@ void Framebuffer::Texture2D (GLenum attachment, GLenum textarget,
 {
 	NamedFramebufferTexture2DEXT (obj, attachment, textarget,
 																texture.obj, level);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Framebuffer::Renderbuffer (GLenum attachment,
@@ -69,13 +69,13 @@ void Framebuffer::Renderbuffer (GLenum attachment,
 {
 	NamedFramebufferRenderbufferEXT (obj, attachment, GL_RENDERBUFFER,
 																	 renderbuffer.obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Framebuffer::DrawBuffers (const std::vector<GLenum> &bufs) const
 {
 	FramebufferDrawBuffersEXT (obj, bufs.size (), &bufs[0]);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 } /* namespace gl */

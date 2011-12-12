@@ -21,7 +21,7 @@
 
 namespace gl {
 
-/** An OpenGL buffer object.
+/** OpenGL buffer object.
  * A wrapper class around an OpenGL Buffer object.
  */
 class Buffer

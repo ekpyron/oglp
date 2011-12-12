@@ -22,60 +22,60 @@ namespace gl {
 Buffer::Buffer (void)
 {
 	GenBuffers (1, &obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Buffer::Buffer (Buffer &&buffer)
 	: obj (buffer.obj)
 {
 	GenBuffers (1, &buffer.obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Buffer::~Buffer (void)
 {
 	DeleteBuffers (1, &obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Buffer &Buffer::operator= (Buffer &&buffer)
 {
 	obj = buffer.obj;
 	GenBuffers (1, &buffer.obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Buffer::Bind (GLenum target) const
 {
 	BindBuffer (target, obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Buffer::Unbind (GLenum target)
 {
 	BindBuffer (target, 0);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Buffer::Data (GLsizeiptr size, const GLvoid *data,
 									 GLenum usage) const
 {
 	NamedBufferDataEXT (obj, size, data, usage);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Buffer::SubData (GLintptr offset, GLsizeiptr size,
 											const GLvoid *data) const
 {
 	NamedBufferSubDataEXT (obj, offset, size, data);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 GLvoid *Buffer::Map (GLenum access) const
 {
 	GLvoid *ptr;
 	ptr = MapNamedBufferEXT (obj, access);
-	GLP_CHECK_ERROR;
+	CheckError ();
 	if (ptr == NULL)
 	{
 		throw std::runtime_error ("An OpenGL buffer object could not be "
@@ -87,7 +87,7 @@ GLvoid *Buffer::Map (GLenum access) const
 void Buffer::Unmap (void) const
 {
 	UnmapNamedBufferEXT (obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 } /* namespace gl */

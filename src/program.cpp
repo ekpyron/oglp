@@ -22,13 +22,13 @@ namespace gl {
 Program::Program (void) : program (0)
 {
 	program = CreateProgram ();
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Program::Program (Program &&p) : program (p.program)
 {
 	p.program = CreateProgram ();
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Program::~Program (void)
@@ -36,7 +36,7 @@ Program::~Program (void)
 	if (program)
 	{
 		DeleteProgram (program);
-		GLP_CHECK_ERROR;
+		CheckError ();
 		program = 0;
 	}
 }
@@ -45,7 +45,7 @@ Program &Program::operator= (Program &&p)
 {
 	program = p.program;
 	p.program = CreateProgram ();
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 bool Program::Create (GLenum type, const std::string &source)
@@ -61,7 +61,7 @@ bool Program::Create (GLenum type, const std::string &source)
 	}
 
 	GetProgramiv (program, GL_LINK_STATUS, &status);
-	GLP_CHECK_ERROR;
+	CheckError ();
 	return status;
 }
 
@@ -72,7 +72,7 @@ std::string Program::GetInfoLog (void) const
 	GetProgramiv (program, GL_INFO_LOG_LENGTH, &length);
 	log.resize (length);
 	GetProgramInfoLog (program, length, NULL, &log[0]);
-	GLP_CHECK_ERROR;
+	CheckError ();
 	return std::string (&log[0], length);
 }
 
@@ -80,20 +80,20 @@ Uniform Program::operator[] (const std::string &name) const
 {
 	GLint location;
 	location = GetUniformLocation (program, name.c_str ());
-	GLP_CHECK_ERROR;
+	CheckError ();
 	return Uniform (program, location);
 }
 
 void Program::Parameter (GLenum pname, GLint value) const
 {
 	ProgramParameteri (program, pname, value);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Program::Attach (const Shader &shader) const
 {
 	AttachShader (program, shader.obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 bool Program::Link (void) const
@@ -101,20 +101,20 @@ bool Program::Link (void) const
 	GLint status;
 	LinkProgram (program);
 	GetProgramiv (program, GL_LINK_STATUS, &status);
-	GLP_CHECK_ERROR;
+	CheckError ();
 	return status;
 }
 
 void Program::Use (void) const
 {
 	UseProgram (program);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Program::UseNone (void)
 {
 	UseProgram (0);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 } /* namespace gl */

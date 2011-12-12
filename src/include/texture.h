@@ -21,7 +21,7 @@
 
 namespace gl {
 
-/** An OpenGL texture object.
+/** OpenGL texture object.
  * A wrapper class around an OpenGL Texture object.
  */
 class Texture

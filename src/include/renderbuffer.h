@@ -21,7 +21,7 @@
 
 namespace gl {
 
-/** An OpenGL renderbuffer object.
+/** OpenGL renderbuffer object.
  * A wrapper class around an OpenGL renderbuffer object.
  */
 class Renderbuffer

@@ -47,7 +47,7 @@ void Init (GetProcAddressCallback callback)
 		 throw std::runtime_error ("No entry point for glGetString found.");
 
 	version << GetString (GL_VERSION);
-	GLP_CHECK_ERROR;
+	CheckError ();
 	version >> major;
 	version.ignore (1);
 	version >> minor;

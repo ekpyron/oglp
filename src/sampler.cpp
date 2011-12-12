@@ -21,56 +21,56 @@ namespace gl {
 Sampler::Sampler (void)
 {
 	GenSamplers (1, &obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Sampler::Sampler (Sampler &&sampler) : obj (sampler.obj)
 {
 	GenSamplers (1, &sampler.obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Sampler::~Sampler (void)
 {
 	DeleteSamplers (1, &obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 Sampler &Sampler::operator= (Sampler &&sampler)
 {
 	obj = sampler.obj;
 	GenSamplers (1, &sampler.obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Sampler::Bind (GLuint unit) const
 {
 	BindSampler (unit, obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Sampler::Parameter (GLenum pname, GLfloat param)
 {
 	SamplerParameterf (obj, pname, param);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Sampler::Parameter (GLenum pname, GLint param)
 {
 	SamplerParameteri (obj, pname, param);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Sampler::Parameter (GLenum pname, const GLfloat *params)
 {
 	SamplerParameterfv (obj, pname, params);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void Sampler::Parameter (GLenum pname, const GLint *params)
 {
 	SamplerParameteriv (obj, pname, params);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 } /* namespace gl */

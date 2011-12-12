@@ -23,7 +23,7 @@
 
 namespace gl {
 
-/** An OpenGL shader pipeline object.
+/** OpenGL shader pipeline object.
  * A wrapper class around an OpenGL shader program pipeline.
  */
 class ProgramPipeline

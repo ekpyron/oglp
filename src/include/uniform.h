@@ -23,7 +23,7 @@
 namespace gl {
 
 /**
- * An OpenGL uniform location object.
+ * OpenGL uniform location object.
  * A wrapper class around an OpenGL uniform location.
  */
 class Uniform

@@ -17,6 +17,4 @@
 #ifndef GLP_CONFIG_H
 #define GLP_CONFIG_H
 
-#define GLP_DEBUG
-
 #endif /* !defined GLP_CONFIG_H */

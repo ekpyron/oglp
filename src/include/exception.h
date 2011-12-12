@@ -23,7 +23,7 @@
 namespace gl {
 
 /**
- * An exception class.
+ * Exception class.
  * Wrapper for OpenGL errors.
  */
 class Exception : public std::exception

@@ -21,32 +21,32 @@ namespace gl {
 VertexArray::VertexArray (void)
 {
 	GenVertexArrays (1, &obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 VertexArray::VertexArray (VertexArray &&va) : obj (va.obj)
 {
 	GenVertexArrays (1, &va.obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 VertexArray::~VertexArray (void)
 {
 	DeleteVertexArrays (1, &obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 VertexArray &VertexArray::operator= (VertexArray &&va)
 {
 	obj = va.obj;
 	GenVertexArrays (1, &va.obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void VertexArray::Bind (void) const
 {
 	BindVertexArray (obj);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void VertexArray::VertexAttribOffset (const Buffer &buffer, GLuint index,
@@ -56,19 +56,19 @@ void VertexArray::VertexAttribOffset (const Buffer &buffer, GLuint index,
 {
 	VertexArrayVertexAttribOffsetEXT (obj, buffer.obj, index, size,
 																		type, normalized, stride, offset);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void VertexArray::EnableVertexAttrib (GLuint index)
 {
 	EnableVertexArrayAttribEXT (obj, index);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 void VertexArray::DisableVertexAttrib (GLuint index)
 {
 	DisableVertexArrayAttribEXT (obj, index);
-	GLP_CHECK_ERROR;
+	CheckError ();
 }
 
 } /* namespace gl */
