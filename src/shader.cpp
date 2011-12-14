@@ -88,4 +88,9 @@ std::string Shader::GetInfoLog (void) const
 	return std::string (&log[0], length);
 }
 
+GLuint Shader::get (void) const
+{
+	return obj;
+}
+
 } /* namespace gl */

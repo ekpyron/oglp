@@ -117,12 +117,17 @@ public:
 		* \sa Map
 		*/
 	 void Unmap (void) const;
+	 /**
+		* Return internal object.
+		* Returns the internal OpenGL buffer object. Use with caution.
+		* \return The internal OpenGL buffer object.
+		*/
+	 GLuint get (void) const;
 private:
 	 /**
 		* internal OpenGL buffer object name
 		*/
 	 GLuint obj;
-	 friend class VertexArray;
 };
 
 } /* namespace gl */

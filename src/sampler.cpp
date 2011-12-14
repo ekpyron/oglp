@@ -73,4 +73,9 @@ void Sampler::Parameter (GLenum pname, const GLint *params)
 	CheckError ();
 }
 
+GLuint Sampler::get (void) const
+{
+	return obj;
+}
+
 } /* namespace gl */

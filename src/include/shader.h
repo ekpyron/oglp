@@ -83,19 +83,26 @@ public:
 	 /**
 		* Compile the shader object.
 		* Compiles the internal OpenGL shader object.
+		* \return Whether the shader object was compiled successfully.
 		*/
 	 bool Compile (void) const;
 	 /**
 		* Get the info log.
 		* Obtain the info log of the internal OpenGL shader object.
+		* \return The info log of the internal OpenGL shader object.
 		*/
 	 std::string GetInfoLog (void) const;
+	 /**
+		* Return internal object.
+		* Returns the internal OpenGL shader object. Use with caution.
+		* \return The internal OpenGL shader object.
+		*/
+	 GLuint get (void) const;
 private:
 	 /**
 		* internal OpenGL shader object
 		*/
 	 GLuint obj;
-	 friend class Program;
 };
 
 } /* namespace gl */

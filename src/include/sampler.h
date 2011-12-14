@@ -109,6 +109,12 @@ public:
 		*               of pname are stored.
 		*/
 	 void Parameter (GLenum pname, const GLint *params);
+	 /**
+		* Return internal object.
+		* Returns the internal OpenGL sampler object. Use with caution.
+		* \return The internal OpenGL sampler object.
+		*/
+	 GLuint get (void) const;
 private:
 	 /**
 		* internal OpenGL sampler object

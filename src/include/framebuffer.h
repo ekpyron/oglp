@@ -110,6 +110,12 @@ public:
 		*             colors or data values will be written.
 		*/
 	 void DrawBuffers (const std::vector<GLenum> &bufs) const;
+	 /**
+		* Return internal object.
+		* Returns the internal OpenGL framebuffer object. Use with caution.
+		* \return The internal OpenGL framebuffer object.
+		*/
+	 GLuint get (void) const;
 private:
 	 /**
 		* internal OpenGL framebuffer object

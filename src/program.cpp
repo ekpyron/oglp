@@ -92,7 +92,7 @@ void Program::Parameter (GLenum pname, GLint value) const
 
 void Program::Attach (const Shader &shader) const
 {
-	AttachShader (program, shader.obj);
+	AttachShader (program, shader.get ());
 	CheckError ();
 }
 
@@ -115,6 +115,11 @@ void Program::UseNone (void)
 {
 	UseProgram (0);
 	CheckError ();
+}
+
+GLuint Program::get (void) const
+{
+	return program;
 }
 
 } /* namespace gl */

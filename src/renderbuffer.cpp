@@ -51,4 +51,9 @@ void Renderbuffer::Storage (GLenum internalformat, GLsizei width,
 	CheckError ();
 }
 
+GLuint Renderbuffer::get (void) const
+{
+	return obj;
+}
+
 } /* namespace gl */

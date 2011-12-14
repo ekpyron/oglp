@@ -53,7 +53,7 @@ void ProgramPipeline::Bind (void) const
 void ProgramPipeline::UseProgramStages (GLbitfield stages,
 																			 const Program &program)
 {
-	gl::UseProgramStages (pipeline, stages, program.program);
+	gl::UseProgramStages (pipeline, stages, program.get ());
 	CheckError ();
 }
 
@@ -75,6 +75,11 @@ std::string ProgramPipeline::GetInfoLog (void) const
 	GetProgramPipelineInfoLog (pipeline, length, &length, &log[0]);
 	CheckError ();
 	return std::string (&log[0], length);
+}
+
+GLuint ProgramPipeline::get (void) const
+{
+	return pipeline;
 }
 
 } /* namespace gl */

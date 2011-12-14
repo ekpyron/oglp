@@ -90,4 +90,9 @@ void Buffer::Unmap (void) const
 	CheckError ();
 }
 
+GLuint Buffer::get (void) const
+{
+	return obj;
+}
+
 } /* namespace gl */

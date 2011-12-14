@@ -88,4 +88,9 @@ void Texture::Parameter (GLenum target, GLenum pname, const GLint *params)
 	CheckError ();
 }
 
+GLuint Texture::get (void) const
+{
+	return obj;
+}
+
 } /* namespace gl */

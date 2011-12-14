@@ -119,12 +119,17 @@ public:
 		* \return An Uniform object representing the specified uniform variable.
 		*/
 	 Uniform operator[] (const std::string &name) const;
+	 /**
+		* Return internal object.
+		* Returns the internal OpenGL shader program object. Use with caution.
+		* \return The internal OpenGL shader program object.
+		*/
+	 GLuint get (void) const;
 private:
 	 /**
 		* internal OpenGL shader program
 		*/
 	 GLuint program;
-	 friend class ProgramPipeline;
 };
 
 } /* namespace gl */

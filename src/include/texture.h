@@ -243,11 +243,16 @@ public:
 		* \param params Specifies the values of pname.
 		*/
 	 void Parameter (GLenum target, GLenum pname, const GLfloat *params);
+	 /**
+		* Return internal object.
+		* Returns the internal OpenGL texture object. Use with caution.
+		* \return The internal OpenGL texture object.
+		*/
+	 GLuint get (void) const;
 private:
 	 /** internal OpenGL texture object
 		*/
 	 GLuint obj;
-	 friend class Framebuffer;
 };
 
 } /* namespace gl */

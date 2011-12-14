@@ -86,6 +86,12 @@ public:
 		* \return A string containing the info log.
 		*/
 	 std::string GetInfoLog (void) const;
+	 /**
+		* Return internal object.
+		* Returns the internal OpenGL program pipeline object. Use with caution.
+		* \return The internal OpenGL program pipeline object.
+		*/
+	 GLuint get (void) const;
 private:
 	 /**
 		* internal OpenGL program pipeline object
@@ -95,4 +101,4 @@ private:
 
 } /* namespace gl */
 
-#endif /* !defined SHADERPIPELINE_H */
+#endif /* !defined PROGRAMPIPELINE_H */

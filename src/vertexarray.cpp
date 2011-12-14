@@ -54,7 +54,7 @@ void VertexArray::VertexAttribOffset (const Buffer &buffer, GLuint index,
 																			GLboolean normalized,
 																			GLsizei stride, GLintptr offset)
 {
-	VertexArrayVertexAttribOffsetEXT (obj, buffer.obj, index, size,
+	VertexArrayVertexAttribOffsetEXT (obj, buffer.get (), index, size,
 																		type, normalized, stride, offset);
 	CheckError ();
 }
@@ -69,6 +69,11 @@ void VertexArray::DisableVertexAttrib (GLuint index)
 {
 	DisableVertexArrayAttribEXT (obj, index);
 	CheckError ();
+}
+
+GLuint VertexArray::get (void) const
+{
+	return obj;
 }
 
 } /* namespace gl */

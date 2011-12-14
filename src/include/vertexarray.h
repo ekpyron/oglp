@@ -105,6 +105,12 @@ public:
 		*              attribute to be disabled.
 		*/
 	 void DisableVertexAttrib (GLuint index);
+	 /**
+		* Return internal object.
+		* Returns the internal OpenGL vertex array object. Use with caution.
+		* \return The internal OpenGL vertex array object.
+		*/
+	 GLuint get (void) const;
 private:
 	 /**
 		* internal OpenGL vertex array object

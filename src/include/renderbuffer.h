@@ -69,12 +69,17 @@ public:
 		*/
 	 void Storage (GLenum internalformat, GLsizei width,
 								 GLsizei height) const;
+	 /**
+		* Return internal object.
+		* Returns the internal renderbuffer object. Use with caution.
+		* \return The internal OpenGL renderbuffer object.
+		*/
+	 GLuint get (void) const;
 private:
 	 /**
 		* internal OpenGL renderbuffer object
 		*/
 	 GLuint obj;
-	 friend class Framebuffer;
 };
 
 } /* namespace gl */

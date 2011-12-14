@@ -60,7 +60,7 @@ void Framebuffer::Texture2D (GLenum attachment, GLenum textarget,
 														 const Texture &texture, GLint level) const
 {
 	NamedFramebufferTexture2DEXT (obj, attachment, textarget,
-																texture.obj, level);
+																texture.get (), level);
 	CheckError ();
 }
 
@@ -68,7 +68,7 @@ void Framebuffer::Renderbuffer (GLenum attachment,
 																const gl::Renderbuffer &renderbuffer) const
 {
 	NamedFramebufferRenderbufferEXT (obj, attachment, GL_RENDERBUFFER,
-																	 renderbuffer.obj);
+																	 renderbuffer.get ());
 	CheckError ();
 }
 
@@ -76,6 +76,11 @@ void Framebuffer::DrawBuffers (const std::vector<GLenum> &bufs) const
 {
 	FramebufferDrawBuffersEXT (obj, bufs.size (), &bufs[0]);
 	CheckError ();
+}
+
+GLuint Framebuffer::get (void) const
+{
+	return obj;
 }
 
 } /* namespace gl */
