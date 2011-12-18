@@ -8,8 +8,8 @@
 # without any warranty.
 #
 include (UseDoxygen OPTIONAL)
-
-include_directories (include)
+find_package (GLM REQUIRED)
+include_directories (include ${GLM_INCLUDE_DIR})
 
 file (GLOB GLP_SOURCES *.cpp gl3w/*.cpp)
 

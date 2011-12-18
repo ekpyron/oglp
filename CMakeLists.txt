@@ -7,6 +7,8 @@
 # notice and this notice are preserved.  This file is offered as-is,
 # without any warranty.
 #
+set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
+     "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 cmake_minimum_required (VERSION 2.8)
 project (glp)
 
