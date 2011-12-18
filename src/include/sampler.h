@@ -1,21 +1,21 @@
 /*
- * This file is part of glp.
+ * This file is part of glcp.
  *
- * glp is free software: you can redistribute it and/or modify
+ * glcp is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * glp is distributed in the hope that it will be useful,
+ * glcp is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with glp.  If not, see <http://www.gnu.org/licenses/>.
+ * along with glcp.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef GLP_SAMPLER_H
-#define GLP_SAMPLER_H
+#ifndef GLCP_SAMPLER_H
+#define GLCP_SAMPLER_H
 
 #include "common.h"
 
@@ -124,4 +124,4 @@ private:
 
 } /* namespace gl */
 
-#endif /* !defined GLP_SAMPLER_H */
+#endif /* !defined GLCP_SAMPLER_H */

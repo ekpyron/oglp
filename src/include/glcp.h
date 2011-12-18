@@ -1,21 +1,21 @@
 /*
- * This file is part of glp.
+ * This file is part of glcp.
  *
- * glp is free software: you can redistribute it and/or modify
+ * glcp is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * glp is distributed in the hope that it will be useful,
+ * glcp is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with glp.  If not, see <http://www.gnu.org/licenses/>.
+ * along with glcp.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef GLP_H
-#define GLP_H
+#ifndef GLCP_H
+#define GLCP_H
 
 #include "common.h"
 #include "buffer.h"
@@ -32,8 +32,8 @@
 namespace gl {
 
 /**
- * Initialize glp.
- * Initializes glp.
+ * Initialize glcp.
+ * Initializes glcp.
  * \param callback Callback to obtain OpenGL entry points.
  */
 void Init (GetProcAddressCallback callback);
@@ -48,4 +48,4 @@ bool IsExtensionSupported (const std::string &name);
 
 } /* namespace gl */
 
-#endif /* !defined GLP_H */
+#endif /* !defined GLCP_H */
