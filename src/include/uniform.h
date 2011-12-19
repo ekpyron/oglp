@@ -37,6 +37,7 @@ public:
 	 /**
 		* Copy constuctor.
 		* Copies the internal uniform location to another Uniform object.
+		* \param obj Uniform object to copy.
 		*/
 	 Uniform (const Uniform &obj);
 	 /**
@@ -47,6 +48,8 @@ public:
 	 /**
 		* Copy assignment.
 		* Copies the internal uniform location to another Uniform object.
+		* \param obj Uniform object to copy.
+		* \return A reference to the Uniform object.
 		*/
 	 Uniform &operator= (const Uniform &obj);
 	 /**

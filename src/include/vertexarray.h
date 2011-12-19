@@ -37,6 +37,7 @@ public:
 		* Move constuctor.
 		* Passes the internal OpenGL vertex array object to
 		* another VertexArray object.
+		* \param va VertexArray object to move.
 		*/
 	 VertexArray (VertexArray &&va);
 	 /**
@@ -53,11 +54,14 @@ public:
 		* Move assignment.
 		* Passes the internal OpenGL vertex array object to
 		* another VertexArray object.
+		* \param va The VertexArray object to move.
+		* \return A reference to the VertexArray object.
 		*/
 	 VertexArray &operator= (VertexArray &&va);
 	 /**
 		* Deleted copy assignment.
 		* A VertexArray object can't be copy assigned.
+		* \return
 		*/
 	 VertexArray &operator= (const VertexArray&) = delete;
 	 /**
@@ -72,9 +76,15 @@ public:
 		* \param index Specifies the index of the generic vertex
 		*              attribute to be modified.
 		* \param type Specifies the data type of each component.
-		*             Symbolic constants GL_BYTE, GL_UNSIGNED_BYTE,
-		*             GL_SHORT, GL_UNSIGNED_SHORT, GL_INT, GL_UNSIGNED_INT,
-		*             GL_FLOAT, or GL_DOUBLE are accepted.
+		*             Must be one of the following symbolic constants:
+		*             - GL_BYTE
+		*             - GL_UNSIGNED_BYTE
+		*             - GL_SHORT
+		*             - GL_UNSIGNED_SHORT
+		*             - GL_INT
+		*             - GL_UNSIGNED_INT
+		*             - GL_FLOAT
+		*             - GL_DOUBLE
 		* \param size Specifies the number of components per generic
 		*             vertex attribute. Must be 1, 2, 3, or 4.
 		* \param normalized Specifies whether fixed-point data values

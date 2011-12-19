@@ -38,6 +38,7 @@ public:
 		* Move constuctor.
 		* Passes the internal OpenGL Framebuffer object to
 		* another framebuffer object.
+		* \param framebuffer The Framebuffer object to move.
 		*/
 	 Framebuffer (Framebuffer &&framebuffer);
 	 /**
@@ -54,11 +55,14 @@ public:
 		* Move assignment.
 		* Passes the internal OpenGL framebuffer object to another
 		* Framebuffer object.
+		* \param framebuffer The Framebuffer object to move.
+		* \return A reference to the Framebuffer object.
 		*/
 	 Framebuffer &operator= (Framebuffer &&framebuffer);
 	 /**
 		* Deleted copy assignment.
 		* A Framebuffer object can't be copy assigned.
+		* \return
 		*/
 	 Framebuffer &operator= (const Framebuffer&) = delete;
 	 /**
@@ -80,9 +84,11 @@ public:
 		* Attach a level of a texture object as a logical buffer to the
 		* Framebuffer object.
 		* \param attachment Specifies the attachment point of the Framebuffer.
-		*                   attachment must be GL_COLOR_ATTACHMENTi,
-		*                   GL_DEPTH_ATTACHMENT, GL_STENCIL_ATTACHMENT or
-		*                   GL_DEPTH_STENCIL_ATTACHMMENT.
+		*                   attachment must be one of the following:
+		*                   - GL_COLOR_ATTACHMENTi
+		*                   - GL_DEPTH_ATTACHMENT
+		*                   - GL_STENCIL_ATTACHMENT
+		*                   - GL_DEPTH_STENCIL_ATTACHMMENT
 		* \param textarget Specifies what type of Texture is expected
 		*                  in the texture parameter, or for cube map textures,
 		*                  which face is to be attached.

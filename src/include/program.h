@@ -40,6 +40,7 @@ public:
 		* Move constuctor.
 		* Passes the internal OpenGL shader program object to
 		* another Program object.
+		* \param p The Program object to move.
 		*/
 	 Program (Program &&p);
 	 /**
@@ -56,11 +57,14 @@ public:
 		* Move assignment.
 		* Passes the internal OpenGL shader program object to another
 		* Program object.
+		* \param p The Program object to move.
+		* \return A reference to the program object.
 		*/
-	 Program &operator= (Program&&);
+	 Program &operator= (Program &&p);
 	 /**
 		* Deleted copy assignment.
 		* A Program object can't be copy assigned.
+		* \return
 		*/
 	 Program &operator= (const Program&) = delete;
 	 /**

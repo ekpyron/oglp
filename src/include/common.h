@@ -23,6 +23,10 @@
 
 namespace gl {
 
+/**
+ * Check for an OpenGL error.
+ * Checks for an OpenGL error and throws an Exception if one occurred.
+ */
 void CheckError (void);
 
 } /* namespace gl */

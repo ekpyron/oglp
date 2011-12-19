@@ -35,6 +35,7 @@ public:
 		* Move constuctor.
 		* Passes the internal OpenGL renderbuffer object to another
 		* Renderbuffer object.
+		* \param renderbuffer The Renderbuffer object to move.
 		*/
 	 Renderbuffer (Renderbuffer &&renderbuffer);
 	 /**
@@ -51,11 +52,14 @@ public:
 		* Move assignment.
 		* Passes the internal OpenGL renderbuffer object to another
 		* Renderbuffer object.
+		* \param renderbuffer The Renderbuffer object to move.
+		* \return A reference to the Renderbuffer object.
 		*/
 	 Renderbuffer &operator= (Renderbuffer &&renderbuffer);
 	 /**
 		* Deleted copy assignment.
 		* A Renderbuffer object can't be copy assigned.
+		* \return
 		*/
 	 Renderbuffer &operator= (const Renderbuffer&) = delete;
 	 /**

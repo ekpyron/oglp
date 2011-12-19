@@ -37,8 +37,9 @@ public:
 		* Move constuctor.
 		* Passes the internal OpenGL shader pipeline object to
 		* another ProgramPipeline object.
+		* \param pipeline The ProgramPipeline object to move.
 		*/
-	 ProgramPipeline (ProgramPipeline&&);
+	 ProgramPipeline (ProgramPipeline &&pipeline);
 	 /**
 		* Deleted copy constructor.
 		* A ProgramPipeline object can't be copy constructed.
@@ -53,11 +54,14 @@ public:
 		* Move assignment.
 		* Passes the internal OpenGL shader pipeline object to another
 		* ProgramPipeline object.
+		* \param pipeline The ProgramPipeline object to move.
+		* \return A reference to the ProgramPipeline object.
 		*/
-	 ProgramPipeline &operator= (ProgramPipeline&&);
+	 ProgramPipeline &operator= (ProgramPipeline &&pipeline);
 	 /**
 		* Deleted copy assignment.
 		* A ProgramPipeline object can't be copy assigned.
+		* \return
 		*/
 	 ProgramPipeline &operator= (const ProgramPipeline&) = delete;
 	 /**
@@ -86,6 +90,13 @@ public:
 		* \return A string containing the info log.
 		*/
 	 std::string GetInfoLog (void) const;
+   /**
+		* Set active shader program.
+		* Sets the active program object for a program pipeline object.
+		* \param program Specifies the program object to set as the
+		*                active program.
+		*/
+	 void ActiveShaderProgram (const Program &program) const;
 	 /**
 		* Return internal object.
 		* Returns the internal OpenGL program pipeline object. Use with caution.

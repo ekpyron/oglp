@@ -37,13 +37,16 @@ public:
 		* Constructor.
 		* Creates a new Shader object and an internal OpenGL shader object.
 		* \param type Specifies the type of shader to be created.
-		*             Must be either GL_VERTEX_SHADER or GL_FRAGMENT_SHADER.
+		*             Must be one of the following:
+		*             - GL_VERTEX_SHADER
+		*             - GL_FRAGMENT_SHADER
 		*/
 	 Shader (GLenum type);
 	 /**
 		* Move constuctor.
 		* Passes the internal OpenGL shader object to
 		* another Shader object.
+		* \param s Shader object to move.
 		*/
 	 Shader (Shader &&s);
 	 /**
@@ -60,18 +63,23 @@ public:
 		* Move assignment.
 		* Passes the internal OpenGL shader object to another
 		* Shader object.
+		* \param s Shader object to move.
+		* \return A reference to the Shader object.
 		*/
-	 Shader &operator= (Shader&&);
+	 Shader &operator= (Shader &&s);
 	 /**
 		* Deleted copy assignment.
 		* A Shader object can't be copy assigned.
+		* \return
 		*/
 	 Shader &operator= (const Shader&) = delete;
 	 /**
 		* Create a Shader.
 		* Creates the internal OpenGL shader object.
 		* \param type Specifies the type of shader to be created.
-		*             Must be either GL_VERTEX_SHADER or GL_FRAGMENT_SHADER.
+		*             Must be one of the following:
+		*             - GL_VERTEX_SHADER
+		*             - GL_FRAGMENT_SHADER
 		*/
 	 void Create (GLenum type);
 	 /**

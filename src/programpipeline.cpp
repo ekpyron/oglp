@@ -77,6 +77,12 @@ std::string ProgramPipeline::GetInfoLog (void) const
 	return std::string (&log[0], length);
 }
 
+void ProgramPipeline::ActiveShaderProgram (const Program &program) const
+{
+	gl::ActiveShaderProgram (pipeline, program.get ());
+	CheckError ();
+}
+
 GLuint ProgramPipeline::get (void) const
 {
 	return pipeline;

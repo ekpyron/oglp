@@ -25,7 +25,7 @@ DOXYFILE_ENCODING      = UTF-8
 # The PROJECT_NAME tag is a single word (or a sequence of words surrounded 
 # by quotes) that should identify the project.
 
-PROJECT_NAME           = "@PROJECT_NAME@"
+PROJECT_NAME           = OGLP
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. 
 # This could be handy for archiving the generated documentation or 
@@ -538,7 +538,7 @@ WARN_IF_DOC_ERROR      = YES
 # wrong or incomplete parameter documentation, but not about the absence of 
 # documentation.
 
-WARN_NO_PARAMDOC       = NO
+WARN_NO_PARAMDOC       = YES
 
 # The WARN_FORMAT tag determines the format of the warning messages that 
 # doxygen can produce. The string should contain the $file, $line, and $text 
@@ -974,24 +974,24 @@ FORMULA_FONTSIZE       = 10
 # If the GENERATE_LATEX tag is set to YES (the default) Doxygen will 
 # generate Latex output.
 
-GENERATE_LATEX         = @DOXYFILE_GENERATE_LATEX@
+GENERATE_LATEX         = YES
 
 # The LATEX_OUTPUT tag is used to specify where the LaTeX docs will be put. 
 # If a relative path is entered the value of OUTPUT_DIRECTORY will be 
 # put in front of it. If left blank `latex' will be used as the default path.
 
-LATEX_OUTPUT           = "@DOXYFILE_LATEX_DIR@"
+#LATEX_OUTPUT           = "@DOXYFILE_LATEX_DIR@"
 
 # The LATEX_CMD_NAME tag can be used to specify the LaTeX command name to be 
 # invoked. If left blank `latex' will be used as the default command name.
 
-LATEX_CMD_NAME         = "@LATEX_COMPILER@"
+#LATEX_CMD_NAME         = "@LATEX_COMPILER@"
 
 # The MAKEINDEX_CMD_NAME tag can be used to specify the command name to 
 # generate index for LaTeX. If left blank `makeindex' will be used as the 
 # default command name.
 
-MAKEINDEX_CMD_NAME     = "@MAKEINDEX_COMPILER@"
+#MAKEINDEX_CMD_NAME     = "@MAKEINDEX_COMPILER@"
 
 # If the COMPACT_LATEX tag is set to YES Doxygen generates more compact 
 # LaTeX documents. This may be useful for small projects and may help to 
@@ -1028,7 +1028,7 @@ PDF_HYPERLINKS         = YES
 # plain latex in the generated Makefile. Set this option to YES to get a 
 # higher quality PDF documentation.
 
-USE_PDFLATEX           = @DOXYFILE_PDFLATEX@
+USE_PDFLATEX           = YES
 
 # If the LATEX_BATCHMODE tag is set to YES, doxygen will add the \\batchmode. 
 # command to the generated LaTeX files. This will instruct LaTeX to keep 

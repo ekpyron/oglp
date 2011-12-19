@@ -84,6 +84,20 @@ GLvoid *Buffer::Map (GLenum access) const
 	return ptr;
 }
 
+GLvoid *Buffer::MapRange (GLintptr offset, GLsizeiptr length,
+													GLbitfield access) const
+{
+	GLvoid *ptr;
+	ptr = MapNamedBufferRangeEXT (obj, offset, length, access);
+	CheckError ();
+	if (ptr == NULL)
+	{
+		throw std::runtime_error ("An OpenGL buffer object could not be "
+															"mapped to memory");
+	}
+	return ptr;
+}
+
 void Buffer::Unmap (void) const
 {
 	UnmapNamedBufferEXT (obj);

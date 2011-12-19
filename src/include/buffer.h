@@ -35,6 +35,7 @@ public:
 	 /**
 		* Move constuctor.
 		* Passes the internal OpenGL buffer object to another Buffer object.
+		* \param buffer The Buffer object to move.
 		*/
 	 Buffer (Buffer &&buffer);
 	 /**
@@ -50,24 +51,39 @@ public:
 	 /**
 		* Move assignment.
 		* Passes the internal OpenGL buffer object to another Buffer object.
+		* \param buffer The Buffer object to move.
+		* \return A reference to the buffer object.
 		*/
 	 Buffer &operator= (Buffer &&buffer);
 	 /**
 		* Deleted copy assignment.
 		* A Buffer object can't be copy assigned.
+		* \return
 		*/
 	 Buffer &operator= (const Buffer&) = delete;
 	 /**
 		* Bind the Buffer object.
 		* Binds the Buffer object to the specified target.
-		* \param target Specifies which target to bind the Buffer to.
+		* \param target Specifies the target to which the buffer object is bound.
+		*               The following symbolic constants are accepted:
+		*               - GL_ARRAY_BUFFER
+		*               - GL_ATOMIC_COUNTER_BUFFER
+		*               - GL_COPY_READ_BUFFER
+		*               - GL_COPY_WRITE_BUFFER
+		*               - GL_DRAW_INDIRECT_BUFFER
+		*               - GL_ELEMENT_ARRAY_BUFFER
+		*               - GL_PIXEL_PACK_BUFFER
+		*               - GL_PIXEL_UNPACK_BUFFER
+		*               - GL_TEXTURE_BUFFER
+		*               - GL_TRANSFORM_FEEDBACK_BUFFER
+		*               - GL_UNIFORM_BUFFER
 		* \sa Unbind()
 		*/
 	 void Bind (GLenum target) const;
 	 /**
 		* Unbinds Buffers.
 		* Unbinds any Buffer object potentially bound to the specified target.
-		* \param target Specifies from which target Buffers should be unbound.
+		* \param target Specifies from which target all buffers should be unbound.
 		* \sa Bind()
 		*/
 	 static void Unbind (GLenum target);
@@ -81,10 +97,16 @@ public:
 		*             into the data store for initialization, or NULL
 		*             if no data is to be copied.
 		* \param usage Specifies the expected usage pattern of the data store.
-		*              The symbolic constant must be GL_STREAM_DRAW,
-		*              GL_STREAM_READ, GL_STREAM_COPY, GL_STATIC_DRAW,
-		*              GL_STATIC_READ, GL_STATIC_COPY, GL_DYNAMIC_DRAW,
-		*              GL_DYNAMIC_READ, or GL_DYNAMIC_COPY.
+		*              The following symbolic constants are accepted:
+		*              - GL_STREAM_DRAW
+		*              - GL_STREAM_READ
+		*              - GL_STREAM_COPY
+		*              - GL_STATIC_DRAW
+		*              - GL_STATIC_READ
+		*              - GL_STATIC_COPY
+		*              - GL_DYNAMIC_DRAW
+		*              - GL_DYNAMIC_READ
+		*              - GL_DYNAMIC_COPY
 		* \sa SubData()
 		*/
 	 void Data (GLsizeiptr size, const GLvoid *data, GLenum usage) const;
@@ -106,11 +128,27 @@ public:
 		* \param access Specifies the access policy, indicating whether it
 		*               will be possible to read from, write to, or both read
 		*               from and write to the Buffer object's mapped data store.
-		*               The symbolic constant must be GL_READ_ONLY, GL_WRITE_ONLY,
-		*               or GL_READ_WRITE.
+		*               The following symbolic constants are accepted:
+		*               - GL_READ_ONLY
+		*               - GL_WRITE_ONLY
+		*               - GL_READ_WRITE
+		* \return A pointer to the memory region the data store was mapped to.
 		* \sa Unmap()
 		*/
 	 GLvoid *Map (GLenum access) const;
+	 /**
+		* Map a section of a buffer object's data store.
+		* Maps a section of the internal OpenGL buffer object's data store.
+		* \param offset Specifies a the starting offset within the buffer
+		*               of the range to be mapped.
+		* \param length Specifies a length of the range to be mapped.
+		* \param access Specifies a combination of access flags indicating
+		*               the desired access to the range.
+		* \return A pointer to the memory region the data store was mapped to.
+		* \sa Map()
+		*/
+	 GLvoid *MapRange (GLintptr offset, GLsizeiptr length,
+										 GLbitfield access) const;
 	 /**
 		* Unmap a Buffer object's data store.
 		* Unmaps the data store of the internal OpenGL buffer object.
