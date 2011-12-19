@@ -31,6 +31,30 @@
 
 namespace gl {
 
+/** \mainpage
+ * \section intro_sec Introduction
+ * \subsection About
+ * OGLP is a free, open source and platform independent library, which
+ * provides a C++ wrapper for OpenGL.
+ * \subsection Goal
+ * OGLP is NOT designed to be backward compatible, but to use modern
+ * technologies. Thus there will be no wrappers for deprecated functions.
+ * That means that OGLP is designed to be used with the OpenGL core
+ * profile introduced with OpenGL 3.2.
+ * Furthermore OGLP aimes to be as close to the underlying OpenGL API
+ * as possible and to produce the least possible overhead.
+ * \subsection Requirements
+ * As OGLP is not designed to be backward compatible, it depends on the
+ * presence of modern technologies. Thus OpenGL 3.3+ is an requirement, 
+ * as well as some common extensions namely GL_EXT_direct_state_access,
+ * GL_ARB_separable_shader_objects and GL_ARB_sampler_objects.
+ * The former is well supported by established graphics card manufactors
+ * and the latter is in core OpenGL 4.
+ * Build dependencies include GLM, cmake and a C++ compiler supporting C++11.
+ * \subsection License
+ * OGLP is licensed under the GPL.
+ */
+
 /**
  * Initialize oglp.
  * Initializes oglp.
