@@ -17,8 +17,8 @@
 #ifndef OGLP_UNIFORM_H
 #define OGLP_UNIFORM_H
 
-#include "common.h"
 #include <glm/glm.hpp>
+#include "common.h"
 
 namespace gl {
 
