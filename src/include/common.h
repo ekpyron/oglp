@@ -18,6 +18,7 @@
 #define OGLP_COMMON_H
 
 #include "config.h"
+#include <glm/glm.hpp>
 #include "gl3w.h"
 #include "exception.h"
 
