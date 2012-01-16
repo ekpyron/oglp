@@ -18,7 +18,6 @@
 #define OGLP_UNIFORM_H
 
 #include "common.h"
-#include <glm/glm.hpp>
 #include <vector>
 
 namespace gl {
