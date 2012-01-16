@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with oglp.  If not, see <http://www.gnu.org/licenses/>.
  */
+/** @file */
 #ifndef OGLP_H
 #define OGLP_H
 
@@ -56,9 +57,10 @@ namespace gl {
  */
 
 /**
- * Initialize oglp.
+ * @brief Initialize oglp.
+ * @param callback Callback to obtain OpenGL entry points.
+ *
  * Initializes oglp.
- * \param callback Callback to obtain OpenGL entry points.
  */
 void Init (GetProcAddressCallback callback);
 

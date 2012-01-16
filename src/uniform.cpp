@@ -53,6 +53,16 @@ GLfloat Uniform::operator= (GLfloat v)
 	return v;
 }
 
+const std::vector<GLfloat> &Uniform::operator= (const std::vector<GLfloat> &v)
+{
+	if (location != -1)
+	{
+		ProgramUniform1fv (program, location, v.size (), &v[0]);
+		CheckError ();
+	}
+	return v;
+}
+
 const glm::vec2 &Uniform::operator= (const glm::vec2 &v)
 {
 	if (location != -1)

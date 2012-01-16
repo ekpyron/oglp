@@ -58,6 +58,13 @@ void Texture::Image2D (GLenum target, GLint level, GLint internalFormat,
 	CheckError ();
 }
 
+void Texture::GetTexImage (GLenum target, GLint level, GLenum format,
+													 GLenum type, GLvoid *img)
+{
+	GetTextureImageEXT (obj, target, level, format, type, img);
+	CheckError ();
+}
+
 void Texture::GenerateMipmap (GLenum target)
 {
 	GenerateTextureMipmapEXT (obj, target);

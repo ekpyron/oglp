@@ -19,6 +19,7 @@
 
 #include "common.h"
 #include <glm/glm.hpp>
+#include <vector>
 
 namespace gl {
 
@@ -59,6 +60,13 @@ public:
 		* \return a reference to the assigned value
 		*/
 	 GLfloat operator= (GLfloat v);
+	 /**
+		* Assign an array of values.
+		* Assigns an array of float values to the uniform location.
+		* \param v array of values to assign
+		* \return a reference to the assigned array of values
+		*/
+	 const std::vector<GLfloat> &operator= (const std::vector<GLfloat> &v);
 	 /**
 		* Assign a value.
 		* Assigns a glm::vec2 value to the uniform location.

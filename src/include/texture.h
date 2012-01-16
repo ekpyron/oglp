@@ -373,6 +373,46 @@ public:
 								 GLsizei width, GLsizei height, GLint border,
 								 GLenum format, GLenum type, const GLvoid *data);
 	 /**
+		* Return a texture image.
+		* Returns data from the internal texture object.
+		* \param target Specifies the texture target from which to obtain
+		*               the data. target must be one of the following:
+		*               - GL_TEXTURE_1D
+		*               - GL_TEXTURE_2D
+		*               - GL_TEXTURE_3D
+		*               - GL_TEXTURE_1D_ARRAY
+		*               - GL_TEXTURE_2D_ARRAY
+		*               - GL_TEXTURE_CUBE_MAP
+		* \param level Specifies the level-of-detail number.
+		*               - Level 0 is the base image level.
+		*               - Level n is the nth mipmap reduction image.
+		* \param format Specifies the pixel format for the returned data.
+		*               The following symbolic values are accepted:
+		*               - GL_STENCIL_INDEX
+		*               - GL_DEPTH_COMPONENT
+		*               - GL_DEPTH_STENCIL
+		*               - GL_RED
+		*               - GL_GREEN
+		*               - GL_BLUE
+		*               - GL_RG
+		*               - GL_RGB
+		*               - GL_BGR
+		*               - GL_RGBA
+		*               - GL_BGRA
+		*               - GL_RED_INTEGER
+		*               - GL_GREEN_INTEGER
+		*               - GL_BLUE_INTEGER
+		*               - GL_RG_INTEGER
+		*               - GL_RGB_INTEGER
+		*               - GL_BGR_INTEGER
+		*               - GL_RGBA_INTEGER
+		*               - GL_BGRA_INTEGER
+		* \param img Returns the texture image. Should be a pointer to an array
+		*            of the type specified by type.
+		*/
+	 void GetTexImage (GLenum target, GLint level, GLenum format, GLenum type,
+										 GLvoid *img);
+	 /**
 		* Generate mipmaps.
 		* Generates mipmaps for the internal texture object
 		* and the specified texture target.
