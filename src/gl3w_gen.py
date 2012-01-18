@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 #
 # This is a highly modified version of gl3w_gen.py.
-# The original version was part of gl3w which is in the public domain
+# The original version was written by Slavomir Kaslev
+# as part of gl3w which is in the public domain
 # and available at https://github.com/skaslev/gl3w.
 #
 # Copyright (c) 2011 Daniel Kirchner
