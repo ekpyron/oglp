@@ -18,6 +18,7 @@
 #define TEXTURE_H
 
 #include "common.h"
+#include "buffer.h"
 
 namespace gl {
 
@@ -372,6 +373,15 @@ public:
 	 void Image2D (GLenum target, GLint level, GLint internalFormat,
 								 GLsizei width, GLsizei height, GLint border,
 								 GLenum format, GLenum type, const GLvoid *data);
+	 /**
+		* Attach a buffer object to the texture.
+		* Attaches the storage for a buffer object to the buffer texture.
+		* \param internalFormat Specifies the internal format of the data in the
+		*                       store belonging to the buffer.
+		* \param buffer Specifies the buffer object whose storage to attach to
+		*               the active buffer texture.
+		*/
+	 void Buffer (GLenum internalFormat, const gl::Buffer &buffer);
 	 /**
 		* Return a texture image.
 		* Returns data from the internal texture object.

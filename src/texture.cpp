@@ -58,6 +58,12 @@ void Texture::Image2D (GLenum target, GLint level, GLint internalFormat,
 	CheckError ();
 }
 
+void Texture::Buffer (GLenum internalFormat, const gl::Buffer &buffer)
+{
+	TextureBufferEXT (obj, GL_TEXTURE_BUFFER, internalFormat, buffer.get ());
+	CheckError ();
+}
+
 void Texture::GetTexImage (GLenum target, GLint level, GLenum format,
 													 GLenum type, GLvoid *img)
 {
