@@ -12,5 +12,7 @@ AC_ARG_WITH([glm],
 	[CPPFLAGS="-I$withval ${CPPFLAGS}"])
 AC_CHECK_HEADERS(glm/glm.hpp, [], AC_MSG_FAILURE([glm headers missing]))
 
+DX_INIT_DOXYGEN($PACKAGE_NAME, doxygen.cfg)
+
 AC_CONFIG_FILES([Makefile src/Makefile oglp.pc])
 AC_OUTPUT
