@@ -17,8 +17,28 @@
 #include "oglp.h"
 #include <stdexcept>
 #include <sstream>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 namespace gl {
+
+#ifdef _WIN32
+/* This workaround falls back to loading symbols
+ * directly from OpenGL32.dll, as wglGetProcAddress
+ * may return NULL for legacy opengl entry points. */
+HMODULE _opengl32dllhandle = NULL;
+GetProcAddressCallback _usergetprocaddress = NULL;
+void *_getprocaddress (const char *name)
+{
+	void *ptr = NULL;
+	if (_usergetprocaddress)
+		 ptr = _usergetprocaddress (name);
+	if (!ptr && _opengl32dllhandle)
+		 ptr = (void*) GetProcAddress (_opengl32dllhandle, name);
+	return ptr;
+}
+#endif
 
 bool IsExtensionSupported (const std::string &name)
 {
@@ -42,8 +62,15 @@ void Init (GetProcAddressCallback callback)
 	};
 	std::stringstream version;
 	int major, minor;
+
+#ifdef _WIN32
+	_opengl32dllhandle = LoadLibrary ("OPENGL32.DLL");
+	_usergetprocaddress = callback;
+	InitPrototypes (_getprocaddress);
+#else
 	InitPrototypes (callback);
-	if (!GetString)
+#endif
+	if (!GetString || GetString == (PFNGLGETSTRINGPROC) gl::Unsupported)
 		 throw std::runtime_error ("No entry point for glGetString found.");
 
 	version << GetString (GL_VERSION);
