@@ -100,6 +100,24 @@ public:
 	 void Texture2D (GLenum attachment, GLenum textarget,
 									 const Texture &texture, GLint level) const;
 	 /**
+		* Attach a layer of a texture array to the Framebuffer object.
+		* Attach a layer of a texture array as a logical buffer to the
+		* Framebuffer object.
+		* \param attachment Specifies the attachment point of the Framebuffer.
+		*                   attachment must be one of the following:
+		*                   - GL_COLOR_ATTACHMENTi
+		*                   - GL_DEPTH_ATTACHMENT
+		*                   - GL_STENCIL_ATTACHMENT
+		*                   - GL_DEPTH_STENCIL_ATTACHMMENT
+		* \param texture Specifies the texture array to be attached
+		*                to the Framebuffer object.
+		* \param level Specifies the mipmap level of the texture layer to attach.
+		* \param layer Specifies the layer of the texture array to attach.
+		* \sa Renderbuffer() Texture2D()
+		*/
+	 void TextureLayer (GLenum attachment, const Texture &texture,
+											GLint level, GLint layer) const;
+	 /**
 		* Attach a Renderbuffer to the Framebuffer object.
 		* Attach a Renderbuffer as a logical buffer to the Framebuffer object.
 		* \param attachment Specifies the attachment point of the Framebuffer.

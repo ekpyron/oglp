@@ -65,6 +65,13 @@ void Framebuffer::Texture2D (GLenum attachment, GLenum textarget,
 	CheckError ();
 }
 
+void Framebuffer::TextureLayer (GLenum attachment, const Texture &texture,
+																GLint level, GLint layer) const
+{
+	NamedFramebufferTextureLayerEXT (obj, attachment, texture.get (),
+																	 level, layer);
+}
+
 void Framebuffer::Renderbuffer (GLenum attachment,
 																const gl::Renderbuffer &renderbuffer) const
 {
