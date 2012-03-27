@@ -79,6 +79,12 @@ public:
 		* \return The internal OpenGL renderbuffer object.
 		*/
 	 GLuint get (void) const;
+   /**
+		* Swap internal object.
+		* Swaps the internal OpenGL renderbuffer object with another
+		* gl::Renderbuffer.
+		*/
+	 void swap (gl::Renderbuffer &renderbuffer);
 private:
 	 /**
 		* internal OpenGL renderbuffer object

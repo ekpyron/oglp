@@ -15,6 +15,7 @@
  * along with oglp.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "sampler.h"
+#include <algorithm>
 
 namespace gl {
 
@@ -71,6 +72,11 @@ void Sampler::Parameter (GLenum pname, const GLint *params)
 {
 	SamplerParameteriv (obj, pname, params);
 	CheckError ();
+}
+
+void Sampler::swap (Sampler &sampler)
+{
+	std::swap (obj, sampler.obj);
 }
 
 GLuint Sampler::get (void) const

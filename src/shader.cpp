@@ -16,6 +16,7 @@
  */
 #include "shader.h"
 #include <vector>
+#include <algorithm>
 
 namespace gl {
 
@@ -86,6 +87,11 @@ std::string Shader::GetInfoLog (void) const
 	log.resize (length);
 	GetShaderInfoLog (obj, length, NULL, &log[0]);
 	return std::string (&log[0], length);
+}
+
+void Shader::swap (Shader &sampler)
+{
+	std::swap (obj, sampler.obj);
 }
 
 GLuint Shader::get (void) const

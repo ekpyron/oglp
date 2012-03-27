@@ -121,6 +121,14 @@ public:
 		* \return The internal OpenGL vertex array object.
 		*/
 	 GLuint get (void) const;
+   /**
+		* Swap internal object.
+		* Swaps the internal OpenGL vertex array object with another
+		* gl::VertexArray.
+		* \param sampler Object with which to swap the internal
+		*                vertex array object.
+		*/
+	 void swap (VertexArray &vertexarray);
 private:
 	 /**
 		* internal OpenGL vertex array object

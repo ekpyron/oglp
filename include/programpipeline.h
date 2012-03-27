@@ -103,11 +103,18 @@ public:
 		* \return The internal OpenGL program pipeline object.
 		*/
 	 GLuint get (void) const;
+	 /**
+		* Swap internal object.
+		* Swaps the internal OpenGL program pipeline object with another
+		* gl::ProgramPipeline.
+		* \program pipeline Object with which to swap the internal object.
+		*/
+	 void swap (ProgramPipeline &pipeline);
 private:
 	 /**
 		* internal OpenGL program pipeline object
 		*/
-	 GLuint pipeline;
+	 GLuint obj;
 };
 
 } /* namespace gl */

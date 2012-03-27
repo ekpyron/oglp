@@ -16,35 +16,36 @@
  */
 #include "program.h"
 #include <iostream>
+#include <algorithm>
 
 namespace gl {
 
-Program::Program (void) : program (0)
+Program::Program (void) : obj (0)
 {
-	program = CreateProgram ();
+	obj = CreateProgram ();
 	CheckError ();
 }
 
-Program::Program (Program &&p) : program (p.program)
+Program::Program (Program &&p) : obj (p.obj)
 {
-	p.program = CreateProgram ();
+	p.obj = CreateProgram ();
 	CheckError ();
 }
 
 Program::~Program (void)
 {
-	if (program)
+	if (obj)
 	{
-		DeleteProgram (program);
+		DeleteProgram (obj);
 		CheckError ();
-		program = 0;
+		obj = 0;
 	}
 }
 
 Program &Program::operator= (Program &&p)
 {
-	program = p.program;
-	p.program = CreateProgram ();
+	obj = p.obj;
+	p.obj = CreateProgram ();
 	CheckError ();
 }
 
@@ -52,15 +53,15 @@ bool Program::Create (GLenum type, const std::string &source)
 {
 	const GLchar *src = source.c_str ();
 	GLint status;
-	DeleteProgram (program);
-	program = CreateShaderProgramv (type, 1, &src);
-	if (!program)
+	DeleteProgram (obj);
+	obj = CreateShaderProgramv (type, 1, &src);
+	if (!obj)
 	{
-		program = CreateProgram ();
+		obj = CreateProgram ();
 		return false;
 	}
 
-	GetProgramiv (program, GL_LINK_STATUS, &status);
+	GetProgramiv (obj, GL_LINK_STATUS, &status);
 	CheckError ();
 	return status;
 }
@@ -69,9 +70,9 @@ std::string Program::GetInfoLog (void) const
 {
 	GLint length;
 	std::vector<GLchar> log;
-	GetProgramiv (program, GL_INFO_LOG_LENGTH, &length);
+	GetProgramiv (obj, GL_INFO_LOG_LENGTH, &length);
 	log.resize (length);
-	GetProgramInfoLog (program, length, NULL, &log[0]);
+	GetProgramInfoLog (obj, length, NULL, &log[0]);
 	CheckError ();
 	return std::string (&log[0], length);
 }
@@ -79,35 +80,35 @@ std::string Program::GetInfoLog (void) const
 Uniform Program::operator[] (const std::string &name) const
 {
 	GLint location;
-	location = GetUniformLocation (program, name.c_str ());
+	location = GetUniformLocation (obj, name.c_str ());
 	CheckError ();
-	return Uniform (program, location);
+	return Uniform (obj, location);
 }
 
 void Program::Parameter (GLenum pname, GLint value) const
 {
-	ProgramParameteri (program, pname, value);
+	ProgramParameteri (obj, pname, value);
 	CheckError ();
 }
 
 void Program::Attach (const Shader &shader) const
 {
-	AttachShader (program, shader.get ());
+	AttachShader (obj, shader.get ());
 	CheckError ();
 }
 
 bool Program::Link (void) const
 {
 	GLint status;
-	LinkProgram (program);
-	GetProgramiv (program, GL_LINK_STATUS, &status);
+	LinkProgram (obj);
+	GetProgramiv (obj, GL_LINK_STATUS, &status);
 	CheckError ();
 	return status;
 }
 
 void Program::Use (void) const
 {
-	UseProgram (program);
+	UseProgram (obj);
 	CheckError ();
 }
 
@@ -117,9 +118,14 @@ void Program::UseNone (void)
 	CheckError ();
 }
 
+void Program::swap (Program &program)
+{
+	std::swap (obj, program.obj);
+}
+
 GLuint Program::get (void) const
 {
-	return program;
+	return obj;
 }
 
 } /* namespace gl */

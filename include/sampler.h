@@ -143,6 +143,12 @@ public:
 		* \return The internal OpenGL sampler object.
 		*/
 	 GLuint get (void) const;
+   /**
+		* Swap internal object.
+		* Swaps the internal OpenGL sampler object with another gl::Sampler.
+		* \param sampler Object with which to swap the internal sampler object.
+		*/
+	 void swap (Sampler &sampler);
 private:
 	 /**
 		* internal OpenGL sampler object

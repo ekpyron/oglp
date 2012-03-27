@@ -161,6 +161,12 @@ public:
 		* \return The internal OpenGL buffer object.
 		*/
 	 GLuint get (void) const;
+	 /**
+		* Swaps internal object.
+		* Swaps the internal OpenGL buffer object with another gl::Buffer.
+		* \param buffer Object with which to swap the internal object.
+		*/
+	 void swap (Buffer &buffer);
 private:
 	 /**
 		* internal OpenGL buffer object name

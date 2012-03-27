@@ -15,6 +15,7 @@
  * along with oglp.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "vertexarray.h"
+#include <algorithm>
 
 namespace gl {
 
@@ -69,6 +70,11 @@ void VertexArray::DisableVertexAttrib (GLuint index)
 {
 	DisableVertexArrayAttribEXT (obj, index);
 	CheckError ();
+}
+
+void VertexArray::swap (VertexArray &vertexarray)
+{
+	std::swap (obj, vertexarray.obj);
 }
 
 GLuint VertexArray::get (void) const

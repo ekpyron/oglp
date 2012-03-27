@@ -122,6 +122,13 @@ public:
 		* \return The internal OpenGL framebuffer object.
 		*/
 	 GLuint get (void) const;
+	 /**
+		* Swap internal object.
+		* Swaps the internal OpenGL framebuffer object with another
+		* gl::Framebuffer.
+		* \param framebuffer Object with which to swap the internal object.
+		*/
+	 void swap (gl::Framebuffer &framebuffer);
 private:
 	 /**
 		* internal OpenGL framebuffer object

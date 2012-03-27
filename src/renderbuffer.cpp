@@ -15,6 +15,7 @@
  * along with oglp.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "renderbuffer.h"
+#include <algorithm>
 
 namespace gl {
 
@@ -49,6 +50,11 @@ void Renderbuffer::Storage (GLenum internalformat, GLsizei width,
 {
 	NamedRenderbufferStorageEXT (obj, internalformat, width, height);
 	CheckError ();
+}
+
+void Renderbuffer::swap (Renderbuffer &renderbuffer)
+{
+	std::swap (obj, renderbuffer.obj);
 }
 
 GLuint Renderbuffer::get (void) const

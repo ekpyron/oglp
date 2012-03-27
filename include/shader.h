@@ -106,6 +106,12 @@ public:
 		* \return The internal OpenGL shader object.
 		*/
 	 GLuint get (void) const;
+   /**
+		* Swap internal object.
+		* Swaps the internal OpenGL shader object with another gl::Shader.
+		* \param sampler Object with which to swap the internal shader object.
+		*/
+	 void swap (Shader &shader);
 private:
 	 /**
 		* internal OpenGL shader object

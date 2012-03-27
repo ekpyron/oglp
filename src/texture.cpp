@@ -15,6 +15,7 @@
  * along with oglp.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "texture.h"
+#include <algorithm>
 
 namespace gl {
 
@@ -99,6 +100,11 @@ void Texture::Parameter (GLenum target, GLenum pname, const GLint *params)
 {
 	TextureParameterivEXT (obj, target, pname, params);
 	CheckError ();
+}
+
+void Texture::swap (gl::Texture &texture)
+{
+	std::swap (obj, texture.obj);
 }
 
 GLuint Texture::get (void) const

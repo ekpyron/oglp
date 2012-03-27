@@ -129,11 +129,18 @@ public:
 		* \return The internal OpenGL shader program object.
 		*/
 	 GLuint get (void) const;
+   /**
+		* Swap internal object.
+		* Swaps the internal OpenGL shader program object with another gl::Program.
+		* \param program Object with which to swap the internal OpenGL
+		*                shader program object.
+		*/
+	 void swap (Program &program);
 private:
 	 /**
 		* internal OpenGL shader program
 		*/
-	 GLuint program;
+	 GLuint obj;
 };
 
 } /* namespace gl */

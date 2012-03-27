@@ -16,6 +16,7 @@
  */
 #include "buffer.h"
 #include <stdexcept>
+#include <algorithm>
 
 namespace gl {
 
@@ -102,6 +103,11 @@ void Buffer::Unmap (void) const
 {
 	UnmapNamedBufferEXT (obj);
 	CheckError ();
+}
+
+void Buffer::swap (Buffer &buffer)
+{
+	std::swap (obj, buffer.obj);
 }
 
 GLuint Buffer::get (void) const

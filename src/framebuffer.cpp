@@ -15,6 +15,7 @@
  * along with oglp.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "framebuffer.h"
+#include <algorithm>
 
 namespace gl {
 
@@ -76,6 +77,11 @@ void Framebuffer::DrawBuffers (const std::vector<GLenum> &bufs) const
 {
 	FramebufferDrawBuffersEXT (obj, bufs.size (), &bufs[0]);
 	CheckError ();
+}
+
+void Framebuffer::swap (Framebuffer &framebuffer)
+{
+	std::swap (obj, framebuffer.obj);
 }
 
 GLuint Framebuffer::get (void) const

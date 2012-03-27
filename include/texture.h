@@ -577,6 +577,12 @@ public:
 		* \return The internal OpenGL texture object.
 		*/
 	 GLuint get (void) const;
+   /**
+		* Swap internal object.
+		* Swaps the internal OpenGL texture object with another gl::Texture.
+		* \param sampler Object with which to swap the internal texture object.
+		*/
+	 void swap (Texture &texture);
 private:
 	 /** internal OpenGL texture object
 		*/

@@ -10,3 +10,5 @@ Makefile.in
 /config.sub
 /ltmain.sh
 /build
+/build-w32
+/build-w64
