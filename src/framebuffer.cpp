@@ -70,6 +70,7 @@ void Framebuffer::TextureLayer (GLenum attachment, const Texture &texture,
 {
 	NamedFramebufferTextureLayerEXT (obj, attachment, texture.get (),
 																	 level, layer);
+	CheckError ();
 }
 
 void Framebuffer::Renderbuffer (GLenum attachment,
