@@ -59,6 +59,16 @@ void Texture::Image2D (GLenum target, GLint level, GLint internalFormat,
 	CheckError ();
 }
 
+void Texture::Image3D (GLenum target, GLint level, GLint internalFormat,
+											 GLsizei width, GLsizei height, GLsizei depth,
+											 GLint border, GLenum format, GLenum type,
+											 const GLvoid *data)
+{
+	TextureImage3DEXT (obj, target, level, internalFormat, width, height,
+										 depth, border, format, type, data);
+	CheckError ();
+}
+
 void Texture::Buffer (GLenum internalFormat, const gl::Buffer &buffer)
 {
 	TextureBufferEXT (obj, GL_TEXTURE_BUFFER, internalFormat, buffer.get ());
