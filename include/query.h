@@ -93,7 +93,7 @@ public:
 		*               GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, or
 		*               GL_TIME_ELAPSED.
 		*/
-	 void End (GLenum target);
+	 static void End (GLenum target);
 	 /**
 		* Return parameters of a query object.
 		* Returns parameters of the internal OpenGL query object.
