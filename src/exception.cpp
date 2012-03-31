@@ -15,6 +15,7 @@
  * along with oglp.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "exception.h"
+#include <iostream>
 
 namespace gl {
 

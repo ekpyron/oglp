@@ -29,6 +29,7 @@
 #include "shader.h"
 #include "sampler.h"
 #include "texture.h"
+#include "query.h"
 
 namespace gl {
 
