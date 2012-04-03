@@ -130,6 +130,12 @@ public:
 		* \param params Returns the requested data.
 		*/
 	 void Get (GLenum pname, GLuint64 *params);
+	 /**
+		* Checks validity.
+		* Returns whether the internal OpenGL query object is valid.
+		* \return whether the internal OpenGL query object is valid.
+		*/
+	 bool IsValid (void);
 private:
 	 /**
 		* internal OpenGL query object name

@@ -89,6 +89,14 @@ void Query::Get (GLenum pname, GLuint64 *params)
 {
 	GetQueryObjectui64v (obj, pname, params);
 	CheckError ();
-} 
+}
+
+bool Query::IsValid (void)
+{
+	bool result;
+	result = IsQuery (obj);
+	CheckError ();
+	return result;
+}
 
 } /* namespace gl */
