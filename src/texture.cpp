@@ -69,6 +69,41 @@ void Texture::Image3D (GLenum target, GLint level, GLint internalFormat,
 	CheckError ();
 }
 
+void Texture::Image2DMultisample (GLenum target, GLsizei samples,
+																	GLint internalFormat, GLsizei width,
+																	GLsizei height,
+																	GLboolean fixedsamplelocation)
+{
+	GLint previous;
+	if (target == GL_TEXTURE_2D_MULTISAMPLE)
+		GetIntegerv (GL_TEXTURE_BINDING_2D_MULTISAMPLE, &previous);
+	else
+		 throw Exception (GL_INVALID_VALUE);
+
+	BindTexture (target, obj);
+	TexImage2DMultisample (target, samples, internalFormat, width, height,
+												 fixedsamplelocation);
+	BindTexture (target, previous);
+}
+
+void Texture::Image3DMultisample (GLenum target, GLsizei samples,
+																	GLint internalFormat, GLsizei width,
+																	GLsizei height, GLsizei depth,
+																	GLboolean fixedsamplelocation)
+{
+	GLint previous;
+	if (target == GL_TEXTURE_2D_MULTISAMPLE_ARRAY)
+		GetIntegerv (GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY, &previous);
+	else
+		 throw Exception (GL_INVALID_VALUE);
+
+	BindTexture (target, obj);
+	TexImage3DMultisample (target, samples, internalFormat, width, height,
+												 depth, fixedsamplelocation);
+	BindTexture (target, previous);
+}
+
+
 void Texture::Buffer (GLenum internalFormat, const gl::Buffer &buffer)
 {
 	TextureBufferEXT (obj, GL_TEXTURE_BUFFER, internalFormat, buffer.get ());

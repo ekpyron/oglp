@@ -525,6 +525,49 @@ public:
 								 GLsizei width, GLsizei height, GLsizei depth, GLint border,
 								 GLenum format, GLenum type, const GLvoid *data);
 	 /**
+		* Specified a two-dimensional multisample texture image.
+		* Establish the data storage, format, dimensions, and number
+		* of samples of a multisample texture's image.
+		* \param target Specifies the target of the operation.
+		*               target must be GL_TEXTURE_2D_MULTISAMPLE.
+		* \param samples The number of samples in the multisample
+		*                texture's image.
+		* \param width The width of the multisample texture's image, in texels.
+		* \param height The height of the multisample texture's image, in texels.
+		* \param fixedsamplelocations Specifies whether the image will use
+		*                             identical sample locations and the same
+		*                             number of samples for all texels in the
+		*                             image, and the sample locations will not
+		*                             depend on the internal format or size of
+		*                             the image.
+		*/
+	 void Image2DMultisample (GLenum target, GLsizei samples,
+														GLint internalFormat, GLsizei width,
+														GLsizei height, GLboolean fixedsamplelocation);
+	 /**
+		* Specified a two-dimensional multisample texture image.
+		* Establish the data storage, format, dimensions, and number
+		* of samples of a multisample texture's image.
+		* \param target Specifies the target of the operation.
+		*               target must be GL_TEXTURE_2D_MULTISAMPLE_ARRAY.
+		* \param samples The number of samples in the multisample
+		*                texture's image.
+		* \param width The width of the multisample texture's image, in texels.
+		* \param height The height of the multisample texture's image, in texels.
+		* \param depth Specifies the number of layers in the multisample texture
+		*              array.
+		* \param fixedsamplelocations Specifies whether the image will use
+		*                             identical sample locations and the same
+		*                             number of samples for all texels in the
+		*                             image, and the sample locations will not
+		*                             depend on the internal format or size of
+		*                             the image.
+		*/
+	 void Image3DMultisample (GLenum target, GLsizei samples,
+														GLint internalFormat, GLsizei width,
+														GLsizei height, GLsizei depth,
+														GLboolean fixedsamplelocation);
+	 /**
 		* Attach a buffer object to the texture.
 		* Attaches the storage for a buffer object to the buffer texture.
 		* \param internalFormat Specifies the internal format of the data in the
