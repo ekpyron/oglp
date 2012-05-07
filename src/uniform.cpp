@@ -268,4 +268,16 @@ Uniform::operator bool (void)
 	return location != -1;
 }
 
+void Unifrom::Get (GLfloat *params)
+{
+	GetUniformfv (program, location, params);
+	CheckError ();
+}
+
+void Uniform::Get (GLint *params)
+{
+	GetUniformiv (program, location, params);
+	CheckError ();
+}
+
 } /* namespace gl */

@@ -211,6 +211,18 @@ public:
 		* \return Whether the uniform is valid.
 		*/
 	 operator bool (void);
+	 /**
+		* Get a value.
+		* Returns the value of the uniform variable.
+		* \param params Returns the value of the uniform variable.
+		*/
+	 void Get (GLfloat *params);
+	 /**
+		* Get a value.
+		* Returns the value of the uniform variable.
+		* \param params Returns the value of the uniform variable.
+		*/
+	 void Get (GLint *params);
 private:
 	 /**
 		* Private constructor.
