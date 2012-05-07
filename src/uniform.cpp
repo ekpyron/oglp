@@ -268,7 +268,7 @@ Uniform::operator bool (void)
 	return location != -1;
 }
 
-void Unifrom::Get (GLfloat *params)
+void Uniform::Get (GLfloat *params)
 {
 	GetUniformfv (program, location, params);
 	CheckError ();
