@@ -52,6 +52,19 @@ void Buffer::Bind (GLenum target) const
 	CheckError ();
 }
 
+void Buffer::BindBase (GLenum target, GLuint index) const
+{
+	BindBufferBase (target, index, obj);
+	CheckError ();
+}
+
+void Buffer::BindRange (GLenum target, GLuint index,
+												GLintptr offset, GLsizeiptr size) const
+{
+	BindBufferRange (target, index, obj, offset, size);
+	CheckError ();
+}
+
 void Buffer::Unbind (GLenum target)
 {
 	BindBuffer (target, 0);

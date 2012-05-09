@@ -81,6 +81,31 @@ public:
 		*/
 	 void Bind (GLenum target) const;
 	 /**
+		* Bind the buffer object.
+		* Binds the Buffer object to an indexed buffer target.
+		* \param target Specify the target of the bind operation. target must be
+		*               one of GL_ATOMIC_COUNTER_BUFFER,
+		*               GL_TRANSFORM_FEEDBACK_BUFFER or GL_UNIFORM_BUFFER.
+		* \param index  Specify the index of the binding point within the
+		*               array specified by target.
+		*/
+	 void BindBase (GLenum target, GLuint index) const;
+	 /**
+		* Bind a range of the buffer object.
+		* Binds a range of the Buffer object to an indexed buffer target.
+		* \param target Specify the target of the bind operation. target must be
+		*               one of GL_ATOMIC_COUNTER_BUFFER,
+		*               GL_TRANSFORM_FEEDBACK_BUFFER or GL_UNIFORM_BUFFER.
+		* \param index  Specify the index of the binding point within the
+		*               array specified by target.
+		* \param offset The starting offset in basic machine units into
+		*               the buffer object buffer.
+		* \param size   The amount of data in machine units that can be read
+		*               from the buffet object while used as an indexed target.
+		*/
+	 void BindRange (GLenum target, GLuint index, GLintptr offset,
+									 GLsizeiptr size) const;
+	 /**
 		* Unbinds Buffers.
 		* Unbinds any Buffer object potentially bound to the specified target.
 		* \param target Specifies from which target all buffers should be unbound.
