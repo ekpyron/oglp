@@ -81,6 +81,22 @@ public:
 		*               - GL_TEXTURE_2D_MULTISAMPLE_ARRAY
 		*/
 	 void Bind (GLenum texunit, GLenum target) const;
+	 /* Bind to an image unit.
+		* Binds a level of a texture to an image unit
+		* \param unit    Specifies the index of the image unit to which
+		*                to bind the texture                
+		* \param level   Specifies the level of the texture that is to be bound.
+		* \param layered Specifies whether a layered texture binding is
+		*                to be established.
+		* \param layer   If layered is GL_FALSE, specifies the layer of texture
+		*                to be bound to the image unit. Ignored otherwise.
+		* \param access  Specifies a token indicating the type of access
+		*                that will be performed on the image.
+		* \param format  Specifies the format that the elements of the image
+		*                will be treated as for the purposes of formatted stores.
+		*/
+	 void BindImage (GLuint unit, GLint level, GLboolean layered,
+									 GLint layer, GLenum access, GLenum format) const;
 	 /**
 		* Specified a one-dimensional texture Image.
 		* Loads a one-dimensional texture image from memory to the

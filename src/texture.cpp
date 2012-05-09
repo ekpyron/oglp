@@ -50,6 +50,13 @@ void Texture::Bind (GLenum texunit, GLenum target) const
 	CheckError ();
 }
 
+void Texture::BindImage (GLuint unit, GLint level, GLboolean layered,
+												 GLint layer, GLenum access, GLenum format) const
+{
+	BindImageTexture (unit, obj, level, layered, layer, access, format);
+	CheckError ();
+}
+
 void Texture::Image2D (GLenum target, GLint level, GLint internalFormat,
 											 GLsizei width, GLsizei height, GLint border,
 											 GLenum format, GLenum type, const GLvoid *data)
