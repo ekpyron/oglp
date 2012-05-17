@@ -12,3 +12,4 @@ Makefile.in
 /build
 /build-w32
 /build-w64
+/ar-lib
