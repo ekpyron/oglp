@@ -118,6 +118,17 @@ void Buffer::Unmap (void) const
 	CheckError ();
 }
 
+void Buffer::CopySubData (Buffer &readbuffer,
+													Buffer &writebuffer,
+													GLintptr readOffset,
+													GLintptr writeOffset,
+													GLsizeiptr size)
+{
+	NamedCopyBufferSubDataEXT (readbuffer.obj, writebuffer.obj,
+														 readOffset, writeOffset, size);
+	CheckError ();
+}
+
 void Buffer::swap (Buffer &buffer)
 {
 	std::swap (obj, buffer.obj);

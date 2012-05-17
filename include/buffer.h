@@ -192,6 +192,19 @@ public:
 		* \param buffer Object with which to swap the internal object.
 		*/
 	 void swap (Buffer &buffer);
+	 /** Copy buffer data.
+		* Copies data between buffer objects.
+		* \param readBuffer  Buffer object to read from.
+		* \param writeBuffer Buffer object to write fom.
+		* \param readOffset  offset to start reading
+		* \param writeOffset offset to start writing
+		* \param size        number of bytes to copy
+		*/
+	 static void CopySubData (Buffer &readBuffer,
+														Buffer &writeBuffer,
+														GLintptr readOffset,
+														GLintptr writeOffset,
+														GLsizeiptr size);
 private:
 	 /**
 		* internal OpenGL buffer object name
