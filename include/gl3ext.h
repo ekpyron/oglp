@@ -41,6 +41,19 @@
 #define GL_PROGRAM_MATRIX_STACK_DEPTH_EXT 0x8E2F
 #endif
 
+#ifndef GL_NV_explicit_multisample
+#define GL_SAMPLE_POSITION_NV             0x8E50
+#define GL_SAMPLE_MASK_NV                 0x8E51
+#define GL_SAMPLE_MASK_VALUE_NV           0x8E52
+#define GL_TEXTURE_BINDING_RENDERBUFFER_NV 0x8E53
+#define GL_TEXTURE_RENDERBUFFER_DATA_STORE_BINDING_NV 0x8E54
+#define GL_MAX_SAMPLE_MASK_WORDS_NV       0x8E59
+#define GL_TEXTURE_RENDERBUFFER_NV        0x8E55
+#define GL_SAMPLER_RENDERBUFFER_NV        0x8E56
+#define GL_INT_SAMPLER_RENDERBUFFER_NV    0x8E57
+#define GL_UNSIGNED_INT_SAMPLER_RENDERBUFFER_NV 0x8E58
+#endif
+
 #ifndef GL_EXT_direct_state_access
 #define GL_EXT_direct_state_access 1
 #ifdef GL_GLEXT_PROTOTYPES
@@ -464,5 +477,18 @@ typedef void (APIENTRYP PFNGLVERTEXARRAYVERTEXATTRIBOFFSETEXTPROC) (GLuint vaobj
 typedef void (APIENTRYP PFNGLENABLEVERTEXARRAYATTRIBEXTPROC) (GLuint vaobj, GLenum array);
 typedef void (APIENTRYP PFNGLDISABLEVERTEXARRAYATTRIBEXTPROC) (GLuint vaobj, GLenum array);
 #endif 
- 
+
+#ifndef GL_NV_explicit_multisample
+#define GL_NV_explicit_multisample 1
+#ifdef GL_GLEXT_PROTOTYPES
+GLAPI void APIENTRY glGetMultisamplefvNV (GLenum, GLuint, GLfloat *);
+GLAPI void APIENTRY glSampleMaskIndexedNV (GLuint, GLbitfield);
+GLAPI void APIENTRY glTexRenderbufferNV (GLenum, GLuint);
+#endif /* GL_GLEXT_PROTOTYPES */
+typedef void (APIENTRYP PFNGLGETMULTISAMPLEFVNVPROC) (GLenum pname, GLuint index, GLfloat *val);
+typedef void (APIENTRYP PFNGLSAMPLEMASKINDEXEDNVPROC) (GLuint index, GLbitfield mask);
+typedef void (APIENTRYP PFNGLTEXRENDERBUFFERNVPROC) (GLenum target, GLuint renderbuffer);
+#endif
+
+
 #endif /* !defined __modified_gl3ext_h_ */

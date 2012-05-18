@@ -1543,6 +1543,12 @@ PFNGLENABLEVERTEXARRAYATTRIBEXTPROC EnableVertexArrayAttribEXT =
     (PFNGLENABLEVERTEXARRAYATTRIBEXTPROC) Unsupported;
 PFNGLDISABLEVERTEXARRAYATTRIBEXTPROC DisableVertexArrayAttribEXT =
     (PFNGLDISABLEVERTEXARRAYATTRIBEXTPROC) Unsupported;
+PFNGLGETMULTISAMPLEFVNVPROC GetMultisamplefvNV =
+    (PFNGLGETMULTISAMPLEFVNVPROC) Unsupported;
+PFNGLSAMPLEMASKINDEXEDNVPROC SampleMaskIndexedNV =
+    (PFNGLSAMPLEMASKINDEXEDNVPROC) Unsupported;
+PFNGLTEXRENDERBUFFERNVPROC TexRenderbufferNV =
+    (PFNGLTEXRENDERBUFFERNVPROC) Unsupported;
 
 
 GLAPI int APIENTRY Unsupported (...)
@@ -3092,6 +3098,12 @@ void InitPrototypes (GetProcAddressCallback getprocaddress)
     if (ptr) EnableVertexArrayAttribEXT = (PFNGLENABLEVERTEXARRAYATTRIBEXTPROC) ptr;
     ptr = getprocaddress ("glDisableVertexArrayAttribEXT");
     if (ptr) DisableVertexArrayAttribEXT = (PFNGLDISABLEVERTEXARRAYATTRIBEXTPROC) ptr;
+    ptr = getprocaddress ("glGetMultisamplefvNV");
+    if (ptr) GetMultisamplefvNV = (PFNGLGETMULTISAMPLEFVNVPROC) ptr;
+    ptr = getprocaddress ("glSampleMaskIndexedNV");
+    if (ptr) SampleMaskIndexedNV = (PFNGLSAMPLEMASKINDEXEDNVPROC) ptr;
+    ptr = getprocaddress ("glTexRenderbufferNV");
+    if (ptr) TexRenderbufferNV = (PFNGLTEXRENDERBUFFERNVPROC) ptr;
 
 }
 
