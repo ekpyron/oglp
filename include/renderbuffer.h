@@ -74,6 +74,19 @@ public:
 	 void Storage (GLenum internalformat, GLsizei width,
 								 GLsizei height) const;
 	 /**
+		* Setup the internal storage of a Renderbuffer object.
+		* Establishes the data storage, format and dimensions of the internal
+		* OpenGL renderbuffer object's image.
+		* \param samples Specifies the number of samples to be used
+		*                for the renderbuffer object's storage.
+		* \param internalformat Specifies the internal format to use for
+		*                       the renderbuffer object's image.
+		* \param width Specifies the width of the Renderbuffer, in pixels.
+		* \param height Specifies the height of the Renderbuffer, in pixels.
+		*/
+	 void StorageMultisample (GLsizei samples, GLenum internalformat,
+														GLsizei width, GLsizei height) const;
+	 /**
 		* Return internal object.
 		* Returns the internal renderbuffer object. Use with caution.
 		* \return The internal OpenGL renderbuffer object.

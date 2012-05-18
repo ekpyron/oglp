@@ -52,6 +52,14 @@ void Renderbuffer::Storage (GLenum internalformat, GLsizei width,
 	CheckError ();
 }
 
+void Renderbuffer::StorageMultisample (GLsizei samples, GLenum internalformat,
+																			 GLsizei width, GLsizei height) const
+{
+	NamedRenderbufferStorageMultisampleEXT (obj, samples, internalformat,
+																					width, height);
+	CheckError ();
+}
+
 void Renderbuffer::swap (Renderbuffer &renderbuffer)
 {
 	std::swap (obj, renderbuffer.obj);
