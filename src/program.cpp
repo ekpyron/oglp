@@ -118,6 +118,65 @@ void Program::UseNone (void)
 	CheckError ();
 }
 
+GLint Program::GetSubroutineUniformLocation (GLenum shadertype,
+																						 const std::string &name) const
+{
+	GLint location;
+	location = gl::GetSubroutineUniformLocation (obj, shadertype, name.c_str ());
+	CheckError ();
+	return location;
+}
+
+GLuint Program::GetSubroutineIndex (GLenum shadertype,
+																		const std::string &name) const
+{
+	GLuint index;
+	index = gl::GetSubroutineIndex (obj, shadertype, name.c_str ());
+	CheckError ();
+	return index;
+}
+
+void Program::GetActiveSubroutineUniform (GLenum shadertype,
+																					GLuint index,
+																					GLenum pname,
+																					GLint *values) const
+{
+	GetActiveSubroutineUniformiv (obj, shadertype, index, pname, values);
+	CheckError ();
+}
+
+std::string Program::GetActiveSubroutineUniformName (GLenum shadertype,
+																										 GLuint index) const
+{
+	GLint len = 0;
+	std::vector<char> buf;
+	GetActiveSubroutineUniform (shadertype, index, GL_UNIFORM_NAME_LENGTH, &len);
+	buf.resize (len);
+	gl::GetActiveSubroutineUniformName (obj, shadertype, index, len,
+																			NULL, &buf[0]);
+	CheckError ();
+	return std::string (&buf[0]);
+}
+
+std::string Program::GetActiveSubroutineName (GLenum shadertype,
+																							GLuint index) const
+{
+	GLint len = 0;
+	std::vector<char> buf;
+	GetProgramStage (shadertype, GL_ACTIVE_SUBROUTINE_MAX_LENGTH, &len);
+	buf.resize (len);
+	gl::GetActiveSubroutineName (obj, shadertype, index, len, NULL, &buf[0]);
+	CheckError ();
+	return std::string (&buf[0]);
+}
+
+void Program::GetProgramStage (GLenum shadertype, GLenum pname,
+															 GLint *values) const
+{
+	GetProgramStageiv (obj, shadertype, pname, values);
+	CheckError ();
+}
+
 void Program::swap (Program &program)
 {
 	std::swap (obj, program.obj);

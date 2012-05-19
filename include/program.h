@@ -115,6 +115,98 @@ public:
 		* \return The info log of the program.
 		*/
 	 std::string GetInfoLog (void) const;
+	 /**
+		* Get subroutine uniform location.
+		* Retrieve the location of a subroutine uniform of
+		* a given shader stage within a program.
+		* \param shadertype Specifies the shader stage from which to query
+		*                   for subroutine uniform index. shadertype must be
+		*                   one of GL_VERTEX_SHADER, GL_TESS_CONTROL_SHADER,
+		*                   GL_TESS_EVALUATION_SHADER, GL_GEOMETRY_SHADER or
+		*                   GL_FRAGMENT_SHADER.
+		* \param name Specifies the name of the subroutine uniform
+		*             whose index to query.
+		* \returns The subroutine uniform location.
+		*/
+	 GLint GetSubroutineUniformLocation (GLenum shadertype,
+																			 const std::string &name) const;
+   /**
+		* Get the index of a subroutine unifom.
+		* Retrieve the index of a subroutine uniform of a given shader stage
+		* within a program.
+		* \param shadertype Specifies the shader stage from which to query
+		*                   for subroutine uniform index. shadertype must be
+		*                   one of GL_VERTEX_SHADER, GL_TESS_CONTROL_SHADER,
+		*                   GL_TESS_EVALUATION_SHADER, GL_GEOMETRY_SHADER or
+		*                   GL_FRAGMENT_SHADER.
+		* \param name Specifies the name of the subroutine uniform
+		*             whose index to query.
+		* \retuns The subroutine index.
+		*/
+	 GLuint GetSubroutineIndex (GLenum shadertype,
+															const std::string &name) const;
+   /**
+		* Get an active subroutine uniform property.
+		* \param shadertype Specifies the shader stage from which to query
+		*                   for subroutine uniform index. shadertype must be
+		*                   one of GL_VERTEX_SHADER, GL_TESS_CONTROL_SHADER,
+		*                   GL_TESS_EVALUATION_SHADER, GL_GEOMETRY_SHADER or
+		*                   GL_FRAGMENT_SHADER.
+		* \param index Specifies the index of the shader subroutine uniform.
+		* \param pname Specifies the parameter of the shader subroutine uniform
+		*              to query. pname must be GL_NUM_COMPATIBLE_SUBROUTINES,
+		*              GL_COMPATIBLE_SUBROUTINES, GL_UNIFORM_SIZE or
+		*              GL_UNIFORM_NAME_LENGTH.
+		* \param values Specifies the address of a into which the queried value
+		*               or values will be placed.
+		*/
+	 void GetActiveSubroutineUniform (GLenum shadertype, GLuint index,
+																		GLenum pname, GLint *values) const;
+	 /**
+		* Get a subroutine uniform name.
+		* Query the name of an active shader subroutine uniform.
+		* \param shadertype Specifies the shader stage from which to query
+		*                   for subroutine uniform index. shadertype must be
+		*                   one of GL_VERTEX_SHADER, GL_TESS_CONTROL_SHADER,
+		*                   GL_TESS_EVALUATION_SHADER, GL_GEOMETRY_SHADER or
+		*                   GL_FRAGMENT_SHADER.
+		* \param index Specifies the index of the shader subroutine uniform.
+		* \returns The name of the specified shader subroutine unifom.
+		*/
+	 std::string GetActiveSubroutineUniformName (GLenum shadertype,
+																							 GLuint index) const;
+	 /**
+		* Get a subroutine name.
+		* Query the name of an active shader subroutine.
+		* \param shadertype Specifies the shader stage from which to query
+		*                   for subroutine uniform index. shadertype must be
+		*                   one of GL_VERTEX_SHADER, GL_TESS_CONTROL_SHADER,
+		*                   GL_TESS_EVALUATION_SHADER, GL_GEOMETRY_SHADER or
+		*                   GL_FRAGMENT_SHADER.
+		* \param index Specifies the index of the shader subroutine uniform.
+		* \returns The subroutine name.
+		*/
+	 std::string GetActiveSubroutineName (GLenum shadertype,
+																				GLuint index) const;
+	 /**
+		* Get shader stage properties.
+		* Retrieve properties of a program object corresponding to
+		* a specified shader stage.
+		* \param shadertype Specifies the shader stage from which to query
+		*                   for subroutine uniform index. shadertype must be
+		*                   one of GL_VERTEX_SHADER, GL_TESS_CONTROL_SHADER,
+		*                   GL_TESS_EVALUATION_SHADER, GL_GEOMETRY_SHADER or
+		*                   GL_FRAGMENT_SHADER.
+		* \param pname Specifies the parameter of the shader to query. pname
+		*              must be GL_ACTIVE_SUBROUTINE_UNIFORMS,
+		*              GL_ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS,
+		*              GL_ACTIVE_SUBROUTINES,
+		*              GL_ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH,
+		*              or GL_ACTIVE_SUBROUTINE_MAX_LENGTH.
+		* \param values Specifies the address of a variable into which
+		*               the queried value or values will be placed.
+		*/
+	 void GetProgramStage (GLenum shadertype, GLenum pname, GLint *values) const;
 	 /** 
 		* Obtain a Uniform location.
 		* Obtains the Uniform location of a uniform variable
