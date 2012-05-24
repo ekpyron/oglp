@@ -124,7 +124,7 @@ void Texture::GetTexImage (GLenum target, GLint level, GLenum format,
 	CheckError ();
 }
 
-void Texture::GenerateMipmap (GLenum target)
+void Texture::GenerateMipmap (GLenum target) const
 {
 	GenerateTextureMipmapEXT (obj, target);
 	CheckError ();
