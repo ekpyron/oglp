@@ -66,15 +66,14 @@ public:
 		* Assign a value.
 		* Assigns a value to the internal uniform.
 		* \param v value to assign
-		* \return a reference to the assigned value
 		*/
-	 const T &operator= (const T &v);
+	 void Set (const T &v);
    /**
 		* Get value.
 		* Obtains the stored value of the uniform.
 		* \return the uniform value.
 		*/
-	 operator T (void);
+	 const T &Get (void) const;
 	 /**
 		* Checks whether the uniform is valid.
 		* \return Whether the uniform is valid.
@@ -138,7 +137,7 @@ inline void SmartUniform<T>::Get (T *param)
 }
 
 template<typename T>
-inline SmartUniform<T>::operator T (void)
+inline const T &SmartUniform<T>::Get (void) const
 {
 	return value;
 }
@@ -150,7 +149,7 @@ inline bool SmartUniform<T>::IsValid (void)
 }
 
 template<typename T>
-inline const T &SmartUniform<T>::operator= (const T &v)
+inline void SmartUniform<T>::Set (const T &v)
 {
 	if (v != value)
 	{
