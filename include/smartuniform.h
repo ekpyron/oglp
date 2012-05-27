@@ -69,11 +69,17 @@ public:
 		* \return a reference to the assigned value
 		*/
 	 const T &operator= (const T &v);
+   /**
+		* Get value.
+		* Obtains the stored value of the uniform.
+		* \return the uniform value.
+		*/
+	 operator T (void);
 	 /**
 		* Checks whether the uniform is valid.
 		* \return Whether the uniform is valid.
 		*/
-	 operator bool (void);
+	 bool IsValid (void);
 	 /**
 		* Get a value.
 		* Returns the value of the uniform variable.
@@ -132,45 +138,21 @@ inline void SmartUniform<T>::Get (T *param)
 }
 
 template<typename T>
-inline SmartUniform<T>::operator bool (void)
+inline SmartUniform<T>::operator T (void)
+{
+	return value;
+}
+
+template<typename T>
+inline bool SmartUniform<T>::IsValid (void)
 {
 	return uniform;
-}
-
-template<>
-inline const GLfloat &SmartUniform<GLfloat>::operator= (const GLfloat &v)
-{
-	if (v != value)
-	{
-		value = v;
-		uniform = v;
-	}
-}
-
-template<>
-inline const GLint &SmartUniform<GLint>::operator= (const GLint &v)
-{
-	if (v != value)
-	{
-		value = v;
-		uniform = v;
-	}
-}
-
-template<>
-inline const GLuint &SmartUniform<GLuint>::operator= (const GLuint &v)
-{
-	if (v != value)
-	{
-		value = v;
-		uniform = v;
-	}
 }
 
 template<typename T>
 inline const T &SmartUniform<T>::operator= (const T &v)
 {
-	if (!glm::equal (v, value))
+	if (v != value)
 	{
 		value = v;
 		uniform = v;
