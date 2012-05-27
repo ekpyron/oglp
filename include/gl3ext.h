@@ -2,7 +2,8 @@
  * This is NOT an official header by The Khronos Group Inc.
  *
  * This header is a subset of glext.h that ONLY exposes the
- * definitions and entry points for GL_EXT_direct_state_access.
+ * definitions and entry points for GL_EXT_direct_state_access
+ * and a few other selected extensions.
  * The entry points that are specified in
  * http://www.opengl.org/registry/specs/EXT/direct_state_access.txt
  * but are missing in the official glext.h were added.
@@ -52,6 +53,15 @@
 #define GL_SAMPLER_RENDERBUFFER_NV        0x8E56
 #define GL_INT_SAMPLER_RENDERBUFFER_NV    0x8E57
 #define GL_UNSIGNED_INT_SAMPLER_RENDERBUFFER_NV 0x8E58
+#endif
+
+#ifndef GL_NVX_gpu_memory_info
+#define GL_NVX_gpu_memory_info
+#define GL_GPU_MEMORY_INFO_DEDICATED_VIDMEM_NVX          0x9047
+#define GL_GPU_MEMORY_INFO_TOTAL_AVAILABLE_MEMORY_NVX    0x9048
+#define GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX  0x9049
+#define GL_GPU_MEMORY_INFO_EVICTION_COUNT_NVX            0x904A
+#define GL_GPU_MEMORY_INFO_EVICTED_MEMORY_NVX            0x904B
 #endif
 
 #ifndef GL_EXT_direct_state_access
