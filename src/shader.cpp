@@ -65,7 +65,19 @@ void Shader::Source (const std::string &source) const
 {
 	const GLchar *src = source.c_str ();
 	ShaderSource (obj, 1, &src, NULL);
+	CheckError ();
+}
 
+void Shader::Source (const std::string *sources, size_t N) const
+{
+	std::vector<const GLchar*> sourcelist;
+	std::vector<GLint> lengths;
+	for (size_t i = 0; i < N; i++)
+	{
+		 sourcelist.push_back (sources[i].data ());
+		 lengths.push_back (sources[i].length ());
+	}
+	ShaderSource (obj, N, &sourcelist[0], &lengths[0]);
 	CheckError ();
 }
 

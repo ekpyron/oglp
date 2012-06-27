@@ -19,6 +19,8 @@
 
 #include "common.h"
 #include <string>
+#include <vector>
+#include <array>
 
 namespace gl {
 
@@ -89,6 +91,20 @@ public:
 		*/
 	 void Source (const std::string &source) const;
 	 /**
+		* Specify sources.
+		* Replaces the source code in the internal OpenGL shader object.
+		* \param sources Specifies the sources.
+		*/
+	 template<size_t N>
+	 inline void Source (const std::array<std::string,N> &sources) const
+	 {
+		 Source (sources.data (), N);
+	 }
+	 inline void Source (const std::vector<std::string> &sources) const
+	 {
+		 Source (&sources[0], sources.size ());
+	 }
+	 /**
 		* Compile the shader object.
 		* Compiles the internal OpenGL shader object.
 		* \return Whether the shader object was compiled successfully.
@@ -113,6 +129,7 @@ public:
 		*/
 	 void swap (Shader &shader);
 private:
+	 void Source (const std::string *sources, size_t N) const;
 	 /**
 		* internal OpenGL shader object
 		*/

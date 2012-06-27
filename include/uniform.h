@@ -67,7 +67,8 @@ public:
 		* \return a reference to the assigned array of values
 		*/
 	 template<size_t N>
-	 const std::array<GLfloat, N> &operator= (const std::array<GLfloat, N> &v) {
+	 inline const std::array<GLfloat, N>
+			&operator= (const std::array<GLfloat, N> &v) {
 		 Set (v.data (), N);
 		 return v;
 	 }
