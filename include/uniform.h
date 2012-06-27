@@ -77,7 +77,7 @@ public:
 		* \param v array of values to assign
 		* \param N number of values in the array
 		*/
-	 void Set (GLfloat *v, size_t N);
+	 void Set (const GLfloat *v, size_t N);
 	 /**
 		* Assign a value.
 		* Assigns a glm::vec2 value to the uniform location.

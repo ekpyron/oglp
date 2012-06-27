@@ -53,7 +53,7 @@ GLfloat Uniform::operator= (GLfloat v)
 	return v;
 }
 
-void Uniform::Set (GLfloat *v, size_t N)
+void Uniform::Set (const GLfloat *v, size_t N)
 {
 	if (location != -1)
 	{
