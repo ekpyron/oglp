@@ -19,6 +19,7 @@
 
 #include "common.h"
 #include <vector>
+#include <array>
 
 namespace gl {
 
@@ -65,7 +66,18 @@ public:
 		* \param v array of values to assign
 		* \return a reference to the assigned array of values
 		*/
-	 const std::vector<GLfloat> &operator= (const std::vector<GLfloat> &v);
+	 template<size_t N>
+	 const std::array<GLfloat, N> &operator= (const std::array<GLfloat, N> &v) {
+		 Set (v.data (), N);
+		 return v;
+	 }
+	 /**
+		* Assign an array of values.
+		* Assigns an array of float values to the uniform location.
+		* \param v array of values to assign
+		* \param N number of values in the array
+		*/
+	 void Set (GLfloat *v, size_t N);
 	 /**
 		* Assign a value.
 		* Assigns a glm::vec2 value to the uniform location.
