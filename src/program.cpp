@@ -119,6 +119,13 @@ bool Program::Binary (GLenum binaryFormat, const void *binary,
 	return status;
 }
 
+void Program::GetBinary (GLsizei bufsize, GLsizei *length,
+												 GLenum *binaryFormat, void *binary) const
+{
+	GetProgramBinary (obj, bufsize, length, binaryFormat, binary);
+	CheckError ();
+}
+
 void Program::Get (GLenum pname, GLint *params) const
 {
 	GetProgramiv (obj, pname, params);

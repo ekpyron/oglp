@@ -109,6 +109,22 @@ public:
 	 bool Binary (GLenum binaryFormat, const void *binary,
 								GLsizei length) const;
 	 /**
+		* Obtain program binary.
+		* Return a binary representation of a program object's compiled and
+		* linked executable source.
+		* \param bufSize Specifies the size of the buffer whose address is
+		*                given by binary.
+		* \param length Specifies the address of a variable to receive the
+		*               number of bytes written into binary.
+		* \param binaryFormat Specifies the address of a variable to receive
+		*                     a token indicating the format of the binary data
+		*                     returned by the GL.
+		* \param binary Specifies the address an array into which the GL will
+		*               return program's binary representation.
+		*/
+	 void GetBinary (GLsizei bufsize, GLsizei *length,
+									 GLenum *binaryFormat, void *binary) const;
+	 /**
 		* Return a parameter.
 		* Returns a parameter from the internal OpenGL program object.
 		* \param pname Specifies the object parameter. Accepted
