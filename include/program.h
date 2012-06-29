@@ -98,6 +98,37 @@ public:
 		*/
 	 bool Link (void) const;
 	 /**
+		* Load a Program binary.
+		* Loads the internal OpenGL program object with a program binary.
+		* \param binaryFormat Specifies the format of the binary data in binary.
+		* \param binary Specifies the address an array containing the binary
+		*               to be loaded into program.
+		* \param length Specifies the number of bytes contained in binary.
+		* \returns whether the program was successfully loaded
+		*/
+	 bool Binary (GLenum binaryFormat, const void *binary,
+								GLsizei length) const;
+	 /**
+		* Return a parameter.
+		* Returns a parameter from the internal OpenGL program object.
+		* \param pname Specifies the object parameter. Accepted
+		*              symbolic names are
+		*              GL_DELETE_STATUS, GL_LINK_STATUS,
+		*              GL_VALIDATE_STATUS, GL_INFO_LOG_LENGTH,
+		*              GL_ATTACHED_SHADERS, GL_ACTIVE_ATTRIBUTES,
+		*              GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, GL_ACTIVE_UNIFORMS,
+		*              GL_ACTIVE_UNIFORM_BLOCKS,
+		*              GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH,
+		*              GL_ACTIVE_UNIFORM_MAX_LENGTH, GL_PROGRAM_BINARY_LENGTH,
+		*              GL_TRANSFORM_FEEDBACK_BUFFER_MODE,
+		*              GL_TRANSFORM_FEEDBACK_VARYINGS,
+		*              GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH,
+		*              GL_GEOMETRY_VERTICES_OUT, GL_GEOMETRY_INPUT_TYPE, and
+		*              GL_GEOMETRY_OUTPUT_TYPE.
+		* \param params Returns the requested object parameter.
+		*/
+	 void Get (GLenum pname, GLint *params) const;
+	 /**
 		* Use a Program.
 		* Installs the internal OpenGL program object
 		* as part of current rendering state.

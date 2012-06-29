@@ -101,9 +101,28 @@ bool Program::Link (void) const
 {
 	GLint status;
 	LinkProgram (obj);
-	GetProgramiv (obj, GL_LINK_STATUS, &status);
-	CheckError ();
+	Get (GL_LINK_STATUS, &status);
 	return status;
+}
+
+bool Program::Binary (GLenum binaryFormat, const void *binary,
+											GLsizei length) const
+{
+	GLint status;
+	ProgramBinary (obj, binaryFormat, binary, length);
+	GLenum err = GetError ();
+	if (err == GL_INVALID_ENUM)
+		 return false;
+	if (err != GL_NO_ERROR)
+		 throw Exception (err);
+	Get (GL_LINK_STATUS, &status);
+	return status;
+}
+
+void Program::Get (GLenum pname, GLint *params) const
+{
+	GetProgramiv (obj, pname, params);
+	CheckError ();
 }
 
 void Program::Use (void) const
