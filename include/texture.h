@@ -238,6 +238,32 @@ public:
 								 GLsizei width, GLint border, GLenum format, GLenum type,
 								 const GLvoid *data);
 	 /**
+		* Specified a one-dimensional texture Image.
+		* Loads a one-dimensional texture image from memory to the
+		* internal OpenGL texture object.
+		* \param target Specifies the target texture.
+		*               Must be one of the following:
+		*               - GL_TEXTURE_1D
+		*               - GL_PROXY_TEXTURE_1D
+		* \param level Specifies the level-of-detail number.
+		*               - Level 0 is the base image level.
+		*               - Level n is the nth mipmap reduction image.
+		* \param internfalformat Specifies the format of the compressed
+		*                        image data stored at address data.
+		* \param width Specifies the width of the texture image.
+		*              All implementations support texture images
+		*              that are at least 64 texels wide.
+		*              The height of the 1D texture image is 1.
+		* \param border This value must be 0.
+		* \param imageSize Specifies the number of unsigned bytes of image
+		*                  data starting at the address specified by data.
+		* \param data Specifies a pointer to the compressed image data in memory.
+		* \sa Image1D ()
+		*/
+	 void CompressedImage1D (GLenum target, GLint level, GLenum internalFormat,
+													 GLsizei width, GLint border, GLsizei imageSize,
+													 const GLvoid *data);
+	 /**
 		* Specified a two-dimensional texture Image.
 		* Loads a two-dimensional texture image from memory to the
 		* internal OpenGL texture object.
@@ -390,6 +416,43 @@ public:
 								 GLsizei width, GLsizei height, GLint border,
 								 GLenum format, GLenum type, const GLvoid *data);
 	 /**
+		* Specified a two-dimensional texture Image.
+		* Loads a two-dimensional texture image from memory to the
+		* internal OpenGL texture object.
+		* \param target Specifies the target texture.
+		*               Must be one of the following:
+		*               - GL_TEXTURE_2D
+		*               - GL_PROXY_TEXTURE_2D
+		*               - GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		*               - GL_TEXTURE_CUBE_MAP_NEGATIVE_X
+		*               - GL_TEXTURE_CUBE_MAP_POSITIVE_Y
+		*               - GL_TEXTURE_CUBE_MAP_NEGATIVE_Y
+		*               - GL_TEXTURE_CUBE_MAP_POSITIVE_Z
+		*               - GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
+		*               - GL_PROXY_TEXTURE_CUBE_MAP
+		* \param level Specifies the level-of-detail number.
+		*               - Level 0 is the base image level.
+		*               - Level n is the nth mipmap reduction image.
+		* \param internfalformat Specifies the format of the compressed
+		*                        image data stored at address data.
+		* \param width Specifies the width of the texture image.
+		*              All implementations support 2D texture images
+		*              that are at least 64 texels wide and cube-mapped
+		*              texture images that are at least 16 texels wide.
+		* \param height Specifies the height of the texture image.
+		*               All implementations support 2D texture images
+		*               that are at least 64 texels high and cube-mapped
+		*               texture images that are at least 16 texels high.
+		* \param border This value must be 0.
+		* \param imageSize Specifies the number of unsigned bytes of image
+		*                  data starting at the address specified by data.
+		* \param data Specifies a pointer to the compressed image data in memory.
+		* \sa Image2D ()
+		*/
+	 void CompressedImage2D (GLenum target, GLint level, GLenum internalFormat,
+													 GLsizei width, GLsizei height, GLint border,
+													 GLsizei imageSize, const GLvoid *data);
+	 /**
 		* Specified a three-dimensional texture Image.
 		* Loads a three-dimensional texture image from memory to the
 		* internal OpenGL texture object.
@@ -540,6 +603,39 @@ public:
 	 void Image3D (GLenum target, GLint level, GLint internalFormat,
 								 GLsizei width, GLsizei height, GLsizei depth, GLint border,
 								 GLenum format, GLenum type, const GLvoid *data);
+	 /**
+		* Specified a three-dimensional texture Image.
+		* Loads a three-dimensional texture image from memory to the
+		* internal OpenGL texture object.
+		* \param target Specifies the target texture.
+		*               Must be one of the following:
+		*               - GL_TEXTURE_3D
+		*               - GL_PROXY_TEXTURE_3D
+		*               - GL_TEXTURE_2D_ARRAY
+		* \param level Specifies the level-of-detail number.
+		*               - Level 0 is the base image level.
+		*               - Level n is the nth mipmap reduction image.
+		* \param internfalformat Specifies the format of the compressed
+		*                        image data stored at address data.
+		* \param width Specifies the width of the texture image.
+		*              All implementations support 3D texture images
+		*              that are at least 16 texels wide.
+		* \param height Specifies the height of the texture image.
+		*               All implementations support 3D texture images
+		*               that are at least 16 texels high.
+		* \param depth Specifies the depth of the texture image.
+		*              All implementations support 3D texture images
+		*              that are at least 16 texels deep.
+		* \param border This value must be 0.
+		* \param imageSize Specifies the number of unsigned bytes of image
+		*                  data starting at the address specified by data.
+		* \param data Specifies a pointer to the compressed image data in memory.
+		* \sa Image3D ()
+		*/
+	 void CompressedImage3D (GLenum target, GLint level, GLenum internalFormat,
+													 GLsizei width, GLsizei height, GLsizei depth,
+													 GLint border, GLsizei imageSize,
+													 const GLvoid *data);
 	 /**
 		* Specified a two-dimensional multisample texture image.
 		* Establish the data storage, format, dimensions, and number

@@ -57,12 +57,43 @@ void Texture::BindImage (GLuint unit, GLint level, GLboolean layered,
 	CheckError ();
 }
 
+void Texture::Image1D (GLenum target, GLint level, GLint internalFormat,
+											 GLsizei width, GLint border, GLenum format,
+											 GLenum type, const GLvoid *data)
+{
+	TextureImage1DEXT (obj, target, level, internalFormat, width,
+										 border, format, type, data);
+	CheckError ();
+}
+
+void Texture::CompressedImage1D (GLenum target, GLint level,
+																 GLenum internalFormat,
+																 GLsizei width, GLint border,
+																 GLsizei imageSize,
+																 const GLvoid *data)
+{
+	CompressedTextureImage1DEXT (obj, target, level, internalFormat, width,
+															 border, imageSize, data);
+	CheckError ();
+}
+
 void Texture::Image2D (GLenum target, GLint level, GLint internalFormat,
 											 GLsizei width, GLsizei height, GLint border,
 											 GLenum format, GLenum type, const GLvoid *data)
 {
 	TextureImage2DEXT (obj, target, level, internalFormat, width, height,
 										 border, format, type, data);
+	CheckError ();
+}
+
+void Texture::CompressedImage2D (GLenum target, GLint level,
+																 GLenum internalFormat,
+																 GLsizei width, GLsizei height,
+																 GLint border, GLsizei imageSize,
+																 const GLvoid *data)
+{
+	CompressedTextureImage2DEXT (obj, target, level, internalFormat, width,
+															 height, border, imageSize, data);
 	CheckError ();
 }
 
@@ -73,6 +104,18 @@ void Texture::Image3D (GLenum target, GLint level, GLint internalFormat,
 {
 	TextureImage3DEXT (obj, target, level, internalFormat, width, height,
 										 depth, border, format, type, data);
+	CheckError ();
+}
+
+void Texture::CompressedImage3D (GLenum target, GLint level,
+																 GLenum internalFormat,
+																 GLsizei width, GLsizei height,
+																 GLsizei depth, GLint border,
+																 GLsizei imageSize,
+																 const GLvoid *data)
+{
+	CompressedTextureImage3DEXT (obj, target, level, internalFormat, width,
+															 height, depth, border, imageSize, data);
 	CheckError ();
 }
 
