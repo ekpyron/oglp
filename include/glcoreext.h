@@ -34,7 +34,7 @@
 #ifndef __modified_gl3ext_h_
 #define __modified_gl3ext_h_
 
-#include "gl3.h"
+#include "glcorearb.h"
 
 #ifndef GL_EXT_direct_state_access
 #define GL_PROGRAM_MATRIX_EXT             0x8E2D

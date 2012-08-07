@@ -1,6 +1,6 @@
-/* This file was generated b gl3w_gen.py.
- * Don't change it directoly, change gl3w_gen.py instead.*/
-#include "gl3w.h"
+/* This file was generated b glcorew_gen.py.
+ * Don't change it directoly, change glcorew_gen.py instead.*/
+#include "glcorew.h"
 #include <stdexcept>
 
 namespace gl {
@@ -1125,6 +1125,118 @@ PFNGLTEXTURESTORAGE2DEXTPROC TextureStorage2DEXT =
     (PFNGLTEXTURESTORAGE2DEXTPROC) Unsupported;
 PFNGLTEXTURESTORAGE3DEXTPROC TextureStorage3DEXT =
     (PFNGLTEXTURESTORAGE3DEXTPROC) Unsupported;
+PFNGLDEBUGMESSAGECONTROLPROC DebugMessageControl =
+    (PFNGLDEBUGMESSAGECONTROLPROC) Unsupported;
+PFNGLDEBUGMESSAGEINSERTPROC DebugMessageInsert =
+    (PFNGLDEBUGMESSAGEINSERTPROC) Unsupported;
+PFNGLDEBUGMESSAGECALLBACKPROC DebugMessageCallback =
+    (PFNGLDEBUGMESSAGECALLBACKPROC) Unsupported;
+PFNGLGETDEBUGMESSAGELOGPROC GetDebugMessageLog =
+    (PFNGLGETDEBUGMESSAGELOGPROC) Unsupported;
+PFNGLPUSHDEBUGGROUPPROC PushDebugGroup =
+    (PFNGLPUSHDEBUGGROUPPROC) Unsupported;
+PFNGLPOPDEBUGGROUPPROC PopDebugGroup =
+    (PFNGLPOPDEBUGGROUPPROC) Unsupported;
+PFNGLOBJECTLABELPROC ObjectLabel =
+    (PFNGLOBJECTLABELPROC) Unsupported;
+PFNGLGETOBJECTLABELPROC GetObjectLabel =
+    (PFNGLGETOBJECTLABELPROC) Unsupported;
+PFNGLOBJECTPTRLABELPROC ObjectPtrLabel =
+    (PFNGLOBJECTPTRLABELPROC) Unsupported;
+PFNGLGETOBJECTPTRLABELPROC GetObjectPtrLabel =
+    (PFNGLGETOBJECTPTRLABELPROC) Unsupported;
+PFNGLCLEARBUFFERDATAPROC ClearBufferData =
+    (PFNGLCLEARBUFFERDATAPROC) Unsupported;
+PFNGLCLEARBUFFERSUBDATAPROC ClearBufferSubData =
+    (PFNGLCLEARBUFFERSUBDATAPROC) Unsupported;
+PFNGLCLEARNAMEDBUFFERDATAEXTPROC ClearNamedBufferDataEXT =
+    (PFNGLCLEARNAMEDBUFFERDATAEXTPROC) Unsupported;
+PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC ClearNamedBufferSubDataEXT =
+    (PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC) Unsupported;
+PFNGLDISPATCHCOMPUTEPROC DispatchCompute =
+    (PFNGLDISPATCHCOMPUTEPROC) Unsupported;
+PFNGLDISPATCHCOMPUTEINDIRECTPROC DispatchComputeIndirect =
+    (PFNGLDISPATCHCOMPUTEINDIRECTPROC) Unsupported;
+PFNGLCOPYIMAGESUBDATAPROC CopyImageSubData =
+    (PFNGLCOPYIMAGESUBDATAPROC) Unsupported;
+PFNGLFRAMEBUFFERPARAMETERIPROC FramebufferParameteri =
+    (PFNGLFRAMEBUFFERPARAMETERIPROC) Unsupported;
+PFNGLGETFRAMEBUFFERPARAMETERIVPROC GetFramebufferParameteriv =
+    (PFNGLGETFRAMEBUFFERPARAMETERIVPROC) Unsupported;
+PFNGLNAMEDFRAMEBUFFERPARAMETERIEXTPROC NamedFramebufferParameteriEXT =
+    (PFNGLNAMEDFRAMEBUFFERPARAMETERIEXTPROC) Unsupported;
+PFNGLGETNAMEDFRAMEBUFFERPARAMETERIVEXTPROC GetNamedFramebufferParameterivEXT =
+    (PFNGLGETNAMEDFRAMEBUFFERPARAMETERIVEXTPROC) Unsupported;
+PFNGLGETINTERNALFORMATI64VPROC GetInternalformati64v =
+    (PFNGLGETINTERNALFORMATI64VPROC) Unsupported;
+PFNGLINVALIDATETEXSUBIMAGEPROC InvalidateTexSubImage =
+    (PFNGLINVALIDATETEXSUBIMAGEPROC) Unsupported;
+PFNGLINVALIDATETEXIMAGEPROC InvalidateTexImage =
+    (PFNGLINVALIDATETEXIMAGEPROC) Unsupported;
+PFNGLINVALIDATEBUFFERSUBDATAPROC InvalidateBufferSubData =
+    (PFNGLINVALIDATEBUFFERSUBDATAPROC) Unsupported;
+PFNGLINVALIDATEBUFFERDATAPROC InvalidateBufferData =
+    (PFNGLINVALIDATEBUFFERDATAPROC) Unsupported;
+PFNGLINVALIDATEFRAMEBUFFERPROC InvalidateFramebuffer =
+    (PFNGLINVALIDATEFRAMEBUFFERPROC) Unsupported;
+PFNGLINVALIDATESUBFRAMEBUFFERPROC InvalidateSubFramebuffer =
+    (PFNGLINVALIDATESUBFRAMEBUFFERPROC) Unsupported;
+PFNGLMULTIDRAWARRAYSINDIRECTPROC MultiDrawArraysIndirect =
+    (PFNGLMULTIDRAWARRAYSINDIRECTPROC) Unsupported;
+PFNGLMULTIDRAWELEMENTSINDIRECTPROC MultiDrawElementsIndirect =
+    (PFNGLMULTIDRAWELEMENTSINDIRECTPROC) Unsupported;
+PFNGLGETPROGRAMINTERFACEIVPROC GetProgramInterfaceiv =
+    (PFNGLGETPROGRAMINTERFACEIVPROC) Unsupported;
+PFNGLGETPROGRAMRESOURCEINDEXPROC GetProgramResourceIndex =
+    (PFNGLGETPROGRAMRESOURCEINDEXPROC) Unsupported;
+PFNGLGETPROGRAMRESOURCENAMEPROC GetProgramResourceName =
+    (PFNGLGETPROGRAMRESOURCENAMEPROC) Unsupported;
+PFNGLGETPROGRAMRESOURCEIVPROC GetProgramResourceiv =
+    (PFNGLGETPROGRAMRESOURCEIVPROC) Unsupported;
+PFNGLGETPROGRAMRESOURCELOCATIONPROC GetProgramResourceLocation =
+    (PFNGLGETPROGRAMRESOURCELOCATIONPROC) Unsupported;
+PFNGLGETPROGRAMRESOURCELOCATIONINDEXPROC GetProgramResourceLocationIndex =
+    (PFNGLGETPROGRAMRESOURCELOCATIONINDEXPROC) Unsupported;
+PFNGLSHADERSTORAGEBLOCKBINDINGPROC ShaderStorageBlockBinding =
+    (PFNGLSHADERSTORAGEBLOCKBINDINGPROC) Unsupported;
+PFNGLTEXBUFFERRANGEPROC TexBufferRange =
+    (PFNGLTEXBUFFERRANGEPROC) Unsupported;
+PFNGLTEXTUREBUFFERRANGEEXTPROC TextureBufferRangeEXT =
+    (PFNGLTEXTUREBUFFERRANGEEXTPROC) Unsupported;
+PFNGLTEXSTORAGE2DMULTISAMPLEPROC TexStorage2DMultisample =
+    (PFNGLTEXSTORAGE2DMULTISAMPLEPROC) Unsupported;
+PFNGLTEXSTORAGE3DMULTISAMPLEPROC TexStorage3DMultisample =
+    (PFNGLTEXSTORAGE3DMULTISAMPLEPROC) Unsupported;
+PFNGLTEXTURESTORAGE2DMULTISAMPLEEXTPROC TextureStorage2DMultisampleEXT =
+    (PFNGLTEXTURESTORAGE2DMULTISAMPLEEXTPROC) Unsupported;
+PFNGLTEXTURESTORAGE3DMULTISAMPLEEXTPROC TextureStorage3DMultisampleEXT =
+    (PFNGLTEXTURESTORAGE3DMULTISAMPLEEXTPROC) Unsupported;
+PFNGLTEXTUREVIEWPROC TextureView =
+    (PFNGLTEXTUREVIEWPROC) Unsupported;
+PFNGLBINDVERTEXBUFFERPROC BindVertexBuffer =
+    (PFNGLBINDVERTEXBUFFERPROC) Unsupported;
+PFNGLVERTEXATTRIBFORMATPROC VertexAttribFormat =
+    (PFNGLVERTEXATTRIBFORMATPROC) Unsupported;
+PFNGLVERTEXATTRIBIFORMATPROC VertexAttribIFormat =
+    (PFNGLVERTEXATTRIBIFORMATPROC) Unsupported;
+PFNGLVERTEXATTRIBLFORMATPROC VertexAttribLFormat =
+    (PFNGLVERTEXATTRIBLFORMATPROC) Unsupported;
+PFNGLVERTEXATTRIBBINDINGPROC VertexAttribBinding =
+    (PFNGLVERTEXATTRIBBINDINGPROC) Unsupported;
+PFNGLVERTEXBINDINGDIVISORPROC VertexBindingDivisor =
+    (PFNGLVERTEXBINDINGDIVISORPROC) Unsupported;
+PFNGLVERTEXARRAYBINDVERTEXBUFFEREXTPROC VertexArrayBindVertexBufferEXT =
+    (PFNGLVERTEXARRAYBINDVERTEXBUFFEREXTPROC) Unsupported;
+PFNGLVERTEXARRAYVERTEXATTRIBFORMATEXTPROC VertexArrayVertexAttribFormatEXT =
+    (PFNGLVERTEXARRAYVERTEXATTRIBFORMATEXTPROC) Unsupported;
+PFNGLVERTEXARRAYVERTEXATTRIBIFORMATEXTPROC VertexArrayVertexAttribIFormatEXT =
+    (PFNGLVERTEXARRAYVERTEXATTRIBIFORMATEXTPROC) Unsupported;
+PFNGLVERTEXARRAYVERTEXATTRIBLFORMATEXTPROC VertexArrayVertexAttribLFormatEXT =
+    (PFNGLVERTEXARRAYVERTEXATTRIBLFORMATEXTPROC) Unsupported;
+PFNGLVERTEXARRAYVERTEXATTRIBBINDINGEXTPROC VertexArrayVertexAttribBindingEXT =
+    (PFNGLVERTEXARRAYVERTEXATTRIBBINDINGEXTPROC) Unsupported;
+PFNGLVERTEXARRAYVERTEXBINDINGDIVISOREXTPROC VertexArrayVertexBindingDivisorEXT =
+    (PFNGLVERTEXARRAYVERTEXBINDINGDIVISOREXTPROC) Unsupported;
 PFNGLCLIENTATTRIBDEFAULTEXTPROC ClientAttribDefaultEXT =
     (PFNGLCLIENTATTRIBDEFAULTEXTPROC) Unsupported;
 PFNGLPUSHCLIENTATTRIBDEFAULTEXTPROC PushClientAttribDefaultEXT =
@@ -2680,6 +2792,118 @@ void InitPrototypes (GetProcAddressCallback getprocaddress)
     if (ptr) TextureStorage2DEXT = (PFNGLTEXTURESTORAGE2DEXTPROC) ptr;
     ptr = getprocaddress ("glTextureStorage3DEXT");
     if (ptr) TextureStorage3DEXT = (PFNGLTEXTURESTORAGE3DEXTPROC) ptr;
+    ptr = getprocaddress ("glDebugMessageControl");
+    if (ptr) DebugMessageControl = (PFNGLDEBUGMESSAGECONTROLPROC) ptr;
+    ptr = getprocaddress ("glDebugMessageInsert");
+    if (ptr) DebugMessageInsert = (PFNGLDEBUGMESSAGEINSERTPROC) ptr;
+    ptr = getprocaddress ("glDebugMessageCallback");
+    if (ptr) DebugMessageCallback = (PFNGLDEBUGMESSAGECALLBACKPROC) ptr;
+    ptr = getprocaddress ("glGetDebugMessageLog");
+    if (ptr) GetDebugMessageLog = (PFNGLGETDEBUGMESSAGELOGPROC) ptr;
+    ptr = getprocaddress ("glPushDebugGroup");
+    if (ptr) PushDebugGroup = (PFNGLPUSHDEBUGGROUPPROC) ptr;
+    ptr = getprocaddress ("glPopDebugGroup");
+    if (ptr) PopDebugGroup = (PFNGLPOPDEBUGGROUPPROC) ptr;
+    ptr = getprocaddress ("glObjectLabel");
+    if (ptr) ObjectLabel = (PFNGLOBJECTLABELPROC) ptr;
+    ptr = getprocaddress ("glGetObjectLabel");
+    if (ptr) GetObjectLabel = (PFNGLGETOBJECTLABELPROC) ptr;
+    ptr = getprocaddress ("glObjectPtrLabel");
+    if (ptr) ObjectPtrLabel = (PFNGLOBJECTPTRLABELPROC) ptr;
+    ptr = getprocaddress ("glGetObjectPtrLabel");
+    if (ptr) GetObjectPtrLabel = (PFNGLGETOBJECTPTRLABELPROC) ptr;
+    ptr = getprocaddress ("glClearBufferData");
+    if (ptr) ClearBufferData = (PFNGLCLEARBUFFERDATAPROC) ptr;
+    ptr = getprocaddress ("glClearBufferSubData");
+    if (ptr) ClearBufferSubData = (PFNGLCLEARBUFFERSUBDATAPROC) ptr;
+    ptr = getprocaddress ("glClearNamedBufferDataEXT");
+    if (ptr) ClearNamedBufferDataEXT = (PFNGLCLEARNAMEDBUFFERDATAEXTPROC) ptr;
+    ptr = getprocaddress ("glClearNamedBufferSubDataEXT");
+    if (ptr) ClearNamedBufferSubDataEXT = (PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC) ptr;
+    ptr = getprocaddress ("glDispatchCompute");
+    if (ptr) DispatchCompute = (PFNGLDISPATCHCOMPUTEPROC) ptr;
+    ptr = getprocaddress ("glDispatchComputeIndirect");
+    if (ptr) DispatchComputeIndirect = (PFNGLDISPATCHCOMPUTEINDIRECTPROC) ptr;
+    ptr = getprocaddress ("glCopyImageSubData");
+    if (ptr) CopyImageSubData = (PFNGLCOPYIMAGESUBDATAPROC) ptr;
+    ptr = getprocaddress ("glFramebufferParameteri");
+    if (ptr) FramebufferParameteri = (PFNGLFRAMEBUFFERPARAMETERIPROC) ptr;
+    ptr = getprocaddress ("glGetFramebufferParameteriv");
+    if (ptr) GetFramebufferParameteriv = (PFNGLGETFRAMEBUFFERPARAMETERIVPROC) ptr;
+    ptr = getprocaddress ("glNamedFramebufferParameteriEXT");
+    if (ptr) NamedFramebufferParameteriEXT = (PFNGLNAMEDFRAMEBUFFERPARAMETERIEXTPROC) ptr;
+    ptr = getprocaddress ("glGetNamedFramebufferParameterivEXT");
+    if (ptr) GetNamedFramebufferParameterivEXT = (PFNGLGETNAMEDFRAMEBUFFERPARAMETERIVEXTPROC) ptr;
+    ptr = getprocaddress ("glGetInternalformati64v");
+    if (ptr) GetInternalformati64v = (PFNGLGETINTERNALFORMATI64VPROC) ptr;
+    ptr = getprocaddress ("glInvalidateTexSubImage");
+    if (ptr) InvalidateTexSubImage = (PFNGLINVALIDATETEXSUBIMAGEPROC) ptr;
+    ptr = getprocaddress ("glInvalidateTexImage");
+    if (ptr) InvalidateTexImage = (PFNGLINVALIDATETEXIMAGEPROC) ptr;
+    ptr = getprocaddress ("glInvalidateBufferSubData");
+    if (ptr) InvalidateBufferSubData = (PFNGLINVALIDATEBUFFERSUBDATAPROC) ptr;
+    ptr = getprocaddress ("glInvalidateBufferData");
+    if (ptr) InvalidateBufferData = (PFNGLINVALIDATEBUFFERDATAPROC) ptr;
+    ptr = getprocaddress ("glInvalidateFramebuffer");
+    if (ptr) InvalidateFramebuffer = (PFNGLINVALIDATEFRAMEBUFFERPROC) ptr;
+    ptr = getprocaddress ("glInvalidateSubFramebuffer");
+    if (ptr) InvalidateSubFramebuffer = (PFNGLINVALIDATESUBFRAMEBUFFERPROC) ptr;
+    ptr = getprocaddress ("glMultiDrawArraysIndirect");
+    if (ptr) MultiDrawArraysIndirect = (PFNGLMULTIDRAWARRAYSINDIRECTPROC) ptr;
+    ptr = getprocaddress ("glMultiDrawElementsIndirect");
+    if (ptr) MultiDrawElementsIndirect = (PFNGLMULTIDRAWELEMENTSINDIRECTPROC) ptr;
+    ptr = getprocaddress ("glGetProgramInterfaceiv");
+    if (ptr) GetProgramInterfaceiv = (PFNGLGETPROGRAMINTERFACEIVPROC) ptr;
+    ptr = getprocaddress ("glGetProgramResourceIndex");
+    if (ptr) GetProgramResourceIndex = (PFNGLGETPROGRAMRESOURCEINDEXPROC) ptr;
+    ptr = getprocaddress ("glGetProgramResourceName");
+    if (ptr) GetProgramResourceName = (PFNGLGETPROGRAMRESOURCENAMEPROC) ptr;
+    ptr = getprocaddress ("glGetProgramResourceiv");
+    if (ptr) GetProgramResourceiv = (PFNGLGETPROGRAMRESOURCEIVPROC) ptr;
+    ptr = getprocaddress ("glGetProgramResourceLocation");
+    if (ptr) GetProgramResourceLocation = (PFNGLGETPROGRAMRESOURCELOCATIONPROC) ptr;
+    ptr = getprocaddress ("glGetProgramResourceLocationIndex");
+    if (ptr) GetProgramResourceLocationIndex = (PFNGLGETPROGRAMRESOURCELOCATIONINDEXPROC) ptr;
+    ptr = getprocaddress ("glShaderStorageBlockBinding");
+    if (ptr) ShaderStorageBlockBinding = (PFNGLSHADERSTORAGEBLOCKBINDINGPROC) ptr;
+    ptr = getprocaddress ("glTexBufferRange");
+    if (ptr) TexBufferRange = (PFNGLTEXBUFFERRANGEPROC) ptr;
+    ptr = getprocaddress ("glTextureBufferRangeEXT");
+    if (ptr) TextureBufferRangeEXT = (PFNGLTEXTUREBUFFERRANGEEXTPROC) ptr;
+    ptr = getprocaddress ("glTexStorage2DMultisample");
+    if (ptr) TexStorage2DMultisample = (PFNGLTEXSTORAGE2DMULTISAMPLEPROC) ptr;
+    ptr = getprocaddress ("glTexStorage3DMultisample");
+    if (ptr) TexStorage3DMultisample = (PFNGLTEXSTORAGE3DMULTISAMPLEPROC) ptr;
+    ptr = getprocaddress ("glTextureStorage2DMultisampleEXT");
+    if (ptr) TextureStorage2DMultisampleEXT = (PFNGLTEXTURESTORAGE2DMULTISAMPLEEXTPROC) ptr;
+    ptr = getprocaddress ("glTextureStorage3DMultisampleEXT");
+    if (ptr) TextureStorage3DMultisampleEXT = (PFNGLTEXTURESTORAGE3DMULTISAMPLEEXTPROC) ptr;
+    ptr = getprocaddress ("glTextureView");
+    if (ptr) TextureView = (PFNGLTEXTUREVIEWPROC) ptr;
+    ptr = getprocaddress ("glBindVertexBuffer");
+    if (ptr) BindVertexBuffer = (PFNGLBINDVERTEXBUFFERPROC) ptr;
+    ptr = getprocaddress ("glVertexAttribFormat");
+    if (ptr) VertexAttribFormat = (PFNGLVERTEXATTRIBFORMATPROC) ptr;
+    ptr = getprocaddress ("glVertexAttribIFormat");
+    if (ptr) VertexAttribIFormat = (PFNGLVERTEXATTRIBIFORMATPROC) ptr;
+    ptr = getprocaddress ("glVertexAttribLFormat");
+    if (ptr) VertexAttribLFormat = (PFNGLVERTEXATTRIBLFORMATPROC) ptr;
+    ptr = getprocaddress ("glVertexAttribBinding");
+    if (ptr) VertexAttribBinding = (PFNGLVERTEXATTRIBBINDINGPROC) ptr;
+    ptr = getprocaddress ("glVertexBindingDivisor");
+    if (ptr) VertexBindingDivisor = (PFNGLVERTEXBINDINGDIVISORPROC) ptr;
+    ptr = getprocaddress ("glVertexArrayBindVertexBufferEXT");
+    if (ptr) VertexArrayBindVertexBufferEXT = (PFNGLVERTEXARRAYBINDVERTEXBUFFEREXTPROC) ptr;
+    ptr = getprocaddress ("glVertexArrayVertexAttribFormatEXT");
+    if (ptr) VertexArrayVertexAttribFormatEXT = (PFNGLVERTEXARRAYVERTEXATTRIBFORMATEXTPROC) ptr;
+    ptr = getprocaddress ("glVertexArrayVertexAttribIFormatEXT");
+    if (ptr) VertexArrayVertexAttribIFormatEXT = (PFNGLVERTEXARRAYVERTEXATTRIBIFORMATEXTPROC) ptr;
+    ptr = getprocaddress ("glVertexArrayVertexAttribLFormatEXT");
+    if (ptr) VertexArrayVertexAttribLFormatEXT = (PFNGLVERTEXARRAYVERTEXATTRIBLFORMATEXTPROC) ptr;
+    ptr = getprocaddress ("glVertexArrayVertexAttribBindingEXT");
+    if (ptr) VertexArrayVertexAttribBindingEXT = (PFNGLVERTEXARRAYVERTEXATTRIBBINDINGEXTPROC) ptr;
+    ptr = getprocaddress ("glVertexArrayVertexBindingDivisorEXT");
+    if (ptr) VertexArrayVertexBindingDivisorEXT = (PFNGLVERTEXARRAYVERTEXBINDINGDIVISOREXTPROC) ptr;
     ptr = getprocaddress ("glClientAttribDefaultEXT");
     if (ptr) ClientAttribDefaultEXT = (PFNGLCLIENTATTRIBDEFAULTEXTPROC) ptr;
     ptr = getprocaddress ("glPushClientAttribDefaultEXT");

@@ -19,7 +19,7 @@
 
 #include "config.h"
 #include <glm/glm.hpp>
-#include "gl3w.h"
+#include "glcorew.h"
 #include "exception.h"
 
 namespace gl {
