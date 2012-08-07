@@ -18,6 +18,9 @@
 #define OGLP_COMMON_H
 
 #include "config.h"
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include <glm/glm.hpp>
 #include "glcorew.h"
 #include "exception.h"
