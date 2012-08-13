@@ -87,6 +87,12 @@ void Framebuffer::DrawBuffers (const std::vector<GLenum> &bufs) const
 	CheckError ();
 }
 
+void Framebuffer::Parameter (GLenum pname, GLint param) const
+{
+	NamedFramebufferParameteriEXT (obj, pname, param);
+	CheckError ();
+}
+
 void Framebuffer::swap (Framebuffer &framebuffer)
 {
 	std::swap (obj, framebuffer.obj);

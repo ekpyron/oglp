@@ -135,6 +135,14 @@ public:
 		*/
 	 void DrawBuffers (const std::vector<GLenum> &bufs) const;
 	 /**
+		* Set a named parameter.
+		* Sets a named parameter of the internal OpenGL framebuffer
+		* object.
+		* \param pname A token indicating the parameter to be modified.
+		* \param param The new value for the parameter named pname.
+		*/
+	 void Parameter (GLenum pname, GLint param) const;
+	 /**
 		* Return internal object.
 		* Returns the internal OpenGL framebuffer object. Use with caution.
 		* \return The internal OpenGL framebuffer object.
