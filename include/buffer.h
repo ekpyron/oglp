@@ -181,6 +181,38 @@ public:
 		*/
 	 void Unmap (void) const;
 	 /**
+		* Fill a buffer object.
+		* Fill the data store of the internal OpenGL buffer object
+		* with a fixed value
+		* \param internalformat The internal format with which the data
+		*                       will be stored in the buffer object.
+		* \param format The format of the data in memory addressed by data.
+		* \param type The type of the data in memory addressed by data.
+		* \param data The address of a memory location storing the data
+		*             to be replicated into the buffer's data store.
+		*/
+	 void ClearData (GLenum internalformat, GLenum format,
+									 GLenum type, const void *data);
+	 /**
+		* Fill a buffer object.
+		* Fill all or part of the data store of the internal OpenGL
+		* buffer object with a fixed value
+		* \param internalformat The internal format with which the data
+		*                       will be stored in the buffer object.
+		* \param offset The offset, in basic machine units into the buffer
+		*               object's data store at which to start filling.
+		* \param size he size, in basic machine units of the range
+		*             of the data store to fill.
+		* \param format The format of the data in memory addressed by data.
+		* \param type The type of the data in memory addressed by data.
+		* \param data The address of a memory location storing the data
+		*             to be replicated into the buffer's data store.
+		*/
+	 void ClearSubData (GLenum internalformat, GLenum format,
+											GLenum type, GLsizeiptr offset,
+											GLsizeiptr size,
+											const void *data);
+	 /**
 		* Return internal object.
 		* Returns the internal OpenGL buffer object. Use with caution.
 		* \return The internal OpenGL buffer object.

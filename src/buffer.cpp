@@ -129,6 +129,24 @@ void Buffer::CopySubData (Buffer &readbuffer,
 	CheckError ();
 }
 
+void Buffer::ClearData (GLenum internalformat, GLenum format,
+												GLenum type, const void *data)
+{
+	ClearNamedBufferDataEXT (obj, internalformat, format, type, data);
+	CheckError ();
+}
+
+void Buffer::ClearSubData (GLenum internalformat, GLenum format,
+													 GLenum type, GLsizeiptr offset,
+													 GLsizeiptr size,
+													 const void *data)
+{
+	ClearNamedBufferSubDataEXT (obj, internalformat, offset, size,
+															format, type, data);
+	CheckError ();
+}
+
+
 void Buffer::swap (Buffer &buffer)
 {
 	std::swap (obj, buffer.obj);
