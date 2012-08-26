@@ -877,6 +877,178 @@ public:
 		* \param params Specifies the values of pname.
 		*/
 	 void Parameter (GLenum target, GLenum pname, const GLfloat *params);
+   /** Get texture parameter.
+		* Returns texture parameter values.
+		* \param pname Specifies the symbolic name of a texture parameter.
+		*              GL_DEPTH_STENCIL_TEXTURE_MODE, GL_TEXTURE_BASE_LEVEL,
+		*              GL_TEXTURE_BORDER_COLOR, GL_TEXTURE_COMPARE_MODE,
+		*              GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_IMMUTABLE_FORMAT,
+		*              GL_TEXTURE_IMMUTABLE_LEVELS, GL_TEXTURE_LOD_BIAS,
+		*              GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MAX_LEVEL,
+		*              GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER,
+		*              GL_TEXTURE_MIN_LOD, GL_TEXTURE_SWIZZLE_R,
+		*              GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_B,
+		*              GL_TEXTURE_SWIZZLE_A, GL_TEXTURE_SWIZZLE_RGBA,
+		*              GL_TEXTURE_VIEW_MIN_LAYER, GL_TEXTURE_VIEW_MIN_LEVEL,
+		*              GL_TEXTURE_VIEW_NUM_LAYERS, GL_TEXTURE_VIEW_NUM_LEVELS,
+		*              GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T, and
+		*              GL_TEXTURE_WRAP_R are accepted.
+		* \param target Specifies the symbolic name of the target texture.
+		*               GL_TEXTURE_1D, GL_TEXTURE_2D, GL_TEXTURE_1D_ARRAY,
+		*               GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D,
+		*               GL_TEXTURE_RECTANGLE, GL_TEXTURE_CUBE_MAP,
+		*               and GL_TEXTURE_CUBE_MAP_ARRAY are accepted.
+		* \param params Returns the texture parameters.
+		*/
+	 void GetParameter (GLenum target, GLenum pname, GLfloat *params);
+   /** Get texture parameter.
+		* Returns texture parameter values.
+		* \param pname Specifies the symbolic name of a texture parameter.
+		*              GL_DEPTH_STENCIL_TEXTURE_MODE, GL_TEXTURE_BASE_LEVEL,
+		*              GL_TEXTURE_BORDER_COLOR, GL_TEXTURE_COMPARE_MODE,
+		*              GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_IMMUTABLE_FORMAT,
+		*              GL_TEXTURE_IMMUTABLE_LEVELS, GL_TEXTURE_LOD_BIAS,
+		*              GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MAX_LEVEL,
+		*              GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER,
+		*              GL_TEXTURE_MIN_LOD, GL_TEXTURE_SWIZZLE_R,
+		*              GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_B,
+		*              GL_TEXTURE_SWIZZLE_A, GL_TEXTURE_SWIZZLE_RGBA,
+		*              GL_TEXTURE_VIEW_MIN_LAYER, GL_TEXTURE_VIEW_MIN_LEVEL,
+		*              GL_TEXTURE_VIEW_NUM_LAYERS, GL_TEXTURE_VIEW_NUM_LEVELS,
+		*              GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T, and
+		*              GL_TEXTURE_WRAP_R are accepted.
+		* \param target Specifies the symbolic name of the target texture.
+		*               GL_TEXTURE_1D, GL_TEXTURE_2D, GL_TEXTURE_1D_ARRAY,
+		*               GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D,
+		*               GL_TEXTURE_RECTANGLE, GL_TEXTURE_CUBE_MAP,
+		*               and GL_TEXTURE_CUBE_MAP_ARRAY are accepted.
+		* \param params Returns the texture parameters.
+		*/
+	 void GetParameter (GLenum target, GLenum pname, GLint *params);
+   /** Get texture parameter.
+		* Returns texture parameter values.
+		* \param pname Specifies the symbolic name of a texture parameter.
+		*              GL_DEPTH_STENCIL_TEXTURE_MODE, GL_TEXTURE_BASE_LEVEL,
+		*              GL_TEXTURE_BORDER_COLOR, GL_TEXTURE_COMPARE_MODE,
+		*              GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_IMMUTABLE_FORMAT,
+		*              GL_TEXTURE_IMMUTABLE_LEVELS, GL_TEXTURE_LOD_BIAS,
+		*              GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MAX_LEVEL,
+		*              GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER,
+		*              GL_TEXTURE_MIN_LOD, GL_TEXTURE_SWIZZLE_R,
+		*              GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_B,
+		*              GL_TEXTURE_SWIZZLE_A, GL_TEXTURE_SWIZZLE_RGBA,
+		*              GL_TEXTURE_VIEW_MIN_LAYER, GL_TEXTURE_VIEW_MIN_LEVEL,
+		*              GL_TEXTURE_VIEW_NUM_LAYERS, GL_TEXTURE_VIEW_NUM_LEVELS,
+		*              GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T, and
+		*              GL_TEXTURE_WRAP_R are accepted.
+		* \param target Specifies the symbolic name of the target texture.
+		*               GL_TEXTURE_1D, GL_TEXTURE_2D, GL_TEXTURE_1D_ARRAY,
+		*               GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D,
+		*               GL_TEXTURE_RECTANGLE, GL_TEXTURE_CUBE_MAP,
+		*               and GL_TEXTURE_CUBE_MAP_ARRAY are accepted.
+		* \param params Returns the texture parameters.
+		*/
+	 void GetParameterI (GLenum target, GLenum pname, GLint *params);
+   /** Get texture parameter.
+		* Returns texture parameter values.
+		* \param pname Specifies the symbolic name of a texture parameter.
+		*              GL_DEPTH_STENCIL_TEXTURE_MODE, GL_TEXTURE_BASE_LEVEL,
+		*              GL_TEXTURE_BORDER_COLOR, GL_TEXTURE_COMPARE_MODE,
+		*              GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_IMMUTABLE_FORMAT,
+		*              GL_TEXTURE_IMMUTABLE_LEVELS, GL_TEXTURE_LOD_BIAS,
+		*              GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MAX_LEVEL,
+		*              GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER,
+		*              GL_TEXTURE_MIN_LOD, GL_TEXTURE_SWIZZLE_R,
+		*              GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_B,
+		*              GL_TEXTURE_SWIZZLE_A, GL_TEXTURE_SWIZZLE_RGBA,
+		*              GL_TEXTURE_VIEW_MIN_LAYER, GL_TEXTURE_VIEW_MIN_LEVEL,
+		*              GL_TEXTURE_VIEW_NUM_LAYERS, GL_TEXTURE_VIEW_NUM_LEVELS,
+		*              GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T, and
+		*              GL_TEXTURE_WRAP_R are accepted.
+		* \param target Specifies the symbolic name of the target texture.
+		*               GL_TEXTURE_1D, GL_TEXTURE_2D, GL_TEXTURE_1D_ARRAY,
+		*               GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D,
+		*               GL_TEXTURE_RECTANGLE, GL_TEXTURE_CUBE_MAP,
+		*               and GL_TEXTURE_CUBE_MAP_ARRAY are accepted.
+		* \param params Returns the texture parameters.
+		*/
+	 void GetParameterI (GLenum target, GLenum pname, GLuint *params);
+	 /** Get texture level parameter.
+		* Return texture parameter values for a specific level of detail.
+		* \param level Specifies the level-of-detail number of the desired image.
+		*              Level 0 is the base image level. Level n is the 
+		*              nth mipmap reduction image.
+		* \param pname Specifies the symbolic name of a texture parameter.
+		*              GL_TEXTURE_WIDTH, GL_TEXTURE_HEIGHT,
+		*              GL_TEXTURE_DEPTH, GL_TEXTURE_INTERNAL_FORMAT,
+		*              GL_TEXTURE_BORDER, GL_TEXTURE_RED_SIZE,
+		*              GL_TEXTURE_GREEN_SIZE, GL_TEXTURE_BLUE_SIZE,
+		*              GL_TEXTURE_ALPHA_SIZE, GL_TEXTURE_DEPTH_SIZE,
+		*              GL_TEXTURE_COMPRESSED, GL_TEXTURE_COMPRESSED_IMAGE_SIZE,
+		*              and GL_TEXTURE_BUFFER_OFFSET are accepted.
+		* \param target Specifies the symbolic name of the target texture,
+		*               one of GL_TEXTURE_1D, GL_TEXTURE_2D, GL_TEXTURE_3D,
+		*               GL_TEXTURE_1D_ARRAY, GL_TEXTURE_2D_ARRAY,
+		*               GL_TEXTURE_RECTANGLE, GL_TEXTURE_2D_MULTISAMPLE,
+		*               GL_TEXTURE_2D_MULTISAMPLE_ARRAY,
+		*               GL_TEXTURE_CUBE_MAP_POSITIVE_X,
+		*               GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+    *               GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
+    *               GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
+    *               GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
+    *               GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,
+    *               GL_PROXY_TEXTURE_1D,
+    *               GL_PROXY_TEXTURE_2D,
+    *               GL_PROXY_TEXTURE_3D,
+    *               GL_PROXY_TEXTURE_1D_ARRAY,
+    *               GL_PROXY_TEXTURE_2D_ARRAY,
+    *               GL_PROXY_TEXTURE_RECTANGLE,
+    *               GL_PROXY_TEXTURE_2D_MULTISAMPLE,
+    *               GL_PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY,
+		*               GL_PROXY_TEXTURE_CUBE_MAP, or
+		*                GL_TEXTURE_BUFFER.           
+		* \param params Returns the requested data.
+		*/
+	 void GetLevelParameter (GLenum target, GLint level,
+													 GLenum pname, GLfloat *params);
+	 /** Get texture level parameter.
+		* Return texture parameter values for a specific level of detail.
+		* \param level Specifies the level-of-detail number of the desired image.
+		*              Level 0 is the base image level. Level n is the 
+		*              nth mipmap reduction image.
+		* \param pname Specifies the symbolic name of a texture parameter.
+		*              GL_TEXTURE_WIDTH, GL_TEXTURE_HEIGHT,
+		*              GL_TEXTURE_DEPTH, GL_TEXTURE_INTERNAL_FORMAT,
+		*              GL_TEXTURE_BORDER, GL_TEXTURE_RED_SIZE,
+		*              GL_TEXTURE_GREEN_SIZE, GL_TEXTURE_BLUE_SIZE,
+		*              GL_TEXTURE_ALPHA_SIZE, GL_TEXTURE_DEPTH_SIZE,
+		*              GL_TEXTURE_COMPRESSED, GL_TEXTURE_COMPRESSED_IMAGE_SIZE,
+		*              and GL_TEXTURE_BUFFER_OFFSET are accepted.    
+		* \param target Specifies the symbolic name of the target texture,
+		*               one of GL_TEXTURE_1D, GL_TEXTURE_2D, GL_TEXTURE_3D,
+		*               GL_TEXTURE_1D_ARRAY, GL_TEXTURE_2D_ARRAY,
+		*               GL_TEXTURE_RECTANGLE, GL_TEXTURE_2D_MULTISAMPLE,
+		*               GL_TEXTURE_2D_MULTISAMPLE_ARRAY,
+		*               GL_TEXTURE_CUBE_MAP_POSITIVE_X,
+		*               GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+    *               GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
+    *               GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
+    *               GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
+    *               GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,
+    *               GL_PROXY_TEXTURE_1D,
+    *               GL_PROXY_TEXTURE_2D,
+    *               GL_PROXY_TEXTURE_3D,
+    *               GL_PROXY_TEXTURE_1D_ARRAY,
+    *               GL_PROXY_TEXTURE_2D_ARRAY,
+    *               GL_PROXY_TEXTURE_RECTANGLE,
+    *               GL_PROXY_TEXTURE_2D_MULTISAMPLE,
+    *               GL_PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY,
+		*               GL_PROXY_TEXTURE_CUBE_MAP, or
+		*                GL_TEXTURE_BUFFER.           
+		* \param params Returns the requested data.
+		*/
+	 void GetLevelParameter (GLenum target, GLint level,
+													 GLenum pname, GLint *params);
 	 /**
 		* Return internal object.
 		* Returns the internal OpenGL texture object. Use with caution.

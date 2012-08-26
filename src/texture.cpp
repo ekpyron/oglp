@@ -197,6 +197,44 @@ void Texture::Parameter (GLenum target, GLenum pname, const GLint *params)
 	CheckError ();
 }
 
+void Texture::GetParameter (GLenum target, GLenum pname, GLfloat *params)
+{
+	GetTextureParameterfvEXT (obj, target, pname, params);
+	CheckError ();
+}
+
+void Texture::GetParameter (GLenum target, GLenum pname, GLint *params)
+{
+	GetTextureParameterivEXT (obj, target, pname, params);
+	CheckError ();
+}
+
+void Texture::GetParameterI (GLenum target, GLenum pname, GLint *params)
+{
+	GetTextureParameterIivEXT (obj, target, pname, params);
+	CheckError ();
+}
+
+void Texture::GetParameterI (GLenum target, GLenum pname, GLuint *params)
+{
+	GetTextureParameterIuivEXT (obj, target, pname, params);
+	CheckError ();
+}
+
+void Texture::GetLevelParameter (GLenum target, GLint level,
+																 GLenum pname, GLfloat *params)
+{
+	GetTextureLevelParameterfvEXT (obj, target, level, pname, params);
+	CheckError ();
+}
+
+void Texture::GetLevelParameter (GLenum target, GLint level,
+																 GLenum pname, GLint *params)
+{
+	GetTextureLevelParameterivEXT (obj, target, level, pname, params);
+	CheckError ();
+}
+
 void Texture::swap (gl::Texture &texture)
 {
 	std::swap (obj, texture.obj);
