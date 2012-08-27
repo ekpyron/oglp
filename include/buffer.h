@@ -212,6 +212,14 @@ public:
 											GLenum type, GLsizeiptr offset,
 											GLsizeiptr size,
 											const void *data);
+	 /** Get parameter.
+		* Returns parameters of the internal OpenGL buffer object.
+		* \param value Specifies the symbolic name of a buffer object parameter.
+		*              Accepted values are GL_BUFFER_ACCESS, GL_BUFFER_MAPPED, 
+		*              GL_BUFFER_SIZE, or GL_BUFFER_USAGE.
+		* \param data Returns the requested parameter.
+		*/
+	 void GetParameter (GLenum value, GLint *data) const;
 	 /**
 		* Return internal object.
 		* Returns the internal OpenGL buffer object. Use with caution.

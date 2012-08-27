@@ -146,6 +146,12 @@ void Buffer::ClearSubData (GLenum internalformat, GLenum format,
 	CheckError ();
 }
 
+void Buffer::GetParameter (GLenum value, GLint *data) const
+{
+	GetNamedBufferParameterivEXT (obj, value, data);
+	CheckError ();
+}
+
 
 void Buffer::swap (Buffer &buffer)
 {
