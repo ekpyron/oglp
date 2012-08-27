@@ -152,6 +152,17 @@ void Buffer::GetParameter (GLenum value, GLint *data) const
 	CheckError ();
 }
 
+void Buffer::InvalidateData (void)
+{
+	InvalidateBufferData (obj);
+	CheckError ();
+}
+
+void Buffer::InvalidateSubData (GLintptr offset, GLsizeiptr length)
+{
+	InvalidateBufferSubData (obj, offset, length);
+	CheckError ();
+}
 
 void Buffer::swap (Buffer &buffer)
 {

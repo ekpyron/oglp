@@ -220,6 +220,20 @@ public:
 		* \param data Returns the requested parameter.
 		*/
 	 void GetParameter (GLenum value, GLint *data) const;
+	 /** Invalidate buffer.
+		* Invalidates the content of the internal
+		* OpenGL buffer object's data store.
+		*/
+	 void InvalidateData (void);
+	 /** Invalidate a buffer region.
+		* Invalidates a region of the internal
+		* OpenGL buffer object's data store.
+		* \param offset The offset within the buffer's data store
+		*               of the start of the range to be invalidated.
+		* \param length The length of the range within the buffer's
+		*               data store to be invalidated.
+		*/
+	 void InvalidateSubData (GLintptr offset, GLsizeiptr length);
 	 /**
 		* Return internal object.
 		* Returns the internal OpenGL buffer object. Use with caution.
