@@ -1050,6 +1050,28 @@ public:
 	 void GetLevelParameter (GLenum target, GLint level,
 													 GLenum pname, GLint *params);
 	 /**
+		* Initialize a texture view.
+		* Initialize the internal OpenGL texture object as a data
+		* alias of another texture's data store.
+		* \param target Specifies the target to be used
+		*               for the newly initialized texture.
+		* \param origtexture Specifies the name of a texture object
+		*                    of which to make a view.
+		* \param internalFormat Specifies the internal format
+		*                       for the newly created view.
+		* \param minlevel Specifies lowest level of detail of the view.
+		* \param numlevels Specifies the number of levels of detail
+		*                  to include in the view.
+		* \param minlayer Specifies the index of the first layer 
+		*                 to include in the view.
+		* \param numlayers Specifies the number of layers
+		*                  to include in the view.
+		*/
+	 void View (GLenum target, const gl::Texture &origtexture,
+							GLenum internalFormat, GLuint minlevel,
+							GLuint numlevels, GLuint minlayer,
+							GLuint numlayers);
+	 /**
 		* Return internal object.
 		* Returns the internal OpenGL texture object. Use with caution.
 		* \return The internal OpenGL texture object.

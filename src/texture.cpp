@@ -235,6 +235,16 @@ void Texture::GetLevelParameter (GLenum target, GLint level,
 	CheckError ();
 }
 
+void Texture::View (GLenum target, const gl::Texture &origtexture,
+										GLenum internalFormat, GLuint minlevel,
+										GLuint numlevels, GLuint minlayer,
+										GLuint numlayers)
+{
+	TextureView (obj, target, origtexture.get (), internalFormat,
+							 minlevel, numlevels, minlayer, numlayers);
+	CheckError ();
+}
+
 void Texture::swap (gl::Texture &texture)
 {
 	std::swap (obj, texture.obj);
