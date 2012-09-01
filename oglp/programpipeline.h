@@ -88,11 +88,11 @@ public:
 	 /**
 		* Bind stages of a ShaderProgram to a ProgramPipeline.
 		* Binds stages of a OpenGL program object contained in a ShaderProgram
-		* pbject to the internal OpenGL program pipeline.
-		* \param stages Specifies a set of program stages to bind
-		                to the program pipeline object.
+		* object to the internal OpenGL program pipeline.
     * \param program Specifies the ShaderProgram object containing the
 		*                shader executables to use in the ProgramPipeline.
+		* \param stages Specifies a set of program stages to bind
+		*               to the program pipeline object.
 		*/
 	 void UseProgramStages (GLbitfield stages, const Program &program) const {
 		 oglp::UseProgramStages (obj, stages, program.get ());
@@ -145,7 +145,7 @@ public:
 		* Swap internal object.
 		* Swaps the internal OpenGL program pipeline object with another
 		* ProgramPipeline.
-		* \program pipeline Object with which to swap the internal object.
+		* \param pipeline Object with which to swap the internal object.
 		*/
 	 void swap (ProgramPipeline &pipeline) {
 		 std::swap (obj, pipeline.obj);

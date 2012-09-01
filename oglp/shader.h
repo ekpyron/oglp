@@ -171,7 +171,7 @@ public:
    /**
 		* Swap internal object.
 		* Swaps the internal OpenGL shader object with another Shader.
-		* \param sampler Object with which to swap the internal shader object.
+		* \param shader Object with which to swap the internal shader object.
 		*/
 	 void swap (Shader &shader) {
 		 std::swap (obj, shader.obj);

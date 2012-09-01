@@ -174,9 +174,9 @@ public:
 		* \param binary Specifies the address an array into which the GL will
 		*               return program's binary representation.
 		*/
-	 void GetBinary (GLsizei bufsize, GLsizei *length,
+	 void GetBinary (GLsizei bufSize, GLsizei *length,
 									 GLenum *binaryFormat, void *binary) const {
-		 GetProgramBinary (obj, bufsize, length, binaryFormat, binary);
+		 GetProgramBinary (obj, bufSize, length, binaryFormat, binary);
 		 CheckError ();
 	 }
 	 /**
@@ -266,7 +266,7 @@ public:
 		*                   GL_FRAGMENT_SHADER.
 		* \param name Specifies the name of the subroutine uniform
 		*             whose index to query.
-		* \retuns The subroutine index.
+		* \returns The subroutine index.
 		*/
 	 GLuint GetSubroutineIndex (GLenum shadertype,
 															const std::string &name) const {

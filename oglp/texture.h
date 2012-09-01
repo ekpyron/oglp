@@ -271,7 +271,7 @@ public:
 		* \param level Specifies the level-of-detail number.
 		*               - Level 0 is the base image level.
 		*               - Level n is the nth mipmap reduction image.
-		* \param internfalformat Specifies the format of the compressed
+		* \param internalFormat Specifies the format of the compressed
 		*                        image data stored at address data.
 		* \param width Specifies the width of the texture image.
 		*              All implementations support texture images
@@ -464,7 +464,7 @@ public:
 		* \param level Specifies the level-of-detail number.
 		*               - Level 0 is the base image level.
 		*               - Level n is the nth mipmap reduction image.
-		* \param internfalformat Specifies the format of the compressed
+		* \param internalFormat Specifies the format of the compressed
 		*                        image data stored at address data.
 		* \param width Specifies the width of the texture image.
 		*              All implementations support 2D texture images
@@ -654,7 +654,7 @@ public:
 		* \param level Specifies the level-of-detail number.
 		*               - Level 0 is the base image level.
 		*               - Level n is the nth mipmap reduction image.
-		* \param internfalformat Specifies the format of the compressed
+		* \param internalFormat Specifies the format of the compressed
 		*                        image data stored at address data.
 		* \param width Specifies the width of the texture image.
 		*              All implementations support 3D texture images
@@ -687,6 +687,10 @@ public:
 		*               target must be GL_TEXTURE_2D_MULTISAMPLE.
 		* \param samples The number of samples in the multisample
 		*                texture's image.
+		* \param internalFormat The internal format to be used to store
+		*                       the multisample texture's image.
+		*                       internalformat must specify a color-renderable,
+		*                       depth-renderable, or stencil-renderable format.
 		* \param width The width of the multisample texture's image, in texels.
 		* \param height The height of the multisample texture's image, in texels.
 		* \param fixedsamplelocations Specifies whether the image will use
@@ -698,7 +702,7 @@ public:
 		*/
 	 void Image2DMultisample (GLenum target, GLsizei samples,
 														GLint internalFormat, GLsizei width,
-														GLsizei height, GLboolean fixedsamplelocation) {
+														GLsizei height, GLboolean fixedsamplelocations) {
 		 GLint previous;
 		 if (target == GL_TEXTURE_2D_MULTISAMPLE)
 				GetIntegerv (GL_TEXTURE_BINDING_2D_MULTISAMPLE, &previous);
@@ -707,7 +711,7 @@ public:
 
 		 BindTexture (target, obj);
 		 TexImage2DMultisample (target, samples, internalFormat, width, height,
-														fixedsamplelocation);
+														fixedsamplelocations);
 		 BindTexture (target, previous);
 	 }
 	 /**
@@ -718,6 +722,10 @@ public:
 		*               target must be GL_TEXTURE_2D_MULTISAMPLE_ARRAY.
 		* \param samples The number of samples in the multisample
 		*                texture's image.
+		* \param internalFormat  The internal format to be used to store
+		*                        the multisample texture's image.
+		*                        internalformat must specify a color-renderable,
+		*                        depth-renderable, or stencil-renderable format.
 		* \param width The width of the multisample texture's image, in texels.
 		* \param height The height of the multisample texture's image, in texels.
 		* \param depth Specifies the number of layers in the multisample texture
@@ -732,7 +740,7 @@ public:
 	 void Image3DMultisample (GLenum target, GLsizei samples,
 														GLint internalFormat, GLsizei width,
 														GLsizei height, GLsizei depth,
-														GLboolean fixedsamplelocation) {
+														GLboolean fixedsamplelocations) {
 		 GLint previous;
 		 if (target == GL_TEXTURE_2D_MULTISAMPLE_ARRAY)
 				GetIntegerv (GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY, &previous);
@@ -741,7 +749,7 @@ public:
 		 
 		 BindTexture (target, obj);
 		 TexImage3DMultisample (target, samples, internalFormat, width, height,
-														depth, fixedsamplelocation);
+														depth, fixedsamplelocations);
 		 BindTexture (target, previous);
 	 }
 	 /**
@@ -792,6 +800,18 @@ public:
 		*               - GL_BGR_INTEGER
 		*               - GL_RGBA_INTEGER
 		*               - GL_BGRA_INTEGER
+		* \param type Specifies a pixel type for the returned data.
+		*             The supported types are GL_UNSIGNED_BYTE, GL_BYTE,
+		*             GL_UNSIGNED_SHORT, GL_SHORT, GL_UNSIGNED_INT, GL_INT,
+		*             GL_HALF_FLOAT, GL_FLOAT, GL_UNSIGNED_BYTE_3_3_2,
+		*             GL_UNSIGNED_BYTE_2_3_3_REV, GL_UNSIGNED_SHORT_5_6_5,
+		*             GL_UNSIGNED_SHORT_5_6_5_REV, GL_UNSIGNED_SHORT_4_4_4_4,
+		*             GL_UNSIGNED_SHORT_4_4_4_4_REV, GL_UNSIGNED_SHORT_5_5_5_1,
+		*             GL_UNSIGNED_SHORT_1_5_5_5_REV, GL_UNSIGNED_INT_8_8_8_8,
+		*             GL_UNSIGNED_INT_8_8_8_8_REV, GL_UNSIGNED_INT_10_10_10_2,
+		*             GL_UNSIGNED_INT_2_10_10_10_REV, GL_UNSIGNED_INT_24_8,
+		*             GL_UNSIGNED_INT_10F_11F_11F_REV, GL_UNSIGNED_INT_5_9_9_9_REV,
+		*             and GL_FLOAT_32_UNSIGNED_INT_24_8_REV.
 		* \param img Returns the texture image. Should be a pointer to an array
 		*            of the type specified by type.
 		*/
@@ -1192,7 +1212,7 @@ public:
    /**
 		* Swap internal object.
 		* Swaps the internal OpenGL texture object with another Texture.
-		* \param sampler Object with which to swap the internal texture object.
+		* \param texture Object with which to swap the internal texture object.
 		*/
 	 void swap (Texture &texture) {
 		 std::swap (obj, texture.obj);

@@ -153,7 +153,7 @@ public:
 		* Swap internal object.
 		* Swaps the internal OpenGL vertex array object with another
 		* VertexArray.
-		* \param sampler Object with which to swap the internal
+		* \param vertexarray Object with which to swap the internal
 		*                vertex array object.
 		*/
 	 void swap (VertexArray &vertexarray) {

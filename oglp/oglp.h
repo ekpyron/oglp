@@ -62,10 +62,10 @@ namespace oglp {
  * be included in one of your source files. See the Usage section for
  * more details.
  * \subsection Usage
- * Use #include <oglp/oglp.h> in all source files in which you want to
+ * Use \#include <oglp/oglp.h> in all source files in which you want to
  * use oglp.
  * Additionally in one source file of your project you must also use
- * #include <oglp/oglp.cxx> to include the non-header parts of the code.
+ * \#include <oglp/oglp.cxx> to include the non-header parts of the code.
  * \subsection License
  * OGLP is licensed under the GPL.
  */
