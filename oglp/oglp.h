@@ -32,7 +32,7 @@
 #include "texture.h"
 #include "query.h"
 
-namespace gl {
+namespace oglp {
 
 /** \mainpage
  * \section intro_sec Introduction
@@ -48,23 +48,27 @@ namespace gl {
  * as possible and to produce the least possible overhead.
  * \subsection Requirements
  * As OGLP is not designed to be backward compatible, it depends on the
- * presence of modern technologies. Thus OpenGL 3.3+ is an requirement, 
+ * presence of modern technologies. Thus OpenGL 3.0+ is an requirement, 
  * as well as some common extensions namely GL_EXT_direct_state_access,
  * GL_ARB_separable_shader_objects and GL_ARB_sampler_objects.
  * The former is well supported by established graphics card manufactors
- * and the latter is in core OpenGL 4.
- * Build dependencies include GLM, cmake and a C++ compiler supporting C++11.
+ * and the latters are in core OpenGL 4.
+ * Further dependencies include GLM, a C++ compiler (at least partially) 
+ * supporting C++11 and a decent implementation of the C++ STL.
+ * \subsection Installation
+ * oglp does not need to be compiled. The library is mostly header-only,
+ * so you just include the headers and use it. As some parts can't be
+ * implemented only in header files, there is also a special header to
+ * be included in one of your source files. See the Usage section for
+ * more details.
+ * \subsection Usage
+ * Use #include <oglp/oglp.h> in all source files in which you want to
+ * use oglp.
+ * Additionally in one source file of your project you must also use
+ * #include <oglp/oglp.cxx> to include the non-header parts of the code.
  * \subsection License
  * OGLP is licensed under the GPL.
  */
-
-/**
- * @brief Initialize oglp.
- * @param callback Callback to obtain OpenGL entry points.
- *
- * Initializes oglp.
- */
-void Init (GetProcAddressCallback callback);
 
 /**
  * Check for an extension.
@@ -74,6 +78,18 @@ void Init (GetProcAddressCallback callback);
  */
 bool IsExtensionSupported (const std::string &name);
 
-} /* namespace gl */
+/** Initialize oglp.
+ * Initializes oglp.
+ * \param callback Callback to obtain OpenGL entry points.
+ *
+ * Initializes oglp.
+ */
+void Init (GetProcAddressCallback callback);
+
+} /* namespace oglp */
+
+#ifndef OGLP_NO_NAMESPACE_ALIAS
+namespace gl = oglp;
+#endif
 
 #endif /* !defined OGLP_H */

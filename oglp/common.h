@@ -24,15 +24,22 @@
 #include <glm/glm.hpp>
 #include "glcorew.h"
 #include "exception.h"
+#include <stdexcept>
+#include <sstream>
 
-namespace gl {
+namespace oglp {
 
 /**
  * Check for an OpenGL error.
  * Checks for an OpenGL error and throws an Exception if one occurred.
  */
-void CheckError (void);
+inline void CheckError (void) {
+	GLenum err;
+	err = GetError ();
+	if (err != GL_NO_ERROR)
+		throw Exception (err);
+}
 
-} /* namespace gl */
+} /* namespace oglp */
 
 #endif /* !defined OGLP_COMMON_H */

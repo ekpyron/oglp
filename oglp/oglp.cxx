@@ -14,22 +14,23 @@
  * You should have received a copy of the GNU General Public License
  * along with oglp.  If not, see <http://www.gnu.org/licenses/>.
  */
+/** @file */
+#ifndef OGLP_CXX
+#define OGLP_CXX
+
 #include "oglp.h"
-#include <stdexcept>
-#include <sstream>
-#ifdef _WIN32
-#include <windows.h>
-#endif
+#include "glcorew.cxx"
 
-namespace gl {
+namespace oglp {
 
 #ifdef _WIN32
+namespace internal {
 /* This workaround falls back to loading symbols
  * directly from OpenGL32.dll, as wglGetProcAddress
  * may return NULL for legacy opengl entry points. */
-HMODULE _opengl32dllhandle = NULL;
-GetProcAddressCallback _usergetprocaddress = NULL;
-void *_getprocaddress (const char *name)
+static HMODULE _opengl32dllhandle = NULL;
+static GetProcAddressCallback _usergetprocaddress = NULL;
+inline void *_getprocaddress (const char *name)
 {
 	void *ptr = NULL;
 	if (_usergetprocaddress)
@@ -38,10 +39,10 @@ void *_getprocaddress (const char *name)
 		 ptr = (void*) GetProcAddress (_opengl32dllhandle, name);
 	return ptr;
 }
+} /* namespace internal */
 #endif
 
-bool IsExtensionSupported (const std::string &name)
-{
+bool IsExtensionSupported (const std::string &name) {
 	int num, i;
 	GetIntegerv (GL_NUM_EXTENSIONS, &num);
 	for (i = 0; i < num; i++)
@@ -53,8 +54,7 @@ bool IsExtensionSupported (const std::string &name)
 	return false;
 }
 
-void Init (GetProcAddressCallback callback)
-{
+void Init (GetProcAddressCallback callback) {
 	std::vector<std::string> needed_extensions = {
 		"GL_ARB_separate_shader_objects",
 		"GL_ARB_sampler_objects",
@@ -64,13 +64,13 @@ void Init (GetProcAddressCallback callback)
 	int major, minor;
 
 #ifdef _WIN32
-	_opengl32dllhandle = LoadLibrary ("OPENGL32.DLL");
-	_usergetprocaddress = callback;
-	InitPrototypes (_getprocaddress);
+	internal::_opengl32dllhandle = LoadLibrary ("OPENGL32.DLL");
+	internal::_usergetprocaddress = callback;
+	InitPrototypes (internal::_getprocaddress);
 #else
 	InitPrototypes (callback);
 #endif
-	if (!GetString || GetString == (PFNGLGETSTRINGPROC) gl::Unsupported)
+	if (!GetString || GetString == (PFNGLGETSTRINGPROC) oglp::Unsupported)
 		 throw std::runtime_error ("No entry point for glGetString found.");
 
 	version << GetString (GL_VERSION);
@@ -79,8 +79,8 @@ void Init (GetProcAddressCallback callback)
 	version.ignore (1);
 	version >> minor;
 
-	if (major < 3 || (major == 3 && minor < 3))
-		 throw std::runtime_error ("OpenGL version 3.3 or higher is required.");
+	if (major < 3)
+		 throw std::runtime_error ("OpenGL version 3.0 or higher is required.");
 	for (std::string &extension : needed_extensions)
 	{
 		if (!IsExtensionSupported (extension))
@@ -90,4 +90,6 @@ void Init (GetProcAddressCallback callback)
 	}
 }
 
-} /* namespace gl */
+} /* namespace oglp */
+
+#endif /* !defined OGLP_CXX */

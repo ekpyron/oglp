@@ -1,2 +1,1 @@
-* Change the name of EVERY internal OpenGL object to obj.
-* Think about a get() for Uniforms.
+* write some documentation

@@ -19,7 +19,7 @@
 
 #include "common.h"
 
-namespace gl {
+namespace oglp {
 
 /** OpenGL Query object.
  * A wrapper class around an OpenGL Query object.
@@ -31,13 +31,19 @@ public:
 	 * Default contructor.
 	 * Creates a new Query object.
 	 */
-	 Query (void);
+	 Query (void) {
+		 GenQueries (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Move constuctor.
 		* Passes the internal OpenGL Query object to another Query object.
 		* \param query The Query object to move.
 		*/
-	 Query (Query &&query);
+	 Query (Query &&query) : obj (query.obj) {
+		 GenQueries (1, &query.obj);
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy constructor.
 		* A Query object can't be copy constructed.
@@ -47,14 +53,21 @@ public:
 		* A destructor.
 		* Deletes a Query object.
 		*/
-	 ~Query (void);
+	 ~Query (void) {
+		 DeleteQueries (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Move assignment.
 		* Passes the internal OpenGL Query object to another Query object.
 		* \param query The Query object to move.
 		* \return A reference to the Query object.
 		*/
-	 Query &operator= (Query &&query);
+	 Query &operator= (Query &&query) {
+		 obj = query.obj;
+		 GenQueries (1, &query.obj);
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy assignment.
 		* A Query object can't be copy assigned.
@@ -66,13 +79,17 @@ public:
 		* Returns the internal OpenGL Query object. Use with caution.
 		* \return The internal OpenGL Query object.
 		*/
-	 GLuint get (void) const;
+	 GLuint get (void) const {
+		 return obj;
+	 }
 	 /**
 		* Swaps internal object.
-		* Swaps the internal OpenGL query object with another gl::Query.
+		* Swaps the internal OpenGL query object with another Query.
 		* \param query Object with which to swap the internal object.
 		*/
-	 void swap (Query &query);
+	 void swap (Query &query) {
+		 std::swap (obj, query.obj);
+	 }
 	 /**
 		* Delimits the boundaries of a query object.
 		* Delimits the boundaries of the internal OpenGL query object.
@@ -83,7 +100,10 @@ public:
 		*               GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, or
 		*               GL_TIME_ELAPSED.
 		*/
-	 void Begin (GLenum target);
+	 void Begin (GLenum target) {
+		 BeginQuery (target, obj);
+		 CheckError ();
+	 }
 	 /**
 		* Delimits the boundaries of a query object.
 		* Delimits the boundaries of the internal OpenGL query object.
@@ -93,7 +113,10 @@ public:
 		*               GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, or
 		*               GL_TIME_ELAPSED.
 		*/
-	 static void End (GLenum target);
+	 static void End (GLenum target) {
+		 EndQuery (target);
+		 CheckError ();
+	 }
 	 /**
 		* Return parameters of a query object.
 		* Returns parameters of the internal OpenGL query object.
@@ -102,7 +125,10 @@ public:
 		*              GL_QUERY_RESULT_AVAILABLE.
 		* \param params Returns the requested data.
 		*/
-	 void Get (GLenum pname, GLint *params);
+	 void Get (GLenum pname, GLint *params) const {
+		 GetQueryObjectiv (obj, pname, params);
+		 CheckError ();
+	 }
 	 /**
 		* Return parameters of a query object.
 		* Returns parameters of the internal OpenGL query object.
@@ -111,7 +137,10 @@ public:
 		*              GL_QUERY_RESULT_AVAILABLE.
 		* \param params Returns the requested data.
 		*/
-	 void Get (GLenum pname, GLuint *params);
+	 void Get (GLenum pname, GLuint *params) const {
+		 GetQueryObjectuiv (obj, pname, params);
+		 CheckError ();
+	 }
 	 /**
 		* Return parameters of a query object.
 		* Returns parameters of the internal OpenGL query object.
@@ -120,7 +149,10 @@ public:
 		*              GL_QUERY_RESULT_AVAILABLE.
 		* \param params Returns the requested data.
 		*/
-	 void Get (GLenum pname, GLint64 *params);
+	 void Get (GLenum pname, GLint64 *params) const {
+		 GetQueryObjecti64v (obj, pname, params);
+		 CheckError ();
+	 }
 	 /**
 		* Return parameters of a query object.
 		* Returns parameters of the internal OpenGL query object.
@@ -129,13 +161,21 @@ public:
 		*              GL_QUERY_RESULT_AVAILABLE.
 		* \param params Returns the requested data.
 		*/
-	 void Get (GLenum pname, GLuint64 *params);
+	 void Get (GLenum pname, GLuint64 *params) const {
+		 GetQueryObjectui64v (obj, pname, params);
+		 CheckError ();
+	 }
 	 /**
 		* Checks validity.
 		* Returns whether the internal OpenGL query object is valid.
 		* \return whether the internal OpenGL query object is valid.
 		*/
-	 bool IsValid (void);
+	 bool IsQuery (void) {
+		 bool result;
+		 result = oglp::IsQuery (obj);
+		 CheckError ();
+		 return result;
+	 }
 private:
 	 /**
 		* internal OpenGL query object name
@@ -143,6 +183,6 @@ private:
 	 GLuint obj;
 };
 
-} /* namespace gl */
+} /* namespace oglp */
 
 #endif /* !defined OGLP_QUERY_H */

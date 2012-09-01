@@ -23,7 +23,7 @@
 #include <string>
 #include <vector>
 
-namespace gl {
+namespace oglp {
 
 /** OpenGL shader program object.
  * A wrapper class around an OpenGL shader program.
@@ -35,19 +35,31 @@ public:
 		* Default constructor.
 		* Creates a new Program object.
 		*/
-	 Program (void);
+	 Program (void) {
+		 obj = CreateProgram ();
+		 CheckError ();
+	 }
 	 /**
 		* Move constuctor.
 		* Passes the internal OpenGL shader program object to
 		* another Program object.
 		* \param p The Program object to move.
 		*/
-	 Program (Program &&p);
+	 Program (Program &&p) : obj (p.obj) {
+		 p.obj = CreateProgram ();
+		 CheckError ();
+	 }
 	 /**
 		* A destructor.
 		* Deletes a Program object.
 		*/
-	 ~Program (void);
+	 ~Program (void) {
+		 if (obj) {
+			 DeleteProgram (obj);
+			 CheckError ();
+			 obj = 0;
+		 }
+	 }
 	 /**
 		* Deleted copy assignment.
 		* A Program object can't be copy assigned.
@@ -60,7 +72,11 @@ public:
 		* \param p The Program object to move.
 		* \return A reference to the program object.
 		*/
-	 Program &operator= (Program &&p);
+	 Program &operator= (Program &&p) {
+		 obj = p.obj;
+		 p.obj = CreateProgram ();
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy assignment.
 		* A Program object can't be copy assigned.
@@ -74,7 +90,22 @@ public:
 		* \param source Specifies the source to compile the program from.
 		* \return Whether the Program was successfully created.
 		*/
-	 bool Create (GLenum type, const std::string &source);
+	 bool Create (GLenum type, const std::string &source) {
+		 const GLchar *src = source.c_str ();
+		 GLint status;
+		 DeleteProgram (obj);
+		 obj = CreateShaderProgramv (type, 1, &src);
+		 if (!obj)
+		 {
+			 obj = CreateProgram ();
+			 CheckError ();
+			 return false;
+		 }
+		 
+		 GetProgramiv (obj, GL_LINK_STATUS, &status);
+		 CheckError ();
+		 return status;
+	 }
 	 /**
 		* Specify a parameter.
 		* Specify a parameter for the internal OpenGL program object
@@ -82,7 +113,10 @@ public:
 		* \param value Specifies the new value of the parameter
 		*              specified by pname.
 		*/
-	 void Parameter (GLenum pname, GLint value) const;
+	 void Parameter (GLenum pname, GLint value) {
+		 ProgramParameteri (obj, pname, value);
+		 CheckError ();
+	 }
 	 /**
 		* Attaches a Shader.
 		* Attaches the OpenGL shader object of a Shader to the internal
@@ -90,13 +124,21 @@ public:
 		* \param shader Specifies the Shader to attach.
 		* \return Whether the program was successfully created.
 		*/
-	 void Attach (const Shader &shader) const;
+	 void Attach (const Shader &shader) {
+		 AttachShader (obj, shader.get ());
+		 CheckError ();
+	 }
 	 /**
 		* Links a Program.
 		* Links the internal OpenGL program object.
 		* \return Whether the program was successfully linked.
 		*/
-	 bool Link (void) const;
+	 bool Link (void) {
+		 GLint status;
+		 LinkProgram (obj);
+		 Get (GL_LINK_STATUS, &status);
+		 return status;
+	 }
 	 /**
 		* Load a Program binary.
 		* Loads the internal OpenGL program object with a program binary.
@@ -107,7 +149,17 @@ public:
 		* \returns whether the program was successfully loaded
 		*/
 	 bool Binary (GLenum binaryFormat, const void *binary,
-								GLsizei length) const;
+								GLsizei length) {
+		 GLint status;
+		 ProgramBinary (obj, binaryFormat, binary, length);
+		 GLenum err = GetError ();
+		 if (err == GL_INVALID_ENUM)
+				return false;
+		 if (err != GL_NO_ERROR)
+				throw Exception (err);
+		 Get (GL_LINK_STATUS, &status);
+		 return status;
+	 }
 	 /**
 		* Obtain program binary.
 		* Return a binary representation of a program object's compiled and
@@ -123,7 +175,10 @@ public:
 		*               return program's binary representation.
 		*/
 	 void GetBinary (GLsizei bufsize, GLsizei *length,
-									 GLenum *binaryFormat, void *binary) const;
+									 GLenum *binaryFormat, void *binary) const {
+		 GetProgramBinary (obj, bufsize, length, binaryFormat, binary);
+		 CheckError ();
+	 }
 	 /**
 		* Return a parameter.
 		* Returns a parameter from the internal OpenGL program object.
@@ -143,25 +198,42 @@ public:
 		*              GL_GEOMETRY_OUTPUT_TYPE.
 		* \param params Returns the requested object parameter.
 		*/
-	 void Get (GLenum pname, GLint *params) const;
+	 void Get (GLenum pname, GLint *params) const {
+		 GetProgramiv (obj, pname, params);
+		 CheckError ();
+	 }
 	 /**
 		* Use a Program.
 		* Installs the internal OpenGL program object
 		* as part of current rendering state.
 		*/
-	 void Use (void) const;
+	 void Use (void) const {
+		 UseProgram (obj);
+		 CheckError ();
+	 }
 	 /**
 		* Disable all Programs
 		* Uninstalls the current OpenGL program object, so that shader pipelines
 		* can be used.
 		*/
-	 static void UseNone (void);
+	 static void UseNone (void) {
+		 UseProgram (0);
+		 CheckError ();
+	 }
 	 /**
 		* Get the info log.
 		* Obtain the info log of the internal OpenGL program object.
 		* \return The info log of the program.
 		*/
-	 std::string GetInfoLog (void) const;
+	 std::string GetInfoLog (void) const {
+		 GLint length;
+		 std::vector<GLchar> log;
+		 GetProgramiv (obj, GL_INFO_LOG_LENGTH, &length);
+		 log.resize (length);
+		 GetProgramInfoLog (obj, length, NULL, &log[0]);
+		 CheckError ();
+		 return std::string (&log[0], length);
+	 }
 	 /**
 		* Get subroutine uniform location.
 		* Retrieve the location of a subroutine uniform of
@@ -176,7 +248,13 @@ public:
 		* \returns The subroutine uniform location.
 		*/
 	 GLint GetSubroutineUniformLocation (GLenum shadertype,
-																			 const std::string &name) const;
+																			 const std::string &name) const {
+		 GLint location;
+		 location = oglp::GetSubroutineUniformLocation (obj, shadertype,
+																									name.c_str ());
+		 CheckError ();
+		 return location;
+	 }
    /**
 		* Get the index of a subroutine unifom.
 		* Retrieve the index of a subroutine uniform of a given shader stage
@@ -191,7 +269,12 @@ public:
 		* \retuns The subroutine index.
 		*/
 	 GLuint GetSubroutineIndex (GLenum shadertype,
-															const std::string &name) const;
+															const std::string &name) const {
+		 GLuint index;
+		 index = oglp::GetSubroutineIndex (obj, shadertype, name.c_str ());
+		 CheckError ();
+		 return index;
+	 }
    /**
 		* Get an active subroutine uniform property.
 		* \param shadertype Specifies the shader stage from which to query
@@ -208,7 +291,10 @@ public:
 		*               or values will be placed.
 		*/
 	 void GetActiveSubroutineUniform (GLenum shadertype, GLuint index,
-																		GLenum pname, GLint *values) const;
+																		GLenum pname, GLint *values) const {
+		 GetActiveSubroutineUniformiv (obj, shadertype, index, pname, values);
+		 CheckError ();
+	 }
 	 /**
 		* Get a subroutine uniform name.
 		* Query the name of an active shader subroutine uniform.
@@ -221,7 +307,17 @@ public:
 		* \returns The name of the specified shader subroutine unifom.
 		*/
 	 std::string GetActiveSubroutineUniformName (GLenum shadertype,
-																							 GLuint index) const;
+																							 GLuint index) const {
+		 GLint len = 0;
+		 std::vector<char> buf;
+		 GetActiveSubroutineUniform (shadertype, index,
+																 GL_UNIFORM_NAME_LENGTH, &len);
+		 buf.resize (len);
+		 oglp::GetActiveSubroutineUniformName (obj, shadertype, index, len,
+																				 NULL, &buf[0]);
+		 CheckError ();
+		 return std::string (&buf[0]);
+	 }
 	 /**
 		* Get a subroutine name.
 		* Query the name of an active shader subroutine.
@@ -234,7 +330,15 @@ public:
 		* \returns The subroutine name.
 		*/
 	 std::string GetActiveSubroutineName (GLenum shadertype,
-																				GLuint index) const;
+																				GLuint index) const {
+		 GLint len = 0;
+		 std::vector<char> buf;
+		 GetProgramStage (shadertype, GL_ACTIVE_SUBROUTINE_MAX_LENGTH, &len);
+		 buf.resize (len);
+		 oglp::GetActiveSubroutineName (obj, shadertype, index, len, NULL, &buf[0]);
+		 CheckError ();
+		 return std::string (&buf[0]);
+	 }
 	 /**
 		* Get shader stage properties.
 		* Retrieve properties of a program object corresponding to
@@ -253,7 +357,11 @@ public:
 		* \param values Specifies the address of a variable into which
 		*               the queried value or values will be placed.
 		*/
-	 void GetProgramStage (GLenum shadertype, GLenum pname, GLint *values) const;
+	 void GetProgramStage (GLenum shadertype, GLenum pname,
+												 GLint *values) const {
+		 GetProgramStageiv (obj, shadertype, pname, values);
+		 CheckError ();
+	 }
 	 /** 
 		* Obtain a Uniform location.
 		* Obtains the Uniform location of a uniform variable
@@ -261,20 +369,29 @@ public:
 		* \param name Name of the uniform variable.
 		* \return An Uniform object representing the specified uniform variable.
 		*/
-	 Uniform operator[] (const std::string &name) const;
+	 Uniform operator[] (const std::string &name) const {
+		 GLint location;
+		 location = GetUniformLocation (obj, name.c_str ());
+		 CheckError ();
+		 return Uniform (obj, location);
+	 }
 	 /**
 		* Return internal object.
 		* Returns the internal OpenGL shader program object. Use with caution.
 		* \return The internal OpenGL shader program object.
 		*/
-	 GLuint get (void) const;
+	 GLuint get (void) const {
+		 return obj;
+	 }
    /**
 		* Swap internal object.
-		* Swaps the internal OpenGL shader program object with another gl::Program.
+		* Swaps the internal OpenGL shader program object with another Program.
 		* \param program Object with which to swap the internal OpenGL
 		*                shader program object.
 		*/
-	 void swap (Program &program);
+	 void swap (Program &program) {
+		 std::swap (obj, program.obj);
+	 }
 private:
 	 /**
 		* internal OpenGL shader program
@@ -282,6 +399,6 @@ private:
 	 GLuint obj;
 };
 
-} /* namespace gl */
+} /* namespace oglp */
 
 #endif /* !defined PROGRAM_H */

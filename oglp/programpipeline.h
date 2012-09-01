@@ -21,7 +21,7 @@
 #include "program.h"
 #include <string>
 
-namespace gl {
+namespace oglp {
 
 /** OpenGL shader pipeline object.
  * A wrapper class around an OpenGL shader program pipeline.
@@ -32,14 +32,20 @@ public:
 	 /** Default constructor.
 		* Creates a new ProgramPipeline object.
 		*/
-	 ProgramPipeline (void);
+	 ProgramPipeline (void) {
+		 GenProgramPipelines (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Move constuctor.
 		* Passes the internal OpenGL shader pipeline object to
 		* another ProgramPipeline object.
 		* \param pipeline The ProgramPipeline object to move.
 		*/
-	 ProgramPipeline (ProgramPipeline &&pipeline);
+	 ProgramPipeline (ProgramPipeline &&pipeline) : obj (pipeline.obj) {
+		 GenProgramPipelines (1, &pipeline.obj);
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy constructor.
 		* A ProgramPipeline object can't be copy constructed.
@@ -49,7 +55,10 @@ public:
 		* A destructor.
 		* Deletes a ProgramPipeline object.
 		*/
-	 ~ProgramPipeline (void);
+	 ~ProgramPipeline (void) {
+		 DeleteProgramPipelines (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Move assignment.
 		* Passes the internal OpenGL shader pipeline object to another
@@ -57,7 +66,11 @@ public:
 		* \param pipeline The ProgramPipeline object to move.
 		* \return A reference to the ProgramPipeline object.
 		*/
-	 ProgramPipeline &operator= (ProgramPipeline &&pipeline);
+	 ProgramPipeline &operator= (ProgramPipeline &&pipeline) {
+		 obj = pipeline.obj;
+		 GenProgramPipelines (1, &pipeline.obj);
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy assignment.
 		* A ProgramPipeline object can't be copy assigned.
@@ -68,7 +81,10 @@ public:
 		* Bind the ProgramPipeline object.
 		* Binds the internal OpenGL shader pipeline object.
 		*/
-	 void Bind (void) const;
+	 void Bind (void) const {
+		 BindProgramPipeline (obj);
+		 CheckError ();
+	 }
 	 /**
 		* Bind stages of a ShaderProgram to a ProgramPipeline.
 		* Binds stages of a OpenGL program object contained in a ShaderProgram
@@ -78,38 +94,62 @@ public:
     * \param program Specifies the ShaderProgram object containing the
 		*                shader executables to use in the ProgramPipeline.
 		*/
-	 void UseProgramStages (GLbitfield stages, const Program &program);
+	 void UseProgramStages (GLbitfield stages, const Program &program) const {
+		 oglp::UseProgramStages (obj, stages, program.get ());
+		 CheckError ();
+	 }
 	 /**
 		* Validates the ProgramPipeline against the current OpenGL state.
 		* \return Returns the validation status.
 		*/
-	 bool Validate (void) const;
+	 bool Validate (void) const {
+		 GLint status;
+		 ValidateProgramPipeline (obj);
+		 GetProgramPipelineiv (obj, GL_VALIDATE_STATUS, &status);
+		 CheckError ();
+		 return status;
+	 }
 	 /**
 		* Get the info log.
 		* Obtains the info log of the internal OpenGL program pipeline object
 		* \return A string containing the info log.
 		*/
-	 std::string GetInfoLog (void) const;
+	 std::string GetInfoLog (void) const {
+		 GLint length;
+		 std::vector<GLchar> log;
+		 GetProgramPipelineiv (obj, GL_INFO_LOG_LENGTH, &length);
+		 log.resize (length);
+		 GetProgramPipelineInfoLog (obj, length, &length, &log[0]);
+		 CheckError ();
+		 return std::string (&log[0], length);
+	 }
    /**
 		* Set active shader program.
 		* Sets the active program object for a program pipeline object.
 		* \param program Specifies the program object to set as the
 		*                active program.
 		*/
-	 void ActiveShaderProgram (const Program &program) const;
+	 void ActiveShaderProgram (const Program &program) const {
+		 oglp::ActiveShaderProgram (obj, program.get ());
+		 CheckError ();
+	 }
 	 /**
 		* Return internal object.
 		* Returns the internal OpenGL program pipeline object. Use with caution.
 		* \return The internal OpenGL program pipeline object.
 		*/
-	 GLuint get (void) const;
+	 GLuint get (void) const {
+		 return obj;
+	 }
 	 /**
 		* Swap internal object.
 		* Swaps the internal OpenGL program pipeline object with another
-		* gl::ProgramPipeline.
+		* ProgramPipeline.
 		* \program pipeline Object with which to swap the internal object.
 		*/
-	 void swap (ProgramPipeline &pipeline);
+	 void swap (ProgramPipeline &pipeline) {
+		 std::swap (obj, pipeline.obj);
+	 }
 private:
 	 /**
 		* internal OpenGL program pipeline object
@@ -117,6 +157,6 @@ private:
 	 GLuint obj;
 };
 
-} /* namespace gl */
+} /* namespace oglp */
 
 #endif /* !defined PROGRAMPIPELINE_H */

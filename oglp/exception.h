@@ -20,7 +20,7 @@
 #include "common.h"
 #include <exception>
 
-namespace gl {
+namespace oglp {
 
 /**
  * Exception class.
@@ -33,12 +33,29 @@ public:
 		* Constructor.
 		* \param err Specifies the OpenGL error code
 		*/
-	 Exception (GLenum err);
+	 Exception (GLenum err) : error (err) {
+	 }
 	 /**
 		* Format the reason for the exception.
 		* \return A string describing the exception.
 		*/
-	 virtual const char *what (void) const throw ();
+	 virtual const char *what (void) const throw () {
+		 switch (error)
+		 {
+		 case GL_NO_ERROR:
+			 return "no error";
+		 case GL_INVALID_ENUM:
+			 return "invalid enum";
+		 case GL_INVALID_VALUE:
+			 return "invalid value";
+		 case GL_INVALID_OPERATION:
+			 return "invalid operation";
+		 case GL_OUT_OF_MEMORY:
+			 return "out of memory";
+		 default:
+			 return "unknown";
+		 }
+	 }
 private:
 	 /**
 		* stores the OpenGL error code
@@ -46,6 +63,6 @@ private:
 	 GLenum error;
 };
 
-} /* namespace gl */
+} /* namespace oglp */
 
 #endif /* !defined OGLP_EXCEPTION_H */

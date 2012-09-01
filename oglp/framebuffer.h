@@ -22,7 +22,7 @@
 #include "renderbuffer.h"
 #include <vector>
 
-namespace gl {
+namespace oglp {
 
 /** OpenGL framebuffer object.
  * A wrapper class around an OpenGL Framebuffer object.
@@ -33,14 +33,20 @@ public:
 	 /** Default constructor.
 		* Creates a new Framebuffer object.
 		*/
-	 Framebuffer (void);
+	 Framebuffer (void) {
+		 GenFramebuffers (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Move constuctor.
 		* Passes the internal OpenGL Framebuffer object to
 		* another framebuffer object.
 		* \param framebuffer The Framebuffer object to move.
 		*/
-	 Framebuffer (Framebuffer &&framebuffer);
+	 Framebuffer (Framebuffer &&framebuffer) : obj (framebuffer.obj) {
+		 DeleteFramebuffers (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy constructor.
 		* A Framebuffer object can't be copy constructed.
@@ -50,7 +56,10 @@ public:
 		* A destructor.
 		* Deletes a Framebuffer object.
 		*/
-	 ~Framebuffer (void);
+	 ~Framebuffer (void) {
+		 DeleteFramebuffers (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Move assignment.
 		* Passes the internal OpenGL framebuffer object to another
@@ -58,7 +67,11 @@ public:
 		* \param framebuffer The Framebuffer object to move.
 		* \return A reference to the Framebuffer object.
 		*/
-	 Framebuffer &operator= (Framebuffer &&framebuffer);
+	 Framebuffer &operator= (Framebuffer &&framebuffer) {
+		 obj = framebuffer.obj;
+		 GenFramebuffers (1, &framebuffer.obj);
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy assignment.
 		* A Framebuffer object can't be copy assigned.
@@ -71,14 +84,20 @@ public:
 		* \param target Specifies which target to bind the Framebuffer object to.
 		* \sa Unbind()
 		*/
-	 void Bind (GLenum target) const;
+	 void Bind (GLenum target) const {
+		 BindFramebuffer (target, obj);
+		 CheckError ();
+	 }
 	 /**
 		* Unbinds Framebuffers.
 		* Unbinds any Framebuffer object potentially bound to the specified target.
 		* \param target Specifies from which target Framebuffers should be unbound.
 		* \sa Bind()
 		*/
-	 static void Unbind (GLenum target);
+	 static void Unbind (GLenum target) {
+		 BindFramebuffer (target, 0);
+		 CheckError ();
+	 }
 	 /**
 		* Attach a texture object to the Framebuffer object.
 		* Attach a level of a texture object as a logical buffer to the
@@ -98,7 +117,11 @@ public:
 		* \sa Renderbuffer()
 		*/
 	 void Texture2D (GLenum attachment, GLenum textarget,
-									 const Texture &texture, GLint level) const;
+									 const Texture &texture, GLint level) const {
+		 NamedFramebufferTexture2DEXT (obj, attachment, textarget,
+																	 texture.get (), level);
+		 CheckError ();
+	 }
 	 /**
 		* Attach a layer of a texture array to the Framebuffer object.
 		* Attach a layer of a texture array as a logical buffer to the
@@ -116,16 +139,26 @@ public:
 		* \sa Renderbuffer() Texture2D()
 		*/
 	 void TextureLayer (GLenum attachment, const Texture &texture,
-											GLint level, GLint layer) const;
+											GLint level, GLint layer) const {
+		 NamedFramebufferTextureLayerEXT (obj, attachment, texture.get (),
+																			level, layer);
+		 CheckError ();
+	 }
 	 /**
 		* Attach a Renderbuffer to the Framebuffer object.
 		* Attach a Renderbuffer as a logical buffer to the Framebuffer object.
 		* \param attachment Specifies the attachment point of the Framebuffer.
+		* \param renderbuffertarget Specifies the renderbuffer target and
+		*                           must be GL_RENDERBUFFER.
 		* \param renderbuffer Specifies the Renderbuffer object to attach.
 		* \sa Texture2D()
 		*/
-	 void Renderbuffer (GLenum attachment,
-											const Renderbuffer &renderbuffer) const;
+	 void Renderbuffer (GLenum attachment, GLenum renderbuffertarget,
+											const Renderbuffer &renderbuffer) const {
+		 NamedFramebufferRenderbufferEXT (obj, attachment, renderbuffertarget,
+																			renderbuffer.get ());
+		 CheckError ();
+	 }
 	 /**
 		* Specify buffers to draw to.
 		* Specifies a list of color buffers to be drawn into.
@@ -133,7 +166,10 @@ public:
 		*             specifying the buffers into which fragment
 		*             colors or data values will be written.
 		*/
-	 void DrawBuffers (const std::vector<GLenum> &bufs) const;
+	 void DrawBuffers (const std::vector<GLenum> &bufs) const {
+		 FramebufferDrawBuffersEXT (obj, bufs.size (), &bufs[0]);
+		 CheckError ();
+	 }
 	 /**
 		* Set a named parameter.
 		* Sets a named parameter of the internal OpenGL framebuffer
@@ -141,20 +177,27 @@ public:
 		* \param pname A token indicating the parameter to be modified.
 		* \param param The new value for the parameter named pname.
 		*/
-	 void Parameter (GLenum pname, GLint param) const;
+	 void Parameter (GLenum pname, GLint param) const {
+		 NamedFramebufferParameteriEXT (obj, pname, param);
+		 CheckError ();
+	 }
 	 /**
 		* Return internal object.
 		* Returns the internal OpenGL framebuffer object. Use with caution.
 		* \return The internal OpenGL framebuffer object.
 		*/
-	 GLuint get (void) const;
+	 GLuint get (void) const {
+		 return obj;
+	 }
 	 /**
 		* Swap internal object.
 		* Swaps the internal OpenGL framebuffer object with another
-		* gl::Framebuffer.
+		* Framebuffer.
 		* \param framebuffer Object with which to swap the internal object.
 		*/
-	 void swap (gl::Framebuffer &framebuffer);
+	 void swap (Framebuffer &framebuffer) {
+		 std::swap (obj, framebuffer.obj);
+	 }
 private:
 	 /**
 		* internal OpenGL framebuffer object
@@ -162,6 +205,6 @@ private:
 	 GLuint obj;
 };
 
-} /* namespace gl */
+} /* namespace oglp */
 
 #endif /* !defined OGLP_FRAMEBUFFER_H */

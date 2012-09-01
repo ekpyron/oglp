@@ -19,7 +19,7 @@
 
 #include "common.h"
 
-namespace gl {
+namespace oglp {
 
 /** OpenGL sampler object.
  * A wrapper class around an OpenGL Sampler object.
@@ -30,13 +30,19 @@ public:
 	 /** Default constructor.
 		* Creates a new Sampler object.
 		*/
-	 Sampler (void);
+	 Sampler (void) {
+		 GenSamplers (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Move constuctor.
 		* Passes the internal OpenGL sampler object to another Sampler object.
 		* \param sampler Sampler object to move.
 		*/
-	 Sampler (Sampler &&sampler);
+	 Sampler (Sampler &&sampler) : obj (sampler.obj) {
+		 GenSamplers (1, &sampler.obj);
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy constructor.
 		* A Sampler object can't be copy constructed.
@@ -46,14 +52,21 @@ public:
 		* A destructor.
 		* Deletes a Sampler object.
 		*/
-	 ~Sampler (void);
+	 ~Sampler (void) {
+		 DeleteSamplers (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Move assignment.
 		* Passes the internal OpenGL sampler object to another Sampler object.
 		* \param sampler Sampler object to move.
 		* \return A reference to the Sampler object.
 		*/
-	 Sampler &operator= (Sampler &&sampler);
+	 Sampler &operator= (Sampler &&sampler) {
+		 obj = sampler.obj;
+		 GenSamplers (1, &sampler.obj);
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy assignment.
 		* A Sampler object can't be copy assigned.
@@ -66,7 +79,10 @@ public:
 		* \param unit Specifies the index of the texture unit to which to
 		*             bind the sampler to.
 		*/
-	 void Bind (GLuint unit) const;
+	 void Bind (GLuint unit) const {
+		 BindSampler (unit, obj);
+		 CheckError ();
+	 }
 	 /** Set Sampler parameters.
 		* Sets the parameters of the internal sampler object.
 		* \param pname Specifies the symbolic name of a single-valued sampler
@@ -83,7 +99,10 @@ public:
 		*              - GL_TEXTURE_COMPARE_FUNC.
 		* \param param Specifies the value of pname.
 		*/
-	 void Parameter (GLenum pname, GLfloat param);
+	 void Parameter (GLenum pname, GLfloat param) {
+		 SamplerParameterf (obj, pname, param);
+		 CheckError ();
+	 }
 	 /** Set Sampler parameters.
 		* Sets the parameters of the internal sampler object.
 		* \param pname Specifies the symbolic name of a single-valued sampler
@@ -100,7 +119,10 @@ public:
 		*              - GL_TEXTURE_COMPARE_FUNC
 		* \param param Specifies the value of pname.
 		*/
-	 void Parameter (GLenum pname, GLint param);
+	 void Parameter (GLenum pname, GLint param) {
+		 SamplerParameteri (obj, pname, param);
+		 CheckError ();
+	 }
 	 /** Set Sampler parameters.
 		* Sets the parameters of the internal sampler object.
 		* \param pname Specifies the symbolic name of a single-valued sampler
@@ -117,7 +139,10 @@ public:
 		*              - GL_TEXTURE_COMPARE_FUNC.
 		* \param params Specifies the values for pname.
 		*/
-	 void Parameter (GLenum pname, const GLfloat *params);
+	 void Parameter (GLenum pname, const GLfloat *params) {
+		 SamplerParameterfv (obj, pname, params);
+		 CheckError ();
+	 }
 	 /** Set Sampler parameters.
 		* Sets the parameters of the internal sampler object.
 		* \param pname Specifies the symbolic name of a single-valued sampler
@@ -136,19 +161,26 @@ public:
 		* \param params Specifies a pointer to an array where the value or values
 		*               of pname are stored.
 		*/
-	 void Parameter (GLenum pname, const GLint *params);
+	 void Parameter (GLenum pname, const GLint *params) {
+		 SamplerParameteriv (obj, pname, params);
+		 CheckError ();
+	 }
 	 /**
 		* Return internal object.
 		* Returns the internal OpenGL sampler object. Use with caution.
 		* \return The internal OpenGL sampler object.
 		*/
-	 GLuint get (void) const;
+	 GLuint get (void) const {
+		 return obj;
+	 }
    /**
 		* Swap internal object.
-		* Swaps the internal OpenGL sampler object with another gl::Sampler.
+		* Swaps the internal OpenGL sampler object with another Sampler.
 		* \param sampler Object with which to swap the internal sampler object.
 		*/
-	 void swap (Sampler &sampler);
+	 void swap (Sampler &sampler) {
+		 std::swap (obj, sampler.obj);
+	 }
 private:
 	 /**
 		* internal OpenGL sampler object
@@ -156,6 +188,6 @@ private:
 	 GLuint obj;
 };
 
-} /* namespace gl */
+} /* namespace oglp */
 
 #endif /* !defined OGLP_SAMPLER_H */

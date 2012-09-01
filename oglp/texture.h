@@ -20,7 +20,7 @@
 #include "common.h"
 #include "buffer.h"
 
-namespace gl {
+namespace oglp {
 
 /**
  * OpenGL texture object.
@@ -33,13 +33,19 @@ public:
 		* Default constructor.
 		* Creates a new Texture object.
 		*/
-	 Texture (void);
+	 Texture (void) {
+		 GenTextures (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Move constuctor.
 		* Passes the internal OpenGL texture object to another Texture object.
 		* \param texture Texture object to move.
 		*/
-	 Texture (Texture &&texture);
+	 Texture (Texture &&texture) : obj (texture.obj) {
+		 GenTextures (1, &texture.obj);
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy constructor.
 		* A Texture object can't be copy constructed.
@@ -49,14 +55,21 @@ public:
 		* A destructor.
 		* Deletes a Texture object.
 		*/
-	 ~Texture (void);
+	 ~Texture (void) {
+		 DeleteTextures (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Move assignment.
 		* Passes the internal OpenGL texture object to another Texture object.
 		* \param texture Texture object to move.
 		* \return A reference to the Texture object.
 		*/
-	 Texture &operator= (Texture &&texture);
+	 Texture &operator= (Texture &&texture) {
+		 obj = texture.obj;
+		 GenTextures (1, &texture.obj);
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy assignment.
 		* A Texture object can't be copy assigned.
@@ -80,7 +93,10 @@ public:
 		*               - GL_TEXTURE_2D_MULTISAMPLE
 		*               - GL_TEXTURE_2D_MULTISAMPLE_ARRAY
 		*/
-	 void Bind (GLenum texunit, GLenum target) const;
+	 void Bind (GLenum texunit, GLenum target) const {
+		 BindMultiTextureEXT (texunit, target, obj);
+		 CheckError ();
+	 }
 	 /* Bind to an image unit.
 		* Binds a level of a texture to an image unit
 		* \param unit    Specifies the index of the image unit to which
@@ -96,7 +112,10 @@ public:
 		*                will be treated as for the purposes of formatted stores.
 		*/
 	 void BindImage (GLuint unit, GLint level, GLboolean layered,
-									 GLint layer, GLenum access, GLenum format) const;
+									 GLint layer, GLenum access, GLenum format) const {
+		 BindImageTexture (unit, obj, level, layered, layer, access, format);
+		 CheckError ();
+	 }
 	 /**
 		* Specified a one-dimensional texture Image.
 		* Loads a one-dimensional texture image from memory to the
@@ -236,7 +255,11 @@ public:
 		*/
 	 void Image1D (GLenum target, GLint level, GLint internalFormat,
 								 GLsizei width, GLint border, GLenum format, GLenum type,
-								 const GLvoid *data);
+								 const GLvoid *data) {
+		 TextureImage1DEXT (obj, target, level, internalFormat, width,
+												border, format, type, data);
+		 CheckError ();
+	 }
 	 /**
 		* Specified a one-dimensional texture Image.
 		* Loads a one-dimensional texture image from memory to the
@@ -262,7 +285,11 @@ public:
 		*/
 	 void CompressedImage1D (GLenum target, GLint level, GLenum internalFormat,
 													 GLsizei width, GLint border, GLsizei imageSize,
-													 const GLvoid *data);
+													 const GLvoid *data) {
+		 CompressedTextureImage1DEXT (obj, target, level, internalFormat, width,
+																	border, imageSize, data);
+		 CheckError ();
+	 }
 	 /**
 		* Specified a two-dimensional texture Image.
 		* Loads a two-dimensional texture image from memory to the
@@ -414,7 +441,11 @@ public:
 		*/
 	 void Image2D (GLenum target, GLint level, GLint internalFormat,
 								 GLsizei width, GLsizei height, GLint border,
-								 GLenum format, GLenum type, const GLvoid *data);
+								 GLenum format, GLenum type, const GLvoid *data) {
+		 TextureImage2DEXT (obj, target, level, internalFormat, width, height,
+												border, format, type, data);
+		 CheckError ();
+	 }
 	 /**
 		* Specified a two-dimensional texture Image.
 		* Loads a two-dimensional texture image from memory to the
@@ -451,7 +482,11 @@ public:
 		*/
 	 void CompressedImage2D (GLenum target, GLint level, GLenum internalFormat,
 													 GLsizei width, GLsizei height, GLint border,
-													 GLsizei imageSize, const GLvoid *data);
+													 GLsizei imageSize, const GLvoid *data) {
+		 CompressedTextureImage2DEXT (obj, target, level, internalFormat, width,
+																	height, border, imageSize, data);
+		 CheckError ();
+	 }
 	 /**
 		* Specified a three-dimensional texture Image.
 		* Loads a three-dimensional texture image from memory to the
@@ -602,7 +637,11 @@ public:
 		*/
 	 void Image3D (GLenum target, GLint level, GLint internalFormat,
 								 GLsizei width, GLsizei height, GLsizei depth, GLint border,
-								 GLenum format, GLenum type, const GLvoid *data);
+								 GLenum format, GLenum type, const GLvoid *data) {
+		 TextureImage3DEXT (obj, target, level, internalFormat, width, height,
+												depth, border, format, type, data);
+		 CheckError ();
+	 }
 	 /**
 		* Specified a three-dimensional texture Image.
 		* Loads a three-dimensional texture image from memory to the
@@ -635,7 +674,11 @@ public:
 	 void CompressedImage3D (GLenum target, GLint level, GLenum internalFormat,
 													 GLsizei width, GLsizei height, GLsizei depth,
 													 GLint border, GLsizei imageSize,
-													 const GLvoid *data);
+													 const GLvoid *data) {
+		 CompressedTextureImage3DEXT (obj, target, level, internalFormat, width,
+																	height, depth, border, imageSize, data);
+		 CheckError ();
+	 }
 	 /**
 		* Specified a two-dimensional multisample texture image.
 		* Establish the data storage, format, dimensions, and number
@@ -655,7 +698,18 @@ public:
 		*/
 	 void Image2DMultisample (GLenum target, GLsizei samples,
 														GLint internalFormat, GLsizei width,
-														GLsizei height, GLboolean fixedsamplelocation);
+														GLsizei height, GLboolean fixedsamplelocation) {
+		 GLint previous;
+		 if (target == GL_TEXTURE_2D_MULTISAMPLE)
+				GetIntegerv (GL_TEXTURE_BINDING_2D_MULTISAMPLE, &previous);
+		 else
+				throw Exception (GL_INVALID_VALUE);
+
+		 BindTexture (target, obj);
+		 TexImage2DMultisample (target, samples, internalFormat, width, height,
+														fixedsamplelocation);
+		 BindTexture (target, previous);
+	 }
 	 /**
 		* Specified a two-dimensional multisample texture image.
 		* Establish the data storage, format, dimensions, and number
@@ -678,7 +732,18 @@ public:
 	 void Image3DMultisample (GLenum target, GLsizei samples,
 														GLint internalFormat, GLsizei width,
 														GLsizei height, GLsizei depth,
-														GLboolean fixedsamplelocation);
+														GLboolean fixedsamplelocation) {
+		 GLint previous;
+		 if (target == GL_TEXTURE_2D_MULTISAMPLE_ARRAY)
+				GetIntegerv (GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY, &previous);
+		 else
+				throw Exception (GL_INVALID_VALUE);
+		 
+		 BindTexture (target, obj);
+		 TexImage3DMultisample (target, samples, internalFormat, width, height,
+														depth, fixedsamplelocation);
+		 BindTexture (target, previous);
+	 }
 	 /**
 		* Attach a buffer object to the texture.
 		* Attaches the storage for a buffer object to the buffer texture.
@@ -687,7 +752,11 @@ public:
 		* \param buffer Specifies the buffer object whose storage to attach to
 		*               the active buffer texture.
 		*/
-	 void Buffer (GLenum internalFormat, const gl::Buffer &buffer);
+	 void Buffer (GLenum internalFormat, const Buffer &buffer) {
+		 TextureBufferEXT (obj, GL_TEXTURE_BUFFER, internalFormat,
+											 buffer.get ());
+		 CheckError ();
+	 }
 	 /**
 		* Return a texture image.
 		* Returns data from the internal texture object.
@@ -727,7 +796,10 @@ public:
 		*            of the type specified by type.
 		*/
 	 void GetTexImage (GLenum target, GLint level, GLenum format, GLenum type,
-										 GLvoid *img);
+										 GLvoid *img) const {
+		 GetTextureImageEXT (obj, target, level, format, type, img);
+		 CheckError ();
+	 }
 	 /**
 		* Generate mipmaps.
 		* Generates mipmaps for the internal texture object
@@ -742,7 +814,10 @@ public:
 		*               - GL_TEXTURE_2D_ARRAY
 		*               - GL_TEXTURE_CUBE_MAP
 		*/
-	 void GenerateMipmap (GLenum target) const;
+	 void GenerateMipmap (GLenum target) {
+		 GenerateTextureMipmapEXT (obj, target);
+		 CheckError ();
+	 }
 	 /**
 		* Set texture parameters.
 		* Set texture parameters.
@@ -775,7 +850,10 @@ public:
 		*              - GL_TEXTURE_WRAP_Ry
 		* \param param Specifies the value of pname.
 		*/
-	 void Parameter (GLenum target, GLenum pname, GLint param);
+	 void Parameter (GLenum target, GLenum pname, GLint param) {
+		 TextureParameteriEXT (obj, target, pname, param);
+		 CheckError ();
+	 }
 	 /**
 		* Set texture parameters.
 		* Set texture parameters.
@@ -809,7 +887,10 @@ public:
 		*              - or GL_TEXTURE_WRAP_R
 		* \param params Specifies the values of pname.
 		*/
-	 void Parameter (GLenum target, GLenum pname, const GLint *params);
+	 void Parameter (GLenum target, GLenum pname, const GLint *params) {
+		 TextureParameterivEXT (obj, target, pname, params);
+		 CheckError ();
+	 }
 	 /**
 		* Set texture parameters.
 		* Set texture parameters.
@@ -842,7 +923,10 @@ public:
 		*              - GL_TEXTURE_WRAP_R
 		* \param param Specifies the value of pname.
 		*/
-	 void Parameter (GLenum target, GLenum pname, GLfloat param);
+	 void Parameter (GLenum target, GLenum pname, GLfloat param) {
+		 TextureParameterfEXT (obj, target, pname, param);
+		 CheckError ();
+	 }
 	 /**
 		* Set texture parameters.
 		* Set texture parameters.
@@ -876,7 +960,10 @@ public:
 		*              - GL_TEXTURE_WRAP_R
 		* \param params Specifies the values of pname.
 		*/
-	 void Parameter (GLenum target, GLenum pname, const GLfloat *params);
+	 void Parameter (GLenum target, GLenum pname, const GLfloat *params) {
+		 TextureParameterfvEXT (obj, target, pname, params);
+		 CheckError ();
+	 }
    /** Get texture parameter.
 		* Returns texture parameter values.
 		* \param pname Specifies the symbolic name of a texture parameter.
@@ -900,7 +987,11 @@ public:
 		*               and GL_TEXTURE_CUBE_MAP_ARRAY are accepted.
 		* \param params Returns the texture parameters.
 		*/
-	 void GetParameter (GLenum target, GLenum pname, GLfloat *params);
+	 void GetParameter (GLenum target, GLenum pname,
+											GLfloat *params) const {
+		 GetTextureParameterfvEXT (obj, target, pname, params);
+		 CheckError ();
+	 }
    /** Get texture parameter.
 		* Returns texture parameter values.
 		* \param pname Specifies the symbolic name of a texture parameter.
@@ -924,7 +1015,10 @@ public:
 		*               and GL_TEXTURE_CUBE_MAP_ARRAY are accepted.
 		* \param params Returns the texture parameters.
 		*/
-	 void GetParameter (GLenum target, GLenum pname, GLint *params);
+	 void GetParameter (GLenum target, GLenum pname, GLint *params) const {
+		 GetTextureParameterivEXT (obj, target, pname, params);
+		 CheckError ();
+	 }
    /** Get texture parameter.
 		* Returns texture parameter values.
 		* \param pname Specifies the symbolic name of a texture parameter.
@@ -948,7 +1042,10 @@ public:
 		*               and GL_TEXTURE_CUBE_MAP_ARRAY are accepted.
 		* \param params Returns the texture parameters.
 		*/
-	 void GetParameterI (GLenum target, GLenum pname, GLint *params);
+	 void GetParameterI (GLenum target, GLenum pname, GLint *params) const {
+		 GetTextureParameterIivEXT (obj, target, pname, params);
+		 CheckError ();
+	 }
    /** Get texture parameter.
 		* Returns texture parameter values.
 		* \param pname Specifies the symbolic name of a texture parameter.
@@ -972,7 +1069,10 @@ public:
 		*               and GL_TEXTURE_CUBE_MAP_ARRAY are accepted.
 		* \param params Returns the texture parameters.
 		*/
-	 void GetParameterI (GLenum target, GLenum pname, GLuint *params);
+	 void GetParameterI (GLenum target, GLenum pname, GLuint *params) const {
+		 GetTextureParameterIuivEXT (obj, target, pname, params);
+		 CheckError ();
+	 }
 	 /** Get texture level parameter.
 		* Return texture parameter values for a specific level of detail.
 		* \param level Specifies the level-of-detail number of the desired image.
@@ -1010,7 +1110,10 @@ public:
 		* \param params Returns the requested data.
 		*/
 	 void GetLevelParameter (GLenum target, GLint level,
-													 GLenum pname, GLfloat *params);
+													 GLenum pname, GLfloat *params) const {
+		 GetTextureLevelParameterfvEXT (obj, target, level, pname, params);
+		 CheckError ();
+	 }
 	 /** Get texture level parameter.
 		* Return texture parameter values for a specific level of detail.
 		* \param level Specifies the level-of-detail number of the desired image.
@@ -1047,8 +1150,11 @@ public:
 		*                GL_TEXTURE_BUFFER.           
 		* \param params Returns the requested data.
 		*/
-	 void GetLevelParameter (GLenum target, GLint level,
-													 GLenum pname, GLint *params);
+	 void GetLevelParameter (GLenum target, GLint level, GLenum pname,
+													 GLint *params) const {
+		 GetTextureLevelParameterivEXT (obj, target, level, pname, params);
+		 CheckError ();
+	 }
 	 /**
 		* Initialize a texture view.
 		* Initialize the internal OpenGL texture object as a data
@@ -1067,28 +1173,36 @@ public:
 		* \param numlayers Specifies the number of layers
 		*                  to include in the view.
 		*/
-	 void View (GLenum target, const gl::Texture &origtexture,
+	 void View (GLenum target, const Texture &origtexture,
 							GLenum internalFormat, GLuint minlevel,
 							GLuint numlevels, GLuint minlayer,
-							GLuint numlayers);
+							GLuint numlayers) {
+		 TextureView (obj, target, origtexture.get (), internalFormat,
+									minlevel, numlevels, minlayer, numlayers);
+		 CheckError ();
+	 }
 	 /**
 		* Return internal object.
 		* Returns the internal OpenGL texture object. Use with caution.
 		* \return The internal OpenGL texture object.
 		*/
-	 GLuint get (void) const;
+	 GLuint get (void) const {
+		 return obj;
+	 }
    /**
 		* Swap internal object.
-		* Swaps the internal OpenGL texture object with another gl::Texture.
+		* Swaps the internal OpenGL texture object with another Texture.
 		* \param sampler Object with which to swap the internal texture object.
 		*/
-	 void swap (Texture &texture);
+	 void swap (Texture &texture) {
+		 std::swap (obj, texture.obj);
+	 }
 private:
 	 /** internal OpenGL texture object
 		*/
 	 GLuint obj;
 };
 
-} /* namespace gl */
+} /* namespace oglp */
 
 #endif /* !defined TEXTURE_H */

@@ -19,7 +19,7 @@
 
 #include "common.h"
 
-namespace gl {
+namespace oglp {
 
 /** OpenGL renderbuffer object.
  * A wrapper class around an OpenGL renderbuffer object.
@@ -30,14 +30,20 @@ public:
 	 /** Default constructor.
 		* Creates a new Renderbuffer object.
 		*/
-	 Renderbuffer (void);
+	 Renderbuffer (void) {
+		 GenRenderbuffers (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Move constuctor.
 		* Passes the internal OpenGL renderbuffer object to another
 		* Renderbuffer object.
 		* \param renderbuffer The Renderbuffer object to move.
 		*/
-	 Renderbuffer (Renderbuffer &&renderbuffer);
+	 Renderbuffer (Renderbuffer &&renderbuffer) : obj (renderbuffer.obj) {
+		 GenRenderbuffers (1, &renderbuffer.obj);
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy constructor.
 		* A Renderbuffer object can't be copy constructed.
@@ -47,7 +53,10 @@ public:
 		* A destructor.
 		* Deletes a Renderbuffer object.
 		*/
-	 ~Renderbuffer (void);
+	 ~Renderbuffer (void) {
+		 DeleteRenderbuffers (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Move assignment.
 		* Passes the internal OpenGL renderbuffer object to another
@@ -55,7 +64,11 @@ public:
 		* \param renderbuffer The Renderbuffer object to move.
 		* \return A reference to the Renderbuffer object.
 		*/
-	 Renderbuffer &operator= (Renderbuffer &&renderbuffer);
+	 Renderbuffer &operator= (Renderbuffer &&renderbuffer) {
+		 obj = renderbuffer.obj;
+		 GenRenderbuffers (1, &renderbuffer.obj);
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy assignment.
 		* A Renderbuffer object can't be copy assigned.
@@ -72,7 +85,10 @@ public:
 		* \param height Specifies the height of the Renderbuffer, in pixels.
 		*/
 	 void Storage (GLenum internalformat, GLsizei width,
-								 GLsizei height) const;
+								 GLsizei height) const {
+		 NamedRenderbufferStorageEXT (obj, internalformat, width, height);
+		 CheckError ();
+	 }
 	 /**
 		* Setup the internal storage of a Renderbuffer object.
 		* Establishes the data storage, format and dimensions of the internal
@@ -85,19 +101,27 @@ public:
 		* \param height Specifies the height of the Renderbuffer, in pixels.
 		*/
 	 void StorageMultisample (GLsizei samples, GLenum internalformat,
-														GLsizei width, GLsizei height) const;
+														GLsizei width, GLsizei height) const {
+		 NamedRenderbufferStorageMultisampleEXT (obj, samples, internalformat,
+																						 width, height);
+		 CheckError ();
+	 }
 	 /**
 		* Return internal object.
 		* Returns the internal renderbuffer object. Use with caution.
 		* \return The internal OpenGL renderbuffer object.
 		*/
-	 GLuint get (void) const;
+	 GLuint get (void) const {
+		 return obj;
+	 }
    /**
 		* Swap internal object.
 		* Swaps the internal OpenGL renderbuffer object with another
-		* gl::Renderbuffer.
+		* Renderbuffer.
 		*/
-	 void swap (gl::Renderbuffer &renderbuffer);
+	 void swap (Renderbuffer &renderbuffer) {
+		 std::swap (obj, renderbuffer.obj);
+	 }
 private:
 	 /**
 		* internal OpenGL renderbuffer object
@@ -105,6 +129,6 @@ private:
 	 GLuint obj;
 };
 
-} /* namespace gl */
+} /* namespace oglp */
 
 #endif /* !defined OGLP_RENDERBUFFER_H */

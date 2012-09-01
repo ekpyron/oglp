@@ -19,7 +19,7 @@
 
 #include "common.h"
 
-namespace gl {
+namespace oglp {
 
 /** OpenGL buffer object.
  * A wrapper class around an OpenGL Buffer object.
@@ -31,13 +31,19 @@ public:
 	 * Default contructor.
 	 * Creates a new Buffer object.
 	 */
-	 Buffer (void);
+	 Buffer (void) {
+		 GenBuffers (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Move constuctor.
 		* Passes the internal OpenGL buffer object to another Buffer object.
 		* \param buffer The Buffer object to move.
 		*/
-	 Buffer (Buffer &&buffer);
+	 Buffer (Buffer &&buffer) : obj (buffer.obj) {
+		 GenBuffers (1, &buffer.obj);
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy constructor.
 		* A Buffer object can't be copy constructed.
@@ -47,14 +53,21 @@ public:
 		* A destructor.
 		* Deletes a Buffer object.
 		*/
-	 ~Buffer (void);
+	 ~Buffer (void) {
+		 DeleteBuffers (1, &obj);
+		 CheckError ();
+	 }
 	 /**
 		* Move assignment.
 		* Passes the internal OpenGL buffer object to another Buffer object.
 		* \param buffer The Buffer object to move.
 		* \return A reference to the buffer object.
 		*/
-	 Buffer &operator= (Buffer &&buffer);
+	 Buffer &operator= (Buffer &&buffer) {
+		 obj = buffer.obj;
+		 GenBuffers (1, &buffer.obj);
+		 CheckError ();
+	 }
 	 /**
 		* Deleted copy assignment.
 		* A Buffer object can't be copy assigned.
@@ -79,7 +92,10 @@ public:
 		*               - GL_UNIFORM_BUFFER
 		* \sa Unbind()
 		*/
-	 void Bind (GLenum target) const;
+	 void Bind (GLenum target) const {
+		 BindBuffer (target, obj);
+		 CheckError ();
+	 }
 	 /**
 		* Bind the buffer object.
 		* Binds the Buffer object to an indexed buffer target.
@@ -89,7 +105,10 @@ public:
 		* \param index  Specify the index of the binding point within the
 		*               array specified by target.
 		*/
-	 void BindBase (GLenum target, GLuint index) const;
+	 void BindBase (GLenum target, GLuint index) const {
+		 BindBufferBase (target, index, obj);
+		 CheckError ();
+	 }
 	 /**
 		* Bind a range of the buffer object.
 		* Binds a range of the Buffer object to an indexed buffer target.
@@ -104,14 +123,20 @@ public:
 		*               from the buffet object while used as an indexed target.
 		*/
 	 void BindRange (GLenum target, GLuint index, GLintptr offset,
-									 GLsizeiptr size) const;
+									 GLsizeiptr size) const {
+		 	BindBufferRange (target, index, obj, offset, size);
+			CheckError ();
+	 }
 	 /**
 		* Unbinds Buffers.
 		* Unbinds any Buffer object potentially bound to the specified target.
 		* \param target Specifies from which target all buffers should be unbound.
 		* \sa Bind()
 		*/
-	 static void Unbind (GLenum target);
+	 static void Unbind (GLenum target) {
+		 BindBuffer (target, 0);
+		 CheckError ();
+	 }
 	 /**
 		* Create and initialize the data store.
 		* Creates and initializes the data store of the internal
@@ -134,7 +159,10 @@ public:
 		*              - GL_DYNAMIC_COPY
 		* \sa SubData()
 		*/
-	 void Data (GLsizeiptr size, const GLvoid *data, GLenum usage) const;
+	 void Data (GLsizeiptr size, const GLvoid *data, GLenum usage) {
+		 NamedBufferDataEXT (obj, size, data, usage);
+		 CheckError ();
+	 }
 	 /**
 		* Updates a subset of a Buffer object's data store.
 		* Updates a subset of the data store of the internal OpenGL buffer object.
@@ -146,7 +174,10 @@ public:
 		*             into the data store.
 		* \sa Data()
 		*/
-	 void SubData (GLintptr offset, GLsizeiptr size, const GLvoid *data) const;
+	 void SubData (GLintptr offset, GLsizeiptr size, const GLvoid *data) {
+		 NamedBufferSubDataEXT (obj, offset, size, data);
+		 CheckError ();
+	 }
    /**
 		* Map a Buffer object's data store.
 		* Maps the data store of the internal OpenGL buffer object.
@@ -160,7 +191,17 @@ public:
 		* \return A pointer to the memory region the data store was mapped to.
 		* \sa Unmap()
 		*/
-	 GLvoid *Map (GLenum access) const;
+	 GLvoid *Map (GLenum access) const {
+		 GLvoid *ptr;
+		 ptr = MapNamedBufferEXT (obj, access);
+		 CheckError ();
+		 if (ptr == NULL)
+		 {
+			 throw std::runtime_error ("An OpenGL buffer object could not be "
+																 "mapped to memory.");
+		 }
+		 return ptr;
+	 }
 	 /**
 		* Map a section of a buffer object's data store.
 		* Maps a section of the internal OpenGL buffer object's data store.
@@ -173,13 +214,26 @@ public:
 		* \sa Map()
 		*/
 	 GLvoid *MapRange (GLintptr offset, GLsizeiptr length,
-										 GLbitfield access) const;
+										 GLbitfield access) const {
+		 GLvoid *ptr;
+		 ptr = MapNamedBufferRangeEXT (obj, offset, length, access);
+		 CheckError ();
+		 if (ptr == NULL)
+		 {
+			 throw std::runtime_error ("An OpenGL buffer object could not be "
+																 "mapped to memory");
+		 }
+		 return ptr;
+	 }
 	 /**
 		* Unmap a Buffer object's data store.
 		* Unmaps the data store of the internal OpenGL buffer object.
 		* \sa Map
 		*/
-	 void Unmap (void) const;
+	 void Unmap (void) const {
+		 UnmapNamedBufferEXT (obj);
+		 CheckError ();
+	 }
 	 /**
 		* Fill a buffer object.
 		* Fill the data store of the internal OpenGL buffer object
@@ -192,7 +246,10 @@ public:
 		*             to be replicated into the buffer's data store.
 		*/
 	 void ClearData (GLenum internalformat, GLenum format,
-									 GLenum type, const void *data);
+									 GLenum type, const void *data) {
+		 ClearNamedBufferDataEXT (obj, internalformat, format, type, data);
+		 CheckError ();
+	 }
 	 /**
 		* Fill a buffer object.
 		* Fill all or part of the data store of the internal OpenGL
@@ -211,7 +268,11 @@ public:
 	 void ClearSubData (GLenum internalformat, GLenum format,
 											GLenum type, GLsizeiptr offset,
 											GLsizeiptr size,
-											const void *data);
+											const void *data) {
+		 ClearNamedBufferSubDataEXT (obj, internalformat, offset, size,
+																 format, type, data);
+		 CheckError ();
+	 }
 	 /** Get parameter.
 		* Returns parameters of the internal OpenGL buffer object.
 		* \param value Specifies the symbolic name of a buffer object parameter.
@@ -219,12 +280,18 @@ public:
 		*              GL_BUFFER_SIZE, or GL_BUFFER_USAGE.
 		* \param data Returns the requested parameter.
 		*/
-	 void GetParameter (GLenum value, GLint *data) const;
+	 void GetParameter (GLenum value, GLint *data) const {
+		 GetNamedBufferParameterivEXT (obj, value, data);
+		 CheckError ();
+	 }
 	 /** Invalidate buffer.
 		* Invalidates the content of the internal
 		* OpenGL buffer object's data store.
 		*/
-	 void InvalidateData (void);
+	 void InvalidateData (void) {
+		 InvalidateBufferData (obj);
+		 CheckError ();
+	 }
 	 /** Invalidate a buffer region.
 		* Invalidates a region of the internal
 		* OpenGL buffer object's data store.
@@ -233,19 +300,26 @@ public:
 		* \param length The length of the range within the buffer's
 		*               data store to be invalidated.
 		*/
-	 void InvalidateSubData (GLintptr offset, GLsizeiptr length);
+	 void InvalidateSubData (GLintptr offset, GLsizeiptr length) {
+		 InvalidateBufferSubData (obj, offset, length);
+		 CheckError ();
+	 }
 	 /**
 		* Return internal object.
 		* Returns the internal OpenGL buffer object. Use with caution.
 		* \return The internal OpenGL buffer object.
 		*/
-	 GLuint get (void) const;
+	 GLuint get (void) const {
+		 return obj;
+	 }
 	 /**
 		* Swaps internal object.
-		* Swaps the internal OpenGL buffer object with another gl::Buffer.
+		* Swaps the internal OpenGL buffer object with another Buffer.
 		* \param buffer Object with which to swap the internal object.
 		*/
-	 void swap (Buffer &buffer);
+	 void swap (Buffer &buffer) {
+		 std::swap (obj, buffer.obj);
+	 }
 	 /** Copy buffer data.
 		* Copies data between buffer objects.
 		* \param readBuffer  Buffer object to read from.
@@ -258,7 +332,11 @@ public:
 														Buffer &writeBuffer,
 														GLintptr readOffset,
 														GLintptr writeOffset,
-														GLsizeiptr size);
+														GLsizeiptr size) {
+		 NamedCopyBufferSubDataEXT (readBuffer.obj, writeBuffer.obj,
+																readOffset, writeOffset, size);
+		 CheckError ();
+	 }
 private:
 	 /**
 		* internal OpenGL buffer object name
@@ -266,6 +344,6 @@ private:
 	 GLuint obj;
 };
 
-} /* namespace gl */
+} /* namespace oglp */
 
 #endif /* !defined OGLP_BUFFER_H */

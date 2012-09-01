@@ -20,7 +20,7 @@
 #include "common.h"
 #include <vector>
 
-namespace gl {
+namespace oglp {
 
 /**
  * Smart OpenGL uniform abstraction.
@@ -159,6 +159,6 @@ inline void SmartUniform<T>::Set (const T &v)
 }
 
 
-} /* namespace gl */
+} /* namespace oglp */
 
 #endif /* !defined OGLP_SMART_UNIFORM_H */
