@@ -141,6 +141,88 @@ public:
 		 DisableVertexArrayAttribEXT (obj, index);
 		 CheckError ();
 	 }
+   /** Bind a vertex buffer.
+		* Binds a buffer to a vertex buffer bind point.
+		* \param bindingindex The index of the vertex buffer binding point
+		*                     to which to bind the buffer.
+		* \param buffer The name of an existing buffer to bind
+		*               to the vertex buffer binding point.
+		* \param offset The offset of the first element of the buffer.
+		* \param stride The distance between elements within the buffer.
+		*/
+	 void BindVertexBuffer (GLuint bindingindex, GLuint buffer,
+													GLintptr offset, GLsizei stride)
+	 {
+		 VertexArrayBindVertexBufferEXT (obj, bindingindex, buffer,
+																		 offset, stride);
+		 CheckError ();
+	 }
+	 /** Specify vertex format.
+		* Specifies the organization of the vertex array.
+		* \param attribindex The generic vertex attribute array being described.
+		* \param size The number of values per vertex that are stored in the array.
+		* \param type The type of the data stored in the array.
+		* \param normalized The distance between elements within the buffer.
+		* \param relativeoffset The distance between elements within the buffer.
+		*/
+	 void VertexAttribFormat (GLuint attribindex, GLint size, GLenum type,
+														GLboolean normalized, GLuint relativeoffset)
+	 {
+		 VertexArrayVertexAttribFormatEXT (obj, attribindex, size, type,
+																			 normalized, relativeoffset);
+		 CheckError ();
+	 }
+	 /** Specify vertex format.
+		* Specifies the organization of the vertex array.
+		* \param attribindex The generic vertex attribute array being described.
+		* \param size The number of values per vertex that are stored in the array.
+		* \param type The type of the data stored in the array.
+		* \param relativeoffset The distance between elements within the buffer.
+		*/
+	 void VertexAttribIFormat (GLuint attribindex, GLint size, GLenum type,
+														 GLuint relativeoffset)
+	 {
+		 VertexArrayVertexAttribIFormatEXT (obj, attribindex, size, type,
+																				relativeoffset);
+		 CheckError ();
+	 }
+	 /** Specify vertex format.
+		* Specifies the organization of the vertex array.
+		* \param attribindex The generic vertex attribute array being described.
+		* \param size The number of values per vertex that are stored in the array.
+		* \param type The type of the data stored in the array.
+		* \param relativeoffset The distance between elements within the buffer.
+		*/
+	 void VertexAttribLFormat (GLuint attribindex, GLint size, GLenum type,
+														 GLuint relativeoffset)
+	 {
+		 VertexArrayVertexAttribLFormatEXT (obj, attribindex, size, type,
+																				relativeoffset);
+		 CheckError ();
+	 }
+	 /** Set vertex attrib binding.
+		* Associates a vertex attribute and a vertex buffer binding.
+		* \param attribindex The index of the attribute to associate
+		*                    with a vertex buffer binding.
+		* \param bindingindex The index of the vertex buffer binding
+		*                     with which to associate the
+		*                     generic vertex attribute.
+		*/
+	 void VertexAttribBinding (GLuint attribindex, GLuint bindingindex)
+	 {
+		 VertexArrayVertexAttribBindingEXT (obj, attribindex, bindingindex);
+		 CheckError ();
+	 }
+	 /** Set vertex attrib advance rate.
+		* Modifies the rate at which generic vertex attributes advance.
+		* \param bindingindex The index of the binding whose divisor to modify.
+		* \param divisor The new value for the instance step rate to apply.
+		*/
+	 void VertexBindingDivisor (GLuint bindingindex, GLuint divisor)
+	 {
+		 VertexArrayVertexBindingDivisorEXT (obj, bindingindex, divisor);
+		 CheckError ();
+	 }
 	 /**
 		* Return internal object.
 		* Returns the internal OpenGL vertex array object. Use with caution.
