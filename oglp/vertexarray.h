@@ -150,10 +150,10 @@ public:
 		* \param offset The offset of the first element of the buffer.
 		* \param stride The distance between elements within the buffer.
 		*/
-	 void BindVertexBuffer (GLuint bindingindex, GLuint buffer,
+	 void BindVertexBuffer (GLuint bindingindex, const gl::Buffer &buffer,
 													GLintptr offset, GLsizei stride)
 	 {
-		 VertexArrayBindVertexBufferEXT (obj, bindingindex, buffer,
+		 VertexArrayBindVertexBufferEXT (obj, bindingindex, buffer.get (),
 																		 offset, stride);
 		 CheckError ();
 	 }
