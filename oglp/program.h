@@ -156,7 +156,17 @@ public:
 		 if (err == GL_INVALID_ENUM)
 				return false;
 		 if (err != GL_NO_ERROR)
+		 {
+#ifdef OGLP_ERROR_CALLBACK
+			 if (internal::errorcallback)
+					internal::errorcallback (err, ErrorToString (err));
+#endif
+#ifdef OGLP_THROW_EXCEPTION
 				throw Exception (err);
+#else
+				return false;
+#endif
+		 }
 		 Get (GL_LINK_STATUS, &status);
 		 return status;
 	 }

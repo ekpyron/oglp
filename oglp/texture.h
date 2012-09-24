@@ -97,7 +97,7 @@ public:
 		 BindMultiTextureEXT (texunit, target, obj);
 		 CheckError ();
 	 }
-	 /* Bind to an image unit.
+	 /** Bind to an image unit.
 		* Binds a level of a texture to an image unit
 		* \param unit    Specifies the index of the image unit to which
 		*                to bind the texture                
@@ -707,7 +707,17 @@ public:
 		 if (target == GL_TEXTURE_2D_MULTISAMPLE)
 				GetIntegerv (GL_TEXTURE_BINDING_2D_MULTISAMPLE, &previous);
 		 else
+		 {
+#ifdef OGLP_ERROR_CALLBACK
+			 if (internal::errorcallback)
+					internal::errorcallback (GL_INVALID_VALUE, "invalid value");
+#endif
+#ifdef OGLP_THROW_EXCEPTIONS
 				throw Exception (GL_INVALID_VALUE);
+#else
+				return;
+#endif
+		 }
 
 		 BindTexture (target, obj);
 		 TexImage2DMultisample (target, samples, internalFormat, width, height,
@@ -745,7 +755,17 @@ public:
 		 if (target == GL_TEXTURE_2D_MULTISAMPLE_ARRAY)
 				GetIntegerv (GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY, &previous);
 		 else
+		 {
+#ifdef OGLP_ERROR_CALLBACK
+			 if (internal::errorcallback)
+					internal::errorcallback (GL_INVALID_VALUE, "invalid value");
+#endif
+#ifdef OGLP_THROW_EXCEPTIONS
 				throw Exception (GL_INVALID_VALUE);
+#else
+				return;
+#endif
+		 }
 		 
 		 BindTexture (target, obj);
 		 TexImage3DMultisample (target, samples, internalFormat, width, height,

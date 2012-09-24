@@ -195,11 +195,13 @@ public:
 		 GLvoid *ptr;
 		 ptr = MapNamedBufferEXT (obj, access);
 		 CheckError ();
+#ifdef OGLP_THROW_EXCEPTIONS
 		 if (ptr == NULL)
 		 {
 			 throw std::runtime_error ("An OpenGL buffer object could not be "
 																 "mapped to memory.");
 		 }
+#endif
 		 return ptr;
 	 }
 	 /**
@@ -218,11 +220,13 @@ public:
 		 GLvoid *ptr;
 		 ptr = MapNamedBufferRangeEXT (obj, offset, length, access);
 		 CheckError ();
+#ifdef OGLP_THROW_EXCEPTIONS
 		 if (ptr == NULL)
 		 {
 			 throw std::runtime_error ("An OpenGL buffer object could not be "
 																 "mapped to memory");
 		 }
+#endif
 		 return ptr;
 	 }
 	 /**

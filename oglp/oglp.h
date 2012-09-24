@@ -81,10 +81,9 @@ bool IsExtensionSupported (const std::string &name);
 /** Initialize oglp.
  * Initializes oglp.
  * \param callback Callback to obtain OpenGL entry points.
- *
- * Initializes oglp.
+ * \returns Whether oglp was initialized successfully.
  */
-void Init (GetProcAddressCallback callback);
+bool Init (GetProcAddressCallback callback);
 
 } /* namespace oglp */
 

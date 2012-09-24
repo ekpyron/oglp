@@ -23,6 +23,31 @@
 
 namespace oglp {
 
+#ifdef OGLP_ERROR_CALLBACK
+namespace internal {
+ErrorCallback errorcallback;
+} /* namespace internal */
+#endif
+
+const char *ErrorToString (GLenum error)
+{
+		 switch (error)
+		 {
+		 case GL_NO_ERROR:
+			 return "no error";
+		 case GL_INVALID_ENUM:
+			 return "invalid enum";
+		 case GL_INVALID_VALUE:
+			 return "invalid value";
+		 case GL_INVALID_OPERATION:
+			 return "invalid operation";
+		 case GL_OUT_OF_MEMORY:
+			 return "out of memory";
+		 default:
+			 return "unknown";
+		 }
+}
+
 #ifdef _WIN32
 namespace internal {
 /* This workaround falls back to loading symbols
@@ -54,7 +79,7 @@ bool IsExtensionSupported (const std::string &name) {
 	return false;
 }
 
-void Init (GetProcAddressCallback callback) {
+bool Init (GetProcAddressCallback callback) {
 	std::vector<std::string> needed_extensions = {
 		"GL_ARB_separate_shader_objects",
 		"GL_ARB_sampler_objects",
@@ -71,7 +96,19 @@ void Init (GetProcAddressCallback callback) {
 	InitPrototypes (callback);
 #endif
 	if (!GetString || GetString == (PFNGLGETSTRINGPROC) oglp::Unsupported)
+	{
+#ifdef OGLP_ERROR_CALLBACK
+		if (internal::errorcallback)
+		{
+			internal::errorcallback (GL_NO_ERROR, "No entry point for "
+															 "glGetString found.");
+		}
+#endif
+#ifdef OGLP_THROW_EXCEPTIONS
 		 throw std::runtime_error ("No entry point for glGetString found.");
+#endif
+		 return false;
+	}
 
 	version << GetString (GL_VERSION);
 	CheckError ();
@@ -80,12 +117,34 @@ void Init (GetProcAddressCallback callback) {
 	version >> minor;
 
 	if (major < 3)
+	{
+#ifdef OGLP_ERROR_CALLBACK
+		if (internal::errorcallback)
+		{
+			internal::errorcallback (GL_NO_ERROR, "OpenGL version 3.0 or "
+															 "higher is required.");
+		}
+#endif
+#ifdef OGLP_THROW_EXCEPTIONS
 		 throw std::runtime_error ("OpenGL version 3.0 or higher is required.");
+#endif
+		 return false;
+	}
 	for (std::string &extension : needed_extensions)
 	{
 		if (!IsExtensionSupported (extension))
 		{
+#ifdef OGLP_ERROR_CALLBACK
+			if (internal::errorcallback)
+			{
+				internal::errorcallback (GL_NO_ERROR,
+																 (extension + " is required.").c_str ());
+			}
+#endif
+#ifdef OGLP_THROW_EXCEPTIONS
 			throw std::runtime_error (extension + " is required.");
+#endif
+			return false;
 		}
 	}
 }

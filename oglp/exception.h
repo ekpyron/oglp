@@ -22,6 +22,8 @@
 
 namespace oglp {
 
+const char *ErrorToString (GLenum error);
+
 /**
  * Exception class.
  * Wrapper for OpenGL errors.
@@ -40,21 +42,7 @@ public:
 		* \return A string describing the exception.
 		*/
 	 virtual const char *what (void) const throw () {
-		 switch (error)
-		 {
-		 case GL_NO_ERROR:
-			 return "no error";
-		 case GL_INVALID_ENUM:
-			 return "invalid enum";
-		 case GL_INVALID_VALUE:
-			 return "invalid value";
-		 case GL_INVALID_OPERATION:
-			 return "invalid operation";
-		 case GL_OUT_OF_MEMORY:
-			 return "out of memory";
-		 default:
-			 return "unknown";
-		 }
+		 return ErrorToString (error);
 	 }
 private:
 	 /**

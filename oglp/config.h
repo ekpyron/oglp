@@ -17,4 +17,7 @@
 #ifndef OGLP_CONFIG_H
 #define OGLP_CONFIG_H
 
+/*#define OGLP_THROW_EXCEPTIONS*/
+#define OGLP_ERROR_CALLBACK
+
 #endif /* !defined OGLP_CONFIG_H */

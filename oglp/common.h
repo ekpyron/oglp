@@ -23,21 +23,67 @@
 #endif
 #include <glm/glm.hpp>
 #include "glcorew.h"
-#include "exception.h"
-#include <stdexcept>
 #include <sstream>
+#ifdef OGLP_THROW_EXCEPTIONS
+#include <stdexcept>
+#include "exception.h"
+#endif
 
+/** oglp namespace.
+ * This namespace contains all oglp functions and data.
+ * Unless OGLP_NO_NAMESPACE_ALIAS is specified the
+ * namespace gl will be defined as an alias of oglp.
+ */
 namespace oglp {
+
+/** Convert error code to string.
+ * Converts an OpenGL error code to a human readable string.
+ * If error is no valid error code, "unknown" is returned.
+ * \param error The OpenGL error code to convert.
+ * \returns The human readable error string.
+ */
+const char *ErrorToString (GLenum error);
+
+#ifdef OGLP_ERROR_CALLBACK
+/** Error callback.
+ * Callback that receives error codes and messages.
+ * \param err OpenGL error code. If the error was not an OpenGL error
+ *            this is set to GL_NO_ERROR.
+ * \param msg A human readable error message.
+ */
+typedef void (*ErrorCallback) (GLenum err, const char *msg);
+namespace internal {
+extern ErrorCallback errorcallback;
+} /* namespace internal */
+
+/** Set error callback.
+ * Specifies an error callback that is called, if an OpenGL error is
+ * detected.
+ * \param cb The error callback to use.
+ */
+inline void SetErrorCallback (ErrorCallback cb) {
+	internal::errorcallback = cb;
+}
+#endif
 
 /**
  * Check for an OpenGL error.
- * Checks for an OpenGL error and throws an Exception if one occurred.
+ * Checks for an OpenGL error and calls the error callback or
+ * throws an Exception if one occurred, depending on whether
+ * OGLP_ERROR_CALLBACK is defined and a callback was set with
+ * SetErrorCallback or OGLP_THROW_EXCEPTIONS is defined.
  */
 inline void CheckError (void) {
 	GLenum err;
 	err = GetError ();
+#ifdef OGLP_ERROR_CALLBACK
+	if (err != GL_NO_ERROR && internal::errorcallback)
+		 internal::errorcallback (err, ErrorToString (err));
+#endif
+#ifdef OGLP_THROW_EXCEPTIONS
 	if (err != GL_NO_ERROR)
 		throw Exception (err);
+#endif
 }
 
 } /* namespace oglp */
