@@ -159,7 +159,8 @@ public:
 		 {
 #ifdef OGLP_ERROR_CALLBACK
 			 if (internal::errorcallback)
-					internal::errorcallback (err, ErrorToString (err));
+					internal::errorcallback (err, ErrorToString (err),
+																	 internal::errorcallback_userdata);
 #endif
 #ifdef OGLP_THROW_EXCEPTION
 				throw Exception (err);

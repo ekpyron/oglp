@@ -50,19 +50,23 @@ const char *ErrorToString (GLenum error);
  * \param err OpenGL error code. If the error was not an OpenGL error
  *            this is set to GL_NO_ERROR.
  * \param msg A human readable error message.
+ * \param userdata The user pointer as specified with SetErrorCallback.
  */
-typedef void (*ErrorCallback) (GLenum err, const char *msg);
+typedef void (*ErrorCallback) (GLenum err, const char *msg, void *userdata);
 namespace internal {
 extern ErrorCallback errorcallback;
+extern void *errorcallback_userdata;
 } /* namespace internal */
 
 /** Set error callback.
  * Specifies an error callback that is called, if an OpenGL error is
  * detected.
  * \param cb The error callback to use.
+ * \param userdata A user pointer that is passed on to the error callback.
  */
-inline void SetErrorCallback (ErrorCallback cb) {
+inline void SetErrorCallback (ErrorCallback cb, void *userdata) {
 	internal::errorcallback = cb;
+	internal::errorcallback_userdata = userdata;
 }
 #endif
 
@@ -78,7 +82,8 @@ inline void CheckError (void) {
 	err = GetError ();
 #ifdef OGLP_ERROR_CALLBACK
 	if (err != GL_NO_ERROR && internal::errorcallback)
-		 internal::errorcallback (err, ErrorToString (err));
+		 internal::errorcallback (err, ErrorToString (err),
+															internal::errorcallback_userdata);
 #endif
 #ifdef OGLP_THROW_EXCEPTIONS
 	if (err != GL_NO_ERROR)

@@ -710,7 +710,8 @@ public:
 		 {
 #ifdef OGLP_ERROR_CALLBACK
 			 if (internal::errorcallback)
-					internal::errorcallback (GL_INVALID_VALUE, "invalid value");
+					internal::errorcallback (GL_INVALID_VALUE, "invalid value",
+																	 internal::errorcallback_userdata);
 #endif
 #ifdef OGLP_THROW_EXCEPTIONS
 				throw Exception (GL_INVALID_VALUE);
@@ -758,7 +759,8 @@ public:
 		 {
 #ifdef OGLP_ERROR_CALLBACK
 			 if (internal::errorcallback)
-					internal::errorcallback (GL_INVALID_VALUE, "invalid value");
+					internal::errorcallback (GL_INVALID_VALUE, "invalid value",
+																	 internal::errorcallback_userdata);
 #endif
 #ifdef OGLP_THROW_EXCEPTIONS
 				throw Exception (GL_INVALID_VALUE);

@@ -25,7 +25,8 @@ namespace oglp {
 
 #ifdef OGLP_ERROR_CALLBACK
 namespace internal {
-ErrorCallback errorcallback;
+ErrorCallback errorcallback = NULL;
+void *errorcallback_userdata = NULL;
 } /* namespace internal */
 #endif
 
@@ -101,7 +102,8 @@ bool Init (GetProcAddressCallback callback) {
 		if (internal::errorcallback)
 		{
 			internal::errorcallback (GL_NO_ERROR, "No entry point for "
-															 "glGetString found.");
+															 "glGetString found.",
+															 internal::errorcallback_userdata);
 		}
 #endif
 #ifdef OGLP_THROW_EXCEPTIONS
@@ -122,7 +124,8 @@ bool Init (GetProcAddressCallback callback) {
 		if (internal::errorcallback)
 		{
 			internal::errorcallback (GL_NO_ERROR, "OpenGL version 3.0 or "
-															 "higher is required.");
+															 "higher is required.",
+															 internal::errorcallback_userdata);
 		}
 #endif
 #ifdef OGLP_THROW_EXCEPTIONS
@@ -138,7 +141,8 @@ bool Init (GetProcAddressCallback callback) {
 			if (internal::errorcallback)
 			{
 				internal::errorcallback (GL_NO_ERROR,
-																 (extension + " is required.").c_str ());
+																 (extension + " is required.").c_str (),
+																 internal::errorcallback_userdata);
 			}
 #endif
 #ifdef OGLP_THROW_EXCEPTIONS
