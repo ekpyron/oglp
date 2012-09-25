@@ -151,6 +151,7 @@ bool Init (GetProcAddressCallback callback) {
 			return false;
 		}
 	}
+	return true;
 }
 
 } /* namespace oglp */
