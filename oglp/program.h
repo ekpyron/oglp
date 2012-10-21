@@ -419,9 +419,9 @@ public:
 		*                       receive the indices of the uniforms.
 		*/
 	 void GetUniformIndices (GLsizei uniformCount, const char **uniformNames,
-													 GLuint **uniformIndices) const
+													 GLuint *uniformIndices) const
 	 {
-		 GetUniformIndices (obj, uniformCount, uniformNames, uniformIndices);
+		 oglp::GetUniformIndices (obj, uniformCount, uniformNames, uniformIndices);
 		 CheckError ();
 	 }
 	 /** Get information about active uniform variables.
@@ -441,7 +441,7 @@ public:
 		*               which are to receive the value of pname for each uniform
 		*               in uniformIndices.
 		*/
-	 void GetActiveUniforms (GLsizei uniformCount, const GLuint uniformIndices,
+	 void GetActiveUniforms (GLsizei uniformCount, const GLuint *uniformIndices,
 													 GLenum pname, GLint *params) const
 	 {
 		 GetActiveUniformsiv (obj, uniformCount, uniformIndices, pname, params);
