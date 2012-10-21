@@ -26,6 +26,7 @@
 #include "programpipeline.h"
 #include "program.h"
 #include "uniform.h"
+#include "uniformblock.h"
 #include "smartuniform.h"
 #include "shader.h"
 #include "sampler.h"

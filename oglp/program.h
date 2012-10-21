@@ -19,6 +19,7 @@
 
 #include "common.h"
 #include "uniform.h"
+#include "uniformblock.h"
 #include "shader.h"
 #include <string>
 #include <vector>
@@ -349,6 +350,40 @@ public:
 		 oglp::GetActiveSubroutineName (obj, shadertype, index, len, NULL, &buf[0]);
 		 CheckError ();
 		 return std::string (&buf[0]);
+	 }
+   /** Get uniform block index.
+		* Retrieve the index of a named uniform block.
+		* \param uniformBlockName Specifies the name of the uniform block
+		*                         whose index to retrieve.
+		* \returns The index of the uniform block.
+		*/
+	 GLuint GetUniformBlockIndex (const std::string &uniformBlockName) const {
+		 GLuint idx = GetUniformBlockIndex (uniformBlockName.c_str ());
+		 CheckError ();
+		 return idx;
+	 }
+	 /** Get uniform block.
+		* Retrieves a UniformBlock wrapper of a named uniform block.
+		* \param uniformBlockName Specifies the name of the uniform block
+		*                         for which to receive a wrapper.
+		* \returns The UniformBlock wrapper.
+		*/
+	 UniformBlock GetUniformBlock (const std::string &uniformBlockName) const {
+		 return UniformBlock (obj, GetUniformBlockIndex (uniformBlockName));
+	 }
+	 /** Query information about an active uniform block.
+		* Queries information about an active uniform block.
+		* \param uniformBlockIndex Specifies the index of the uniform block
+		*                          within program.
+		* \param pname Specifies the name of the parameter to query.
+		* \param params Specifies the address of a variable to receive
+		*               the result of the query.
+		*/
+	 void GetActiveUniformBlock (GLuint uniformBlockIndex, GLenum pname,
+															 GLint *params) const
+	 {
+		 GetActiveUniformBlockiv (obj, uniformBlockIndex, pname, params);
+		 CheckError ();
 	 }
 	 /**
 		* Get shader stage properties.
