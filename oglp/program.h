@@ -408,6 +408,45 @@ public:
 		 GetProgramStageiv (obj, shadertype, pname, values);
 		 CheckError ();
 	 }
+	 /** Get uniform indices.
+		* Retrieves indices from a named uniform block.
+		* \param uniformCount Specifies the number of uniforms
+		*                     whose indices to query.
+		* \param uniformNames Specifies the address of an array of pointers to
+		*                     buffers containing the names of
+		*                     the queried uniforms.
+		* \param uniformIndices Specifies the address of an array that will
+		*                       receive the indices of the uniforms.
+		*/
+	 void GetUniformIndices (GLsizei uniformCount, const char **uniformNames,
+													 GLuint **uniformIndices) const
+	 {
+		 GetUniformIndices (obj, uniformCount, uniformNames, uniformIndices);
+		 CheckError ();
+	 }
+	 /** Get information about active uniform variables.
+		* Returns information about several active uniform variables
+		* for the specified program object.
+		* \param uniformCount Specifies both the number of elements in
+		*                     the array of indices uniformIndices and
+		*                     the number of parameters written to params upon
+		*                     successful return.
+		* \param uniformIndices Specifies the address of an array of uniformCount
+		*                       integers containing the indices of uniforms within
+		*                       program whose parameter pname pname.
+		* \param pname Specifies the property of the each uniform in
+		*              uniformIndices that should be written into the
+		*              corresponding element of params.
+		* \param params Specifies the address of an array of uniformCount integers
+		*               which are to receive the value of pname for each uniform
+		*               in uniformIndices.
+		*/
+	 void GetActiveUniforms (GLsizei uniformCount, const GLuint uniformIndices,
+													 GLenum pname, GLint *params) const
+	 {
+		 GetActiveUniformsiv (obj, uniformCount, uniformIndices, pname, params);
+		 CheckError ();
+	 }
 	 /** 
 		* Obtain a Uniform location.
 		* Obtains the Uniform location of a uniform variable
