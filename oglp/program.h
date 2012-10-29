@@ -358,7 +358,7 @@ public:
 		* \returns The index of the uniform block.
 		*/
 	 GLuint GetUniformBlockIndex (const std::string &uniformBlockName) const {
-		 GLuint idx = GetUniformBlockIndex (uniformBlockName.c_str ());
+		 GLuint idx = oglp::GetUniformBlockIndex (obj, uniformBlockName.c_str ());
 		 CheckError ();
 		 return idx;
 	 }

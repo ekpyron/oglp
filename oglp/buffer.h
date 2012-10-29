@@ -239,6 +239,18 @@ public:
 		 CheckError ();
 	 }
 	 /**
+		* Flush mapped buffer range.
+		* Indicates modifications to a range of a mapped buffer.
+		* \param offset Specifies the start of the buffer subrange,
+		*               in basic machine units.
+		* \param length Specifies the length of the buffer subrange,
+		*               in basic machine units.
+		*/
+	 void FlushMappedRange (GLintptr offset, GLsizeiptr length) const {
+		 FlushMappedNamedBufferRangeEXT (obj, offset, length);
+		 CheckError ();
+	 }
+	 /**
 		* Fill a buffer object.
 		* Fill the data store of the internal OpenGL buffer object
 		* with a fixed value
