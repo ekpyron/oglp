@@ -856,7 +856,7 @@ public:
 		*               - GL_TEXTURE_2D_ARRAY
 		*               - GL_TEXTURE_CUBE_MAP
 		*/
-	 void GenerateMipmap (GLenum target) {
+	 void GenerateMipmap (GLenum target) const {
 		 GenerateTextureMipmapEXT (obj, target);
 		 CheckError ();
 	 }
