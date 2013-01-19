@@ -152,7 +152,7 @@ public:
 									 GLenum internalformat,
 									 GLsizei width, GLsizei height)
 	 {
-		 TextureStorage2D (obj, target, levels, internalformat, width, height);
+		 TextureStorage2DEXT (obj, target, levels, internalformat, width, height);
 		 CheckError ();
 	 }
 	 /**
@@ -175,8 +175,8 @@ public:
 									 GLenum internalformat, GLsizei width,
 									 GLsizei height, GLsizei depth)
 	 {
-		 TextureStorage3D (obj, target, levels, internalformat,
-											 width, height, depth);
+		 TextureStorage3DEXT (obj, target, levels, internalformat,
+													width, height, depth);
 		 CheckError ();
 	 }
 	 /**
