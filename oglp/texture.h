@@ -130,7 +130,7 @@ public:
 	 void Storage1D (GLenum target, GLsizei levels,
 									 GLenum internalformat, GLsizei width)
 	 {
-		 TexStorage1D (target, levels, internalformat, width);
+		 TextureStorage1DEXT (obj, target, levels, internalformat, width);
 		 CheckError ();
 	 }
 	 /**
@@ -152,7 +152,7 @@ public:
 									 GLenum internalformat,
 									 GLsizei width, GLsizei height)
 	 {
-		 TexStorage2D (target, levels, internalformat, width, height);
+		 TextureStorage2D (obj, target, levels, internalformat, width, height);
 		 CheckError ();
 	 }
 	 /**
@@ -175,7 +175,8 @@ public:
 									 GLenum internalformat, GLsizei width,
 									 GLsizei height, GLsizei depth)
 	 {
-		 TexStorage3D (target, levels, internalformat, width, height, depth);
+		 TextureStorage3D (obj, target, levels, internalformat,
+											 width, height, depth);
 		 CheckError ();
 	 }
 	 /**
