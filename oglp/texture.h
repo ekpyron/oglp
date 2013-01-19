@@ -116,6 +116,68 @@ public:
 		 BindImageTexture (unit, obj, level, layered, layer, access, format);
 		 CheckError ();
 	 }
+	 /** Specify one-dimensional texture storage.
+		* Simultaneously specify storage for all levels of a
+		* one-dimensional texture.
+		* \param target Specify the target of the operation.
+		*               target must be either
+		*               GL_TEXTURE_1D or GL_PROXY_TEXTURE_1D.
+		* \param levels Specify the number of texture levels.
+		* \param internalformat Specifies the sized internal format to
+		*                       be used to store texture image data.
+		* \param width Specifies the width of the texture, in texels.
+		*/
+	 void Storage1D (GLenum target, GLsizei levels,
+									 GLenum internalformat, GLsizei width)
+	 {
+		 TexStorage1D (target, levels, internalformat, width);
+		 CheckError ();
+	 }
+	 /**
+		* Specify two-dimensional texture storage.
+		* Simultaneously specify storage for all levels of a
+		* two-dimensional or one-dimensional array texture.
+		* \param target Specify the target of the operation.
+		*               target must be one of
+		*               GL_TEXTURE_2D, GL_PROXY_TEXTURE_2D, GL_TEXTURE_1D_ARRAY,
+		*               GL_PROXY_TEXTURE_1D_ARRAY, GL_TEXTURE_RECTANGLE,
+		*               GL_PROXY_TEXTURE_RECTANGLE, or GL_PROXY_TEXTURE_CUBE_MAP.
+		* \param levels Specify the number of texture levels.
+		* \param internalformat Specifies the sized internal format to
+		*                       be used to store texture image data.
+		* \param width Specifies the width of the texture, in texels.
+		* \param height Specifies the height of the texture, in texels.
+		*/
+	 void Storage2D (GLenum target, GLsizei levels,
+									 GLenum internalformat,
+									 GLsizei width, GLsizei height)
+	 {
+		 TexStorage2D (target, levels, internalformat, width, height);
+		 CheckError ();
+	 }
+	 /**
+		* Specify three-dimensional texture storage.
+		* Simultaneously specify storage for all levels of a
+		* three-dimensional, two-dimensional array or cube-map array texture.
+		* \param target Specify the target of the operation.
+		*               target must be one of
+		*               GL_TEXTURE_2D, GL_PROXY_TEXTURE_2D, GL_TEXTURE_1D_ARRAY,
+		*               GL_PROXY_TEXTURE_1D_ARRAY, GL_TEXTURE_RECTANGLE,
+		*               GL_PROXY_TEXTURE_RECTANGLE, or GL_PROXY_TEXTURE_CUBE_MAP.
+		* \param levels Specify the number of texture levels.
+		* \param internalformat Specifies the sized internal format to
+		*                       be used to store texture image data.
+		* \param width Specifies the width of the texture, in texels.
+		* \param height Specifies the height of the texture, in texels.
+		* \param depth Specifies the depth of the texture, in texels.
+		*/
+	 void Storage3D (GLenum target, GLsizei levels,
+									 GLenum internalformat, GLsizei width,
+									 GLsizei height, GLsizei depth)
+	 {
+		 TexStorage3D (target, levels, internalformat, width, height, depth);
+		 CheckError ();
+	 }
 	 /**
 		* Specified a one-dimensional texture Image.
 		* Loads a one-dimensional texture image from memory to the
