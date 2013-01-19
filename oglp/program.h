@@ -20,6 +20,7 @@
 #include "common.h"
 #include "uniform.h"
 #include "uniformblock.h"
+#include "programresource.h"
 #include "shader.h"
 #include <string>
 #include <vector>
@@ -350,6 +351,19 @@ public:
 		 oglp::GetActiveSubroutineName (obj, shadertype, index, len, NULL, &buf[0]);
 		 CheckError ();
 		 return std::string (&buf[0]);
+	 }
+	 /** Get program resource.
+		* Retrieves a ProgramResource wrapper of a program resource.
+		* \param interface A token identifying the interface within
+		*                  program containing the resource named name.
+		* \param name The name of the resource to query the index of.
+		* \returns The ProgramResource wrapper for the program resource.
+		*/
+	 ProgramResource GetResource (GLenum interface,
+																const std::string &name) const {
+		 return ProgramResource (obj, interface,
+														 GetProgramResourceIndex (obj, interface,
+																											name.c_str ()));
 	 }
    /** Get uniform block index.
 		* Retrieve the index of a named uniform block.

@@ -164,8 +164,8 @@ public:
    /**
 		* Swap contents.
 		* Swaps the contents of the UniformBlock object with another.
-		* \param program Object with which to swap the contents
-		*                of the UniformBlock.
+		* \param u Object with which to swap the contents
+		*          of the UniformBlock.
 		*/
 	 void swap (UniformBlock &u) {
 		 std::swap (program, u.program);

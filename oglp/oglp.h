@@ -25,6 +25,7 @@
 #include "vertexarray.h"
 #include "programpipeline.h"
 #include "program.h"
+#include "programresource.h"
 #include "uniform.h"
 #include "uniformblock.h"
 #include "smartuniform.h"
