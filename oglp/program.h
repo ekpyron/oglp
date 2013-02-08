@@ -354,15 +354,15 @@ public:
 	 }
 	 /** Get program resource.
 		* Retrieves a ProgramResource wrapper of a program resource.
-		* \param interface A token identifying the interface within
-		*                  program containing the resource named name.
+		* \param rsrcinterface A token identifying the interface within
+		*                      program containing the resource named name.
 		* \param name The name of the resource to query the index of.
 		* \returns The ProgramResource wrapper for the program resource.
 		*/
-	 ProgramResource GetResource (GLenum interface,
+	 ProgramResource GetResource (GLenum rsrcinterface,
 																const std::string &name) const {
-		 return ProgramResource (obj, interface,
-														 GetProgramResourceIndex (obj, interface,
+		 return ProgramResource (obj, rsrcinterface,
+														 GetProgramResourceIndex (obj, rsrcinterface,
 																											name.c_str ()));
 	 }
    /** Get uniform block index.

@@ -36,7 +36,7 @@ public:
 		*/
 	 ProgramResource (void) {
 		 program = 0;
-		 interface = 0;
+		 rsrcinterface = 0;
 		 idx = 0;
 	 }
 	 /**
@@ -46,9 +46,9 @@ public:
 		* \param r The ProgramResource object to move.
 		*/
 	 ProgramResource (ProgramResource &&r)
-		 : program (r.program), interface (r.interface), idx (r.idx) {
+		 : program (r.program), rsrcinterface (r.rsrcinterface), idx (r.idx) {
 		 r.program = 0;
-		 r.interface = 0;
+		 r.rsrcinterface = 0;
 		 r.idx = 0;
 	 }
 	 /**
@@ -63,7 +63,7 @@ public:
 		* \param r The ProgramResource object to clone.
 		*/
 	 ProgramResource (const ProgramResource &r)
-		 : program (r.program), interface (r.interface), idx (r.idx) {
+		 : program (r.program), rsrcinterface (r.rsrcinterface), idx (r.idx) {
 	 }
 	 /**
 		* Move assignment.
@@ -74,10 +74,10 @@ public:
 		*/
 	 ProgramResource &operator= (ProgramResource &&r) {
 		 program = r.program;
-		 interface = r.interface;
+		 rsrcinterface = r.rsrcinterface;
 		 idx = r.idx;
 		 r.program = 0;
-		 r.interface = 0;
+		 r.rsrcinterface = 0;
 		 r.idx = 0;
 		 return *this;
 	 }
@@ -89,7 +89,7 @@ public:
 		*/
 	 ProgramResource &operator= (const ProgramResource &r) {
 		 program = r.program;
-		 interface = r.interface;
+		 rsrcinterface = r.rsrcinterface;
 		 idx = r.idx;
 		 return *this;
 	 }
@@ -105,7 +105,7 @@ public:
 		*/
 	 void Get (GLsizei propCount, const GLenum *props, GLsizei bufSize,
 						 GLsizei *length, GLint *params) const {
-		 GetProgramResourceiv (program, interface, idx, propCount, props,
+		 GetProgramResourceiv (program, rsrcinterface, idx, propCount, props,
 													 bufSize, length, params);
 		 CheckError ();
 	 }
@@ -116,7 +116,7 @@ public:
 		*/
 	 GLint GetProperty (GLenum prop) const {
 		 GLint value;
-		 GetProgramResourceiv (program, interface, idx, 1, &prop,
+		 GetProgramResourceiv (program, rsrcinterface, idx, 1, &prop,
 													 1, NULL, &value);
 		 CheckError ();
 		 return value;
@@ -129,7 +129,7 @@ public:
 	 std::string GetName (void) const {
 		 std::vector<GLchar> name;
 		 name.resize (GetProperty (GL_NAME_LENGTH));
-		 GetProgramResourceName (program, interface, idx, name.size (),
+		 GetProgramResourceName (program, rsrcinterface, idx, name.size (),
 														 NULL, name.data ());
 		 CheckError ();
 		 return std::string (name.begin (), name.end ());
@@ -148,7 +148,7 @@ public:
 		* \returns The internal OpenGL program interface.
 		*/
 	 GLenum getInterface (void) const  {
-		 return interface;
+		 return rsrcinterface;
 	 }
 	 /**
 		* Return internal block index.
@@ -166,7 +166,7 @@ public:
 		*/
 	 void swap (ProgramResource &r) {
 		 std::swap (program, r.program);
-		 std::swap (interface, r.interface);
+		 std::swap (rsrcinterface, r.rsrcinterface);
 		 std::swap (idx, r.idx);
 	 }
 private:
@@ -174,11 +174,11 @@ private:
 		* Private constructor.
 		* Private constructor for internal creation from a Program object.
 		* \param _program Internal OpenGL shader program.
-		* \param _interface Internal OpenGL program interface.
+		* \param _rsrcinterface Internal OpenGL program interface.
 		* \param _idx Internal OpenGL program resource index.
 		*/
-	 ProgramResource (GLuint _program, GLuint _interface, GLuint _idx)
-		 : program (program), interface (_interface), idx (_idx) {
+	 ProgramResource (GLuint _program, GLuint _rsrcinterface, GLuint _idx)
+		 : program (program), rsrcinterface (_rsrcinterface), idx (_idx) {
 	 }
 	 /**
 		* internal OpenGL shader program
@@ -187,7 +187,7 @@ private:
 	 /**
 		* internal OpenGL program interface
 		*/
-	 GLenum interface;
+	 GLenum rsrcinterface;
 	 /**
 		* internal OpenGL program resource index
 		*/
