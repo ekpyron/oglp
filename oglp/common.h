@@ -18,11 +18,11 @@
 #define OGLP_COMMON_H
 
 #include "config.h"
+#include "glcorew.h"
 #ifdef _WIN32
 #include <windows.h>
 #endif
 #include <glm/glm.hpp>
-#include "glcorew.h"
 #include <sstream>
 #ifdef OGLP_THROW_EXCEPTIONS
 #include <stdexcept>
