@@ -178,7 +178,7 @@ private:
 		* \param _idx Internal OpenGL program resource index.
 		*/
 	 ProgramResource (GLuint _program, GLuint _rsrcinterface, GLuint _idx)
-		 : program (program), rsrcinterface (_rsrcinterface), idx (_idx) {
+		 : program (_program), rsrcinterface (_rsrcinterface), idx (_idx) {
 	 }
 	 /**
 		* internal OpenGL shader program
