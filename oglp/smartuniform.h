@@ -19,6 +19,7 @@
 
 #include "common.h"
 #include <vector>
+#include <iostream>
 
 namespace oglp {
 
@@ -123,6 +124,7 @@ inline SmartUniform<T> &SmartUniform<T>::operator= (const SmartUniform<T> &obj)
 {
 	uniform = obj.uniform;
 	value = obj.value;
+	return *this;
 }
 
 template<typename T>
