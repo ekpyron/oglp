@@ -100,8 +100,24 @@ public:
 		*               GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, or
 		*               GL_TIME_ELAPSED.
 		*/
-	 void Begin (GLenum target) {
+	 void Begin (GLenum target) const {
 		 BeginQuery (target, obj);
+		 CheckError ();
+	 }
+	 /**
+		* Delimits the boundaries of a query object.
+		* Delimits the boundaries of the internal OpenGL query object.
+		* \param target Specifies the target type of query object established
+		*               between glBeginQuery and the subsequent glEndQuery.
+		*               The symbolic constant must be one of GL_SAMPLES_PASSED,
+		*               GL_ANY_SAMPLES_PASSED, GL_PRIMITIVES_GENERATED,
+		*               GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, or
+		*               GL_TIME_ELAPSED.
+		* \param index Specifies the index of the query target upon which
+		*              to begin the query.
+		*/
+	 void BeginIndexed (GLenum target, GLuint index) const {
+		 BeginQueryIndexed (target, index, obj);
 		 CheckError ();
 	 }
 	 /**
@@ -115,6 +131,21 @@ public:
 		*/
 	 static void End (GLenum target) {
 		 EndQuery (target);
+		 CheckError ();
+	 }
+	 /**
+		* Delimits the boundaries of a query object.
+		* Delimits the boundaries of the internal OpenGL query object.
+		* \param target Specifies the target type of query object to be concluded.
+		*               The symbolic constant must be one of GL_SAMPLES_PASSED,
+		*               GL_ANY_SAMPLES_PASSED, GL_PRIMITIVES_GENERATED,
+		*               GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, or
+		*               GL_TIME_ELAPSED.
+		* \param index Specifies the index of the query target upon which
+		*              to end the query.
+		*/
+	 static void EndIndexed (GLenum target, GLuint index) {
+		 EndQueryIndexed (target, index);
 		 CheckError ();
 	 }
 	 /**
@@ -170,11 +201,28 @@ public:
 		* Returns whether the internal OpenGL query object is valid.
 		* \return whether the internal OpenGL query object is valid.
 		*/
-	 bool IsQuery (void) {
+	 bool IsQuery (void) const {
 		 bool result;
 		 result = oglp::IsQuery (obj);
 		 CheckError ();
 		 return result;
+	 }
+	 /**
+		* Start conditional rendering.
+		* Starts conditional rendering.
+		* \param mode Specifies how glBeginConditionalRender interprets
+		*             the results of the occlusion query.
+		*/
+	 void BeginConditionalRender (GLenum mode) const {
+		 oglp::BeginConditionalRender (obj, mode);
+		 CheckError ();
+	 }
+	 /**
+		* End conditional rendering.
+		* Ends conditional rendering.
+		*/
+	 static void EndConditionalRender (void) {
+		 oglp::EndConditionalRender ();
 	 }
 private:
 	 /**

@@ -33,6 +33,7 @@
 #include "sampler.h"
 #include "texture.h"
 #include "query.h"
+#include "conditionalrender.h"
 
 namespace oglp {
 
