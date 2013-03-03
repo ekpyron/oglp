@@ -476,6 +476,62 @@ public:
 		 oglp::BindAttribLocation (obj, index, name);
 		 CheckError ();
 	 }
+	 /**
+		* Bind frag data location.
+		* Binds a user-defined varying out variable to a fragment shader
+		* color number.
+		* \param colorNumber The color number to bind the user-defined varying
+		*                    out variable to
+		* \param name The name of the user-defined varying out variable
+		*             whose binding to modify.
+		*/
+	 void BindFragDataLocation (GLuint colorNumber, const char *name) const {
+		 oglp::BindFragDataLocation (obj, colorNumber, name);
+		 CheckError ();
+	 }
+	 /**
+		* Bind frag data location.
+		* Binds a user-defined varying out variable to a fragment shader
+		* color number and index.
+		* \param colorNumber The color number to bind the user-defined varying
+		*                    out variable to
+		* \param name The name of the user-defined varying out variable
+		*             whose binding to modify.
+		* \param index The index of the color input to bind the user-defined
+		*               varying out variable to.
+		*/
+	 void BindFragDataLocationIndexed (GLuint colorNumber,
+																		 GLuint index,
+																		 const char *name) const {
+		 oglp::BindFragDataLocationIndexed (obj, colorNumber, index, name);
+		 CheckError ();
+	 }
+	 /**
+		* Get frag data location.
+		* Queries the bindings of color numbers to user-defined varying
+		* out variables
+		* \param name The name of the user-defined varying out variable
+		*             whose binding to query.
+		*/
+	 GLint GetFragDataLocation (const char *name) const {
+		 GLint result;
+		 result = oglp::GetFragDataLocation (obj, name);
+		 CheckError ();
+		 return result;
+	 }
+	 /**
+		* Get frad data index.
+		* Queries the bindings of color indices to user-defined varying
+		* out variables.
+		* \param name The name of the user-defined varying out variable
+		*             whose index to query.
+		*/
+	 GLint GetFragDataIndex (const char *name) const {
+		 GLint result;
+		 result = oglp::GetFragDataIndex (obj, name);
+		 CheckError ();
+		 return result;
+	 }
 	 /** 
 		* Obtain a Uniform location.
 		* Obtains the Uniform location of a uniform variable
