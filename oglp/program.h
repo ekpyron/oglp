@@ -461,6 +461,21 @@ public:
 		 GetActiveUniformsiv (obj, uniformCount, uniformIndices, pname, params);
 		 CheckError ();
 	 }
+	 /**
+		* Bind an attrib location.
+		* Associates a generic vertex attribute index
+		* with a named attribute variable.
+		* \param index Specifies the index of the generic vertex
+		*              attribute to be bound.
+		* \param name Specifies a null terminated string containing
+		*             the name of the vertex shader attribute variable to
+		*             which index is to be
+		*             bound.
+		*/
+	 void BindAttribLocation (GLuint index, const GLchar *name) const {
+		 oglp::BindAttribLocation (obj, index, name);
+		 CheckError ();
+	 }
 	 /** 
 		* Obtain a Uniform location.
 		* Obtains the Uniform location of a uniform variable
