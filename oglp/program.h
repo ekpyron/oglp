@@ -78,6 +78,7 @@ public:
 		 obj = p.obj;
 		 p.obj = CreateProgram ();
 		 CheckError ();
+		 return *this;
 	 }
 	 /**
 		* Deleted copy assignment.
