@@ -10,3 +10,10 @@ without any warranty.
 oglp is a C++ wrapper around OpenGL.
 
 TODO: write a readme file.
+
+COPYRIGHT NOTICE:
+
+A major part of the documentation is taken from the opengl man pages.
+Those man pages are licensed under the SGI Free Software B License.
+For details, see http://oss.sgi.com/projects/FreeB/. For the original
+opengl man pages, see http://www.opengl.org/sdk/docs/man/.
