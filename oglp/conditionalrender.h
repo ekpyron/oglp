@@ -69,4 +69,4 @@ public:
 
 } /* namespace oglp */
 
-#endif /* !defined OGLP_QUERY_H */
+#endif /* !defined OGLP_CONDITIONALRENDER_H */
