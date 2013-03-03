@@ -34,6 +34,7 @@
 #include "texture.h"
 #include "query.h"
 #include "conditionalrender.h"
+#include "transformfeedback.h"
 
 namespace oglp {
 
