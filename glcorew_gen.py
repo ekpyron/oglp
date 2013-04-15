@@ -16,12 +16,6 @@ import re
 import os
 import urllib.request, urllib.error, urllib.parse
 
-# Download glcorearb.h
-if not os.path.exists('oglp/glcorearb.h'):
-    web = urllib.request.urlopen('http://www.opengl.org/registry/api/glcorearb.h')
-    with open('oglp/glcorearb.h', 'wb') as f:
-        f.writelines(web.readlines())
-
 # Parse function names from glcorearb.h
 procs = []
 p = re.compile(r'GLAPI.*APIENTRY\s+(\w+)')
@@ -30,12 +24,22 @@ with open('oglp/glcorearb.h', 'r') as f:
         m = p.match(line)
         if m:
             procs.append(m.group(1))
+
+# Parse function names from EXT_direct_state_access.h
+dsa_procs = []
+with open('oglp/ext/EXT_direct_state_access.h', 'r') as f:
+	for line in f:
+		m = p.match (line);
+		if m:
+			dsa_procs.append(m.group(1))
+
 # Parse function names from glcoreext.h
-with open('oglp/glcoreext.h', 'r') as f:
-    for line in f:
-        m = p.match (line)
-        if m:
-            procs.append(m.group(1))
+for filename in ['NV_explicit_multisample.h', 'NVX_gpu_memory_info.h']:
+	with open(os.path.join('oglp/ext',filename), 'r') as f:
+		for line in f:
+			m = p.match (line)
+			if m:
+				procs.append(m.group(1))
 
 def proc_t(proc):
     return { 'p': proc,
@@ -70,6 +74,8 @@ GLAPI int APIENTRY Unsupported (...);
 ''')
     for proc in procs:
         f.write('extern %(p_t)s %(p_s)s;\n' % proc_t(proc))
+    for proc in dsa_procs:
+        f.write('extern %(p_t)s %(p_s)s;\n' % proc_t(proc))
     f.write(r'''
 
 } /* namespace oglp */
@@ -93,6 +99,7 @@ with open('oglp/glcorew.cxx', 'wt') as f:
 #define OGLP_GLCOREW_CXX
 
 #include "glcorew.h"
+#include "dsawrap.cxx"
 #include <stdexcept>
 
 namespace oglp {
@@ -101,6 +108,9 @@ namespace oglp {
     for proc in procs:
         f.write('%(p_t)s %(p_s)s =\n'
 		'    (%(p_t)s) Unsupported;\n' % proc_t(proc))
+    for proc in dsa_procs:
+        f.write('%(p_t)s %(p_s)s =\n'
+		'    (%(p_t)s) dsawrap::%(p_s)s;\n' % proc_t(proc))
     f.write(r'''
 
 GLAPI int APIENTRY Unsupported (...)
@@ -114,6 +124,10 @@ void InitPrototypes (GetProcAddressCallback getprocaddress)
 
 ''')
     for proc in procs:
+        f.write('    ptr = getprocaddress ("%(p)s");\n'
+		'    if (ptr) %(p_s)s = (%(p_t)s) ptr;\n'
+                % proc_t(proc))
+    for proc in dsa_procs:
         f.write('    ptr = getprocaddress ("%(p)s");\n'
 		'    if (ptr) %(p_s)s = (%(p_t)s) ptr;\n'
                 % proc_t(proc))
