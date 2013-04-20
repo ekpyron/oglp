@@ -51,12 +51,16 @@ namespace oglp {
  * Furthermore OGLP aimes to be as close to the underlying OpenGL API
  * as possible and to produce the least possible overhead.
  * \subsection Requirements
- * As OGLP is not designed to be backward compatible, it depends on the
- * presence of modern technologies. Thus OpenGL 3.0+ is an requirement, 
- * as well as some common extensions namely GL_EXT_direct_state_access,
- * GL_ARB_separable_shader_objects and GL_ARB_sampler_objects.
- * The former is well supported by established graphics card manufactors
- * and the latters are in core OpenGL 4.
+ * As OGLP is not designed to be backward compatible, but it depends on the
+ * presence of modern technologies. Thus OpenGL 3.0+ is an requirement.
+ * Some of the functionality of OGLP (e.g. the gl::Sampler class) also depends
+ * on common OpenGL extensions  as for example GL_ARB_sampler_objects.
+ * Any attempt to use such functionality, if respective extension is not supported
+ * will result in a call of oglp::Unsupported which currently throws an exception.
+ * Furthermore OGLP makes intensive use of the extension GL_EXT_direct_state_access.
+ * If GL_EXT_direct_state_access is not available, oglp can fall back to wrapper
+ * functions that provide the same functionality. This may or may not have negative
+ * impacts on the performance.
  * Further dependencies include GLM, a C++ compiler (at least partially) 
  * supporting C++11 and a decent implementation of the C++ STL.
  * \subsection Installation
