@@ -70,6 +70,7 @@ public:
 		 obj = va.obj;
 		 GenVertexArrays (1, &va.obj);
 		 CheckError ();
+		 return *this;
 	 }
 	 /**
 		* Deleted copy assignment.

@@ -71,6 +71,7 @@ public:
 		 obj = framebuffer.obj;
 		 GenFramebuffers (1, &framebuffer.obj);
 		 CheckError ();
+		 return *this;
 	 }
 	 /**
 		* Deleted copy assignment.
