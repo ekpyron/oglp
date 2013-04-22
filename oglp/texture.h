@@ -69,6 +69,7 @@ public:
 		 obj = texture.obj;
 		 GenTextures (1, &texture.obj);
 		 CheckError ();
+		 return *this;
 	 }
 	 /**
 		* Deleted copy assignment.
@@ -836,6 +837,103 @@ public:
 		 TexImage3DMultisample (target, samples, internalFormat, width, height,
 														depth, fixedsamplelocations);
 		 BindTexture (target, previous);
+	 }
+	 /**
+	  * Specify a one-dimensional texture subimage.
+	  * \param target  Specifies the target texture. Must be GL_TEXTURE_2D,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, or
+	  *                GL_TEXTURE_1D_ARRAY.
+	  * \param level Specifies the level-of-detail number. Level 0 is the base image
+	  *              level. Level n is the nth mipmap reduction image.
+	  * \param xoffset Specifies a texel offset in the x direction within the texture array.
+	  * \param width Specifies the width of the texture subimage.
+	  * \param format Specifies the format of the pixel data. The following symbolic
+	  *               values are accepted: GL_RED, GL_RG, GL_RGB, GL_BGR, GL_RGBA, and
+	  *               GL_BGRA.
+	  * \param type Specifies the data type of the pixel data. The following symbolic
+	  *             values are accepted: GL_UNSIGNED_BYTE, GL_BYTE, GL_UNSIGNED_SHORT,
+	  *             GL_SHORT, GL_UNSIGNED_INT, GL_INT, GL_FLOAT,
+	  *             GL_UNSIGNED_BYTE_3_3_2, GL_UNSIGNED_BYTE_2_3_3_REV,
+	  *             GL_UNSIGNED_SHORT_5_6_5, GL_UNSIGNED_SHORT_5_6_5_REV,
+	  *             GL_UNSIGNED_SHORT_4_4_4_4, GL_UNSIGNED_SHORT_4_4_4_4_REV,
+	  *             GL_UNSIGNED_SHORT_5_5_5_1, GL_UNSIGNED_SHORT_1_5_5_5_REV,
+	  *             GL_UNSIGNED_INT_8_8_8_8, GL_UNSIGNED_INT_8_8_8_8_REV,
+	  *             GL_UNSIGNED_INT_10_10_10_2, and GL_UNSIGNED_INT_2_10_10_10_REV.
+	  * \param data Specifies a pointer to the image data in memory.
+	  */
+	 void SubImage1D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width,
+			 GLenum format, GLenum type, const GLvoid *data) {
+		 TextureSubImage1DEXT (obj, target, level, xoffset, width, format, type, data);
+		 CheckError ();
+	 }
+	 /**
+	  * Specify a two-dimensional texture subimage.
+	  * \param target  Specifies the target texture. Must be GL_TEXTURE_2D,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, or
+	  *                GL_TEXTURE_1D_ARRAY.
+	  * \param level Specifies the level-of-detail number. Level 0 is the base image
+	  *              level. Level n is the nth mipmap reduction image.
+	  * \param xoffset Specifies a texel offset in the x direction within the texture array.
+	  * \param yoffset Specifies a texel offset in the y direction within the texture array.
+	  * \param width Specifies the width of the texture subimage.
+	  * \param height Specifies the height of the texture subimage.
+	  * \param format Specifies the format of the pixel data. The following symbolic
+	  *               values are accepted: GL_RED, GL_RG, GL_RGB, GL_BGR, GL_RGBA, and
+	  *               GL_BGRA.
+	  * \param type Specifies the data type of the pixel data. The following symbolic
+	  *             values are accepted: GL_UNSIGNED_BYTE, GL_BYTE, GL_UNSIGNED_SHORT,
+	  *             GL_SHORT, GL_UNSIGNED_INT, GL_INT, GL_FLOAT,
+	  *             GL_UNSIGNED_BYTE_3_3_2, GL_UNSIGNED_BYTE_2_3_3_REV,
+	  *             GL_UNSIGNED_SHORT_5_6_5, GL_UNSIGNED_SHORT_5_6_5_REV,
+	  *             GL_UNSIGNED_SHORT_4_4_4_4, GL_UNSIGNED_SHORT_4_4_4_4_REV,
+	  *             GL_UNSIGNED_SHORT_5_5_5_1, GL_UNSIGNED_SHORT_1_5_5_5_REV,
+	  *             GL_UNSIGNED_INT_8_8_8_8, GL_UNSIGNED_INT_8_8_8_8_REV,
+	  *             GL_UNSIGNED_INT_10_10_10_2, and GL_UNSIGNED_INT_2_10_10_10_REV.
+	  * \param data Specifies a pointer to the image data in memory.
+	  */
+	 void SubImage2D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width,
+			 GLsizei height, GLenum format, GLenum type, const GLvoid *data) {
+		 TextureSubImage2DEXT (obj, target, level, xoffset, yoffset, width, height, format, type, data);
+		 CheckError ();
+	 }
+	 /**
+	  * Specify a three-dimensional texture subimage.
+	  * \param target  Specifies the target texture. Must be GL_TEXTURE_2D,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, or
+	  *                GL_TEXTURE_1D_ARRAY.
+	  * \param level Specifies the level-of-detail number. Level 0 is the base image
+	  *              level. Level n is the nth mipmap reduction image.
+	  * \param xoffset Specifies a texel offset in the x direction within the texture array.
+	  * \param yoffset Specifies a texel offset in the y direction within the texture array.
+	  * \param zoffset Specifies a texel offset in the z direction within the texture array.
+	  * \param width Specifies the width of the texture subimage.
+	  * \param height Specifies the height of the texture subimage.
+	  * \param depth Specifies the depth of the texture subimage.
+	  * \param format Specifies the format of the pixel data. The following symbolic
+	  *               values are accepted: GL_RED, GL_RG, GL_RGB, GL_BGR, GL_RGBA, and
+	  *               GL_BGRA.
+	  * \param type Specifies the data type of the pixel data. The following symbolic
+	  *             values are accepted: GL_UNSIGNED_BYTE, GL_BYTE, GL_UNSIGNED_SHORT,
+	  *             GL_SHORT, GL_UNSIGNED_INT, GL_INT, GL_FLOAT,
+	  *             GL_UNSIGNED_BYTE_3_3_2, GL_UNSIGNED_BYTE_2_3_3_REV,
+	  *             GL_UNSIGNED_SHORT_5_6_5, GL_UNSIGNED_SHORT_5_6_5_REV,
+	  *             GL_UNSIGNED_SHORT_4_4_4_4, GL_UNSIGNED_SHORT_4_4_4_4_REV,
+	  *             GL_UNSIGNED_SHORT_5_5_5_1, GL_UNSIGNED_SHORT_1_5_5_5_REV,
+	  *             GL_UNSIGNED_INT_8_8_8_8, GL_UNSIGNED_INT_8_8_8_8_REV,
+	  *             GL_UNSIGNED_INT_10_10_10_2, and GL_UNSIGNED_INT_2_10_10_10_REV.
+	  * \param data Specifies a pointer to the image data in memory.
+	  */
+	 void SubImage3D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset,
+			 GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *data) {
+		 TextureSubImage3DEXT (obj, target, level, xoffset, yoffset, zoffset,
+				 width, height, depth, format, type, data);
+		 CheckError ();
 	 }
 	 /**
 		* Attach a buffer object to the texture.
