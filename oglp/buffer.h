@@ -67,6 +67,7 @@ public:
 		 obj = buffer.obj;
 		 GenBuffers (1, &buffer.obj);
 		 CheckError ();
+		 return *this;
 	 }
 	 /**
 		* Deleted copy assignment.
