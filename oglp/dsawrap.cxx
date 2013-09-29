@@ -134,6 +134,24 @@ GLAPI void APIENTRY MatrixMultTransposedEXT (GLenum mode, const GLdouble *m)
 
 namespace detail {
 
+inline void BindTexture (GLenum target, GLuint texture)
+{
+    switch (target)
+    {
+    case GL_TEXTURE_CUBE_MAP_NEGATIVE_X:
+    case GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:
+    case GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
+    case GL_TEXTURE_CUBE_MAP_POSITIVE_X:
+    case GL_TEXTURE_CUBE_MAP_POSITIVE_Y:
+    case GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
+        oglp::BindTexture (GL_TEXTURE_CUBE_MAP, texture);
+        break;
+    default:
+        oglp::BindTexture (target, texture);
+        break;
+    }
+}
+
 inline GLenum TextureTargetToBinding (GLenum target)
 {
 	switch (target)
@@ -156,6 +174,14 @@ inline GLenum TextureTargetToBinding (GLenum target)
 		return GL_TEXTURE_BINDING_BUFFER;
 	case GL_TEXTURE_RECTANGLE:
 		return GL_TEXTURE_BINDING_RECTANGLE;
+	case GL_TEXTURE_CUBE_MAP_NEGATIVE_X:
+	case GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:
+	case GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
+	case GL_TEXTURE_CUBE_MAP_POSITIVE_X:
+	case GL_TEXTURE_CUBE_MAP_POSITIVE_Y:
+	case GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
+	case GL_TEXTURE_CUBE_MAP:
+	    return GL_TEXTURE_BINDING_CUBE_MAP;
 	default:
 		return (GLenum)-1;
 	}
@@ -212,9 +238,9 @@ GLAPI void APIENTRY TextureImage2DEXT (GLuint texture, GLenum target, GLint leve
 {
 	GLint saved;
 	GetIntegerv (detail::TextureTargetToBinding (target), &saved);
-	BindTexture (target, texture);
+	detail::BindTexture (target, texture);
 	TexImage2D (target, level, internalformat, width, height, border, format, type, pixels);
-	BindTexture (target, saved);
+	detail::BindTexture (target, saved);
 }
 
 GLAPI void APIENTRY TextureSubImage1DEXT (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels)
@@ -230,9 +256,9 @@ GLAPI void APIENTRY TextureSubImage2DEXT (GLuint texture, GLenum target, GLint l
 {
 	GLint saved;
 	GetIntegerv (detail::TextureTargetToBinding (target), &saved);
-	BindTexture (target, texture);
+	detail::BindTexture (target, texture);
 	TexSubImage2D (target, level, xoffset, yoffset, width, height, format, type, pixels);
-	BindTexture (target, saved);
+	detail::BindTexture (target, saved);
 }
 
 GLAPI void APIENTRY CopyTextureImage1DEXT (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border)
@@ -248,9 +274,9 @@ GLAPI void APIENTRY CopyTextureImage2DEXT (GLuint texture, GLenum target, GLint 
 {
 	GLint saved;
 	GetIntegerv (detail::TextureTargetToBinding (target), &saved);
-	BindTexture (target, texture);
+	detail::BindTexture (target, texture);
 	CopyTexImage2D (target, level, internalformat, x, y, width, height, border);
-	BindTexture (target, saved);
+	detail::BindTexture (target, saved);
 }
 
 GLAPI void APIENTRY CopyTextureSubImage1DEXT (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width)
@@ -266,18 +292,18 @@ GLAPI void APIENTRY CopyTextureSubImage2DEXT (GLuint texture, GLenum target, GLi
 {
 	GLint saved;
 	GetIntegerv (detail::TextureTargetToBinding (target), &saved);
-	BindTexture (target, texture);
+	detail::BindTexture (target, texture);
 	CopyTexSubImage2D (target, level, xoffset, yoffset, x, y, width, height);
-	BindTexture (target, saved);
+	detail::BindTexture (target, saved);
 }
 
 GLAPI void APIENTRY GetTextureImageEXT (GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels)
 {
 	GLint saved;
 	GetIntegerv (detail::TextureTargetToBinding (target), &saved);
-	BindTexture (target, texture);
+	detail::BindTexture (target, texture);
 	GetTexImage (target, level, format, type, pixels);
-	BindTexture (target, saved);
+	detail::BindTexture (target, saved);
 }
 
 GLAPI void APIENTRY GetTextureParameterfvEXT (GLuint texture, GLenum target, GLenum pname, GLfloat *params)
@@ -302,18 +328,18 @@ GLAPI void APIENTRY GetTextureLevelParameterfvEXT (GLuint texture, GLenum target
 {
 	GLint saved;
 	GetIntegerv (detail::TextureTargetToBinding (target), &saved);
-	BindTexture (target, texture);
+	detail::BindTexture (target, texture);
 	GetTexLevelParameterfv (target, level, pname, params);
-	BindTexture (target, saved);
+	detail::BindTexture (target, saved);
 }
 
 GLAPI void APIENTRY GetTextureLevelParameterivEXT (GLuint texture, GLenum target, GLint level, GLenum pname, GLint *params)
 {
 	GLint saved;
 	GetIntegerv (detail::TextureTargetToBinding (target), &saved);
-	BindTexture (target, texture);
+	detail::BindTexture (target, texture);
 	GetTexLevelParameteriv (target, level, pname, params);
-	BindTexture (target, saved);
+	detail::BindTexture (target, saved);
 }
 
 GLAPI void APIENTRY TextureImage3DEXT (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
@@ -722,9 +748,9 @@ GLAPI void APIENTRY CompressedTextureImage2DEXT (GLuint texture, GLenum target, 
 {
 	GLint saved;
 	GetIntegerv (detail::TextureTargetToBinding (target), &saved);
-	BindTexture (target, texture);
+	detail::BindTexture (target, texture);
 	CompressedTexImage2D (target, level, internalformat, width, height, border, imageSize, bits);
-	BindTexture (target, saved);
+	detail::BindTexture (target, saved);
 }
 
 GLAPI void APIENTRY CompressedTextureImage1DEXT (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *bits)
@@ -749,9 +775,9 @@ GLAPI void APIENTRY CompressedTextureSubImage2DEXT (GLuint texture, GLenum targe
 {
 	GLint saved;
 	GetIntegerv (detail::TextureTargetToBinding (target), &saved);
-	BindTexture (target, texture);
+	detail::BindTexture (target, texture);
 	CompressedTexSubImage2D (target, level, xoffset, yoffset, width, height, format, imageSize, bits);
-	BindTexture (target, saved);
+	detail::BindTexture (target, saved);
 }
 
 GLAPI void APIENTRY CompressedTextureSubImage1DEXT (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *bits)
@@ -767,9 +793,9 @@ GLAPI void APIENTRY GetCompressedTextureImageEXT (GLuint texture, GLenum target,
 {
 	GLint saved;
 	GetIntegerv (detail::TextureTargetToBinding (target), &saved);
-	BindTexture (target, texture);
+	detail::BindTexture (target, texture);
 	GetCompressedTexImage (target, lod, img);
-	BindTexture (target, saved);
+	detail::BindTexture (target, saved);
 }
 
 GLAPI void APIENTRY CompressedMultiTexImage3DEXT (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *bits)
@@ -1415,18 +1441,18 @@ GLAPI void APIENTRY NamedRenderbufferStorageEXT (GLuint renderbuffer, GLenum int
 {
 	GLint saved;
 	GetIntegerv (GL_RENDERBUFFER_BINDING, &saved);
-	BindRenderbuffer (GL_RENDERBUFFER_BINDING, renderbuffer);
+	BindRenderbuffer (GL_RENDERBUFFER, renderbuffer);
 	RenderbufferStorage (GL_RENDERBUFFER, internalformat, width, height);
-	BindRenderbuffer (GL_RENDERBUFFER_BINDING, saved);
+	BindRenderbuffer (GL_RENDERBUFFER, saved);
 }
 
 GLAPI void APIENTRY GetNamedRenderbufferParameterivEXT (GLuint renderbuffer, GLenum pname, GLint *params)
 {
 	GLint saved;
 	GetIntegerv (GL_RENDERBUFFER_BINDING, &saved);
-	BindRenderbuffer (GL_RENDERBUFFER_BINDING, renderbuffer);
+	BindRenderbuffer (GL_RENDERBUFFER, renderbuffer);
 	GetRenderbufferParameteriv (GL_RENDERBUFFER, pname, params);
-	BindRenderbuffer (GL_RENDERBUFFER_BINDING, saved);
+	BindRenderbuffer (GL_RENDERBUFFER, saved);
 }
 
 GLAPI GLenum APIENTRY CheckNamedFramebufferStatusEXT (GLuint framebuffer, GLenum target)
@@ -1445,7 +1471,7 @@ GLAPI GLenum APIENTRY CheckNamedFramebufferStatusEXT (GLuint framebuffer, GLenum
 GLAPI void APIENTRY NamedFramebufferTexture1DEXT (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
 {
 	GLint saved;
-	GetIntegerv (GL_DRAW_FRAMEBUFFER, &saved);
+	GetIntegerv (GL_DRAW_FRAMEBUFFER_BINDING, &saved);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, framebuffer);
 	FramebufferTexture1D (GL_DRAW_FRAMEBUFFER, attachment, textarget, texture, level);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, saved);
@@ -1454,7 +1480,7 @@ GLAPI void APIENTRY NamedFramebufferTexture1DEXT (GLuint framebuffer, GLenum att
 GLAPI void APIENTRY NamedFramebufferTexture2DEXT (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
 {
 	GLint saved;
-	GetIntegerv (GL_DRAW_FRAMEBUFFER, &saved);
+	GetIntegerv (GL_DRAW_FRAMEBUFFER_BINDING, &saved);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, framebuffer);
 	FramebufferTexture2D (GL_DRAW_FRAMEBUFFER, attachment, textarget, texture, level);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, saved);
@@ -1463,7 +1489,7 @@ GLAPI void APIENTRY NamedFramebufferTexture2DEXT (GLuint framebuffer, GLenum att
 GLAPI void APIENTRY NamedFramebufferTexture3DEXT (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset)
 {
 	GLint saved;
-	GetIntegerv (GL_DRAW_FRAMEBUFFER, &saved);
+	GetIntegerv (GL_DRAW_FRAMEBUFFER_BINDING, &saved);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, framebuffer);
 	FramebufferTexture3D (GL_DRAW_FRAMEBUFFER, attachment, textarget, texture, level, zoffset);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, saved);
@@ -1472,7 +1498,7 @@ GLAPI void APIENTRY NamedFramebufferTexture3DEXT (GLuint framebuffer, GLenum att
 GLAPI void APIENTRY NamedFramebufferRenderbufferEXT (GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer)
 {
 	GLint saved;
-	GetIntegerv (GL_DRAW_FRAMEBUFFER, &saved);
+	GetIntegerv (GL_DRAW_FRAMEBUFFER_BINDING, &saved);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, framebuffer);
 	FramebufferRenderbuffer (GL_DRAW_FRAMEBUFFER, attachment, renderbuffertarget, renderbuffer);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, saved);
@@ -1481,7 +1507,7 @@ GLAPI void APIENTRY NamedFramebufferRenderbufferEXT (GLuint framebuffer, GLenum 
 GLAPI void APIENTRY GetNamedFramebufferAttachmentParameterivEXT (GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params)
 {
 	GLint saved;
-	GetIntegerv (GL_DRAW_FRAMEBUFFER, &saved);
+	GetIntegerv (GL_DRAW_FRAMEBUFFER_BINDING, &saved);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, framebuffer);
 	GetFramebufferAttachmentParameteriv (GL_DRAW_FRAMEBUFFER, attachment, pname, params);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, saved);
@@ -1508,7 +1534,7 @@ GLAPI void APIENTRY GenerateMultiTexMipmapEXT (GLenum texunit, GLenum target)
 GLAPI void APIENTRY FramebufferDrawBufferEXT (GLuint framebuffer, GLenum mode)
 {
 	GLint saved;
-	GetIntegerv (GL_DRAW_FRAMEBUFFER, &saved);
+	GetIntegerv (GL_DRAW_FRAMEBUFFER_BINDING, &saved);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, framebuffer);
 	DrawBuffer (mode);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, saved);
@@ -1517,7 +1543,7 @@ GLAPI void APIENTRY FramebufferDrawBufferEXT (GLuint framebuffer, GLenum mode)
 GLAPI void APIENTRY FramebufferDrawBuffersEXT (GLuint framebuffer, GLsizei n, const GLenum *bufs)
 {
 	GLint saved;
-	GetIntegerv (GL_DRAW_FRAMEBUFFER, &saved);
+	GetIntegerv (GL_DRAW_FRAMEBUFFER_BINDING, &saved);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, framebuffer);
 	DrawBuffers (n, bufs);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, saved);
@@ -1535,7 +1561,7 @@ GLAPI void APIENTRY FramebufferReadBufferEXT (GLuint framebuffer, GLenum mode)
 GLAPI void APIENTRY GetFramebufferParameterivEXT (GLuint framebuffer, GLenum pname, GLint *params)
 {
 	GLint saved;
-	GetIntegerv (GL_DRAW_FRAMEBUFFER, &saved);
+	GetIntegerv (GL_DRAW_FRAMEBUFFER_BINDING, &saved);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, framebuffer);
 	GetFramebufferParameteriv (GL_DRAW_FRAMEBUFFER, pname, params);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, saved);
@@ -1559,7 +1585,7 @@ GLAPI void APIENTRY NamedRenderbufferStorageMultisampleCoverageEXT (GLuint rende
 GLAPI void APIENTRY NamedFramebufferTextureEXT (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level)
 {
 	GLint saved;
-	GetIntegerv (GL_DRAW_FRAMEBUFFER, &saved);
+	GetIntegerv (GL_DRAW_FRAMEBUFFER_BINDING, &saved);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, framebuffer);
 	FramebufferTexture (GL_DRAW_FRAMEBUFFER, attachment, texture, level);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, saved);
@@ -1568,7 +1594,7 @@ GLAPI void APIENTRY NamedFramebufferTextureEXT (GLuint framebuffer, GLenum attac
 GLAPI void APIENTRY NamedFramebufferTextureLayerEXT (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer)
 {
 	GLint saved;
-	GetIntegerv (GL_DRAW_FRAMEBUFFER, &saved);
+	GetIntegerv (GL_DRAW_FRAMEBUFFER_BINDING, &saved);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, framebuffer);
 	FramebufferTextureLayer (GL_DRAW_FRAMEBUFFER, attachment, texture, level, layer);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, saved);
@@ -1583,9 +1609,9 @@ GLAPI void APIENTRY TextureRenderbufferEXT (GLuint texture, GLenum target, GLuin
 {
 	GLint saved;
 	GetIntegerv (detail::TextureTargetToBinding (target), &saved);
-	BindTexture (target, texture);
+	detail::BindTexture (target, texture);
 	TexRenderbufferNV (target, renderbuffer);
-	BindTexture (target, saved);
+	detail::BindTexture (target, saved);
 }
 
 GLAPI void APIENTRY MultiTexRenderbufferEXT (GLenum texunit, GLenum target, GLuint renderbuffer)
@@ -1793,9 +1819,9 @@ GLAPI void APIENTRY TextureStorage2DEXT (GLuint texture, GLenum target, GLsizei 
 {
 	GLint saved;
 	GetIntegerv (detail::TextureTargetToBinding (target), &saved);
-	BindTexture (target, texture);
+	detail::BindTexture (target, texture);
 	TexStorage2D (target, levels, internalformat, width, height);
-	BindTexture (target, saved);
+	detail::BindTexture (target, saved);
 }
 
 GLAPI void APIENTRY TextureStorage3DEXT (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)
@@ -1882,7 +1908,7 @@ GLAPI void APIENTRY VertexArrayVertexBindingDivisorEXT (GLuint vaobj, GLuint bin
 GLAPI void APIENTRY NamedFramebufferParameteriEXT (GLuint framebuffer, GLenum pname, GLint param)
 {
 	GLint saved;
-	GetIntegerv (GL_DRAW_FRAMEBUFFER, &saved);
+	GetIntegerv (GL_DRAW_FRAMEBUFFER_BINDING, &saved);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, framebuffer);
 	FramebufferParameteri (GL_DRAW_FRAMEBUFFER, pname, param);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, saved);
@@ -1891,7 +1917,7 @@ GLAPI void APIENTRY NamedFramebufferParameteriEXT (GLuint framebuffer, GLenum pn
 GLAPI void APIENTRY GetNamedFramebufferParameterivEXT (GLuint framebuffer, GLenum pname, GLint *params)
 {
 	GLint saved;
-	GetIntegerv (GL_DRAW_FRAMEBUFFER, &saved);
+	GetIntegerv (GL_DRAW_FRAMEBUFFER_BINDING, &saved);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, framebuffer);
 	GetFramebufferParameteriv (GL_DRAW_FRAMEBUFFER, pname, params);
 	BindFramebuffer (GL_DRAW_FRAMEBUFFER, saved);
@@ -1922,6 +1948,248 @@ GLAPI void APIENTRY TextureStorage3DMultisampleEXT (GLuint texture, GLenum targe
 	BindTexture (target, texture);
 	TexStorage3DMultisample (target, samples, internalformat, width, height, depth, fixedsamplelocations);
 	BindTexture (target, saved);
+}
+
+GLAPI void APIENTRY EnableIndexedEXT (GLenum cap, GLuint index)
+{
+    GLint savedActiveTexture;
+    GetIntegerv (GL_ACTIVE_TEXTURE, &savedActiveTexture);
+    ActiveTexture (GL_TEXTURE0+index);
+    Enable (cap);
+    ActiveTexture (savedActiveTexture);
+}
+
+GLAPI void APIENTRY DisableIndexedEXT (GLenum cap, GLuint index)
+{
+    GLint savedActiveTexture;
+    GetIntegerv (GL_ACTIVE_TEXTURE, &savedActiveTexture);
+    ActiveTexture (GL_TEXTURE0+index);
+    Disable (cap);
+    ActiveTexture (savedActiveTexture);
+}
+
+GLAPI GLboolean APIENTRY IsEnabledIndexedEXT (GLenum target, GLuint index)
+{
+    int savedActiveTexture;
+    GLboolean rv;
+    GetIntegerv (GL_ACTIVE_TEXTURE, &savedActiveTexture);
+    ActiveTexture (GL_TEXTURE0+index);
+    rv = IsEnabled (target);
+    ActiveTexture (savedActiveTexture);
+    return rv;
+}
+
+GLAPI void APIENTRY GetIntegerIndexedvEXT (GLenum target, GLuint index, GLint *data)
+{
+    int savedActiveTexture;
+    GetIntegerv(GL_ACTIVE_TEXTURE, &savedActiveTexture);
+    ActiveTexture(GL_TEXTURE0+index);
+    GetIntegerv (target, data);
+    ActiveTexture(savedActiveTexture);
+}
+
+GLAPI void APIENTRY GetBooleanIndexedvEXT (GLenum target, GLuint index, GLboolean *data)
+{
+    int savedActiveTexture;
+    GetIntegerv(GL_ACTIVE_TEXTURE, &savedActiveTexture);
+    ActiveTexture(GL_TEXTURE0+index);
+    GetBooleanv (target, data);
+    ActiveTexture(savedActiveTexture);
+}
+
+GLAPI void APIENTRY EnableClientStateiEXT (GLenum array, GLuint index)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY DisableClientStateiEXT (GLenum array, GLuint index)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY GetFloati_vEXT (GLenum pname, GLuint index, GLfloat *params)
+{
+    int savedActiveTexture;
+    GetIntegerv (GL_ACTIVE_TEXTURE, &savedActiveTexture);
+    ActiveTexture (GL_TEXTURE0+index);
+    GetFloatv (pname, params);
+    ActiveTexture(savedActiveTexture);
+
+}
+
+GLAPI void APIENTRY GetDoublei_vEXT (GLenum pname, GLuint index, GLdouble *params)
+{
+    int savedActiveTexture;
+    GetIntegerv (GL_ACTIVE_TEXTURE, &savedActiveTexture);
+    ActiveTexture (GL_TEXTURE0+index);
+    GetDoublev (pname, params);
+    ActiveTexture(savedActiveTexture);
+
+}
+
+GLAPI void APIENTRY GetPointeri_vEXT (GLenum pname, GLuint index, GLvoid **params)
+{
+    int savedActiveTexture;
+    GetIntegerv (GL_ACTIVE_TEXTURE, &savedActiveTexture);
+    ActiveTexture (GL_TEXTURE0+index);
+    GetPointerv (pname, params);
+    ActiveTexture(savedActiveTexture);
+}
+
+GLAPI void APIENTRY VertexArrayVertexOffsetEXT (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY VertexArrayColorOffsetEXT (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY VertexArrayEdgeFlagOffsetEXT (GLuint vaobj, GLuint buffer, GLsizei stride, GLintptr offset)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY VertexArrayIndexOffsetEXT (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY VertexArrayNormalOffsetEXT (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY VertexArrayTexCoordOffsetEXT (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset)
+{
+    Unsupported ();
+}
+GLAPI void APIENTRY VertexArrayMultiTexCoordOffsetEXT (GLuint vaobj, GLuint buffer, GLenum texunit, GLint size, GLenum type, GLsizei stride, GLintptr offset)
+{
+    Unsupported ();
+}
+GLAPI void APIENTRY VertexArrayFogCoordOffsetEXT (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY VertexArraySecondaryColorOffsetEXT (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY VertexArrayVertexAttribIOffsetEXT (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset)
+{
+    GLint saved_vao, saved_ab;
+    GetIntegerv (GL_VERTEX_ARRAY_BINDING, &saved_vao);
+    BindVertexArray (vaobj);
+    GetIntegerv (GL_ARRAY_BUFFER_BINDING, &saved_ab);
+    BindBuffer (GL_ARRAY_BUFFER, buffer);
+    VertexAttribIPointer (index, size, type, stride, (const GLvoid*)offset);
+    BindBuffer (GL_ARRAY_BUFFER, saved_ab);
+    BindVertexArray (saved_vao);
+}
+
+GLAPI void APIENTRY EnableVertexArrayEXT (GLuint vaobj, GLenum array)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY DisableVertexArrayEXT (GLuint vaobj, GLenum array)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY GetVertexArrayIntegervEXT (GLuint vaobj, GLenum pname, GLint *param)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY GetVertexArrayPointervEXT (GLuint vaobj, GLenum pname, GLvoid **param)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY GetVertexArrayIntegeri_vEXT (GLuint vaobj, GLuint index, GLenum pname, GLint *param)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY GetVertexArrayPointeri_vEXT (GLuint vaobj, GLuint index, GLenum pname, GLvoid **param)
+{
+    Unsupported ();
+}
+
+GLAPI void APIENTRY NamedBufferStorageEXT (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags)
+{
+    GLint saved;
+    GetIntegerv (GL_ARRAY_BUFFER_BINDING, &saved);
+    BindBuffer (GL_ARRAY_BUFFER, buffer);
+    BufferStorage (GL_ARRAY_BUFFER, size, data, flags);
+    BindBuffer (GL_ARRAY_BUFFER, saved);
+}
+
+GLAPI void APIENTRY VertexArrayVertexAttribLOffsetEXT (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset)
+{
+    GLint saved_vao, saved_ab;
+    GetIntegerv (GL_VERTEX_ARRAY_BINDING, &saved_vao);
+    BindVertexArray (vaobj);
+    GetIntegerv (GL_ARRAY_BUFFER_BINDING, &saved_ab);
+    BindBuffer (GL_ARRAY_BUFFER, buffer);
+    VertexAttribLPointer (index, size, type, stride, (const GLvoid*)offset);
+    BindBuffer (GL_ARRAY_BUFFER, saved_ab);
+    BindVertexArray (saved_vao);
+}
+
+GLAPI void APIENTRY VertexArrayVertexAttribDivisorEXT (GLuint vaobj, GLuint index, GLuint divisor)
+{
+    GLint saved_vao;
+    GetIntegerv (GL_VERTEX_ARRAY_BINDING, &saved_vao);
+    BindVertexArray (vaobj);
+    VertexAttribDivisor (index, divisor);
+    BindVertexArray (saved_vao);
+}
+
+GLAPI void APIENTRY TexturePageCommitmentEXT (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean resident)
+{
+    GLuint targets[] = {
+            GL_TEXTURE_1D,
+            GL_TEXTURE_2D,
+            GL_TEXTURE_3D,
+            GL_TEXTURE_1D_ARRAY,
+            GL_TEXTURE_2D_ARRAY,
+            GL_TEXTURE_RECTANGLE,
+            GL_TEXTURE_CUBE_MAP,
+            GL_TEXTURE_CUBE_MAP_ARRAY,
+            GL_TEXTURE_BUFFER,
+            GL_TEXTURE_2D_MULTISAMPLE,
+            GL_TEXTURE_2D_MULTISAMPLE_ARRAY
+    };
+
+    // Can't reasonably implement this, as there is no target parameter
+    CheckError ();
+
+    int i;
+    for (i = 0; i < sizeof (targets) / sizeof (targets[0]); i++)
+    {
+        GLint saved;
+        GetIntegerv (detail::TextureTargetToBinding (targets[i]), &saved);
+
+        BindTexture (targets[i], texture);
+        if (GetError () == GL_INVALID_OPERATION)
+        {
+            BindTexture (targets[i], saved);
+            continue;
+        }
+
+        TexPageCommitmentARB (targets[i], level, xoffset, yoffset, zoffset, width, height, depth, resident);
+        BindTexture (targets[i], saved);
+        return;
+    }
+
+    // generate error
+    TexPageCommitmentARB (0, level, xoffset, yoffset, zoffset, width, height, depth, resident);
 }
 
 
