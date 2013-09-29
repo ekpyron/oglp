@@ -68,6 +68,7 @@ public:
 		 obj = renderbuffer.obj;
 		 GenRenderbuffers (1, &renderbuffer.obj);
 		 CheckError ();
+		 return *this;
 	 }
 	 /**
 		* Deleted copy assignment.
