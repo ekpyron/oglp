@@ -125,12 +125,21 @@ public:
 		* Attaches the OpenGL shader object of a Shader to the internal
 		* program object.
 		* \param shader Specifies the Shader to attach.
-		* \return Whether the program was successfully created.
 		*/
 	 void Attach (const Shader &shader) {
 		 AttachShader (obj, shader.get ());
 		 CheckError ();
 	 }
+     /**
+        * Detaches a Shader.
+        * Detaches the OpenGL shader object of a Shader from the internal
+        * program object.
+        * \param shader Specifies the Shader to detach.
+        */
+     void Detach (const Shader &shader) {
+         DetachShader (obj, shader.get ());
+         CheckError ();
+     }
 	 /**
 		* Links a Program.
 		* Links the internal OpenGL program object.
