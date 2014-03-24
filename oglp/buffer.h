@@ -164,6 +164,30 @@ public:
 		 NamedBufferDataEXT (obj, size, data, usage);
 		 CheckError ();
 	 }
+	 
+	 /**
+		* Creates and initializes an immutable data store.
+		* Creates and initializes an immutable data store for the internal
+		* OpenGL buffer object.
+		* \param size Specifies the size in bytes of the Buffer object's
+		*             new data store.
+		* \param data Specifies a pointer to data that will be copied
+		*             into the data store for initialization, or NULL
+		*             if no data is to be copied. 
+		* \param flags Specifies the intended usage of the buffer's data store.
+		*              Must be a bitwise combination of the following flags:
+		*              - GL_DYNAMIC_STORAGE_BIT
+		*              - GL_MAP_READ_BIT
+		*              - GL_MAP_WRITE_BIT
+		*              - GL_MAP_PERSISTENT_BIT
+		*              - GL_MAP_COHERENT_BIT
+		*              - GL_CLIENT_STORAGE_BIT. 
+	    */
+	 void Storage (GLsizeiptr size, const void *data, GLbitfield flags) {
+		NamedBufferStorageEXT (obj, size, data, flags);
+		CheckError ();
+	 }
+	 
 	 /**
 		* Updates a subset of a Buffer object's data store.
 		* Updates a subset of the data store of the internal OpenGL buffer object.
