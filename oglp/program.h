@@ -75,6 +75,7 @@ public:
 		* \return A reference to the program object.
 		*/
 	 Program &operator= (Program &&p) {
+	     if (obj) DeleteProgram (obj);
 		 obj = p.obj;
 		 p.obj = CreateProgram ();
 		 CheckError ();

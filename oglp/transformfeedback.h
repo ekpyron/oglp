@@ -68,6 +68,7 @@ public:
 		* \return A reference to the transform feedback object.
 		*/
 	 TransformFeedback &operator= (TransformFeedback &&t) {
+	     DeleteTransformFeedbacks (1, &obj);
 		 obj = t.obj;
 		 GenTransformFeedbacks (1, &t.obj);
 		 CheckError ();

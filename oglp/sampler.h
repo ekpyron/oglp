@@ -63,6 +63,7 @@ public:
 		* \return A reference to the Sampler object.
 		*/
 	 Sampler &operator= (Sampler &&sampler) {
+	     DeleteSamplers (1, &obj);
 		 obj = sampler.obj;
 		 GenSamplers (1, &sampler.obj);
 		 CheckError ();

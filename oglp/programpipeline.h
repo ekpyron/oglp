@@ -67,6 +67,7 @@ public:
 		* \return A reference to the ProgramPipeline object.
 		*/
 	 ProgramPipeline &operator= (ProgramPipeline &&pipeline) {
+	     DeleteProgramPipelines (1, &obj);
 		 obj = pipeline.obj;
 		 GenProgramPipelines (1, &pipeline.obj);
 		 CheckError ();

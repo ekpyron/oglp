@@ -67,6 +67,7 @@ public:
 		* \return A reference to the VertexArray object.
 		*/
 	 VertexArray &operator= (VertexArray &&va) {
+	     DeleteVertexArrays (1, &obj);
 		 obj = va.obj;
 		 GenVertexArrays (1, &va.obj);
 		 CheckError ();

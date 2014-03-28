@@ -82,6 +82,11 @@ public:
 		* \return A reference to the Shader object.
 		*/
 	 Shader &operator= (Shader &&s) {
+	     if (obj)
+		 {
+			 DeleteShader (obj);
+			 CheckError ();
+		 }
 		 obj = s.obj;
 		 s.obj = 0;
 	 }

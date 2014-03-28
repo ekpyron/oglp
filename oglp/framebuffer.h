@@ -68,6 +68,7 @@ public:
 		* \return A reference to the Framebuffer object.
 		*/
 	 Framebuffer &operator= (Framebuffer &&framebuffer) {
+	     DeleteFramebuffers (1, &obj);
 		 obj = framebuffer.obj;
 		 GenFramebuffers (1, &framebuffer.obj);
 		 CheckError ();

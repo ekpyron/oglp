@@ -64,6 +64,7 @@ public:
 		* \return A reference to the Query object.
 		*/
 	 Query &operator= (Query &&query) {
+	     DeleteQueries (1, &obj);
 		 obj = query.obj;
 		 GenQueries (1, &query.obj);
 		 CheckError ();

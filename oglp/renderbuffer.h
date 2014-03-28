@@ -65,6 +65,7 @@ public:
 		* \return A reference to the Renderbuffer object.
 		*/
 	 Renderbuffer &operator= (Renderbuffer &&renderbuffer) {
+	     DeleteRenderbuffers (1, &obj);
 		 obj = renderbuffer.obj;
 		 GenRenderbuffers (1, &renderbuffer.obj);
 		 CheckError ();

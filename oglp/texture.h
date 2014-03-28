@@ -19,6 +19,7 @@
 
 #include "common.h"
 #include "buffer.h"
+#include <iostream>
 
 namespace oglp {
 
@@ -66,6 +67,7 @@ public:
 		* \return A reference to the Texture object.
 		*/
 	 Texture &operator= (Texture &&texture) {
+	     DeleteTextures (1, &obj);
 		 obj = texture.obj;
 		 GenTextures (1, &texture.obj);
 		 CheckError ();

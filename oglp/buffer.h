@@ -64,6 +64,7 @@ public:
 		* \return A reference to the buffer object.
 		*/
 	 Buffer &operator= (Buffer &&buffer) {
+	     DeleteBuffers (1, &obj);
 		 obj = buffer.obj;
 		 GenBuffers (1, &buffer.obj);
 		 CheckError ();
