@@ -164,12 +164,24 @@ public:
 	 /**
 		* Specify buffers to draw to.
 		* Specifies a list of color buffers to be drawn into.
-		* \param bufs Points to an vector of symbolic constants
+		* \param bufs Points to a vector of symbolic constants
 		*             specifying the buffers into which fragment
 		*             colors or data values will be written.
 		*/
 	 void DrawBuffers (const std::vector<GLenum> &bufs) const {
 		 FramebufferDrawBuffersEXT (obj, bufs.size (), &bufs[0]);
+		 CheckError ();
+	 }
+	 /**
+		* Specify buffers to draw to.
+		* Specifies a list of color buffers to be drawn into.
+		* \param n Size of the array passed in bufs.
+		* \param bufs Points to an array of symbolic constants
+		*             specifying the buffers into which fragment
+		*             colors or data values will be written.
+		*/
+	 void DrawBuffers (const GLuint &n, const GLenum *bufs) const {
+		 FramebufferDrawBuffersEXT (obj, n, bufs);
 		 CheckError ();
 	 }
 	 /**
