@@ -842,11 +842,7 @@ public:
 	 }
 	 /**
 	  * Specify a one-dimensional texture subimage.
-	  * \param target  Specifies the target texture. Must be GL_TEXTURE_2D,
-	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
-	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
-	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, or
-	  *                GL_TEXTURE_1D_ARRAY.
+	  * \param target  Specifies the target texture. Must be GL_TEXTURE_1D.
 	  * \param level Specifies the level-of-detail number. Level 0 is the base image
 	  *              level. Level n is the nth mipmap reduction image.
 	  * \param xoffset Specifies a texel offset in the x direction within the texture array.
@@ -865,9 +861,26 @@ public:
 	  *             GL_UNSIGNED_INT_10_10_10_2, and GL_UNSIGNED_INT_2_10_10_10_REV.
 	  * \param data Specifies a pointer to the image data in memory.
 	  */
-	 void SubImage1D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width,
+	 void SubImage1D (GLenum target, GLint level, GLint xoffset, GLsizei width,
 			 GLenum format, GLenum type, const GLvoid *data) {
 		 TextureSubImage1DEXT (obj, target, level, xoffset, width, format, type, data);
+		 CheckError ();
+	 }
+	 /**
+	  * Specify a one-dimensional texture subimage in a compressed format.
+	  * \param target  Specifies the target texture. Must be GL_TEXTURE_1D.
+	  * \param level Specifies the level-of-detail number. Level 0 is the base image
+	  *              level. Level n is the nth mipmap reduction image.
+	  * \param xoffset Specifies a texel offset in the x direction within the texture array.
+	  * \param width Specifies the width of the texture subimage.
+	  * \param format Specifies the format of the compressed image data.
+	  * \param imageSize Specifies the number of unsigned bytes of image data starting at
+	  *                  the address specified by data.
+	  * \param data Specifies a pointer to the image data in memory.
+	  */
+	 void CompressedSubImage1D (GLenum target, GLint level, GLint xoffset, GLsizei width,
+			 GLenum format, GLsizei imageSize, const GLvoid *data) {
+		 CompressedTextureSubImage1DEXT (obj, target, level, xoffset, width, format, imageSize, data);
 		 CheckError ();
 	 }
 	 /**
@@ -903,6 +916,30 @@ public:
 		 CheckError ();
 	 }
 	 /**
+	  * Specify a two-dimensional texture subimage in a compressed format.
+	  * \param target  Specifies the target texture. Must be GL_TEXTURE_2D,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, or
+	  *                GL_TEXTURE_1D_ARRAY.
+	  * \param level Specifies the level-of-detail number. Level 0 is the base image
+	  *              level. Level n is the nth mipmap reduction image.
+	  * \param xoffset Specifies a texel offset in the x direction within the texture array.
+	  * \param yoffset Specifies a texel offset in the y direction within the texture array.
+	  * \param width Specifies the width of the texture subimage.
+	  * \param height Specifies the height of the texture subimage.
+	  * \param format Specifies the format of the compressed image data.
+	  * \param imageSize Specifies the number of unsigned bytes of image data starting at
+	  *                  the address specified by data.
+	  * \param data Specifies a pointer to the image data in memory.
+	  */
+	 void CompressedSubImage2D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width,
+			 GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data) {
+		 CompressedTextureSubImage2DEXT (obj, target, level, xoffset, yoffset, width, height,
+				 format, imageSize, data);
+		 CheckError ();
+	 }
+	 /**
 	  * Specify a three-dimensional texture subimage.
 	  * \param target  Specifies the target texture. Must be GL_TEXTURE_2D,
 	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
@@ -935,6 +972,33 @@ public:
 			 GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *data) {
 		 TextureSubImage3DEXT (obj, target, level, xoffset, yoffset, zoffset,
 				 width, height, depth, format, type, data);
+		 CheckError ();
+	 }
+	 /**
+	  * Specify a three-dimensional texture subimage in a compressed format.
+	  * \param target  Specifies the target texture. Must be GL_TEXTURE_2D,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
+	  *                GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, or
+	  *                GL_TEXTURE_1D_ARRAY.
+	  * \param level Specifies the level-of-detail number. Level 0 is the base image
+	  *              level. Level n is the nth mipmap reduction image.
+	  * \param xoffset Specifies a texel offset in the x direction within the texture array.
+	  * \param yoffset Specifies a texel offset in the y direction within the texture array.
+	  * \param zoffset Specifies a texel offset in the z direction within the texture array.
+	  * \param width Specifies the width of the texture subimage.
+	  * \param height Specifies the height of the texture subimage.
+	  * \param depth Specifies the depth of the texture subimage.
+	  * \param format Specifies the format of the compressed image data.
+	  * \param imageSize Specifies the number of unsigned bytes of image data starting at
+	  *                  the address specified by data.
+	  * \param data Specifies a pointer to the image data in memory.
+	  */
+	 void CompressedSubImage3D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset,
+			 GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize,
+			 const GLvoid *data) {
+		 CompressedTextureSubImage3DEXT (obj, target, level, xoffset, yoffset, zoffset,
+				 width, height, depth, format, imageSize, data);
 		 CheckError ();
 	 }
 	 /**
