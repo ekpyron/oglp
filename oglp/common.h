@@ -21,6 +21,9 @@
 #ifdef _WIN32
 #include <windows.h>
 #endif
+#ifdef OGLP_USE_CXX11
+#include <functional>
+#endif
 #include "glcorew.h"
 #include <glm/glm.hpp>
 #include <sstream>

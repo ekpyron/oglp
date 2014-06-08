@@ -16,7 +16,11 @@
 
 namespace oglp {
 
+#ifdef OGLP_USE_CXX11
+typedef std::function<void*(const char*)> GetProcAddressCallback;
+#else
 typedef void *(*GetProcAddressCallback) (const char*);
+#endif
 
 void InitPrototypes (GetProcAddressCallback getprocaddress);
 GLAPI int APIENTRY Unsupported (...);

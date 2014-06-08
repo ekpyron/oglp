@@ -20,4 +20,8 @@
 /*#define OGLP_THROW_EXCEPTIONS*/
 #define OGLP_ERROR_CALLBACK
 
+#if __cplusplus > 199711L
+#define OGLP_USE_CXX11
+#endif
+
 #endif /* !defined OGLP_CONFIG_H */
