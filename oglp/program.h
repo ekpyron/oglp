@@ -550,8 +550,8 @@ public:
 		* \param name Name of the uniform variable.
 		* \return the uniform location.
 		*/
-	 GLuint GetUniformLocation (const std::string &name) const {
-		GLuint result = oglp::GetUniformLocation (obj, name.c_str ());
+	 GLint GetUniformLocation (const std::string &name) const {
+		GLint result = oglp::GetUniformLocation (obj, name.c_str ());
 		CheckError ();
 		return result;
 	 }

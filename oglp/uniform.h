@@ -412,7 +412,7 @@ private:
 		* \param prog the internal OpenGL shader program to use
 		* \param loc the internal OpenGL uniform location to use
 		*/
-	 Uniform (GLuint prog, GLuint loc)
+	 Uniform (GLuint prog, GLint loc)
 		 : program (prog), location (loc) {
 	 }
 	 /**
@@ -422,7 +422,7 @@ private:
 	 /**
 		* The internal OpenGL uniform location of the uniform variable.
 		*/
-	 GLuint location;
+	 GLint location;
 	 friend class Program;
 };
 
