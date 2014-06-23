@@ -544,6 +544,18 @@ public:
 		 return result;
 	 }
 	 /** 
+		* Obtain a uniform location.
+		* Obtains the uniform location of a uniform variable
+		* within the shader program.
+		* \param name Name of the uniform variable.
+		* \return the uniform location.
+		*/
+	 GLuint GetUniformLocation (const std::string &name) const {
+		GLuint result = oglp::GetUniformLocation (obj, name.c_str ());
+		CheckError ();
+		return result;
+	 }
+	 /** 
 		* Obtain a Uniform location.
 		* Obtains the Uniform location of a uniform variable
 		* within the shader program.
@@ -552,8 +564,7 @@ public:
 		*/
 	 Uniform operator[] (const std::string &name) const {
 		 GLint location;
-		 location = GetUniformLocation (obj, name.c_str ());
-		 CheckError ();
+		 location = GetUniformLocation (name);
 		 return Uniform (obj, location);
 	 }
 	 /**
