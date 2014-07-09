@@ -159,6 +159,61 @@ public:
 		 CheckError ();
 	 }
 	 /**
+		* Specify two-dimensional multisample texture storage.
+		* Simultaneously specify storage for a two-dimensional
+        * multisample texture.
+		* \param target Specify the target of the operation.
+		*               target must be one GL_TEXTURE_2D_MULTISAMPLE
+        *               or GL_PROXY_TEXTURE_2D_MULTISAMPLE.
+        * \param samples Specify the number of samples in the texture.
+		* \param internalformat Specifies the sized internal format to
+		*                       be used to store texture image data.
+		* \param width Specifies the width of the texture, in texels.
+		* \param height Specifies the height of the texture, in texels.
+        * \param fixedsamplelocations Specifies whether the image will
+        *                             use identical sample locations and
+        *                             the same number of samples for all
+        *                             texels in the image, and the sample
+        *                             locations will not depend on the
+        *                             internal format or size of the image.
+		*/
+	 void Storage2DMultisample (GLenum target, GLsizei samples,
+									 GLenum internalformat,
+									 GLsizei width, GLsizei height,
+                                     GLboolean fixedsamplelocations)
+	 {
+		 TextureStorage2DMultisampleEXT (obj, target, samples, internalformat, width, height, fixedsamplelocations);
+		 CheckError ();
+	 }
+	 /**
+		* Specify three-dimensional multisample texture storage.
+		* Simultaneously specify storage for a two-dimensional
+        * multisample array texture.
+		* \param target Specify the target of the operation.
+		*               target must be one GL_TEXTURE_2D_MULTISAMPLE_ARRAY
+        *               or GL_PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY.
+        * \param samples Specify the number of samples in the texture.
+		* \param internalformat Specifies the sized internal format to
+		*                       be used to store texture image data.
+		* \param width Specifies the width of the texture, in texels.
+		* \param height Specifies the height of the texture, in texels.
+        * \param depth Specifies the depth of the texture, in layers.
+        * \param fixedsamplelocations Specifies whether the image will
+        *                             use identical sample locations and
+        *                             the same number of samples for all
+        *                             texels in the image, and the sample
+        *                             locations will not depend on the
+        *                             internal format or size of the image.
+		*/
+	 void Storage3DMultisample (GLenum target, GLsizei samples,
+									 GLenum internalformat,
+									 GLsizei width, GLsizei height, GLsizei depth,
+                                     GLboolean fixedsamplelocations)
+	 {
+		 TextureStorage3DMultisampleEXT (obj, target, samples, internalformat, width, height, depth, fixedsamplelocations);
+		 CheckError ();
+	 }
+	 /**
 		* Specify three-dimensional texture storage.
 		* Simultaneously specify storage for all levels of a
 		* three-dimensional, two-dimensional array or cube-map array texture.
