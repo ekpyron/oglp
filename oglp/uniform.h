@@ -204,6 +204,20 @@ public:
 		* \param v value to assign
 		* \return a reference to the assigned value
 		*/
+     GLuint64 operator= (GLuint64 v) {
+        if (location != -1)
+        {
+            ProgramUniformHandleui64ARB (program, location, v);
+            CheckError ();
+        }
+        return v;
+     }
+	 /**
+		* Assign a value.
+		* Assigns an unsigned int value to the uniform location.
+		* \param v value to assign
+		* \return a reference to the assigned value
+		*/
 	 GLuint operator= (GLuint v) {
 		 if (location != -1)
 		 {
