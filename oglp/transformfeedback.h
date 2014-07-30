@@ -81,6 +81,15 @@ public:
 		*/
 	 TransformFeedback &operator= (const TransformFeedback&) = delete;
 	 /**
+		* Label the transform feedback object.
+		* Labels the internal OpenGL transform feedback object.
+		* \param name Label to be used for the transform feedback object.
+		*/
+	 void Label (const std::string &name) {
+		ObjectLabel (GL_TRANSFORM_FEEDBACK, obj, name.length (), name.data ());
+		CheckError ();
+	 }
+	 /**
 		* Bind a transform feedback object.
 		* Binds a transform feedback object.
 		* \param target Specifies the target to which to bind the

@@ -14,8 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with oglp.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef TEXTURE_H
-#define TEXTURE_H
+#ifndef OGLP_TEXTURE_H
+#define OGLP_TEXTURE_H
 
 #include "common.h"
 #include "buffer.h"
@@ -79,6 +79,15 @@ public:
 		* \return
 		*/
 	 Texture &operator= (const Texture&) = delete;
+	 /**
+		* Label the texture object.
+		* Labels the internal OpenGL texture object.
+		* \param name Label to be used for the texture object.
+		*/
+	 void Label (const std::string &name) {
+		ObjectLabel (GL_TEXTURE, obj, name.length (), name.data ());
+		CheckError ();
+	 }
 	 /**
 		* Bind the Texture object.
 		* Binds the Texture object to the specified target and texture unit.
@@ -1529,4 +1538,4 @@ private:
 
 } /* namespace oglp */
 
-#endif /* !defined TEXTURE_H */
+#endif /* !defined OGLP_TEXTURE_H */

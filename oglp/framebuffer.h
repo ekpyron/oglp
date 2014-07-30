@@ -81,6 +81,15 @@ public:
 		*/
 	 Framebuffer &operator= (const Framebuffer&) = delete;
 	 /**
+		* Label the framebuffer object.
+		* Labels the internal OpenGL framebuffer object.
+		* \param name Label to be used for the framebuffer object.
+		*/
+	 void Label (const std::string &name) {
+		ObjectLabel (GL_FRAMEBUFFER, obj, name.length (), name.data ());
+		CheckError ();
+	 }
+	 /**
 		* Bind the Framebuffer object.
 		* Binds the Framebuffer object to the specified target.
 		* \param target Specifies which target to bind the Framebuffer object to.

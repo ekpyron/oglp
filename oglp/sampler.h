@@ -75,6 +75,15 @@ public:
 		*/
 	 Sampler &operator= (const Sampler&) = delete;
 	 /**
+		* Label the sampler object.
+		* Labels the internal OpenGL sampler object.
+		* \param name Label to be used for the sampler object.
+		*/
+	 void Label (const std::string &name) {
+		ObjectLabel (GL_SAMPLER, obj, name.length (), name.data ());
+		CheckError ();
+	 }
+	 /**
 		* Bind the Sampler object.
 		* Binds the Sampler object to the specified target.
 		* \param unit Specifies the index of the texture unit to which to

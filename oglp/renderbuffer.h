@@ -78,6 +78,15 @@ public:
 		*/
 	 Renderbuffer &operator= (const Renderbuffer&) = delete;
 	 /**
+		* Label the renderbuffer object.
+		* Labels the internal OpenGL renderbuffer object.
+		* \param name Label to be used for the renderbuffer object.
+		*/
+	 void Label (const std::string &name) {
+		ObjectLabel (GL_RENDERBUFFER, obj, name.length (), name.data ());
+		CheckError ();
+	 }
+	 /**
 		* Setup the internal storage of a Renderbuffer object.
 		* Establishes the data storage, format and dimensions of the internal
 		* OpenGL renderbuffer object's image.

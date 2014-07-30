@@ -88,6 +88,15 @@ public:
 		*/
 	 Program &operator= (const Program&) = delete;
 	 /**
+		* Label the program object.
+		* Labels the internal OpenGL program object.
+		* \param name Label to be used for the program object.
+		*/
+	 void Label (const std::string &name) {
+		ObjectLabel (GL_PROGRAM, obj, name.length (), name.data ());
+		CheckError ();
+	 }
+	 /**
 		* Create a Program from source.
 		* Creates a stand-alone Program from a source string.
 		* \param type Specifies the type of shader to create.

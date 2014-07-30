@@ -99,6 +99,15 @@ public:
 		 CheckError ();
 	 }
 	 /**
+		* Label the buffer object.
+		* Labels the internal OpenGL buffer object.
+		* \param name Label to be used for the buffer object.
+		*/
+	 void Label (const std::string &name) {
+		 ObjectLabel (GL_BUFFER, obj, name.length (), name.data ());
+		 CheckError ();
+	 }
+	 /**
 		* Bind the buffer object.
 		* Binds the Buffer object to an indexed buffer target.
 		* \param target Specify the target of the bind operation. target must be

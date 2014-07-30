@@ -97,6 +97,15 @@ public:
 		*/
 	 Shader &operator= (const Shader&) = delete;
 	 /**
+		* Label the shader object.
+		* Labels the internal OpenGL shader object.
+		* \param name Label to be used for the shader object.
+		*/
+	 void Label (const std::string &name) {
+		ObjectLabel (GL_SHADER, obj, name.length (), name.data ());
+		CheckError ();
+	 }
+	 /**
 		* Create a Shader.
 		* Creates the internal OpenGL shader object.
 		* \param type Specifies the type of shader to be created.

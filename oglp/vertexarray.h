@@ -80,6 +80,15 @@ public:
 		*/
 	 VertexArray &operator= (const VertexArray&) = delete;
 	 /**
+		* Label the vertex array object.
+		* Labels the internal OpenGL vertex array object.
+		* \param name Label to be used for the vertex array object.
+		*/
+	 void Label (const std::string &name) {
+		ObjectLabel (GL_VERTEX_ARRAY, obj, name.length (), name.data ());
+		CheckError ();
+	 }
+	 /**
 		* Bind the VertexArray object.
 		* Binds the internal OpenGL vertex array object.
 		*/

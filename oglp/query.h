@@ -92,6 +92,15 @@ public:
 		 std::swap (obj, query.obj);
 	 }
 	 /**
+		* Label the query object.
+		* Labels the internal OpenGL query object.
+		* \param name Label to be used for the query object.
+		*/
+	 void Label (const std::string &name) {
+		ObjectLabel (GL_QUERY, obj, name.length (), name.data ());
+		CheckError ();
+	 }
+	 /**
 		* Delimits the boundaries of a query object.
 		* Delimits the boundaries of the internal OpenGL query object.
 		* \param target Specifies the target type of query object established

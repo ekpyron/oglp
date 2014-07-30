@@ -79,6 +79,15 @@ public:
 		*/
 	 ProgramPipeline &operator= (const ProgramPipeline&) = delete;
 	 /**
+		* Label the program pipeline object.
+		* Labels the internal OpenGL program pipeline object.
+		* \param name Label to be used for the program pipeline object.
+		*/
+	 void Label (const std::string &name) {
+		ObjectLabel (GL_PROGRAM_PIPELINE, obj, name.length (), name.data ());
+		CheckError ();
+	 }
+	 /**
 		* Bind the ProgramPipeline object.
 		* Binds the internal OpenGL shader pipeline object.
 		*/
