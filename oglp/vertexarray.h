@@ -133,6 +133,36 @@ public:
 		 CheckError ();
 	 }
 	 /**
+		* Specify an vertex attrib.
+		* Defines an array of generic vertex attribute data in the vertex array.
+		* \param buffer Buffer object in which the data is stored.
+		* \param index Specifies the index of the generic vertex
+		*              attribute to be modified.
+		* \param type Specifies the data type of each component.
+		*             Must be one of the following symbolic constants:
+		*             - GL_BYTE
+		*             - GL_UNSIGNED_BYTE
+		*             - GL_SHORT
+		*             - GL_UNSIGNED_SHORT
+		*             - GL_INT
+		*             - GL_UNSIGNED_INT
+		* \param size Specifies the number of components per generic
+		*             vertex attribute. Must be 1, 2, 3, or 4.
+		* \param stride Specifies the byte offset between consecutive
+		*               generic vertex attributes. If stride is 0, the
+		*               generic vertex attributes are understood to be
+		*               tightly packed.
+		* \param offset Specifies the offset of the first component of
+		*               the first generic vertex attribute in the buffer.
+		*/
+	 void VertexAttribIOffset (const Buffer &buffer, GLuint index, GLint size,
+														GLenum type, GLsizei stride,
+														GLintptr offset) {
+		 VertexArrayVertexAttribIOffsetEXT (obj, buffer.get (), index, size,
+																			 type, stride, offset);
+		 CheckError ();
+	 }
+	 	 /**
 		* Enable a vertex attrib.
 		* Enables a generic vertex attribute.
 		* \param index Specifies the index of the generic vertex
