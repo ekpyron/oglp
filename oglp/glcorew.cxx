@@ -1249,6 +1249,8 @@ PFNGLGETINTEGERUI64I_VNVPROC GetIntegerui64i_vNV =
     (PFNGLGETINTEGERUI64I_VNVPROC) Unsupported;
 PFNGLENABLECLIENTSTATEPROC EnableClientState =
     (PFNGLENABLECLIENTSTATEPROC) Unsupported;
+PFNGLDISABLECLIENTSTATEPROC DisableClientState =
+    (PFNGLDISABLECLIENTSTATEPROC) Unsupported;
 PFNGLMATRIXLOADFEXTPROC MatrixLoadfEXT =
     (PFNGLMATRIXLOADFEXTPROC) dsawrap::MatrixLoadfEXT;
 PFNGLMATRIXLOADDEXTPROC MatrixLoaddEXT =
@@ -3002,6 +3004,8 @@ void InitPrototypes (GetProcAddressCallback getprocaddress)
     if (ptr) GetIntegerui64i_vNV = (PFNGLGETINTEGERUI64I_VNVPROC) ptr;
     ptr = getprocaddress ("glEnableClientState");
     if (ptr) EnableClientState = (PFNGLENABLECLIENTSTATEPROC) ptr;
+    ptr = getprocaddress ("glDisableClientState");
+    if (ptr) DisableClientState = (PFNGLDISABLECLIENTSTATEPROC) ptr;
     ptr = getprocaddress ("glMatrixLoadfEXT");
     if (ptr) MatrixLoadfEXT = (PFNGLMATRIXLOADFEXTPROC) ptr;
     ptr = getprocaddress ("glMatrixLoaddEXT");
