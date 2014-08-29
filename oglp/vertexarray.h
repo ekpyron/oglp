@@ -198,6 +198,22 @@ public:
 																		 offset, stride);
 		 CheckError ();
 	 }
+   /** Bind a vertex buffer.
+		* Binds a buffer to a vertex buffer bind point.
+		* \param bindingindex The index of the vertex buffer binding point
+		*                     to which to bind the buffer.
+		* \param buffer The name of an existing buffer to bind
+		*               to the vertex buffer binding point.
+		* \param offset The offset of the first element of the buffer.
+		* \param stride The distance between elements within the buffer.
+		*/
+	 void BindVertexBuffer (GLuint bindingindex, GLuint buffer,
+													GLintptr offset, GLsizei stride)
+	 {
+		 VertexArrayBindVertexBufferEXT (obj, bindingindex, buffer,
+																		 offset, stride);
+		 CheckError ();
+	 }
 	 /** Specify vertex format.
 		* Specifies the organization of the vertex array.
 		* \param attribindex The generic vertex attribute array being described.
