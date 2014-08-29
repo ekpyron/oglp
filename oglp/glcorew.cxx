@@ -1247,6 +1247,8 @@ PFNGLVERTEXATTRIBIFORMATNVPROC VertexAttribIFormatNV =
     (PFNGLVERTEXATTRIBIFORMATNVPROC) Unsupported;
 PFNGLGETINTEGERUI64I_VNVPROC GetIntegerui64i_vNV =
     (PFNGLGETINTEGERUI64I_VNVPROC) Unsupported;
+PFNGLENABLECLIENTSTATEPROC EnableClientState =
+    (PFNGLENABLECLIENTSTATEPROC) Unsupported;
 PFNGLMATRIXLOADFEXTPROC MatrixLoadfEXT =
     (PFNGLMATRIXLOADFEXTPROC) dsawrap::MatrixLoadfEXT;
 PFNGLMATRIXLOADDEXTPROC MatrixLoaddEXT =
@@ -2998,6 +3000,8 @@ void InitPrototypes (GetProcAddressCallback getprocaddress)
     if (ptr) VertexAttribIFormatNV = (PFNGLVERTEXATTRIBIFORMATNVPROC) ptr;
     ptr = getprocaddress ("glGetIntegerui64i_vNV");
     if (ptr) GetIntegerui64i_vNV = (PFNGLGETINTEGERUI64I_VNVPROC) ptr;
+    ptr = getprocaddress ("glEnableClientState");
+    if (ptr) EnableClientState = (PFNGLENABLECLIENTSTATEPROC) ptr;
     ptr = getprocaddress ("glMatrixLoadfEXT");
     if (ptr) MatrixLoadfEXT = (PFNGLMATRIXLOADFEXTPROC) ptr;
     ptr = getprocaddress ("glMatrixLoaddEXT");
