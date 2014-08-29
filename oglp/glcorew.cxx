@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011 Daniel Kirchner
+ * Copyright (c) 2014 Daniel Kirchner
  *
  * Copying and distribution of this file, with or without modification,
  * are permitted in any medium without royalty provided the copyright
@@ -1197,6 +1197,56 @@ PFNGLSAMPLEMASKINDEXEDNVPROC SampleMaskIndexedNV =
     (PFNGLSAMPLEMASKINDEXEDNVPROC) Unsupported;
 PFNGLTEXRENDERBUFFERNVPROC TexRenderbufferNV =
     (PFNGLTEXRENDERBUFFERNVPROC) Unsupported;
+PFNGLMAKEBUFFERRESIDENTNVPROC MakeBufferResidentNV =
+    (PFNGLMAKEBUFFERRESIDENTNVPROC) Unsupported;
+PFNGLMAKEBUFFERNONRESIDENTNVPROC MakeBufferNonResidentNV =
+    (PFNGLMAKEBUFFERNONRESIDENTNVPROC) Unsupported;
+PFNGLISBUFFERRESIDENTNVPROC IsBufferResidentNV =
+    (PFNGLISBUFFERRESIDENTNVPROC) Unsupported;
+PFNGLMAKENAMEDBUFFERRESIDENTNVPROC MakeNamedBufferResidentNV =
+    (PFNGLMAKENAMEDBUFFERRESIDENTNVPROC) Unsupported;
+PFNGLMAKENAMEDBUFFERNONRESIDENTNVPROC MakeNamedBufferNonResidentNV =
+    (PFNGLMAKENAMEDBUFFERNONRESIDENTNVPROC) Unsupported;
+PFNGLISNAMEDBUFFERRESIDENTNVPROC IsNamedBufferResidentNV =
+    (PFNGLISNAMEDBUFFERRESIDENTNVPROC) Unsupported;
+PFNGLGETBUFFERPARAMETERUI64VNVPROC GetBufferParameterui64vNV =
+    (PFNGLGETBUFFERPARAMETERUI64VNVPROC) Unsupported;
+PFNGLGETNAMEDBUFFERPARAMETERUI64VNVPROC GetNamedBufferParameterui64vNV =
+    (PFNGLGETNAMEDBUFFERPARAMETERUI64VNVPROC) Unsupported;
+PFNGLGETINTEGERUI64VNVPROC GetIntegerui64vNV =
+    (PFNGLGETINTEGERUI64VNVPROC) Unsupported;
+PFNGLUNIFORMUI64NVPROC Uniformui64NV =
+    (PFNGLUNIFORMUI64NVPROC) Unsupported;
+PFNGLUNIFORMUI64VNVPROC Uniformui64vNV =
+    (PFNGLUNIFORMUI64VNVPROC) Unsupported;
+PFNGLPROGRAMUNIFORMUI64NVPROC ProgramUniformui64NV =
+    (PFNGLPROGRAMUNIFORMUI64NVPROC) Unsupported;
+PFNGLPROGRAMUNIFORMUI64VNVPROC ProgramUniformui64vNV =
+    (PFNGLPROGRAMUNIFORMUI64VNVPROC) Unsupported;
+PFNGLBUFFERADDRESSRANGENVPROC BufferAddressRangeNV =
+    (PFNGLBUFFERADDRESSRANGENVPROC) Unsupported;
+PFNGLVERTEXFORMATNVPROC VertexFormatNV =
+    (PFNGLVERTEXFORMATNVPROC) Unsupported;
+PFNGLNORMALFORMATNVPROC NormalFormatNV =
+    (PFNGLNORMALFORMATNVPROC) Unsupported;
+PFNGLCOLORFORMATNVPROC ColorFormatNV =
+    (PFNGLCOLORFORMATNVPROC) Unsupported;
+PFNGLINDEXFORMATNVPROC IndexFormatNV =
+    (PFNGLINDEXFORMATNVPROC) Unsupported;
+PFNGLTEXCOORDFORMATNVPROC TexCoordFormatNV =
+    (PFNGLTEXCOORDFORMATNVPROC) Unsupported;
+PFNGLEDGEFLAGFORMATNVPROC EdgeFlagFormatNV =
+    (PFNGLEDGEFLAGFORMATNVPROC) Unsupported;
+PFNGLSECONDARYCOLORFORMATNVPROC SecondaryColorFormatNV =
+    (PFNGLSECONDARYCOLORFORMATNVPROC) Unsupported;
+PFNGLFOGCOORDFORMATNVPROC FogCoordFormatNV =
+    (PFNGLFOGCOORDFORMATNVPROC) Unsupported;
+PFNGLVERTEXATTRIBFORMATNVPROC VertexAttribFormatNV =
+    (PFNGLVERTEXATTRIBFORMATNVPROC) Unsupported;
+PFNGLVERTEXATTRIBIFORMATNVPROC VertexAttribIFormatNV =
+    (PFNGLVERTEXATTRIBIFORMATNVPROC) Unsupported;
+PFNGLGETINTEGERUI64I_VNVPROC GetIntegerui64i_vNV =
+    (PFNGLGETINTEGERUI64I_VNVPROC) Unsupported;
 PFNGLMATRIXLOADFEXTPROC MatrixLoadfEXT =
     (PFNGLMATRIXLOADFEXTPROC) dsawrap::MatrixLoadfEXT;
 PFNGLMATRIXLOADDEXTPROC MatrixLoaddEXT =
@@ -2898,6 +2948,56 @@ void InitPrototypes (GetProcAddressCallback getprocaddress)
     if (ptr) SampleMaskIndexedNV = (PFNGLSAMPLEMASKINDEXEDNVPROC) ptr;
     ptr = getprocaddress ("glTexRenderbufferNV");
     if (ptr) TexRenderbufferNV = (PFNGLTEXRENDERBUFFERNVPROC) ptr;
+    ptr = getprocaddress ("glMakeBufferResidentNV");
+    if (ptr) MakeBufferResidentNV = (PFNGLMAKEBUFFERRESIDENTNVPROC) ptr;
+    ptr = getprocaddress ("glMakeBufferNonResidentNV");
+    if (ptr) MakeBufferNonResidentNV = (PFNGLMAKEBUFFERNONRESIDENTNVPROC) ptr;
+    ptr = getprocaddress ("glIsBufferResidentNV");
+    if (ptr) IsBufferResidentNV = (PFNGLISBUFFERRESIDENTNVPROC) ptr;
+    ptr = getprocaddress ("glMakeNamedBufferResidentNV");
+    if (ptr) MakeNamedBufferResidentNV = (PFNGLMAKENAMEDBUFFERRESIDENTNVPROC) ptr;
+    ptr = getprocaddress ("glMakeNamedBufferNonResidentNV");
+    if (ptr) MakeNamedBufferNonResidentNV = (PFNGLMAKENAMEDBUFFERNONRESIDENTNVPROC) ptr;
+    ptr = getprocaddress ("glIsNamedBufferResidentNV");
+    if (ptr) IsNamedBufferResidentNV = (PFNGLISNAMEDBUFFERRESIDENTNVPROC) ptr;
+    ptr = getprocaddress ("glGetBufferParameterui64vNV");
+    if (ptr) GetBufferParameterui64vNV = (PFNGLGETBUFFERPARAMETERUI64VNVPROC) ptr;
+    ptr = getprocaddress ("glGetNamedBufferParameterui64vNV");
+    if (ptr) GetNamedBufferParameterui64vNV = (PFNGLGETNAMEDBUFFERPARAMETERUI64VNVPROC) ptr;
+    ptr = getprocaddress ("glGetIntegerui64vNV");
+    if (ptr) GetIntegerui64vNV = (PFNGLGETINTEGERUI64VNVPROC) ptr;
+    ptr = getprocaddress ("glUniformui64NV");
+    if (ptr) Uniformui64NV = (PFNGLUNIFORMUI64NVPROC) ptr;
+    ptr = getprocaddress ("glUniformui64vNV");
+    if (ptr) Uniformui64vNV = (PFNGLUNIFORMUI64VNVPROC) ptr;
+    ptr = getprocaddress ("glProgramUniformui64NV");
+    if (ptr) ProgramUniformui64NV = (PFNGLPROGRAMUNIFORMUI64NVPROC) ptr;
+    ptr = getprocaddress ("glProgramUniformui64vNV");
+    if (ptr) ProgramUniformui64vNV = (PFNGLPROGRAMUNIFORMUI64VNVPROC) ptr;
+    ptr = getprocaddress ("glBufferAddressRangeNV");
+    if (ptr) BufferAddressRangeNV = (PFNGLBUFFERADDRESSRANGENVPROC) ptr;
+    ptr = getprocaddress ("glVertexFormatNV");
+    if (ptr) VertexFormatNV = (PFNGLVERTEXFORMATNVPROC) ptr;
+    ptr = getprocaddress ("glNormalFormatNV");
+    if (ptr) NormalFormatNV = (PFNGLNORMALFORMATNVPROC) ptr;
+    ptr = getprocaddress ("glColorFormatNV");
+    if (ptr) ColorFormatNV = (PFNGLCOLORFORMATNVPROC) ptr;
+    ptr = getprocaddress ("glIndexFormatNV");
+    if (ptr) IndexFormatNV = (PFNGLINDEXFORMATNVPROC) ptr;
+    ptr = getprocaddress ("glTexCoordFormatNV");
+    if (ptr) TexCoordFormatNV = (PFNGLTEXCOORDFORMATNVPROC) ptr;
+    ptr = getprocaddress ("glEdgeFlagFormatNV");
+    if (ptr) EdgeFlagFormatNV = (PFNGLEDGEFLAGFORMATNVPROC) ptr;
+    ptr = getprocaddress ("glSecondaryColorFormatNV");
+    if (ptr) SecondaryColorFormatNV = (PFNGLSECONDARYCOLORFORMATNVPROC) ptr;
+    ptr = getprocaddress ("glFogCoordFormatNV");
+    if (ptr) FogCoordFormatNV = (PFNGLFOGCOORDFORMATNVPROC) ptr;
+    ptr = getprocaddress ("glVertexAttribFormatNV");
+    if (ptr) VertexAttribFormatNV = (PFNGLVERTEXATTRIBFORMATNVPROC) ptr;
+    ptr = getprocaddress ("glVertexAttribIFormatNV");
+    if (ptr) VertexAttribIFormatNV = (PFNGLVERTEXATTRIBIFORMATNVPROC) ptr;
+    ptr = getprocaddress ("glGetIntegerui64i_vNV");
+    if (ptr) GetIntegerui64i_vNV = (PFNGLGETINTEGERUI64I_VNVPROC) ptr;
     ptr = getprocaddress ("glMatrixLoadfEXT");
     if (ptr) MatrixLoadfEXT = (PFNGLMATRIXLOADFEXTPROC) ptr;
     ptr = getprocaddress ("glMatrixLoaddEXT");

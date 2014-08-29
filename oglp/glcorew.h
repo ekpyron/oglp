@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011 Daniel Kirchner
+ * Copyright (c) 2014 Daniel Kirchner
  *
  * Copying and distribution of this file, with or without modification,
  * are permitted in any medium without royalty provided the copyright
@@ -16,11 +16,7 @@
 
 namespace oglp {
 
-#ifdef OGLP_USE_CXX11
-typedef std::function<void*(const char*)> GetProcAddressCallback;
-#else
 typedef void *(*GetProcAddressCallback) (const char*);
-#endif
 
 void InitPrototypes (GetProcAddressCallback getprocaddress);
 GLAPI int APIENTRY Unsupported (...);
@@ -615,6 +611,31 @@ extern PFNGLTEXPAGECOMMITMENTARBPROC TexPageCommitmentARB;
 extern PFNGLGETMULTISAMPLEFVNVPROC GetMultisamplefvNV;
 extern PFNGLSAMPLEMASKINDEXEDNVPROC SampleMaskIndexedNV;
 extern PFNGLTEXRENDERBUFFERNVPROC TexRenderbufferNV;
+extern PFNGLMAKEBUFFERRESIDENTNVPROC MakeBufferResidentNV;
+extern PFNGLMAKEBUFFERNONRESIDENTNVPROC MakeBufferNonResidentNV;
+extern PFNGLISBUFFERRESIDENTNVPROC IsBufferResidentNV;
+extern PFNGLMAKENAMEDBUFFERRESIDENTNVPROC MakeNamedBufferResidentNV;
+extern PFNGLMAKENAMEDBUFFERNONRESIDENTNVPROC MakeNamedBufferNonResidentNV;
+extern PFNGLISNAMEDBUFFERRESIDENTNVPROC IsNamedBufferResidentNV;
+extern PFNGLGETBUFFERPARAMETERUI64VNVPROC GetBufferParameterui64vNV;
+extern PFNGLGETNAMEDBUFFERPARAMETERUI64VNVPROC GetNamedBufferParameterui64vNV;
+extern PFNGLGETINTEGERUI64VNVPROC GetIntegerui64vNV;
+extern PFNGLUNIFORMUI64NVPROC Uniformui64NV;
+extern PFNGLUNIFORMUI64VNVPROC Uniformui64vNV;
+extern PFNGLPROGRAMUNIFORMUI64NVPROC ProgramUniformui64NV;
+extern PFNGLPROGRAMUNIFORMUI64VNVPROC ProgramUniformui64vNV;
+extern PFNGLBUFFERADDRESSRANGENVPROC BufferAddressRangeNV;
+extern PFNGLVERTEXFORMATNVPROC VertexFormatNV;
+extern PFNGLNORMALFORMATNVPROC NormalFormatNV;
+extern PFNGLCOLORFORMATNVPROC ColorFormatNV;
+extern PFNGLINDEXFORMATNVPROC IndexFormatNV;
+extern PFNGLTEXCOORDFORMATNVPROC TexCoordFormatNV;
+extern PFNGLEDGEFLAGFORMATNVPROC EdgeFlagFormatNV;
+extern PFNGLSECONDARYCOLORFORMATNVPROC SecondaryColorFormatNV;
+extern PFNGLFOGCOORDFORMATNVPROC FogCoordFormatNV;
+extern PFNGLVERTEXATTRIBFORMATNVPROC VertexAttribFormatNV;
+extern PFNGLVERTEXATTRIBIFORMATNVPROC VertexAttribIFormatNV;
+extern PFNGLGETINTEGERUI64I_VNVPROC GetIntegerui64i_vNV;
 extern PFNGLMATRIXLOADFEXTPROC MatrixLoadfEXT;
 extern PFNGLMATRIXLOADDEXTPROC MatrixLoaddEXT;
 extern PFNGLMATRIXMULTFEXTPROC MatrixMultfEXT;
