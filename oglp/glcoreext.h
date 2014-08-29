@@ -16,5 +16,7 @@
  */
 #include "ext/EXT_direct_state_access.h"
 #include "ext/NV_explicit_multisample.h"
+#include "ext/NV_shader_buffer_load.h"
+#incldue "ext/NV_vertex_buffer_unified_memory.h"
 #include "ext/NVX_gpu_memory_info.h"
 #include "ext/EXT_abgr.h"

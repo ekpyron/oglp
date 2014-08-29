@@ -5,7 +5,7 @@
 # as part of gl3w which is in the public domain
 # and available at https://github.com/skaslev/gl3w.
 #
-# Copyright (c) 2011 Daniel Kirchner
+# Copyright (c) 2014 Daniel Kirchner
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -34,7 +34,7 @@ with open('oglp/ext/EXT_direct_state_access.h', 'r') as f:
 			dsa_procs.append(m.group(1))
 
 # Parse function names from glcoreext.h
-for filename in ['NV_explicit_multisample.h', 'NVX_gpu_memory_info.h']:
+for filename in ['NV_explicit_multisample.h', 'NVX_gpu_memory_info.h', 'NV_shader_buffer_load.h', 'NV_vertex_buffer_unified_memory.h']:
 	with open(os.path.join('oglp/ext',filename), 'r') as f:
 		for line in f:
 			m = p.match (line)
@@ -49,7 +49,7 @@ def proc_t(proc):
 # Generate glcorew.h
 with open('oglp/glcorew.h', 'wt') as f:
     f.write (r'''/*
- * Copyright (c) 2011 Daniel Kirchner
+ * Copyright (c) 2014 Daniel Kirchner
  *
  * Copying and distribution of this file, with or without modification,
  * are permitted in any medium without royalty provided the copyright
@@ -86,7 +86,7 @@ GLAPI int APIENTRY Unsupported (...);
 # Generate glcorew.cxx
 with open('oglp/glcorew.cxx', 'wt') as f:
     f.write(r'''/*
- * Copyright (c) 2011 Daniel Kirchner
+ * Copyright (c) 2014 Daniel Kirchner
  *
  * Copying and distribution of this file, with or without modification,
  * are permitted in any medium without royalty provided the copyright
