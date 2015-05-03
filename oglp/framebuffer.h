@@ -78,7 +78,7 @@ public:
     {
         GLuint tmp = obj;
         obj = framebuffer.obj;
-        framebfufer.obj = tmp;
+        framebuffer.obj = tmp;
         return *this;
     }
 
