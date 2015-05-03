@@ -19,6 +19,7 @@
 #define OGLP_CXX
 
 #include "oglp.h"
+#include "glcorew.cxx"
 
 namespace oglp {
 
@@ -89,18 +90,11 @@ bool Init (GetProcAddressCallback callback)
     InitPrototypes (callback);
 #endif
     if (!GetString || GetString == (PFNGLGETSTRINGPROC) oglp::Unsupported) {
-#ifdef OGLP_ERROR_CALLBACK
-		if (internal::errorcallback)
-		{
-			internal::errorcallback (GL_NO_ERROR, "No entry point for "
-															 "glGetString found.",
-															 internal::errorcallback_userdata);
-		}
-#endif
 #ifdef OGLP_THROW_EXCEPTIONS
-		 throw std::runtime_error ("No entry point for glGetString found.");
-#endif
+		throw std::runtime_error ("No entry point for glGetString found.");
+#else
         return false;
+#endif
     }
 
     version << GetString (GL_VERSION);
@@ -110,33 +104,19 @@ bool Init (GetProcAddressCallback callback)
     version >> minor;
 
     if (major < 3) {
-#ifdef OGLP_ERROR_CALLBACK
-		if (internal::errorcallback)
-		{
-			internal::errorcallback (GL_NO_ERROR, "OpenGL version 3.0 or "
-															 "higher is required.",
-															 internal::errorcallback_userdata);
-		}
-#endif
 #ifdef OGLP_THROW_EXCEPTIONS
-		 throw std::runtime_error ("OpenGL version 3.0 or higher is required.");
-#endif
+		throw std::runtime_error ("OpenGL version 3.0 or higher is required.");
+#else
         return false;
+#endif
     }
     for (std::string &extension : needed_extensions) {
         if (!IsExtensionSupported (extension)) {
-#ifdef OGLP_ERROR_CALLBACK
-			if (internal::errorcallback)
-			{
-				internal::errorcallback (GL_NO_ERROR,
-																 (extension + " is required.").c_str (),
-																 internal::errorcallback_userdata);
-			}
-#endif
 #ifdef OGLP_THROW_EXCEPTIONS
 			throw std::runtime_error (extension + " is required.");
-#endif
+#else
             return false;
+#endif
         }
     }
     return true;
