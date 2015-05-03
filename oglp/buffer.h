@@ -406,7 +406,7 @@ public:
        * \param writeOffset offset to start writing
        * \param size        number of bytes to copy
        */
-    static void CopySubData (Buffer &readBuffer,
+    static void CopySubData (const Buffer &readBuffer,
                              Buffer &writeBuffer,
                              GLintptr readOffset,
                              GLintptr writeOffset,
