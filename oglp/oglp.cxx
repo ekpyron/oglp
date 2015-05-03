@@ -18,35 +18,24 @@
 #ifndef OGLP_CXX
 #define OGLP_CXX
 
-#include "oglp.h"
-#include "glcorew.cxx"
-
 namespace oglp {
-
-#ifdef OGLP_ERROR_CALLBACK
-namespace internal {
-ErrorCallback errorcallback = NULL;
-void *errorcallback_userdata = NULL;
-} /* namespace internal */
-#endif
 
 const char *ErrorToString (GLenum error)
 {
-		 switch (error)
-		 {
-		 case GL_NO_ERROR:
-			 return "no error";
-		 case GL_INVALID_ENUM:
-			 return "invalid enum";
-		 case GL_INVALID_VALUE:
-			 return "invalid value";
-		 case GL_INVALID_OPERATION:
-			 return "invalid operation";
-		 case GL_OUT_OF_MEMORY:
-			 return "out of memory";
-		 default:
-			 return "unknown";
-		 }
+    switch (error) {
+        case GL_NO_ERROR:
+            return "no error";
+        case GL_INVALID_ENUM:
+            return "invalid enum";
+        case GL_INVALID_VALUE:
+            return "invalid value";
+        case GL_INVALID_OPERATION:
+            return "invalid operation";
+        case GL_OUT_OF_MEMORY:
+            return "out of memory";
+        default:
+            return "unknown";
+    }
 }
 
 #ifdef _WIN32
@@ -68,36 +57,36 @@ inline void *_getprocaddress (const char *name)
 } /* namespace internal */
 #endif
 
-bool IsExtensionSupported (const std::string &name) {
-	int num, i;
-	GetIntegerv (GL_NUM_EXTENSIONS, &num);
-	for (i = 0; i < num; i++)
-	{
-		const GLubyte *ext = GetStringi (GL_EXTENSIONS, i);
-		if (!name.compare (reinterpret_cast<const char*> (ext)))
-			 return true;
-	}
-	return false;
+bool IsExtensionSupported (const std::string &name)
+{
+    int num, i;
+    GetIntegerv (GL_NUM_EXTENSIONS, &num);
+    for (i = 0; i < num; i++) {
+        const GLubyte *ext = GetStringi (GL_EXTENSIONS, i);
+        if (!name.compare (reinterpret_cast<const char *> (ext)))
+            return true;
+    }
+    return false;
 }
 
-bool Init (GetProcAddressCallback callback) {
-	std::vector<std::string> needed_extensions = {
-		"GL_ARB_separate_shader_objects",
-		"GL_ARB_sampler_objects",
-		"GL_EXT_direct_state_access"
-	};
-	std::stringstream version;
-	int major, minor;
+bool Init (GetProcAddressCallback callback)
+{
+    std::vector <std::string> needed_extensions = {
+            "GL_ARB_separate_shader_objects",
+            "GL_ARB_sampler_objects",
+            "GL_EXT_direct_state_access"
+    };
+    std::stringstream version;
+    int major, minor;
 
 #ifdef _WIN32
 	internal::_opengl32dllhandle = LoadLibrary ("OPENGL32.DLL");
 	internal::_usergetprocaddress = callback;
 	InitPrototypes (internal::_getprocaddress);
 #else
-	InitPrototypes (callback);
+    InitPrototypes (callback);
 #endif
-	if (!GetString || GetString == (PFNGLGETSTRINGPROC) oglp::Unsupported)
-	{
+    if (!GetString || GetString == (PFNGLGETSTRINGPROC) oglp::Unsupported) {
 #ifdef OGLP_ERROR_CALLBACK
 		if (internal::errorcallback)
 		{
@@ -109,17 +98,16 @@ bool Init (GetProcAddressCallback callback) {
 #ifdef OGLP_THROW_EXCEPTIONS
 		 throw std::runtime_error ("No entry point for glGetString found.");
 #endif
-		 return false;
-	}
+        return false;
+    }
 
-	version << GetString (GL_VERSION);
-	CheckError ();
-	version >> major;
-	version.ignore (1);
-	version >> minor;
+    version << GetString (GL_VERSION);
+    CheckError ();
+    version >> major;
+    version.ignore (1);
+    version >> minor;
 
-	if (major < 3)
-	{
+    if (major < 3) {
 #ifdef OGLP_ERROR_CALLBACK
 		if (internal::errorcallback)
 		{
@@ -131,12 +119,10 @@ bool Init (GetProcAddressCallback callback) {
 #ifdef OGLP_THROW_EXCEPTIONS
 		 throw std::runtime_error ("OpenGL version 3.0 or higher is required.");
 #endif
-		 return false;
-	}
-	for (std::string &extension : needed_extensions)
-	{
-		if (!IsExtensionSupported (extension))
-		{
+        return false;
+    }
+    for (std::string &extension : needed_extensions) {
+        if (!IsExtensionSupported (extension)) {
 #ifdef OGLP_ERROR_CALLBACK
 			if (internal::errorcallback)
 			{
@@ -148,10 +134,10 @@ bool Init (GetProcAddressCallback callback) {
 #ifdef OGLP_THROW_EXCEPTIONS
 			throw std::runtime_error (extension + " is required.");
 #endif
-			return false;
-		}
-	}
-	return true;
+            return false;
+        }
+    }
+    return true;
 }
 
 } /* namespace oglp */

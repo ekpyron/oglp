@@ -33,38 +33,42 @@ namespace oglp {
 class ConditionalRender
 {
 public:
-	/**
-	 * Constructor.
-	 * Creates a new ConditionalRender object and begins
-	 * conditional rendering.
-	 * \param query Query as a condition for rendering.
-	 * \param mode Specifies how glBeginConditionalRender interprets
-	 *             the results of the occlusion query.
-	 */
-	 ConditionalRender (const Query &query, GLenum mode) {
-		 query.BeginConditionalRender (mode);
-		 CheckError ();
-	 }
-	 /**
-		* Deleted copy constructor.
-		* A ConditionalRender object can't be copy constructed.
-		*/
-	 ConditionalRender (const ConditionalRender&) = delete;
-	 /**
-		* A destructor.
-		* Deletes the ConditionalRender object and
-		* automatically ends the conditional rendering.
-		*/
-	 ~ConditionalRender (void) {
-		 Query::EndConditionalRender ();
-		 CheckError ();
-	 }
-	 /**
-		* Deleted copy assignment.
-		* A Query object can't be copy assigned.
-		* \return
-		*/
-	 ConditionalRender &operator= (const ConditionalRender&) = delete;
+    /**
+     * Constructor.
+     * Creates a new ConditionalRender object and begins
+     * conditional rendering.
+     * \param query Query as a condition for rendering.
+     * \param mode Specifies how glBeginConditionalRender interprets
+     *             the results of the occlusion query.
+     */
+    ConditionalRender (const Query &query, GLenum mode)
+    {
+        query.BeginConditionalRender (mode);
+        CheckError ();
+    }
+
+    /**
+       * Deleted copy constructor.
+       * A ConditionalRender object can't be copy constructed.
+       */
+    ConditionalRender (const ConditionalRender &) = delete;
+
+    /**
+       * A destructor.
+       * Deletes the ConditionalRender object and
+       * automatically ends the conditional rendering.
+       */
+    ~ConditionalRender (void)
+    {
+        oglp::EndConditionalRender ();
+    }
+
+    /**
+       * Deleted copy assignment.
+       * A Query object can't be copy assigned.
+       * \return
+       */
+    ConditionalRender &operator= (const ConditionalRender &) = delete;
 };
 
 } /* namespace oglp */

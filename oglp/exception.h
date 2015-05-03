@@ -31,24 +31,28 @@ const char *ErrorToString (GLenum error);
 class Exception : public std::exception
 {
 public:
-	 /**
-		* Constructor.
-		* \param err Specifies the OpenGL error code
-		*/
-	 Exception (GLenum err) : error (err) {
-	 }
-	 /**
-		* Format the reason for the exception.
-		* \return A string describing the exception.
-		*/
-	 virtual const char *what (void) const throw () {
-		 return ErrorToString (error);
-	 }
+    /**
+       * Constructor.
+       * \param err Specifies the OpenGL error code
+       */
+    Exception (GLenum err) : error (err)
+    {
+    }
+
+    /**
+       * Format the reason for the exception.
+       * \return A string describing the exception.
+       */
+    virtual const char *what (void) const noexcept
+    {
+        return ErrorToString (error);
+    }
+
 private:
-	 /**
-		* stores the OpenGL error code
-		*/
-	 GLenum error;
+    /**
+       * stores the OpenGL error code
+       */
+    GLenum error;
 };
 
 } /* namespace oglp */

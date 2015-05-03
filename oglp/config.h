@@ -18,10 +18,9 @@
 #define OGLP_CONFIG_H
 
 /*#define OGLP_THROW_EXCEPTIONS*/
-#define OGLP_ERROR_CALLBACK
 
-#if __cplusplus > 199711L
-#define OGLP_USE_CXX11
+#if __cplusplus < 201103L
+#error "C++11 is required for OGLP"
 #endif
 
 #endif /* !defined OGLP_CONFIG_H */

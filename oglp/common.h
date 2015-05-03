@@ -18,15 +18,18 @@
 #define OGLP_COMMON_H
 
 #include "config.h"
+
 #ifdef _WIN32
 #include <windows.h>
 #endif
 #ifdef OGLP_USE_CXX11
 #include <functional>
 #endif
+
 #include "glcorew.h"
 #include <glm/glm.hpp>
 #include <sstream>
+
 #ifdef OGLP_THROW_EXCEPTIONS
 #include <stdexcept>
 #include "exception.h"
@@ -47,48 +50,17 @@ namespace oglp {
  */
 const char *ErrorToString (GLenum error);
 
-#ifdef OGLP_ERROR_CALLBACK
-/** Error callback.
- * Callback that receives error codes and messages.
- * \param err OpenGL error code. If the error was not an OpenGL error
- *            this is set to GL_NO_ERROR.
- * \param msg A human readable error message.
- * \param userdata The user pointer as specified with SetErrorCallback.
- */
-typedef void (*ErrorCallback) (GLenum err, const char *msg, void *userdata);
-namespace internal {
-extern ErrorCallback errorcallback;
-extern void *errorcallback_userdata;
-} /* namespace internal */
-
-/** Set error callback.
- * Specifies an error callback that is called, if an OpenGL error is
- * detected.
- * \param cb The error callback to use.
- * \param userdata A user pointer that is passed on to the error callback.
- */
-inline void SetErrorCallback (ErrorCallback cb, void *userdata) {
-	internal::errorcallback = cb;
-	internal::errorcallback_userdata = userdata;
-}
-#endif
-
 /**
  * Check for an OpenGL error.
- * Checks for an OpenGL error and calls the error callback or
- * throws an Exception if one occurred, depending on whether
- * OGLP_ERROR_CALLBACK is defined and a callback was set with
- * SetErrorCallback or OGLP_THROW_EXCEPTIONS is defined.
+ * If OGLP_THROW_EXCEPTIONS is defined, this checks for an
+ * OpenGL error and throws an Exception if one occurred,
+ * otherwise it does nothing.
  */
-inline void CheckError (void) {
+inline void CheckError (void)
+{
+#ifdef OGLP_THROW_EXCEPTIONS
 	GLenum err;
 	err = GetError ();
-#ifdef OGLP_ERROR_CALLBACK
-	if (err != GL_NO_ERROR && internal::errorcallback)
-		 internal::errorcallback (err, ErrorToString (err),
-															internal::errorcallback_userdata);
-#endif
-#ifdef OGLP_THROW_EXCEPTIONS
 	if (err != GL_NO_ERROR)
 		throw Exception (err);
 #endif

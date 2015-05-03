@@ -29,117 +29,125 @@ namespace oglp {
 class TransformFeedback
 {
 public:
-	 /**
-		* Default constructor.
-		* Creates a new TransformFeedback object.
-		*/
-	 TransformFeedback (void) {
-		 GenTransformFeedbacks (1, &obj);
-		 CheckError ();
-	 }
-	 /**
-		* Move constuctor.
-		* Passes the internal OpenGL transform feedback object to
-		* another TransformFeedback object.
-		* \param t The TransformFeedback object to move.
-		*/
-	 TransformFeedback (TransformFeedback &&t) : obj (t.obj) {
-		 GenTransformFeedbacks (1, &t.obj);
-		 CheckError ();
-	 }
-	 /**
-		* A destructor.
-		* Deletes a TransformFeedback object.
-		*/
-	 ~TransformFeedback (void) {
-		 DeleteTransformFeedbacks (1, &obj);
-		 CheckError ();
-	 }
-	 /**
-		* Deleted copy assignment.
-		* A TransformFeedback object can't be copy assigned.
-		*/
-	 TransformFeedback (const TransformFeedback&) = delete;
-	 /**
-		* Move assignment.
-		* Passes the internal OpenGL transform feedback object to another
-		* TransformFeedback object.
-		* \param t The TransformFeedback object to move.
-		* \return A reference to the transform feedback object.
-		*/
-	 TransformFeedback &operator= (TransformFeedback &&t) {
-	     DeleteTransformFeedbacks (1, &obj);
-		 obj = t.obj;
-		 GenTransformFeedbacks (1, &t.obj);
-		 CheckError ();
-		 return *this;
-	 }
-	 /**
-		* Deleted copy assignment.
-		* A TransformFeedback object can't be copy assigned.
-		* \return
-		*/
-	 TransformFeedback &operator= (const TransformFeedback&) = delete;
-	 /**
-		* Label the transform feedback object.
-		* Labels the internal OpenGL transform feedback object.
-		* \param name Label to be used for the transform feedback object.
-		*/
-	 void Label (const std::string &name) {
-		ObjectLabel (GL_TRANSFORM_FEEDBACK, obj, name.length (), name.data ());
-		CheckError ();
-	 }
-	 /**
-		* Bind a transform feedback object.
-		* Binds a transform feedback object.
-		* \param target Specifies the target to which to bind the
-		*               transform feedback object. target must be
-		*               GL_TRANSFORM_FEEDBACK.                
-		*/
-	 void Bind (GLenum target) const {
-		 BindTransformFeedback (target, obj);
-		 CheckError ();
-	 }
-   /**
-		* Determine if a name corresponds to a transform feedback object.
-		* Determines if a name corresponds to a transform feedback object.
-		* \returns Whether the internal object is a valid OpenGL
-		*          transform feedback object.
-		*/
-	 GLboolean IsTransformFeedback (void) const {
-		 GLboolean result;
-		 result = oglp::IsTransformFeedback (obj);
-		 CheckError ();
-		 return result;
-	 }
-   /**
-		* Pause transform feedback operations.
-		* Pauses transform feedback operations.
-		*/
-	 static void Pause (void) {
-		 PauseTransformFeedback ();
-		 CheckError ();
-	 }
-   /**
-		* Resume transform feedback operations.
-		* Resumes transform feedback operations.
-		*/
-	 static void Resume (void) {
-		 ResumeTransformFeedback ();
-		 CheckError ();
-	 }
-   /**
-		* Swap internal object.
-		* Swaps the internal OpenGL transform feedback object with
-		* another TransformFeedback.
-		* \param t Object with which to swap the internal OpenGL
-		*          transform feedback object.
-		*/
-	 void swap (TransformFeedback &t) {
-		 std::swap (obj, t.obj);
-	 }
+    /**
+       * Default constructor.
+       * Creates a new TransformFeedback object.
+       */
+    TransformFeedback (void)
+    {
+        GenTransformFeedbacks (1, &obj);
+        CheckError ();
+    }
+
+    /**
+       * Move constuctor.
+       * Passes the internal OpenGL transform feedback object to
+       * another TransformFeedback object.
+       * \param t The TransformFeedback object to move.
+       */
+    TransformFeedback (TransformFeedback &&t) noexcept
+    {
+        GLuint tmp = obj;
+        obj = t.obj;
+        t.obj = tmp;
+    }
+
+    /**
+       * A destructor.
+       * Deletes a TransformFeedback object.
+       */
+    ~TransformFeedback (void)
+    {
+        DeleteTransformFeedbacks (1, &obj);
+    }
+
+    /**
+       * Deleted copy assignment.
+       * A TransformFeedback object can't be copy assigned.
+       */
+    TransformFeedback (const TransformFeedback &) = delete;
+
+    /**
+       * Move assignment.
+       * Passes the internal OpenGL transform feedback object to another
+       * TransformFeedback object.
+       * \param t The TransformFeedback object to move.
+       * \return A reference to the transform feedback object.
+       */
+    TransformFeedback &operator= (TransformFeedback &&t) noexcept
+    {
+        GLuint tmp = obj;
+        obj = t.obj;
+        t.obj = tmp;
+        return *this;
+    }
+
+    /**
+       * Deleted copy assignment.
+       * A TransformFeedback object can't be copy assigned.
+       * \return
+       */
+    TransformFeedback &operator= (const TransformFeedback &) = delete;
+
+    /**
+       * Label the transform feedback object.
+       * Labels the internal OpenGL transform feedback object.
+       * \param name Label to be used for the transform feedback object.
+       */
+    void Label (const std::string &name)
+    {
+        ObjectLabel (GL_TRANSFORM_FEEDBACK, obj, name.length (), name.data ());
+        CheckError ();
+    }
+
+    /**
+       * Bind a transform feedback object.
+       * Binds a transform feedback object.
+       * \param target Specifies the target to which to bind the
+       *               transform feedback object. target must be
+       *               GL_TRANSFORM_FEEDBACK.
+       */
+    void Bind (GLenum target) const
+    {
+        BindTransformFeedback (target, obj);
+        CheckError ();
+    }
+
+    /**
+         * Determine if a name corresponds to a transform feedback object.
+         * Determines if a name corresponds to a transform feedback object.
+         * \returns Whether the internal object is a valid OpenGL
+         *          transform feedback object.
+         */
+    GLboolean IsTransformFeedback (void) const
+    {
+        GLboolean result;
+        result = oglp::IsTransformFeedback (obj);
+        CheckError ();
+        return result;
+    }
+
+    /**
+         * Pause transform feedback operations.
+         * Pauses transform feedback operations.
+         */
+    static void Pause (void)
+    {
+        PauseTransformFeedback ();
+        CheckError ();
+    }
+
+    /**
+         * Resume transform feedback operations.
+         * Resumes transform feedback operations.
+         */
+    static void Resume (void)
+    {
+        ResumeTransformFeedback ();
+        CheckError ();
+    }
 private:
-	 GLuint obj;
+    GLuint obj;
 };
 
 /**
@@ -152,38 +160,42 @@ private:
 class TransformFeedbackOperation
 {
 public:
-	/**
-	 * Constructor.
-	 * Creates a new TransformFeedbackOperation object and starts
-	 * a transform feedback operation
-	 * \param primitiveMode Specify the output type of the primitives
-	 *                      that will be recorded into the buffer objects
-	 *                      that are bound for transform feedback.
-	 */
-	 TransformFeedbackOperation (GLenum primitiveMode) {
-		 BeginTransformFeedback (primitiveMode);
-		 CheckError ();
-	 }
-	 /**
-		* Deleted copy constructor.
-		* A TransformFeedbackOperation object can't be copy constructed.
-		*/
-	 TransformFeedbackOperation (const TransformFeedbackOperation&) = delete;
-	 /**
-		* A destructor.
-		* Deletes the TransformFeedbackOperation object and
-		* automatically ends the transform feedback operation.
-		*/
-	 ~TransformFeedbackOperation (void) {
-		 EndTransformFeedback ();
-		 CheckError ();
-	 }
-	 /**
-		* Deleted copy assignment.
-		* A TransformFeedbackOperation object can't be copy assigned.
-		* \return
-		*/
-	 TransformFeedbackOperation &operator= (const TransformFeedbackOperation&) = delete;
+    /**
+     * Constructor.
+     * Creates a new TransformFeedbackOperation object and starts
+     * a transform feedback operation
+     * \param primitiveMode Specify the output type of the primitives
+     *                      that will be recorded into the buffer objects
+     *                      that are bound for transform feedback.
+     */
+    TransformFeedbackOperation (GLenum primitiveMode)
+    {
+        BeginTransformFeedback (primitiveMode);
+        CheckError ();
+    }
+
+    /**
+       * Deleted copy constructor.
+       * A TransformFeedbackOperation object can't be copy constructed.
+       */
+    TransformFeedbackOperation (const TransformFeedbackOperation &) = delete;
+
+    /**
+       * A destructor.
+       * Deletes the TransformFeedbackOperation object and
+       * automatically ends the transform feedback operation.
+       */
+    ~TransformFeedbackOperation (void)
+    {
+        EndTransformFeedback ();
+    }
+
+    /**
+       * Deleted copy assignment.
+       * A TransformFeedbackOperation object can't be copy assigned.
+       * \return
+       */
+    TransformFeedbackOperation &operator= (const TransformFeedbackOperation &) = delete;
 };
 
 } /* namespace oglp */
