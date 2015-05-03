@@ -18,6 +18,8 @@
 #ifndef OGLP_CXX
 #define OGLP_CXX
 
+#include "oglp.h"
+
 namespace oglp {
 
 const char *ErrorToString (GLenum error)
