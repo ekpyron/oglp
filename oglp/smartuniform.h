@@ -44,7 +44,9 @@ public:
        * Creates a SmartUniform from a Uniform object and its value.
        * This implicitely assigns the given value to the uniform.
        */
-    SmartUniform (const Uniform &u, const T &v) : uniform (u), value (v) {}
+    SmartUniform (const Uniform &u, const T &v) : uniform (u), value (v) {
+        uniform = value;
+    }
 
     /**
        * Copy constuctor.
