@@ -37,7 +37,7 @@ public:
      */
     VertexArray (void)
     {
-        GenVertexArrays (1, &obj);
+        CreateVertexArrays (1, &obj);
         CheckError ();
     }
 
@@ -113,84 +113,14 @@ public:
     }
 
     /**
-       * Specify an vertex attrib.
-       * Defines an array of generic vertex attribute data in the vertex array.
-       * \param buffer Buffer object in which the data is stored.
-       * \param index Specifies the index of the generic vertex
-       *              attribute to be modified.
-       * \param type Specifies the data type of each component.
-       *             Must be one of the following symbolic constants:
-       *             - GL_BYTE
-       *             - GL_UNSIGNED_BYTE
-       *             - GL_SHORT
-       *             - GL_UNSIGNED_SHORT
-       *             - GL_INT
-       *             - GL_UNSIGNED_INT
-       *             - GL_FLOAT
-       *             - GL_DOUBLE
-       * \param size Specifies the number of components per generic
-       *             vertex attribute. Must be 1, 2, 3, or 4.
-       * \param normalized Specifies whether fixed-point data values
-       *                   should be normalized (GL_TRUE) or converted
-       *                   directly as fixed-point values (GL_FALSE) when
-       *                   they are accessed.
-       * \param stride Specifies the byte offset between consecutive
-       *               generic vertex attributes. If stride is 0, the
-       *               generic vertex attributes are understood to be
-       *               tightly packed.
-       * \param offset Specifies the offset of the first component of
-       *               the first generic vertex attribute in the buffer.
-       */
-    void VertexAttribOffset (const Buffer &buffer, GLuint index, GLint size,
-                             GLenum type, GLboolean normalized, GLsizei stride,
-                             GLintptr offset)
-    {
-        VertexArrayVertexAttribOffsetEXT (obj, buffer.get (), index, size,
-                                          type, normalized, stride, offset);
-        CheckError ();
-    }
-
-    /**
-       * Specify an vertex attrib.
-       * Defines an array of generic vertex attribute data in the vertex array.
-       * \param buffer Buffer object in which the data is stored.
-       * \param index Specifies the index of the generic vertex
-       *              attribute to be modified.
-       * \param type Specifies the data type of each component.
-       *             Must be one of the following symbolic constants:
-       *             - GL_BYTE
-       *             - GL_UNSIGNED_BYTE
-       *             - GL_SHORT
-       *             - GL_UNSIGNED_SHORT
-       *             - GL_INT
-       *             - GL_UNSIGNED_INT
-       * \param size Specifies the number of components per generic
-       *             vertex attribute. Must be 1, 2, 3, or 4.
-       * \param stride Specifies the byte offset between consecutive
-       *               generic vertex attributes. If stride is 0, the
-       *               generic vertex attributes are understood to be
-       *               tightly packed.
-       * \param offset Specifies the offset of the first component of
-       *               the first generic vertex attribute in the buffer.
-       */
-    void VertexAttribIOffset (const Buffer &buffer, GLuint index, GLint size,
-                              GLenum type, GLsizei stride,
-                              GLintptr offset)
-    {
-        VertexArrayVertexAttribIOffsetEXT (obj, buffer.get (), index, size,
-                                           type, stride, offset);
-        CheckError ();
-    }
-
-    /**
   * Enable a vertex attrib.
   * Enables a generic vertex attribute.
   * \param index Specifies the index of the generic vertex
   *              attribute to be enabled.
   */
-    void EnableVertexAttrib (GLuint index)
+    void EnableAttrib (GLuint index)
     {
-        EnableVertexArrayAttribEXT (obj, index);
+        EnableVertexArrayAttrib (obj, index);
         CheckError ();
     }
 
@@ -200,9 +130,47 @@ public:
        * \param index Specifies the index of the generic vertex
        *              attribute to be disabled.
        */
-    void DisableVertexAttrib (GLuint index)
+    void DisableAttrib (GLuint index)
     {
-        DisableVertexArrayAttribEXT (obj, index);
+        DisableVertexArrayAttrib (obj, index);
+        CheckError ();
+    }
+
+    /**
+     * Specify element buffer.
+     * Configures element array buffer binding of a vertex array object.
+     * \param buffer Specifies the name of the buffer object to use for the element array buffer binding.
+     */
+    void ElementBuffer (GLuint buffer) {
+        VertexArrayElementBuffer (obj, buffer);
+        CheckError ();
+    }
+
+    /** Bind vertex buffers.
+     * Attach multiple buffer objects to a vertex array object.
+     * \param first Specifies the first vertex buffer binding point to which a buffer object is to be bound.
+     * \param count Specifies the number of buffers to bind.
+     * \param buffers Specifies the address of an array of names of existing buffer objects.
+     * \param offsets Specifies the address of an array of offsets to associate with the binding points.
+     * \param strides Specifies the address of an array of strides to associate with the binding points.
+     */
+    void VertexBuffers (GLuint first, GLuint count, const GLuint *buffers,
+                        const GLintptr *offsets, const GLsizei *strides) {
+        VertexArrayVertexBuffers (obj, first, count, buffers, offsets, strides);
+        CheckError ();
+    }
+
+    /** Bind vertex buffers.
+     * Attach multiple buffer objects to a vertex array object.
+     * \param first Specifies the first vertex buffer binding point to which a buffer object is to be bound.
+     * \param count Specifies the number of buffers to bind.
+     * \param buffers Specifies the address of an array of names of existing buffer objects.
+     * \param offsets Specifies the address of an array of offsets to associate with the binding points.
+     * \param strides Specifies the address of an array of strides to associate with the binding points.
+     */
+    void VertexBuffers (GLuint first, GLuint count, const Buffer *buffers,
+                        const GLintptr *offsets, const GLsizei *strides) {
+        VertexArrayVertexBuffers (obj, first, count, reinterpret_cast<const GLuint*> (buffers), offsets, strides);
         CheckError ();
     }
 
@@ -215,11 +183,9 @@ public:
          * \param offset The offset of the first element of the buffer.
          * \param stride The distance between elements within the buffer.
          */
-    void BindVertexBuffer (GLuint bindingindex, const Buffer &buffer,
-                           GLintptr offset, GLsizei stride)
+    void VertexBuffer (GLuint bindingindex, const Buffer &buffer, GLintptr offset, GLsizei stride)
     {
-        VertexArrayBindVertexBufferEXT (obj, bindingindex, buffer.get (),
-                                        offset, stride);
+        VertexArrayVertexBuffer (obj, bindingindex, buffer.get (), offset, stride);
         CheckError ();
     }
 
@@ -232,11 +198,9 @@ public:
          * \param offset The offset of the first element of the buffer.
          * \param stride The distance between elements within the buffer.
          */
-    void BindVertexBuffer (GLuint bindingindex, GLuint buffer,
-                           GLintptr offset, GLsizei stride)
+    void VertexBuffer (GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride)
     {
-        VertexArrayBindVertexBufferEXT (obj, bindingindex, buffer,
-                                        offset, stride);
+        VertexArrayVertexBuffer (obj, bindingindex, buffer, offset, stride);
         CheckError ();
     }
 
@@ -248,11 +212,10 @@ public:
        * \param normalized The distance between elements within the buffer.
        * \param relativeoffset The distance between elements within the buffer.
        */
-    void VertexAttribFormat (GLuint attribindex, GLint size, GLenum type,
+    void AttribFormat (GLuint attribindex, GLint size, GLenum type,
                              GLboolean normalized, GLuint relativeoffset)
     {
-        VertexArrayVertexAttribFormatEXT (obj, attribindex, size, type,
-                                          normalized, relativeoffset);
+        VertexArrayAttribFormat (obj, attribindex, size, type, normalized, relativeoffset);
         CheckError ();
     }
 
@@ -263,11 +226,9 @@ public:
        * \param type The type of the data stored in the array.
        * \param relativeoffset The distance between elements within the buffer.
        */
-    void VertexAttribIFormat (GLuint attribindex, GLint size, GLenum type,
-                              GLuint relativeoffset)
+    void AttribIFormat (GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
     {
-        VertexArrayVertexAttribIFormatEXT (obj, attribindex, size, type,
-                                           relativeoffset);
+        VertexArrayAttribIFormat (obj, attribindex, size, type, relativeoffset);
         CheckError ();
     }
 
@@ -278,11 +239,9 @@ public:
        * \param type The type of the data stored in the array.
        * \param relativeoffset The distance between elements within the buffer.
        */
-    void VertexAttribLFormat (GLuint attribindex, GLint size, GLenum type,
-                              GLuint relativeoffset)
+    void AttribLFormat (GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
     {
-        VertexArrayVertexAttribLFormatEXT (obj, attribindex, size, type,
-                                           relativeoffset);
+        VertexArrayAttribLFormat (obj, attribindex, size, type, relativeoffset);
         CheckError ();
     }
 
@@ -294,9 +253,9 @@ public:
        *                     with which to associate the
        *                     generic vertex attribute.
        */
-    void VertexAttribBinding (GLuint attribindex, GLuint bindingindex)
+    void AttribBinding (GLuint attribindex, GLuint bindingindex)
     {
-        VertexArrayVertexAttribBindingEXT (obj, attribindex, bindingindex);
+        VertexArrayAttribBinding (obj, attribindex, bindingindex);
         CheckError ();
     }
 
@@ -305,9 +264,9 @@ public:
        * \param bindingindex The index of the binding whose divisor to modify.
        * \param divisor The new value for the instance step rate to apply.
        */
-    void VertexBindingDivisor (GLuint bindingindex, GLuint divisor)
+    void BindingDivisor (GLuint bindingindex, GLuint divisor)
     {
-        VertexArrayVertexBindingDivisorEXT (obj, bindingindex, divisor);
+        VertexArrayBindingDivisor (obj, bindingindex, divisor);
         CheckError ();
     }
 

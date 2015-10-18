@@ -35,7 +35,7 @@ public:
        */
     Sampler (void)
     {
-        GenSamplers (1, &obj);
+        CreateSamplers (1, &obj);
         CheckError ();
     }
 

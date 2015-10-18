@@ -36,7 +36,7 @@ public:
      */
     Buffer (void)
     {
-        GenBuffers (1, &obj);
+        CreateBuffers (1, &obj);
         CheckError ();
     }
 
@@ -194,7 +194,7 @@ public:
        */
     void Data (GLsizeiptr size, const GLvoid *data, GLenum usage)
     {
-        NamedBufferDataEXT (obj, size, data, usage);
+        NamedBufferData (obj, size, data, usage);
         CheckError ();
     }
 
@@ -218,7 +218,7 @@ public:
        */
     void Storage (GLsizeiptr size, const void *data, GLbitfield flags)
     {
-        NamedBufferStorageEXT (obj, size, data, flags);
+        NamedBufferStorage (obj, size, data, flags);
         CheckError ();
     }
 
@@ -235,7 +235,7 @@ public:
        */
     void SubData (GLintptr offset, GLsizeiptr size, const GLvoid *data)
     {
-        NamedBufferSubDataEXT (obj, offset, size, data);
+        NamedBufferSubData (obj, offset, size, data);
         CheckError ();
     }
 
@@ -255,7 +255,7 @@ public:
     GLvoid *Map (GLenum access) const
     {
         GLvoid *ptr;
-        ptr = MapNamedBufferEXT (obj, access);
+        ptr = MapNamedBuffer (obj, access);
         CheckError ();
 #ifdef OGLP_THROW_EXCEPTIONS
 		 if (ptr == NULL) throw std::runtime_error ("An OpenGL buffer object could not be mapped to memory.");
@@ -278,7 +278,7 @@ public:
                       GLbitfield access) const
     {
         GLvoid *ptr;
-        ptr = MapNamedBufferRangeEXT (obj, offset, length, access);
+        ptr = MapNamedBufferRange (obj, offset, length, access);
         CheckError ();
 #ifdef OGLP_THROW_EXCEPTIONS
 		 if (ptr == NULL) throw std::runtime_error ("An OpenGL buffer object could not be mapped to memory");
@@ -293,7 +293,7 @@ public:
        */
     void Unmap (void) const
     {
-        UnmapNamedBufferEXT (obj);
+        UnmapNamedBuffer (obj);
         CheckError ();
     }
 
@@ -307,7 +307,7 @@ public:
        */
     void FlushMappedRange (GLintptr offset, GLsizeiptr length) const
     {
-        FlushMappedNamedBufferRangeEXT (obj, offset, length);
+        FlushMappedNamedBufferRange (obj, offset, length);
         CheckError ();
     }
 
@@ -325,7 +325,7 @@ public:
     void ClearData (GLenum internalformat, GLenum format,
                     GLenum type, const void *data)
     {
-        ClearNamedBufferDataEXT (obj, internalformat, format, type, data);
+        ClearNamedBufferData (obj, internalformat, format, type, data);
         CheckError ();
     }
 
@@ -349,7 +349,7 @@ public:
                        GLsizeiptr size,
                        const void *data)
     {
-        ClearNamedBufferSubDataEXT (obj, internalformat, offset, size,
+        ClearNamedBufferSubData (obj, internalformat, offset, size,
                                     format, type, data);
         CheckError ();
     }
@@ -363,7 +363,7 @@ public:
        */
     void GetParameter (GLenum value, GLint *data) const
     {
-        GetNamedBufferParameterivEXT (obj, value, data);
+        GetNamedBufferParameteriv (obj, value, data);
         CheckError ();
     }
 
@@ -415,8 +415,8 @@ public:
                              GLintptr writeOffset,
                              GLsizeiptr size)
     {
-        NamedCopyBufferSubDataEXT (readBuffer.obj, writeBuffer.obj,
-                                   readOffset, writeOffset, size);
+        CopyNamedBufferSubData (readBuffer.obj, writeBuffer.obj,
+                                readOffset, writeOffset, size);
         CheckError ();
     }
 

@@ -17,7 +17,6 @@
  * along with midium.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ext/EXT_direct_state_access.h"
 #include "ext/NV_explicit_multisample.h"
 #include "ext/NV_shader_buffer_load.h"
 #include "ext/NV_vertex_buffer_unified_memory.h"

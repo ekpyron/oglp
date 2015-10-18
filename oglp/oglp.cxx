@@ -80,7 +80,7 @@ bool Init (GetProcAddressCallback callback)
     std::vector <std::string> needed_extensions = {
             "GL_ARB_separate_shader_objects",
             "GL_ARB_sampler_objects",
-            "GL_EXT_direct_state_access"
+            "GL_ARB_direct_state_access"
     };
     std::stringstream version;
     int major, minor;

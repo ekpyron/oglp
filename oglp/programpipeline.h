@@ -37,7 +37,7 @@ public:
        */
     ProgramPipeline (void)
     {
-        GenProgramPipelines (1, &obj);
+        CreateProgramPipelines (1, &obj);
         CheckError ();
     }
 

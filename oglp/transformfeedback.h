@@ -38,7 +38,7 @@ public:
        */
     TransformFeedback (void)
     {
-        GenTransformFeedbacks (1, &obj);
+        CreateTransformFeedbacks (1, &obj);
         CheckError ();
     }
 

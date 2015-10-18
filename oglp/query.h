@@ -33,10 +33,11 @@ public:
     /**
      * Default contructor.
      * Creates a new Query object.
+     * \param target Specifies the target of each created query object.
      */
-    Query (void)
+    Query (GLenum target)
     {
-        GenQueries (1, &obj);
+        CreateQueries (target, 1, &obj);
         CheckError ();
     }
 

@@ -38,7 +38,7 @@ public:
        */
     Framebuffer (void)
     {
-        GenFramebuffers (1, &obj);
+        CreateFramebuffers (1, &obj);
         CheckError ();
     }
 
@@ -128,6 +128,52 @@ public:
     }
 
     /**
+     * Clears a buffer.
+     * Clear individual buffers of a framebuffer.
+     * \param buffer Specify the buffer to clear.
+     * \param drawbuffer Specify a particular draw buffer to clear.
+     * \param value A pointer to the value or values to clear the buffer to.
+     */
+    void Clear (GLenum buffer, GLint drawbuffer, const GLint *value) {
+        ClearNamedFramebufferiv (obj, buffer, drawbuffer, value);
+        CheckError ();
+    }
+
+    /**
+      * Clears a buffer.
+      * Clear individual buffers of a framebuffer.
+      * \param buffer Specify the buffer to clear.
+      * \param drawbuffer Specify a particular draw buffer to clear.
+      * \param value A pointer to the value or values to clear the buffer to.
+      */
+    void Clear (GLenum buffer, GLint drawbuffer, const GLuint *value) {
+        ClearNamedFramebufferuiv (obj, buffer, drawbuffer, value);
+        CheckError ();
+    }
+    /**
+     * Clears a buffer.
+     * Clear individual buffers of a framebuffer.
+     * \param buffer Specify the buffer to clear.
+     * \param drawbuffer Specify a particular draw buffer to clear.
+     * \param value A pointer to the value or values to clear the buffer to.
+     */
+    void Clear (GLenum buffer, GLint drawbuffer, const GLfloat *value) {
+        ClearNamedFramebufferfv (obj, buffer, drawbuffer, value);
+        CheckError ();
+    }
+    /**
+     * Clears a buffer.
+     * Clear individual buffers of a framebuffer.
+     * \param buffer Specify the buffer to clear.
+     * \param depth The value to clear the depth buffer to.
+     * \param stencil The value to clear the stencil buffer to.
+     */
+    void Clear (GLenum buffer, GLfloat depth, GLfloat stencil) {
+        ClearNamedFramebufferfi (obj, buffer, depth, stencil);
+        CheckError ();
+    }
+
+    /**
        * Attach a texture object to the Framebuffer object.
        * Attach a level of a texture object as a logical buffer to the
        * Framebuffer object.
@@ -137,19 +183,14 @@ public:
        *                   - GL_DEPTH_ATTACHMENT
        *                   - GL_STENCIL_ATTACHMENT
        *                   - GL_DEPTH_STENCIL_ATTACHMMENT
-       * \param textarget Specifies what type of Texture is expected
-       *                  in the texture parameter, or for cube map textures,
-       *                  which face is to be attached.
        * \param texture Specifies the texture to be attached
        *                to the Framebuffer object.
        * \param level Specifies the mipmap level of texture to attach.
        * \sa Renderbuffer()
        */
-    void Texture2D (GLenum attachment, GLenum textarget,
-                    const Texture &texture, GLint level) const
+    void Texture2D (GLenum attachment, const Texture &texture, GLint level) const
     {
-        NamedFramebufferTexture2DEXT (obj, attachment, textarget,
-                                      texture.get (), level);
+        NamedFramebufferTexture (obj, attachment, texture.get (), level);
         CheckError ();
     }
 
@@ -172,8 +213,7 @@ public:
     void TextureLayer (GLenum attachment, const Texture &texture,
                        GLint level, GLint layer) const
     {
-        NamedFramebufferTextureLayerEXT (obj, attachment, texture.get (),
-                                         level, layer);
+        NamedFramebufferTextureLayer (obj, attachment, texture.get (), level, layer);
         CheckError ();
     }
 
@@ -189,8 +229,7 @@ public:
     void Renderbuffer (GLenum attachment, GLenum renderbuffertarget,
                        const Renderbuffer &renderbuffer) const
     {
-        NamedFramebufferRenderbufferEXT (obj, attachment, renderbuffertarget,
-                                         renderbuffer.get ());
+        NamedFramebufferRenderbuffer (obj, attachment, renderbuffertarget, renderbuffer.get ());
         CheckError ();
     }
 
@@ -203,7 +242,7 @@ public:
        */
     void DrawBuffers (const std::vector <GLenum> &bufs) const
     {
-        FramebufferDrawBuffersEXT (obj, bufs.size (), &bufs[0]);
+        NamedFramebufferDrawBuffers (obj, bufs.size (), &bufs[0]);
         CheckError ();
     }
 
@@ -217,7 +256,7 @@ public:
        */
     void DrawBuffers (const GLuint &n, const GLenum *bufs) const
     {
-        FramebufferDrawBuffersEXT (obj, n, bufs);
+        NamedFramebufferDrawBuffers (obj, n, bufs);
         CheckError ();
     }
 
@@ -230,7 +269,7 @@ public:
        */
     void Parameter (GLenum pname, GLint param) const
     {
-        NamedFramebufferParameteriEXT (obj, pname, param);
+        NamedFramebufferParameteri (obj, pname, param);
         CheckError ();
     }
 

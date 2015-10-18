@@ -35,7 +35,7 @@ public:
        */
     Renderbuffer (void)
     {
-        GenRenderbuffers (1, &obj);
+        CreateRenderbuffers (1, &obj);
         CheckError ();
     }
 
@@ -112,7 +112,7 @@ public:
     void Storage (GLenum internalformat, GLsizei width,
                   GLsizei height) const
     {
-        NamedRenderbufferStorageEXT (obj, internalformat, width, height);
+        NamedRenderbufferStorage (obj, internalformat, width, height);
         CheckError ();
     }
 
@@ -130,8 +130,7 @@ public:
     void StorageMultisample (GLsizei samples, GLenum internalformat,
                              GLsizei width, GLsizei height) const
     {
-        NamedRenderbufferStorageMultisampleEXT (obj, samples, internalformat,
-                                                width, height);
+        NamedRenderbufferStorageMultisample (obj, samples, internalformat, width, height);
         CheckError ();
     }
 
