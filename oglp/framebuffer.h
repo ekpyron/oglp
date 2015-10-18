@@ -233,6 +233,16 @@ public:
         CheckError ();
     }
 
+    /** Specify which color buffers are drawn into.
+     * Specifies which color buffers are to be drawn into.
+     * \param buf GL_COLOR_ATTACHMENT$m$ and GL_NONE enums are accepted, where $m$ is a value between 0 and
+     *            GL_MAX_COLOR_ATTACHMENTS.
+     */
+    void DrawBuffer (GLenum buf) {
+        NamedFramebufferDrawBuffer (obj, buf);
+        CheckError ();
+    }
+
     /**
        * Specify buffers to draw to.
        * Specifies a list of color buffers to be drawn into.
