@@ -188,9 +188,30 @@ public:
        * \param level Specifies the mipmap level of texture to attach.
        * \sa Renderbuffer()
        */
-    void Texture2D (GLenum attachment, const Texture &texture, GLint level) const
+    void Texture (GLenum attachment, const Texture &texture, GLint level) const
     {
         NamedFramebufferTexture (obj, attachment, texture.get (), level);
+        CheckError ();
+    }
+
+    /**
+       * Attach a texture object to the Framebuffer object.
+       * Attach a level of a texture object as a logical buffer to the
+       * Framebuffer object.
+       * \param attachment Specifies the attachment point of the Framebuffer.
+       *                   attachment must be one of the following:
+       *                   - GL_COLOR_ATTACHMENTi
+       *                   - GL_DEPTH_ATTACHMENT
+       *                   - GL_STENCIL_ATTACHMENT
+       *                   - GL_DEPTH_STENCIL_ATTACHMMENT
+       * \param texture Specifies the texture to be attached
+       *                to the Framebuffer object.
+       * \param level Specifies the mipmap level of texture to attach.
+       * \sa Renderbuffer()
+       */
+    void Texture (GLenum attachment, const GLuint &texture, GLint level) const
+    {
+        NamedFramebufferTexture (obj, attachment, texture, level);
         CheckError ();
     }
 
@@ -214,6 +235,29 @@ public:
                        GLint level, GLint layer) const
     {
         NamedFramebufferTextureLayer (obj, attachment, texture.get (), level, layer);
+        CheckError ();
+    }
+
+    /**
+       * Attach a layer of a texture array to the Framebuffer object.
+       * Attach a layer of a texture array as a logical buffer to the
+       * Framebuffer object.
+       * \param attachment Specifies the attachment point of the Framebuffer.
+       *                   attachment must be one of the following:
+       *                   - GL_COLOR_ATTACHMENTi
+       *                   - GL_DEPTH_ATTACHMENT
+       *                   - GL_STENCIL_ATTACHMENT
+       *                   - GL_DEPTH_STENCIL_ATTACHMMENT
+       * \param texture Specifies the texture array to be attached
+       *                to the Framebuffer object.
+       * \param level Specifies the mipmap level of the texture layer to attach.
+       * \param layer Specifies the layer of the texture array to attach.
+       * \sa Renderbuffer() Texture2D()
+       */
+    void TextureLayer (GLenum attachment, const GLuint &texture,
+                       GLint level, GLint layer) const
+    {
+        NamedFramebufferTextureLayer (obj, attachment, texture, level, layer);
         CheckError ();
     }
 
