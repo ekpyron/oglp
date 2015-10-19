@@ -188,7 +188,7 @@ public:
        * \param level Specifies the mipmap level of texture to attach.
        * \sa Renderbuffer()
        */
-    void Texture (GLenum attachment, const Texture &texture, GLint level) const
+    void Texture (GLenum attachment, const oglp::Texture &texture, GLint level) const
     {
         NamedFramebufferTexture (obj, attachment, texture.get (), level);
         CheckError ();
@@ -231,7 +231,7 @@ public:
        * \param layer Specifies the layer of the texture array to attach.
        * \sa Renderbuffer() Texture2D()
        */
-    void TextureLayer (GLenum attachment, const Texture &texture,
+    void TextureLayer (GLenum attachment, const oglp::Texture &texture,
                        GLint level, GLint layer) const
     {
         NamedFramebufferTextureLayer (obj, attachment, texture.get (), level, layer);
@@ -252,7 +252,7 @@ public:
        *                to the Framebuffer object.
        * \param level Specifies the mipmap level of the texture layer to attach.
        * \param layer Specifies the layer of the texture array to attach.
-       * \sa Renderbuffer() Texture2D()
+       * \sa Renderbuffer() Texture()
        */
     void TextureLayer (GLenum attachment, const GLuint &texture,
                        GLint level, GLint layer) const
@@ -268,7 +268,7 @@ public:
        * \param renderbuffertarget Specifies the renderbuffer target and
        *                           must be GL_RENDERBUFFER.
        * \param renderbuffer Specifies the Renderbuffer object to attach.
-       * \sa Texture2D()
+       * \sa Texture()
        */
     void Renderbuffer (GLenum attachment, GLenum renderbuffertarget,
                        const Renderbuffer &renderbuffer) const
