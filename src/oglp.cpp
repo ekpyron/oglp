@@ -18,11 +18,7 @@
  */
 
 /** @file */
-#ifndef OGLP_CXX
-#define OGLP_CXX
-
-#include "oglp.h"
-#include "glcorew.cxx"
+#include <oglp/oglp.h>
 
 namespace oglp {
 
@@ -126,5 +122,3 @@ bool Init (GetProcAddressCallback callback)
 }
 
 } /* namespace oglp */
-
-#endif /* !defined OGLP_CXX */
